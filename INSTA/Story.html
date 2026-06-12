@@ -135,7 +135,7 @@
         .my-story-card, .other-story-card {
             background: #111;
             border-radius: 18px;
-            overflow: visible;
+            overflow: hidden;
             aspect-ratio: 9 / 16;
             position: relative;
             background-size: cover;
@@ -144,7 +144,6 @@
             flex-direction: column;
             justify-content: space-between;
             width: 100%;
-            /* FIX: Mencegah cropping pada saat download untuk elemen absolute di bottom */
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
         }
@@ -417,8 +416,8 @@
 <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
     <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
+    <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
     <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-    <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
 </div>
 
 <div class="main-content">
@@ -960,16 +959,21 @@
     document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg=e.target.value; updatePublicView(); });
     document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer-pub'); pubOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updatePublicView(); }));
 
-    // Download - FIXED: ensure full capture without bottom crop
+    // Download - capture full element without cropping
     async function downloadEl(el, name) { 
-        try { 
+        try {
+            const rect = el.getBoundingClientRect();
             const c = await html2canvas(el, {
                 scale: 2.5,
                 backgroundColor: null,
                 useCORS: true,
                 logging: false,
-                windowWidth: el.scrollWidth,
-                windowHeight: el.scrollHeight
+                width: rect.width,
+                height: rect.height,
+                windowWidth: document.documentElement.scrollWidth,
+                windowHeight: document.documentElement.scrollHeight,
+                scrollX: 0,
+                scrollY: 0
             }); 
             const a = document.createElement('a'); 
             a.download = name; 
