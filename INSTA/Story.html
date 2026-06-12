@@ -144,6 +144,9 @@
             flex-direction: column;
             justify-content: space-between;
             width: 100%;
+            /* FIX: Mencegah cropping pada saat download untuk elemen absolute di bottom */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .story-progress {
@@ -957,8 +960,27 @@
     document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg=e.target.value; updatePublicView(); });
     document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer-pub'); pubOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updatePublicView(); }));
 
-    // Download
-    async function downloadEl(el, name) { try { const c=await html2canvas(el,{scale:2.5,backgroundColor:null,useCORS:true}); const a=document.createElement('a'); a.download=name; a.href=c.toDataURL('image/png'); a.click(); showToast('Berhasil diunduh'); } catch(e){ showToast('Gagal'); } }
+    // Download - FIXED: ensure full capture without bottom crop
+    async function downloadEl(el, name) { 
+        try { 
+            const c = await html2canvas(el, {
+                scale: 2.5,
+                backgroundColor: null,
+                useCORS: true,
+                logging: false,
+                windowWidth: el.scrollWidth,
+                windowHeight: el.scrollHeight
+            }); 
+            const a = document.createElement('a'); 
+            a.download = name; 
+            a.href = c.toDataURL('image/png'); 
+            a.click(); 
+            showToast('Berhasil diunduh'); 
+        } catch(e){ 
+            console.error(e);
+            showToast('Gagal'); 
+        } 
+    }
     document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
     document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
 
@@ -1032,4 +1054,4 @@
     applyLanguage('id', false);
 </script>
 </body>
-                            </html>
+                                </html>
