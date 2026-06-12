@@ -138,11 +138,12 @@
         .dark-theme .preview-top-bar { border-bottom-color: rgba(255,255,255,0.1); }
         .top-left-icon { font-size: 24px; color: #262626; cursor: pointer; z-index: 2; }
         .dark-theme .top-left-icon { color: #f5f5f5; }
-        .top-center-username { position: absolute; left: 50%; transform: translateX(-50%); font-weight: 700; font-size: 18px; color: #262626; white-space: nowrap; }
+        .top-center-username { position: absolute; left: 50%; transform: translateX(-50%); font-weight: 700; font-size: 18px; color: #262626; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
         .dark-theme .top-center-username { color: white; }
         .top-right-icons { display: flex; gap: 18px; z-index: 2; }
         .top-right-icons i { font-size: 20px; color: #262626; cursor: pointer; }
         .dark-theme .top-right-icons i { color: #f5f5f5; }
+        .top-verif-badge { color: #0095f6; font-size: 16px; display: inline-flex; align-items: center; }
         
         .profile-header-section { padding: 16px 16px 8px; display: flex; gap: 20px; align-items: center; background: inherit; }
         .profile-avatar-preview { width: 84px; height: 84px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #ddd; }
@@ -160,14 +161,12 @@
         .profile-action-btn { flex: 1; background: #efefef; border: none; padding: 8px 0; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; text-align: center; color: #262626; }
         .dark-theme .profile-action-btn { background: #2c2c2c; color: white; }
         .right-icons-row { display: flex; align-items: center; }
-        /* Ikon add contact diganti dengan img */
         .contact-icon-img { width: 24px; height: 24px; object-fit: contain; cursor: pointer; }
         
         /* Story tab row */
         .story-tab-row { display: flex; justify-content: space-around; padding: 8px 16px; border-top: 0.5px solid rgba(0,0,0,0.1); border-bottom: 0.5px solid rgba(0,0,0,0.1); background: inherit; }
         .dark-theme .story-tab-row { border-color: rgba(255,255,255,0.1); }
         .tab-icon-img { width: 26px; height: 26px; object-fit: contain; cursor: pointer; filter: brightness(0.4); transition: 0.2s; }
-        /* Icon grid diganti dengan img */
         .grid-icon-img { width: 26px; height: 26px; object-fit: contain; cursor: pointer; filter: brightness(0.4); transition: 0.2s; }
         .dark-theme .tab-icon-img { filter: brightness(0.7); }
         .dark-theme .grid-icon-img { filter: brightness(0.7); }
@@ -179,16 +178,15 @@
         .preview-post-item img { width: 100%; height: 100%; object-fit: cover; }
         .preview-post-placeholder { color: #bbb; font-size: 20px; font-weight: 300; }
         
-        /* Bottom navbar: Home (img), Media (img), Share (img), Search (img), Profile */
+        /* Bottom navbar */
         .bottom-nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-top: 0.5px solid rgba(0,0,0,0.1); background: inherit; margin-top: 4px; }
         .dark-theme .bottom-nav-bar { border-top-color: rgba(255,255,255,0.1); }
         .nav-icon-img-custom { width: 26px; height: 26px; object-fit: contain; cursor: pointer; filter: brightness(0.3); }
         .dark-theme .nav-icon-img-custom { filter: brightness(0.8); }
         .nav-icon-share-img { width: 26px; height: 26px; object-fit: contain; cursor: pointer; }
-        .nav-profile-img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; background: #ddd; }
-        /* Ikon search di bottom */
         .search-icon-img { width: 26px; height: 26px; object-fit: contain; cursor: pointer; filter: brightness(0.3); }
         .dark-theme .search-icon-img { filter: brightness(0.8); }
+        .nav-profile-img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; background: #ddd; }
         
         .download-area { text-align: center; margin-top: 20px; }
         .download-btn { background: #1a1a1a; color: white; border: none; padding: 14px 40px; border-radius: 100px; font-weight: 600; cursor: pointer; font-size: 16px; transition: 0.2s; }
@@ -216,9 +214,6 @@
         .crop-modal-btn.cancel { background: #333; color: white; }
         .crop-modal-btn.save { background: #0095f6; color: white; }
         .toast-msg { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 11px 22px; border-radius: 60px; font-weight: 500; font-size: 13px; z-index: 30000; opacity: 0; transition: 0.2s; pointer-events: none; white-space: nowrap; }
-        
-        .username-wrapper { display: flex; align-items: center; gap: 6px; }
-        .check-badge { color: #0095f6; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -273,7 +268,7 @@
                         <div class="instagram-profile-preview" id="profilePreviewCard">
                             <div class="preview-top-bar">
                                 <div class="top-left-icon"><i class="fas fa-plus"></i></div>
-                                <div class="top-center-username" id="previewTopUsername">thekachoo</div>
+                                <div class="top-center-username" id="previewTopUsername">thekachoo<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span></div>
                                 <div class="top-right-icons"><i class="fas fa-at"></i><i class="fas fa-bars"></i></div>
                             </div>
                             <div class="profile-header-section">
@@ -281,7 +276,6 @@
                                 <div class="profile-stats-preview"><div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">Posts</span></div><div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">Followers</span></div><div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">Following</span></div></div>
                             </div>
                             <div class="profile-bio">
-                                <div class="username-wrapper"><span style="font-weight:700; font-size:14px;" id="previewUsernameInline">thekachoo</span><span id="previewVerifBadge" style="display:none;"><i class="fas fa-check-circle check-badge"></i></span></div>
                                 <div class="bio-text" id="previewBio">Content Creator | Jakarta</div>
                             </div>
                             <div class="action-buttons-row">
@@ -291,7 +285,7 @@
                                     <img src="Icon-contact1.png" class="contact-icon-img" id="contactIconImg" alt="add contact">
                                 </div>
                             </div>
-                            <!-- Story tab row: grid icon diganti img -->
+                            <!-- Story tab row -->
                             <div class="story-tab-row">
                                 <img src="Icon-grid1.png" class="grid-icon-img" id="gridIconImg" alt="grid">
                                 <img src="icon-media1.png" class="tab-icon-img media-icon" id="mediaIconImg" alt="media">
@@ -299,7 +293,7 @@
                                 <img src="icon-tag1.png" class="tab-icon-img tag-icon" id="tagIconImg" alt="user tag">
                             </div>
                             <div class="posts-grid-preview" id="previewGridPosts"><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div></div>
-                            <!-- Bottom navbar: Home (img), Media (img), Share (img), Search (img), Profile -->
+                            <!-- Bottom navbar -->
                             <div class="bottom-nav-bar">
                                 <img src="Icon-home1.png" class="nav-icon-img-custom" id="homeIconImg" alt="home">
                                 <img src="icon-media1.png" class="nav-icon-img-custom" id="bottomMediaImg" alt="media">
@@ -342,14 +336,19 @@
         function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
         function updatePreview() {
             let username = document.getElementById('username').value.trim() || 'thekachoo';
-            document.getElementById('previewTopUsername').innerText = username;
-            document.getElementById('previewUsernameInline').innerText = username;
+            // Update username di top bar (dengan badge di sampingnya)
+            const topUsernameSpan = document.getElementById('previewTopUsername');
+            topUsernameSpan.innerHTML = username + '<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span>';
+            // Update stats dan bio
             document.getElementById('previewPosts').innerText = document.getElementById('postsCount').value.trim() || '0';
             document.getElementById('previewFollowers').innerText = document.getElementById('followersCount').value.trim() || '0';
             document.getElementById('previewFollowing').innerText = document.getElementById('followingCount').value.trim() || '0';
             document.getElementById('previewBio').innerText = document.getElementById('bioText').value || '';
-            const badge = document.getElementById('previewVerifBadge');
-            badge.style.display = isVerified ? 'inline-flex' : 'none';
+            
+            // Update badge verifikasi di top bar
+            const topBadge = document.getElementById('previewTopVerifBadge');
+            if(topBadge) topBadge.style.display = isVerified ? 'inline-flex' : 'none';
+            
             if(isVerified) document.getElementById('verificationBtn').classList.add('active');
             else document.getElementById('verificationBtn').classList.remove('active');
             document.getElementById('bottomNavAvatar').src = document.getElementById('previewAvatarImg').src;
@@ -359,7 +358,6 @@
             if(currentTheme === 'dark') card.classList.add('dark-theme');
             else card.classList.remove('dark-theme');
             
-            // Ikon-ikon yang berubah sesuai mode
             const mediaIcon = document.getElementById('mediaIconImg');
             const repostIcon = document.getElementById('repostIconImg');
             const tagIcon = document.getElementById('tagIconImg');
@@ -434,4 +432,4 @@
         updateFormLanguage(); updateTheme(); renderPostGrids(); updatePreview();
     </script>
 </body>
-                                                                                                                                                            </html>
+                    </html>
