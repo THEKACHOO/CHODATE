@@ -37,10 +37,9 @@
         }
         .logo-container { display: flex; align-items: center; cursor: pointer; }
         .logo-img { height: 38px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; }
-        .center-logo-text { font-size: 22px; font-weight: 800; color: white; white-space: nowrap; line-height: 1.2; }
-        .sub-logo { font-size: 10px; color: rgba(255,255,255,0.55); white-space: nowrap; letter-spacing: 0.5px; margin-top: 2px; }
-        @media (max-width: 640px) { .center-logo-text { font-size: 17px; } .logo-img { height: 30px; } }
+        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
+        .center-logo-img { height: 42px; width: auto; display: block; object-fit: contain; }
+        @media (max-width: 640px) { .center-logo-img { height: 32px; } .logo-img { height: 30px; } }
 
         .desktop-nav-container { position: relative; display: block; }
         @media (max-width: 768px) { .desktop-nav-container { display: none; } }
@@ -156,8 +155,16 @@
 
         .action-buttons { padding: 6px 11px 4px; display: flex; gap: 14px; align-items: center; }
         .action-icons { display: flex; gap: 14px; align-items: center; }
-        .action-icon { width: 23px; height: 23px; cursor: pointer; }
+        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .action-icon svg { width: 100%; height: 100%; }
+        .action-icon img { width: 100%; height: 100%; object-fit: contain; }
+        /* Ukuran icon comment, repost, share diperbesar */
+        .action-icons .action-icon:nth-child(2) img,
+        .action-icons .action-icon:nth-child(3) img,
+        .action-icons .action-icon:nth-child(4) img {
+            width: 26px;
+            height: 26px;
+        }
         .save-icon { margin-left: auto; }
 
         .like-count { font-weight: 600; font-size: 13px; padding: 2px 13px 5px; color: #262626; }
@@ -217,7 +224,8 @@
             <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         </div>
         <div class="center-title">
-            <img src="Instapost2.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">        </div>
+            <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+        </div>
         <div class="desktop-nav-container">
             <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
             <div class="desktop-nav-dropdown" id="desktopNavDropdown">
@@ -373,9 +381,9 @@
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
-                            <div class="action-icon"><img src="icon-comment.png" alt="comment" style="width:23px; height:23px;"></div>
-                            <div class="action-icon"><img src="icon-repost.png" alt="repost" style="width:23px; height:23px;"></div>
-                            <div class="action-icon"><img src="icon-share.png" alt="share" style="width:23px; height:23px;"></div>
+                            <div class="action-icon"><img src="icon-comment.png" alt="comment"></div>
+                            <div class="action-icon"><img src="icon-repost.png" alt="repost"></div>
+                            <div class="action-icon"><img src="icon-share.png" alt="share"></div>
                         </div>
                         <div class="save-icon">
                             <div class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
@@ -743,4 +751,4 @@
     updateLanguage(); updateLoveColor(); updateBackground(); applyVersion();
 </script>
 </body>
-                    </html>
+    </html>
