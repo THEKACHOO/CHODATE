@@ -386,8 +386,9 @@
                     <!-- Like count / liked by -->
                     <div class="like-count" id="displayLikes">0 suka</div>
 
-                    <!-- FIX 4: caption block (v1 only — no username repeated below) -->
+                    <!-- FIX 4 & PERMINTAAN BARU: caption block v1 dengan username disamping caption (bold, arial) -->
                     <div class="caption-text" id="captionWrapper">
+                        <span id="captionUsername" class="caption-username" style="font-weight: 700; font-family: Arial, sans-serif;"></span>
                         <span class="caption-message" id="displayCaption"></span>
                     </div>
                     <div class="timestamp" id="displayTimestamp"></div>
@@ -490,6 +491,7 @@
     const displayCaption  = document.getElementById('displayCaption');
     const displayTimestamp= document.getElementById('displayTimestamp');
     const captionWrapper  = document.getElementById('captionWrapper');
+    const captionUsernameSpan = document.getElementById('captionUsername');
     const likeIcon        = document.getElementById('likeIcon');
     let likeSvg = likeIcon.querySelector('svg');
 
@@ -527,7 +529,7 @@
         updatePreviewContent();
     }
 
-    // ---- updatePreviewContent ----
+    // ---- updatePreviewContent (DENGAN TAMBAHAN USERNAME DI CAPTION untuk VERSI 1) ----
     function updatePreviewContent() {
         const uname = usernameInput.value.trim() || 'thekachoo';
         usernameText.innerText = uname;
@@ -565,13 +567,21 @@
             displayLikes.innerText = `${val} ${likesSuffix}`;
         }
 
-        // FIX 4: Caption — no username below, just caption text (v1 only)
+        // PERUBAHAN UTAMA: Caption dengan username di samping (BOLD, Arial) hanya untuk Versi 1
         if (currentVersion === 1) {
-            captionWrapper.style.display = captionInput.value ? 'block' : 'none';
-            displayCaption.innerText = captionInput.value || '';
+            captionWrapper.style.display = 'block';
+            const currentCaption = captionInput.value || '';
+            const currentUsername = uname;
+            // Menampilkan username dengan style bold dan font Arial
+            captionUsernameSpan.innerText = currentUsername + ' ';
+            captionUsernameSpan.style.fontWeight = '700';
+            captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
+            displayCaption.innerText = currentCaption;
+            
             displayTimestamp.innerText = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' : 'Just now');
             displayTimestamp.style.display = 'block';
         } else {
+            // Versi 2: Sembunyikan semua elemen caption
             captionWrapper.style.display = 'none';
             displayTimestamp.style.display = 'none';
         }
@@ -734,4 +744,4 @@
     updateLanguage(); updateLoveColor(); updateBackground(); applyVersion();
 </script>
 </body>
-</html>
+    </html>
