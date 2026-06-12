@@ -17,30 +17,60 @@
         @media (max-width: 1024px) { .container { padding: 0 24px; } }
         @media (max-width: 768px) { .container { padding: 0 16px; } }
 
+        /* Title Center */
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.6rem;
+            }
+        }
+
         /* ===== HEADER ===== */
-        header { background: rgba(0,0,0,0.95); backdrop-filter: blur(16px); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; position: relative; max-width: 1400px; margin: 0 auto; }
+        header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
         .logo-container { display: flex; align-items: center; cursor: pointer; }
-        .logo-img { height: 36px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; }
-        .center-logo-text { font-size: 22px; font-weight: 800; color: white; white-space: nowrap; line-height: 1.2; }
-        .sub-logo-header { font-size: 10px; color: rgba(255,255,255,0.5); white-space: nowrap; letter-spacing: 0.4px; margin-top: 2px; }
-        @media (max-width: 640px) { .center-logo-text { font-size: 17px; } .logo-img { height: 28px; } }
-        .desktop-nav-container { position: relative; }
+        .logo-img { height: 38px; width: auto; }
+        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
+        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
+        @media (max-width: 640px) { .center-logo-img { height: 100px; } .logo-img { height: 30px; } }
+
+        .desktop-nav-container { position: relative; display: block; }
         @media (max-width: 768px) { .desktop-nav-container { display: none; } }
         .desktop-nav-trigger { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 14px; color: white; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
         .desktop-nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 200px; background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); }
         .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; cursor: pointer; transition: 0.2s; }
+        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; transition: 0.2s; }
         .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
+
         .mobile-menu-btn { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; align-items: center; justify-content: center; }
         @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
         .mobile-menu.active { right: 0; }
         .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998; }
         .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; width: 38px; height: 38px; border-radius: 40px; font-size: 16px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .mobile-menu .nav-button { display: block; padding: 12px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; color: white; text-decoration: none; font-size: 14px; font-weight: 500; margin-bottom: 10px; cursor: pointer; text-align: center; }
+        .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
+        .mobile-menu-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 50%; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
         /* ===== MAIN ===== */
         .main-content { padding: 28px 0 60px; }
@@ -94,7 +124,6 @@
         .story-card-wrapper { width: 300px; }
         @media (max-width: 860px) { .story-card-wrapper { width: 100%; max-width: 340px; } }
 
-        /* Outer frame — mimics device bezel */
         .story-outer {
             background-color: #000;
             border-radius: 28px;
@@ -103,7 +132,6 @@
             width: 100%;
         }
 
-        /* The card itself — 9:16 */
         .my-story-card, .other-story-card {
             background: #111;
             border-radius: 18px;
@@ -118,7 +146,6 @@
             width: 100%;
         }
 
-        /* ===== STORY HEADER ===== */
         .story-progress {
             position: absolute;
             top: 8px;
@@ -170,7 +197,6 @@
         .header-right i { font-size: 16px; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.5); cursor: default; }
         .plus-badge { position: absolute; bottom: -2px; right: -3px; background: #0095f6; border: 1.5px solid white; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white; }
 
-        /* ===== FOLLOW BUTTON (Social View) ===== */
         .follow-btn-story {
             padding: 5px 14px;
             border-radius: 8px;
@@ -189,7 +215,6 @@
             color: rgba(255,255,255,0.7);
         }
 
-        /* ===== SELF VIEW BOTTOM BAR - NEW: Activity kiri, group kanan ===== */
         .my-bottom-bar {
             position: absolute;
             bottom: 12px;
@@ -201,7 +226,6 @@
             padding: 0 12px;
             z-index: 3;
         }
-        /* Activity section kiri */
         .activity-left {
             display: flex;
             flex-direction: column;
@@ -226,7 +250,6 @@
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
-        /* Right group (Boost, Highlight, Mention, More) */
         .actions-right {
             display: flex;
             gap: 12px;
@@ -256,10 +279,7 @@
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
-        /* hapus class lama */
-        .right-actions { display: none; }
 
-        /* Social view send message bar tetap */
         .send-message-bar {
             position: absolute;
             bottom: 10px;
@@ -312,7 +332,6 @@
         }
         .story-icon-btn.liked svg { fill: #ff3040; stroke: #ff3040; }
 
-        /* ===== DOWNLOAD / BACK ===== */
         .download-group { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
         .download-single { background: #111; border: none; padding: 11px 26px; border-radius: 100px; font-weight: 600; color: white; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-family: 'Outfit', sans-serif; }
         .download-single:hover { background: #333; }
@@ -327,14 +346,13 @@
         .footer-links li { margin-bottom: 8px; }
         .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
         .footer-links a:hover { color: white; }
-        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 200px; margin-bottom: 14px; line-height: 1.6; }
+        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 280px; margin-bottom: 14px; line-height: 1.6; }
         .social-links { display: flex; gap: 10px; }
         .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 60px; color: white; text-decoration: none; font-size: 12px; transition: 0.2s; }
         .social-link:hover { background: white; color: black; }
         .footer-bottom { display: flex; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
         .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
 
-        /* Crop modal */
         .crop-modal { display: none; position: fixed; inset: 0; background: #000; z-index: 20000; justify-content: center; align-items: center; flex-direction: column; }
         .crop-container { max-width: 90vw; max-height: 80vh; overflow: hidden; border-radius: 20px; background: #111; }
         .crop-modal-buttons { padding: 18px; display: flex; gap: 14px; }
@@ -348,19 +366,18 @@
 
 <header>
     <div class="header-content">
-        <div class="logo-container" onclick="resetToModeSelection()">
-            <img src="logo-thekachoo.png" class="logo-img" onerror="this.style.display='none'">
+        <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         </div>
         <div class="center-title">
-            <div class="center-logo-text">INSTACHO</div>
-            <div class="sub-logo-header">Story Studio</div>
+            <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
         </div>
         <div class="desktop-nav-container">
             <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
             <div class="desktop-nav-dropdown" id="desktopNavDropdown">
                 <a href="index.html" class="nav-button">Home</a>
                 <a href="Profile.html" class="nav-button">Instacho Profile</a>
-                <a href="Post.html" class="nav-button">Instacho Post</a>
+                <a href="Story.html" class="nav-button">Instacho Story</a>
             </div>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -370,13 +387,14 @@
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
-    <a href="index.html" class="nav-button">Home</a>
-    <a href="Profile.html" class="nav-button">Instacho Profile</a>
-    <a href="Post.html" class="nav-button">Instacho Post</a>
+    <a href="index.html" class="mobile-menu-link">Home</a>
+    <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+    <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
 </div>
 
 <div class="main-content">
     <div class="container">
+        <h1 class="page-title">Create your story!</h1>
         <div id="modeSelection" class="mode-selector">
             <div class="mode-card" data-mode="myview">
                 <i class="fas fa-user-circle"></i><h2>Self View</h2>
@@ -388,40 +406,40 @@
 
         <!-- ===== SELF VIEW STUDIO ===== -->
         <div id="studioMyView" class="studio-wrapper">
-            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span class="backText">Back to Mode</span></button>
+            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Back to Mode</span></button>
             <div class="story-studio">
                 <div class="form-panel">
                     <div class="lang-buttons">
                         <button class="lang-btn active" id="btnIndonesiaMy">Bahasa Indonesia</button>
                         <button class="lang-btn" id="btnInggrisMy">English</button>
                     </div>
-                    <div class="section-divider"><i class="fas fa-palette"></i> <span class="themeLabel">Tema Teks</span></div>
+                    <div class="section-divider"><i class="fas fa-palette"></i> <span id="textThemeLabel">Tema Teks</span></div>
                     <div class="theme-selector">
-                        <div class="theme-btn active-theme" data-theme="white" id="myThemeWhite">Putih</div>
-                        <div class="theme-btn" data-theme="black" id="myThemeBlack">Hitam</div>
+                        <div class="theme-btn active-theme" data-theme="white" id="myThemeWhite"><span id="whiteText">Putih</span></div>
+                        <div class="theme-btn" data-theme="black" id="myThemeBlack"><span id="blackText">Hitam</span></div>
                     </div>
-                    <div class="section-divider"><i class="fas fa-user-circle"></i> <span class="profileLabel">Profil Saya</span></div>
+                    <div class="section-divider"><i class="fas fa-user-circle"></i> <span id="myProfileLabel">Profil Saya</span></div>
                     <div class="form-group">
-                        <label class="avatarLabel">Foto Profil</label>
+                        <label id="avatarLabel">Foto Profil</label>
                         <input type="file" id="myAvatarUpload" accept="image/*" style="display:none;">
                         <div class="file-input-label" id="myAvatarLabel">Upload Avatar (1:1)</div>
                     </div>
                     <div class="form-group">
-                        <label class="timeLabel">Waktu Tayang</label>
+                        <label id="timeLabel">Waktu Tayang</label>
                         <select id="myTimeSelect">
-                            <option value="Just now">Baru saja</option>
-                            <option value="Custom">Custom</option>
+                            <option value="Just now" id="justNowOption">Baru saja</option>
+                            <option value="Custom" id="customOption">Custom</option>
                         </select>
                         <input type="text" id="myCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
                     </div>
                     <div class="form-group">
-                        <label class="storyLabel">Gambar Story</label>
+                        <label id="storyLabel">Gambar Story</label>
                         <input type="file" id="myBgUpload" accept="image/*" style="display:none;">
                         <div class="file-input-label" id="myBgLabel">Upload latar story (9:16)</div>
                     </div>
-                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span class="outerLabel">Background Luar</span></div>
+                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerBgLabel">Background Luar</span></div>
                     <div class="form-group">
-                        <label class="outerColorLabel">Warna Luar Frame</label>
+                        <label id="outerColorLabel">Warna Luar Frame</label>
                         <div class="bg-options-row">
                             <div class="bg-option bg-black active-bg-choice" data-outer="black"></div>
                             <div class="bg-option bg-white" data-outer="white"></div>
@@ -430,7 +448,7 @@
                         </div>
                     </div>
                     <div class="toggle-switch" id="myCloseFriendsToggle">
-                        <span class="cfText">Close Friends</span>
+                        <span id="closeFriendsText">Close Friends</span>
                         <div class="toggle-slider" id="myCfSlider"></div>
                     </div>
                 </div>
@@ -451,9 +469,9 @@
                                         <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                     </div>
                                     <div>
-                                        <div class="story-username" id="myViewLabel">Your Story</div>
+                                        <div class="story-username" id="yourStoryText">Your Story</div>
                                         <div class="story-time" id="myViewTime">Baru saja</div>
-                                        <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span class="cfBadgeText">Teman Dekat</span></div>
+                                        <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
                                     </div>
                                 </div>
                                 <div class="header-right">
@@ -461,84 +479,83 @@
                                     <i class="fas fa-times"></i>
                                 </div>
                             </div>
-                            <!-- Self View Bottom Bar: Activity kiri, Boost/Highlight/Mention/More kanan -->
                             <div class="my-bottom-bar">
                                 <div class="activity-left">
                                     <div class="activity-circle"><i class="far fa-heart"></i></div>
-                                    <span class="activity-label">Activity</span>
+                                    <span class="activity-label" id="activityText">Activity</span>
                                 </div>
                                 <div class="actions-right">
                                     <div class="action-item">
                                         <div class="action-circle"><i class="fas fa-rocket"></i></div>
-                                        <span class="action-label">Boost</span>
+                                        <span class="action-label" id="boostText">Boost</span>
                                     </div>
                                     <div class="action-item">
                                         <div class="action-circle"><i class="fas fa-bookmark"></i></div>
-                                        <span class="action-label">Highlight</span>
+                                        <span class="action-label" id="highlightText">Highlight</span>
                                     </div>
                                     <div class="action-item">
                                         <div class="action-circle"><i class="fas fa-at"></i></div>
-                                        <span class="action-label">Mention</span>
+                                        <span class="action-label" id="mentionText">Mention</span>
                                     </div>
                                     <div class="action-item">
                                         <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
-                                        <span class="action-label">More</span>
+                                        <span class="action-label" id="moreText">More</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="download-group">
-                        <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span class="downloadText">Unduh</span></button>
+                        <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span id="downloadText">Unduh</span></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SOCIAL VIEW STUDIO ===== (tidak diubah) -->
+        <!-- ===== SOCIAL VIEW STUDIO ===== -->
         <div id="studioPublicView" class="studio-wrapper">
-            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span class="backTextPub">Back to Mode</span></button>
+            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Back to Mode</span></button>
             <div class="story-studio">
                 <div class="form-panel">
                     <div class="lang-buttons">
                         <button class="lang-btn active" id="btnIndonesiaPub">Bahasa Indonesia</button>
                         <button class="lang-btn" id="btnInggrisPub">English</button>
                     </div>
-                    <div class="section-divider"><i class="fas fa-palette"></i> <span class="themeLabelPub">Tema Teks</span></div>
+                    <div class="section-divider"><i class="fas fa-palette"></i> <span id="textThemeLabelPub">Tema Teks</span></div>
                     <div class="theme-selector">
-                        <div class="theme-btn active-theme" data-theme="white" id="pubThemeWhite">Putih</div>
-                        <div class="theme-btn" data-theme="black" id="pubThemeBlack">Hitam</div>
+                        <div class="theme-btn active-theme" data-theme="white" id="pubThemeWhite"><span id="whiteTextPub">Putih</span></div>
+                        <div class="theme-btn" data-theme="black" id="pubThemeBlack"><span id="blackTextPub">Hitam</span></div>
                     </div>
-                    <div class="section-divider"><i class="fas fa-user"></i> <span class="profileLabelPub">Profil & Interaksi</span></div>
+                    <div class="section-divider"><i class="fas fa-user"></i> <span id="profileLabelPub">Profil & Interaksi</span></div>
                     <div class="form-group">
-                        <label class="avatarLabelPub">Foto Profil</label>
+                        <label id="avatarLabelPub">Foto Profil</label>
                         <input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;">
                         <div class="file-input-label" id="pubAvatarLabel">Upload avatar</div>
                     </div>
                     <div class="form-group">
-                        <label class="usernameLabel">Username</label>
+                        <label id="usernameLabel">Username</label>
                         <input type="text" id="pubUsername" placeholder="thekachoo" value="thekachoo">
                     </div>
                     <div class="toggle-switch" id="pubVerifiedToggle">
-                        <span class="verifiedText">Akun Terverifikasi</span>
+                        <span id="verifiedText">Akun Terverifikasi</span>
                         <div class="toggle-slider" id="pubVerifiedSlider"></div>
                     </div>
                     <div class="form-group">
-                        <label class="timeLabelPub">Waktu Tayang</label>
+                        <label id="timeLabelPub">Waktu Tayang</label>
                         <select id="pubTimeSelect">
-                            <option value="Just now">Baru saja</option>
-                            <option value="Custom">Custom</option>
+                            <option value="Just now" id="justNowOptionPub">Baru saja</option>
+                            <option value="Custom" id="customOptionPub">Custom</option>
                         </select>
                         <input type="text" id="pubCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
                     </div>
                     <div class="form-group">
-                        <label class="storyLabelPub">Gambar Story</label>
+                        <label id="storyLabelPub">Gambar Story</label>
                         <input type="file" id="pubBgUpload" accept="image/*" style="display:none;">
                         <div class="file-input-label" id="pubBgLabel">Upload latar story (9:16)</div>
                     </div>
-                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span class="outerLabelPub">Background Luar</span></div>
+                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerLabelPub">Background Luar</span></div>
                     <div class="form-group">
-                        <label class="outerColorLabelPub">Warna Luar Frame</label>
+                        <label id="outerColorLabelPub">Warna Luar Frame</label>
                         <div class="bg-options-row">
                             <div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div>
                             <div class="bg-option bg-white" data-outer-pub="white"></div>
@@ -547,11 +564,11 @@
                         </div>
                     </div>
                     <div class="toggle-switch" id="pubCloseFriendsToggle">
-                        <span class="cfTextPub">Close Friends</span>
+                        <span id="cfTextPub">Close Friends</span>
                         <div class="toggle-slider" id="pubCfSlider"></div>
                     </div>
                     <div class="toggle-follow-control" id="toggleFollowControl">
-                        <span class="followText">Follow / Following</span>
+                        <span id="followText">Follow / Following</span>
                         <div class="follow-toggle-slider" id="followToggleSlider"></div>
                     </div>
                 </div>
@@ -573,7 +590,7 @@
                                             <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
                                         </div>
                                         <div class="story-time" id="pubTimeLabel">Baru saja</div>
-                                        <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span class="cfBadgeTextPub">Close friends</span></div>
+                                        <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Close friends</span></div>
                                     </div>
                                 </div>
                                 <button class="follow-btn-story" id="pubFollowAction">Follow</button>
@@ -599,7 +616,7 @@
                         </div>
                     </div>
                     <div class="download-group">
-                        <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span class="downloadTextPub">Unduh</span></button>
+                        <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span id="downloadTextPub">Unduh</span></button>
                     </div>
                 </div>
             </div>
@@ -607,11 +624,12 @@
     </div>
 </div>
 
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="footer-grid">
         <div class="footer-section footer-brand">
             <h3>CHODATE</h3>
-            <p>Creative ecosystem by The Kachoo.</p>
+            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
             <div class="social-links">
                 <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -624,26 +642,28 @@
                 <li><a href="#">Kafkapages</a></li>
                 <li><a href="#">Kaboom</a></li>
                 <li><a href="#">Kazine</a></li>
+                <li><a href="#">Kadio</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>More</h3>
             <ul class="footer-links">
-                <li><a href="#">Kadio</a></li>
                 <li><a href="#">Chobank</a></li>
                 <li><a href="#">Chonnect</a></li>
+                <li><a href="#">Chosong</a></li>
+                <li><a href="#">Chodate</a></li>
             </ul>
         </div>
         <div class="footer-section">
-            <h3>Connect</h3>
+            <h3>Meet Us</h3>
             <ul class="footer-links">
-                <li><a href="https://twitter.com/thekachoo" target="_blank">Twitter</a></li>
+                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
                 <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="copyright">&copy; 2026 CHODATE by The Kachoo. All rights reserved.</div>
+        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
     </div>
 </footer>
 
@@ -664,7 +684,165 @@
     let myOuterBg = '#000000', pubOuterBg = '#000000';
     let myTextTheme = 'white', pubTextTheme = 'white';
 
-    function showToast(msg) { const t = document.getElementById('toastMsg'); t.innerText = msg; t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 2000); }
+    // ========== TRANSLATIONS (hanya untuk setting panel) ==========
+    const translations = {
+        id: {
+            backToMode: "Kembali ke Mode",
+            textTheme: "Tema Teks",
+            white: "Putih",
+            black: "Hitam",
+            myProfile: "Profil Saya",
+            avatarLabel: "Foto Profil",
+            uploadAvatar: "Upload Avatar (1:1)",
+            timeLabel: "Waktu Tayang",
+            justNow: "Baru saja",
+            custom: "Kustom",
+            customTimePlaceholder: "Isi waktu...",
+            storyLabel: "Gambar Story",
+            uploadStoryBg: "Upload latar story (9:16)",
+            outerBgLabel: "Background Luar",
+            outerColorLabel: "Warna Luar Frame",
+            closeFriends: "Teman Dekat",
+            yourStory: "Story Anda",
+            activity: "Aktivitas",
+            boost: "Promosi",
+            highlight: "Sorotan",
+            mention: "Mention",
+            more: "Lainnya",
+            download: "Unduh",
+            closeFriendsBadge: "Teman Dekat",
+            profileLabelPub: "Profil & Interaksi",
+            avatarLabelPub: "Foto Profil",
+            uploadAvatarPub: "Upload avatar",
+            usernameLabel: "Username",
+            verifiedText: "Akun Terverifikasi",
+            timeLabelPub: "Waktu Tayang",
+            storyLabelPub: "Gambar Story",
+            outerLabelPub: "Background Luar",
+            outerColorLabelPub: "Warna Luar Frame",
+            cfTextPub: "Teman Dekat",
+            followText: "Ikuti / Mengikuti",
+            sendMessagePlaceholder: "Kirim pesan...",
+            follow: "Ikuti",
+            following: "Mengikuti"
+        },
+        en: {
+            backToMode: "Back to Mode",
+            textTheme: "Text Theme",
+            white: "White",
+            black: "Black",
+            myProfile: "My Profile",
+            avatarLabel: "Profile Photo",
+            uploadAvatar: "Upload Avatar (1:1)",
+            timeLabel: "Time Posted",
+            justNow: "Just now",
+            custom: "Custom",
+            customTimePlaceholder: "Enter time...",
+            storyLabel: "Story Image",
+            uploadStoryBg: "Upload story background (9:16)",
+            outerBgLabel: "Outer Background",
+            outerColorLabel: "Outer Frame Color",
+            closeFriends: "Close Friends",
+            yourStory: "Your Story",
+            activity: "Activity",
+            boost: "Boost",
+            highlight: "Highlight",
+            mention: "Mention",
+            more: "More",
+            download: "Download",
+            closeFriendsBadge: "Close Friends",
+            profileLabelPub: "Profile & Interaction",
+            avatarLabelPub: "Profile Photo",
+            uploadAvatarPub: "Upload avatar",
+            usernameLabel: "Username",
+            verifiedText: "Verified Account",
+            timeLabelPub: "Time Posted",
+            storyLabelPub: "Story Image",
+            outerLabelPub: "Outer Background",
+            outerColorLabelPub: "Outer Frame Color",
+            cfTextPub: "Close Friends",
+            followText: "Follow / Following",
+            sendMessagePlaceholder: "Send message...",
+            follow: "Follow",
+            following: "Following"
+        }
+    };
+
+    function applyLanguage(lang, isMyView) {
+        const t = translations[lang];
+        if (!t) return;
+        
+        if (isMyView) {
+            document.getElementById('backToModeText') && (document.getElementById('backToModeText').innerText = t.backToMode);
+            document.getElementById('textThemeLabel') && (document.getElementById('textThemeLabel').innerText = t.textTheme);
+            document.getElementById('whiteText') && (document.getElementById('whiteText').innerText = t.white);
+            document.getElementById('blackText') && (document.getElementById('blackText').innerText = t.black);
+            document.getElementById('myProfileLabel') && (document.getElementById('myProfileLabel').innerText = t.myProfile);
+            document.getElementById('avatarLabel') && (document.getElementById('avatarLabel').innerText = t.avatarLabel);
+            document.getElementById('myAvatarLabel') && (document.getElementById('myAvatarLabel').innerText = t.uploadAvatar);
+            document.getElementById('timeLabel') && (document.getElementById('timeLabel').innerText = t.timeLabel);
+            document.getElementById('justNowOption') && (document.getElementById('justNowOption').innerText = t.justNow);
+            document.getElementById('customOption') && (document.getElementById('customOption').innerText = t.custom);
+            document.getElementById('storyLabel') && (document.getElementById('storyLabel').innerText = t.storyLabel);
+            document.getElementById('myBgLabel') && (document.getElementById('myBgLabel').innerText = t.uploadStoryBg);
+            document.getElementById('outerBgLabel') && (document.getElementById('outerBgLabel').innerText = t.outerBgLabel);
+            document.getElementById('outerColorLabel') && (document.getElementById('outerColorLabel').innerText = t.outerColorLabel);
+            document.getElementById('closeFriendsText') && (document.getElementById('closeFriendsText').innerText = t.closeFriends);
+            document.getElementById('yourStoryText') && (document.getElementById('yourStoryText').innerText = t.yourStory);
+            document.getElementById('activityText') && (document.getElementById('activityText').innerText = t.activity);
+            document.getElementById('boostText') && (document.getElementById('boostText').innerText = t.boost);
+            document.getElementById('highlightText') && (document.getElementById('highlightText').innerText = t.highlight);
+            document.getElementById('mentionText') && (document.getElementById('mentionText').innerText = t.mention);
+            document.getElementById('moreText') && (document.getElementById('moreText').innerText = t.more);
+            document.getElementById('downloadText') && (document.getElementById('downloadText').innerText = t.download);
+            document.getElementById('closeFriendsBadgeText') && (document.getElementById('closeFriendsBadgeText').innerText = t.closeFriendsBadge);
+            
+            let timeVal = document.getElementById('myTimeSelect').value;
+            if (timeVal === 'Just now') {
+                document.getElementById('myViewTime').innerText = t.justNow;
+            }
+        } else {
+            document.getElementById('backToModeTextPub') && (document.getElementById('backToModeTextPub').innerText = t.backToMode);
+            document.getElementById('textThemeLabelPub') && (document.getElementById('textThemeLabelPub').innerText = t.textTheme);
+            document.getElementById('whiteTextPub') && (document.getElementById('whiteTextPub').innerText = t.white);
+            document.getElementById('blackTextPub') && (document.getElementById('blackTextPub').innerText = t.black);
+            document.getElementById('profileLabelPub') && (document.getElementById('profileLabelPub').innerText = t.profileLabelPub);
+            document.getElementById('avatarLabelPub') && (document.getElementById('avatarLabelPub').innerText = t.avatarLabelPub);
+            document.getElementById('pubAvatarLabel') && (document.getElementById('pubAvatarLabel').innerText = t.uploadAvatarPub);
+            document.getElementById('usernameLabel') && (document.getElementById('usernameLabel').innerText = t.usernameLabel);
+            document.getElementById('verifiedText') && (document.getElementById('verifiedText').innerText = t.verifiedText);
+            document.getElementById('timeLabelPub') && (document.getElementById('timeLabelPub').innerText = t.timeLabelPub);
+            document.getElementById('justNowOptionPub') && (document.getElementById('justNowOptionPub').innerText = t.justNow);
+            document.getElementById('customOptionPub') && (document.getElementById('customOptionPub').innerText = t.custom);
+            document.getElementById('storyLabelPub') && (document.getElementById('storyLabelPub').innerText = t.storyLabelPub);
+            document.getElementById('pubBgLabel') && (document.getElementById('pubBgLabel').innerText = t.uploadStoryBg);
+            document.getElementById('outerLabelPub') && (document.getElementById('outerLabelPub').innerText = t.outerBgLabel);
+            document.getElementById('outerColorLabelPub') && (document.getElementById('outerColorLabelPub').innerText = t.outerColorLabel);
+            document.getElementById('cfTextPub') && (document.getElementById('cfTextPub').innerText = t.closeFriends);
+            document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
+            document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
+            document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
+            document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').setAttribute('placeholder', t.sendMessagePlaceholder));
+            
+            if (pubFollowActive) {
+                document.getElementById('pubFollowAction').innerText = t.following;
+            } else {
+                document.getElementById('pubFollowAction').innerText = t.follow;
+            }
+            
+            let timeVal = document.getElementById('pubTimeSelect').value;
+            if (timeVal === 'Just now') {
+                document.getElementById('pubTimeLabel').innerText = t.justNow;
+            }
+        }
+    }
+
+    function showToast(msg) { 
+        const t = document.getElementById('toastMsg'); 
+        t.innerText = msg; 
+        t.style.opacity = '1'; 
+        setTimeout(() => t.style.opacity = '0', 2000); 
+    }
 
     function cropImageRatio(file, ratio) {
         return new Promise(resolve => {
@@ -693,7 +871,8 @@
     function updateMyView() {
         let timeVal = document.getElementById('myTimeSelect').value;
         if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
-        const displayTime = (timeVal === 'Just now') ? (currentMyLang === 'id' ? 'Baru saja' : 'Just now') : (timeVal || (currentMyLang === 'id' ? 'Baru saja' : 'Just now'));
+        const t = translations[currentMyLang];
+        const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
         document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
         if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
         document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
@@ -712,12 +891,17 @@
         document.getElementById('pubVerifiedIcon').style.display = pubVerified ? 'inline' : 'none';
         let timeVal = document.getElementById('pubTimeSelect').value;
         if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
-        const displayTime = (timeVal === 'Just now') ? (currentPubLang === 'id' ? 'Baru saja' : 'Just now') : (timeVal || (currentPubLang === 'id' ? 'Baru saja' : 'Just now'));
+        const t = translations[currentPubLang];
+        const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
         document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
         if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
         document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
         const followBtn = document.getElementById('pubFollowAction');
-        followBtn.innerText = pubFollowActive ? 'Following' : 'Follow';
+        if (t) {
+            followBtn.innerText = pubFollowActive ? t.following : t.follow;
+        } else {
+            followBtn.innerText = pubFollowActive ? 'Following' : 'Follow';
+        }
         followBtn.classList.toggle('following', pubFollowActive);
         const likeBtn = document.getElementById('pubLikeBtn');
         likeBtn.classList.toggle('liked', pubLiked);
@@ -730,11 +914,13 @@
         applyTextTheme(card, pubTextTheme);
     }
 
+    // Theme buttons
     document.getElementById('myThemeWhite').addEventListener('click', () => { myTextTheme = 'white'; document.getElementById('myThemeWhite').classList.add('active-theme'); document.getElementById('myThemeBlack').classList.remove('active-theme'); updateMyView(); });
     document.getElementById('myThemeBlack').addEventListener('click', () => { myTextTheme = 'black'; document.getElementById('myThemeBlack').classList.add('active-theme'); document.getElementById('myThemeWhite').classList.remove('active-theme'); updateMyView(); });
     document.getElementById('pubThemeWhite').addEventListener('click', () => { pubTextTheme = 'white'; document.getElementById('pubThemeWhite').classList.add('active-theme'); document.getElementById('pubThemeBlack').classList.remove('active-theme'); updatePublicView(); });
     document.getElementById('pubThemeBlack').addEventListener('click', () => { pubTextTheme = 'black'; document.getElementById('pubThemeBlack').classList.add('active-theme'); document.getElementById('pubThemeWhite').classList.remove('active-theme'); updatePublicView(); });
 
+    // Avatar & Background uploads
     document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
     document.getElementById('myAvatarUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],1); if(u){myAvatarUrl=u; updateMyView();} } });
     document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
@@ -744,11 +930,13 @@
     document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
     document.getElementById('pubBgUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],9/16); if(u){pubBgUrl=u; updatePublicView();} } });
 
+    // Time selects
     document.getElementById('myTimeSelect').addEventListener('change', function(){ document.getElementById('myCustomTime').style.display=this.value==='Custom'?'block':'none'; updateMyView(); });
     document.getElementById('myCustomTime').addEventListener('input', updateMyView);
     document.getElementById('pubTimeSelect').addEventListener('change', function(){ document.getElementById('pubCustomTime').style.display=this.value==='Custom'?'block':'none'; updatePublicView(); });
     document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
 
+    // Toggles
     document.getElementById('myCfSlider').addEventListener('click', () => { myCfActive=!myCfActive; document.getElementById('myCfSlider').classList.toggle('active'); updateMyView(); });
     document.getElementById('pubVerifiedSlider').addEventListener('click', () => { pubVerified=!pubVerified; document.getElementById('pubVerifiedSlider').classList.toggle('active'); updatePublicView(); });
     document.getElementById('pubCfSlider').addEventListener('click', () => { pubCfActive=!pubCfActive; document.getElementById('pubCfSlider').classList.toggle('active'); updatePublicView(); });
@@ -756,33 +944,85 @@
     document.getElementById('pubLikeBtn').addEventListener('click', () => { pubLiked=!pubLiked; updatePublicView(); });
     document.getElementById('pubUsername').addEventListener('input', updatePublicView);
 
+    // Outer background
     document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg=e.target.value; updateMyView(); });
     document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer'); myOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updateMyView(); }));
     document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg=e.target.value; updatePublicView(); });
     document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer-pub'); pubOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updatePublicView(); }));
 
+    // Download
     async function downloadEl(el, name) { try { const c=await html2canvas(el,{scale:2.5,backgroundColor:null,useCORS:true}); const a=document.createElement('a'); a.download=name; a.href=c.toDataURL('image/png'); a.click(); showToast('Berhasil diunduh'); } catch(e){ showToast('Gagal'); } }
     document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
     document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
 
-    window.resetToModeSelection = function(){ document.getElementById('modeSelection').style.display='flex'; document.getElementById('studioMyView').style.display='none'; document.getElementById('studioPublicView').style.display='none'; };
+    // Mode selection
+    window.resetToModeSelection = function(){ document.getElementById('modeSelection').style.display='flex'; document.getElementById('studioMyView').classList.remove('active-view'); document.getElementById('studioPublicView').classList.remove('active-view'); document.getElementById('studioMyView').style.display='none'; document.getElementById('studioPublicView').style.display='none'; };
     document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
         const mode = card.getAttribute('data-mode');
         document.getElementById('modeSelection').style.display = 'none';
-        if (mode === 'myview') { document.getElementById('studioMyView').style.display='block'; document.getElementById('studioMyView').classList.add('active-view'); updateMyView(); }
-        else { document.getElementById('studioPublicView').style.display='block'; document.getElementById('studioPublicView').classList.add('active-view'); updatePublicView(); }
+        if (mode === 'myview') { 
+            document.getElementById('studioMyView').style.display='block'; 
+            document.getElementById('studioMyView').classList.add('active-view'); 
+            updateMyView(); 
+        } else { 
+            document.getElementById('studioPublicView').style.display='block'; 
+            document.getElementById('studioPublicView').classList.add('active-view'); 
+            updatePublicView(); 
+        }
     }));
 
-    const deskTrigger = document.getElementById('desktopNavTrigger');
-    const deskDrop    = document.getElementById('desktopNavDropdown');
-    deskTrigger.addEventListener('click', e => { e.stopPropagation(); deskDrop.classList.toggle('active'); });
-    document.addEventListener('click', () => deskDrop.classList.remove('active'));
-    const mobBtn = document.getElementById('mobileMenuBtn'), mobMenu = document.getElementById('mobileMenu'), mobOverlay = document.getElementById('mobileMenuOverlay'), mobClose = document.getElementById('mobileMenuClose');
-    mobBtn.onclick = () => { mobMenu.classList.add('active'); mobOverlay.classList.add('active'); document.body.style.overflow='hidden'; };
-    const closeMob = () => { mobMenu.classList.remove('active'); mobOverlay.classList.remove('active'); document.body.style.overflow=''; };
-    mobClose.onclick = closeMob; mobOverlay.onclick = closeMob;
+    // Language buttons for Self View
+    document.getElementById('btnIndonesiaMy').addEventListener('click', () => {
+        currentMyLang = 'id';
+        document.getElementById('btnIndonesiaMy').classList.add('active');
+        document.getElementById('btnInggrisMy').classList.remove('active');
+        applyLanguage('id', true);
+        updateMyView();
+    });
+    document.getElementById('btnInggrisMy').addEventListener('click', () => {
+        currentMyLang = 'en';
+        document.getElementById('btnInggrisMy').classList.add('active');
+        document.getElementById('btnIndonesiaMy').classList.remove('active');
+        applyLanguage('en', true);
+        updateMyView();
+    });
 
-    updateMyView(); updatePublicView();
+    // Language buttons for Social View
+    document.getElementById('btnIndonesiaPub').addEventListener('click', () => {
+        currentPubLang = 'id';
+        document.getElementById('btnIndonesiaPub').classList.add('active');
+        document.getElementById('btnInggrisPub').classList.remove('active');
+        applyLanguage('id', false);
+        updatePublicView();
+    });
+    document.getElementById('btnInggrisPub').addEventListener('click', () => {
+        currentPubLang = 'en';
+        document.getElementById('btnInggrisPub').classList.add('active');
+        document.getElementById('btnIndonesiaPub').classList.remove('active');
+        applyLanguage('en', false);
+        updatePublicView();
+    });
+
+    // Navigation
+    const deskTrigger = document.getElementById('desktopNavTrigger');
+    const deskDrop = document.getElementById('desktopNavDropdown');
+    if (deskTrigger) {
+        deskTrigger.addEventListener('click', e => { e.stopPropagation(); deskDrop.classList.toggle('active'); });
+        document.addEventListener('click', () => deskDrop.classList.remove('active'));
+    }
+    const mobBtn = document.getElementById('mobileMenuBtn'), mobMenu = document.getElementById('mobileMenu'), mobOverlay = document.getElementById('mobileMenuOverlay'), mobClose = document.getElementById('mobileMenuClose');
+    if (mobBtn) {
+        mobBtn.onclick = () => { mobMenu.classList.add('active'); mobOverlay.classList.add('active'); document.body.style.overflow='hidden'; };
+    }
+    const closeMob = () => { mobMenu.classList.remove('active'); mobOverlay.classList.remove('active'); document.body.style.overflow=''; };
+    if (mobClose) mobClose.onclick = closeMob;
+    if (mobOverlay) mobOverlay.onclick = closeMob;
+
+    // Initial updates
+    updateMyView();
+    updatePublicView();
+    applyLanguage('id', true);
+    applyLanguage('id', false);
 </script>
 </body>
-</html>
+    </html>
