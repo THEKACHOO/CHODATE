@@ -291,7 +291,7 @@
             gap: 8px;
             z-index: 3;
             background: #000000;
-            padding: 12px 12px 18px;
+            padding: 10px 14px 22px;
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
         }
@@ -299,9 +299,10 @@
             flex: 1;
             background: rgba(255,255,255,0.15);
             border-radius: 22px;
-            padding: 8px 14px;
+            padding: 8px 16px;
             display: flex;
             align-items: center;
+            overflow: visible;
         }
         .send-message-input {
             background: transparent;
@@ -963,6 +964,8 @@
     async function downloadEl(el, name) { 
         try {
             const rect = el.getBoundingClientRect();
+            const scrollX = window.scrollX || window.pageXOffset;
+            const scrollY = window.scrollY || window.pageYOffset;
             const c = await html2canvas(el, {
                 scale: 2.5,
                 backgroundColor: null,
@@ -972,8 +975,10 @@
                 height: rect.height,
                 windowWidth: document.documentElement.scrollWidth,
                 windowHeight: document.documentElement.scrollHeight,
-                scrollX: 0,
-                scrollY: 0
+                scrollX: -scrollX,
+                scrollY: -scrollY,
+                x: rect.left + scrollX,
+                y: rect.top + scrollY
             }); 
             const a = document.createElement('a'); 
             a.download = name; 
