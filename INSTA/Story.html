@@ -128,7 +128,8 @@
             background-color: #000;
             border-radius: 28px;
             padding: 14px;
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
             width: 100%;
         }
 
@@ -282,16 +283,11 @@
 
         /* Send message bar dengan background hitam */
         .send-message-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             display: flex;
             align-items: center;
             gap: 8px;
-            z-index: 3;
             background: #000000;
-            padding: 10px 14px 22px;
+            padding: 10px 12px 14px;
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
         }
@@ -617,23 +613,23 @@
                                     <i class="fas fa-ellipsis-h three-dots"></i>
                                 </div>
                             </div>
-                            <div class="send-message-bar">
-                                <div class="send-message-pill">
-                                    <input class="send-message-input" id="pubMessageInput" value="Send message...">
-                                </div>
-                                <div class="story-action-icons">
-                                    <div class="story-icon-btn" id="pubLikeBtn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="story-icon-btn">
-                                        <svg viewBox="0 0 24 24">
-                                            <line x1="22" y1="2" x2="11" y2="13"/>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="send-message-bar">
+                        <div class="send-message-pill">
+                            <input class="send-message-input" id="pubMessageInput" value="Send message...">
+                        </div>
+                        <div class="story-action-icons">
+                            <div class="story-icon-btn" id="pubLikeBtn">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <div class="story-icon-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
                             </div>
                         </div>
                     </div>
