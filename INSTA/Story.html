@@ -281,33 +281,41 @@
         }
 
         /* Send message bar dengan background hitam */
-        .send-message-bar {
+        .send-message-bg {
             position: absolute;
-            bottom: 20px;
+            bottom: 0;
             left: 0;
             right: 0;
+            height: 60px;
+            background: #000000;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            z-index: 3;
+        }
+        .send-message-bar {
+            position: absolute;
+            bottom: 14px;
+            left: 10px;
+            right: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
-            z-index: 10;
-            padding: 0 12px;
+            z-index: 4;
+            padding: 0;
         }
         .send-message-pill {
             flex: 1;
             background: rgba(255,255,255,0.15);
             border-radius: 22px;
             height: 36px;
-            border: 1px solid rgba(255,255,255,0.0);
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
         }
-        /* Teks dipisah dari pill, posisi absolut di depan pill */
         .send-message-label {
-            position: absolute;
-            left: 26px;
-            bottom: 28px;
             font-size: 12px;
             color: rgba(255,255,255,0.65);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            z-index: 11;
             pointer-events: none;
         }
         .send-message-input {
@@ -366,7 +374,7 @@
         @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
         .footer-section h3 { font-size: 0.7rem; font-weight: 700; margin-bottom: 14px; color: white; text-transform: uppercase; letter-spacing: 1.2px; }
         .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 4px; }
+        .footer-links li { margin-bottom: 8px; }
         .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
         .footer-links a:hover { color: white; }
         .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 280px; margin-bottom: 14px; line-height: 1.6; }
@@ -623,11 +631,11 @@
                                     <i class="fas fa-ellipsis-h three-dots"></i>
                                 </div>
                             </div>
+                            <div class="send-message-bg"></div>
                             <div class="send-message-bar">
                                 <div class="send-message-pill">
-                                    <!-- teks dipisah, posisi absolut di atas pill -->
+                                    <span class="send-message-label" id="pubMessageInput">Send message</span>
                                 </div>
-                                <div class="send-message-label" id="pubMessageInput">Send message</div>
                                 <div class="story-action-icons">
                                     <div class="story-icon-btn" id="pubLikeBtn">
                                         <svg viewBox="0 0 24 24">
