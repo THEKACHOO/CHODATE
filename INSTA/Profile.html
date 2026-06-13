@@ -419,17 +419,22 @@
         document.getElementById('themeLightBtn').addEventListener('click', () => { currentTheme='light'; document.getElementById('themeLightBtn').classList.add('active'); document.getElementById('themeDarkBtn').classList.remove('active'); updateTheme(); });
         document.getElementById('themeDarkBtn').addEventListener('click', () => { currentTheme='dark'; document.getElementById('themeDarkBtn').classList.add('active'); document.getElementById('themeLightBtn').classList.remove('active'); updateTheme(); });
         document.getElementById('downloadBtn').addEventListener('click', async () => { const element = document.getElementById('previewOuter'); try { const canvas = await html2canvas(element, { scale: 3, backgroundColor: null, useCORS: true }); const link = document.createElement('a'); link.download = `instaprofile_${Date.now()}.png`; link.href = canvas.toDataURL('image/png'); link.click(); showToast(translations[currentLang].downloadToast); } catch(e) { showToast(translations[currentLang].errorToast); } });
-        const handleNav = (e) => { e.preventDefault(); showToast('Fitur segera hadir'); };
-        document.querySelectorAll('#desktopNavDropdown .nav-button, .mobile-menu-link').forEach(el => el.addEventListener('click', handleNav));
+        
+        // Hapus pencegahan navigasi default untuk menu utama
+        // Biarkan tautan berfungsi seperti biasa (tanpa event listener yang menghalangi)
+        
         document.getElementById('editProfileBtn').addEventListener('click', () => showToast('Edit profil akan segera hadir'));
         document.getElementById('shareProfileBtn').addEventListener('click', () => showToast('Bagikan profil akan segera hadir'));
+        
         const desktopNavTrigger = document.getElementById('desktopNavTrigger'), desktopNavDropdown = document.getElementById('desktopNavDropdown');
         if(desktopNavTrigger && desktopNavDropdown) { desktopNavTrigger.addEventListener('click', (e) => { e.stopPropagation(); desktopNavDropdown.classList.toggle('active'); }); document.addEventListener('click', (e) => { if(!desktopNavTrigger.contains(e.target) && !desktopNavDropdown.contains(e.target)) desktopNavDropdown.classList.remove('active'); }); }
+        
         const mobileMenuBtn = document.getElementById('mobileMenuBtn'), mobileMenu = document.getElementById('mobileMenu'), mobileOverlay = document.getElementById('mobileMenuOverlay');
         function toggleMobileMenu() { mobileMenu.classList.toggle('active'); mobileOverlay.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; }
         function closeMobileMenu() { mobileMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; }
         mobileMenuBtn.addEventListener('click', toggleMobileMenu); mobileOverlay.addEventListener('click', closeMobileMenu);
+        
         updateFormLanguage(); updateTheme(); renderPostGrids(); updatePreview();
     </script>
 </body>
-                    </html>
+</html>
