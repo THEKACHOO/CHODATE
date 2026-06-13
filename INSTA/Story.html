@@ -963,22 +963,12 @@
     // Download - capture full element without cropping
     async function downloadEl(el, name) { 
         try {
-            const rect = el.getBoundingClientRect();
-            const scrollX = window.scrollX || window.pageXOffset;
-            const scrollY = window.scrollY || window.pageYOffset;
             const c = await html2canvas(el, {
                 scale: 2.5,
                 backgroundColor: null,
                 useCORS: true,
-                logging: false,
-                width: rect.width,
-                height: rect.height,
-                windowWidth: document.documentElement.scrollWidth,
-                windowHeight: document.documentElement.scrollHeight,
-                scrollX: -scrollX,
-                scrollY: -scrollY,
-                x: rect.left + scrollX,
-                y: rect.top + scrollY
+                allowTaint: true,
+                logging: false
             }); 
             const a = document.createElement('a'); 
             a.download = name; 
