@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>YOUCHO MEDIA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f9f9f9;
+            color: #0f0f0f;
+        }
+
+        /* HEADER (SAMA PERSIS) */
+        header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .logo-container { display: flex; align-items: center; cursor: pointer; }
+        .logo-img { height: 38px; width: auto; }
+        .center-title { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .center-logo-img { height: 100px; width: auto; object-fit: contain; }
+        .lang-toggle-header {
+            display: flex; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 60px;
+        }
+        .lang-btn {
+            background: transparent; border: none; color: white; font-weight: 600; font-size: 13px;
+            cursor: pointer; padding: 4px 8px; border-radius: 40px; transition: 0.2s;
+        }
+        .lang-btn.active { background: #ff0000; color: white; }
+        @media (max-width: 640px) { .center-logo-img { height: 70px; } .logo-img { height: 30px; } .lang-toggle-header { padding: 3px 8px; } .lang-btn { font-size: 11px; } }
+
+        .desktop-nav-container { position: relative; display: block; }
+        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
+        .desktop-nav-trigger {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px;
+            font-weight: 600; font-size: 14px; color: white; cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .desktop-nav-dropdown {
+            position: absolute; top: calc(100% + 12px); right: 0; width: 200px;
+            background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0;
+            opacity: 0; visibility: hidden; transform: translateY(-8px);
+            transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12);
+            z-index: 1100;
+        }
+        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .desktop-nav-dropdown .nav-button {
+            display: block; width: 100%; padding: 11px 20px; font-weight: 500;
+            font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none;
+            transition: 0.2s;
+        }
+        .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
+        .mobile-menu-btn {
+            display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px;
+            cursor: pointer; align-items: center; justify-content: center;
+        }
+        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
+        .mobile-menu {
+            position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px;
+            height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px;
+            transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0;
+            visibility: hidden; transition: all 0.3s; z-index: 998;
+        }
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-menu-link {
+            display: block; padding: 13px 18px; background: rgba(255,255,255,0.06);
+            border-radius: 40px; text-decoration: none; color: white; font-weight: 500;
+            margin-bottom: 10px; text-align: center; font-size: 14px;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: 100px 24px 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 28px;
+            color: #000000;
+            letter-spacing: -0.3px;
+        }
+        @media (max-width: 640px) {
+            .page-title { font-size: 26px; margin-bottom: 20px; }
+            .main-content { padding: 88px 16px 40px; }
+        }
+
+        /* Layout */
+        .settings-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .form-panel {
+            flex: 1;
+            min-width: 280px;
+            max-width: 380px;
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+            border: 1px solid #eaeef2;
+            height: fit-content;
+        }
+        .preview-panel {
+            flex: 1.2;
+            min-width: 320px;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #5f5f5f;
+            display: block;
+            margin-bottom: 6px;
+        }
+        input, .range-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 14px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: 0.2s;
+            background: white;
+        }
+        input:focus {
+            border-color: #000000;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+        .range-input {
+            padding: 8px;
+        }
+        .file-upload-btn {
+            background: #f2f2f2;
+            border-radius: 40px;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px dashed #bbb;
+            transition: 0.2s;
+        }
+        .file-upload-btn:hover {
+            background: #e6e6e6;
+            border-color: #000000;
+        }
+        .switch-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 8px 14px;
+            border-radius: 40px;
+            border: 1px solid #e0e0e0;
+        }
+        .switch-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #111;
+        }
+        .switch-toggle {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+        .switch-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider-round {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+        .slider-round:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider-round {
+            background-color: #000000;
+        }
+        input:checked + .slider-round:before {
+            transform: translateX(24px);
+        }
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 18px 0;
+        }
+
+        /* PREVIEW CARD */
+        .yt-preview-card {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            font-family: 'Inter', Roboto, Arial, sans-serif;
+        }
+        .yt-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0a0a0a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .yt-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .yt-thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .yt-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(4px);
+            z-index: 3;
+        }
+        /* GARIS MERAH PROGRESS BAR dengan lebar dinamis */
+        .progress-red-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: #ff0000;
+            z-index: 2;
+            transition: width 0.2s ease;
+        }
+        .yt-info {
+            padding: 12px 14px;
+        }
+        .channel-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .avatar-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .avatar-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-details {
+            flex: 1;
+        }
+        .video-title {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.3;
+            margin-bottom: 6px;
+            color: #0f0f0f;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .channel-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #606060;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .subscribe-btn {
+            background: #0f0f0f;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-left: auto;
+        }
+        .subscribe-btn.subscribed {
+            background: #f2f2f2;
+            color: #0f0f0f;
+        }
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: #606060;
+            margin-top: 8px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 8px;
+        }
+        .publish-line {
+            margin-top: 4px;
+            border-top: none;
+            padding-top: 0;
+        }
+        .stats-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .action-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 10px;
+        }
+        .action-icon {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #606060;
+            cursor: default;
+        }
+        .action-icon i {
+            font-size: 18px;
+        }
+
+        .download-btn {
+            background: #181818;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+            width: 100%;
+            max-width: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .download-btn:hover {
+            background: #ff0000;
+            transform: scale(0.98);
+        }
+
+        /* MODAL CROP */
+        .crop-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000000e6;
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .crop-modal .crop-container {
+            max-width: 90vw;
+            max-height: 70vh;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .crop-modal img {
+            max-width: 100%;
+            max-height: 65vh;
+        }
+        .crop-buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .crop-btn {
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+        .crop-save { background: #000000; color: white; }
+        .crop-cancel { background: #333; color: white; }
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #222;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-size: 13px;
+            z-index: 30000;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+        
+        footer {
+            background: #000;
+            color: #ddd;
+            padding: 50px 0 28px;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
+        }
+        @media(max-width:860px){ .footer-grid{grid-template-columns:1fr 1fr; gap:24px;} }
+        .footer-section h3 { font-size:0.7rem; font-weight:700; margin-bottom:14px; color:white; text-transform:uppercase; letter-spacing:1.2px; }
+        .footer-links { list-style:none; }
+        .footer-links li { margin-bottom:0; }
+        .footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.83rem; transition:0.2s; }
+        .footer-links a:hover { color:white; }
+        .footer-brand p { color:rgba(255,255,255,0.5); font-size:0.8rem; max-width:200px; margin-bottom:14px; line-height:1.6; }
+        .social-links { display:flex; gap:10px; }
+        .social-link { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; background:rgba(255,255,255,0.08); border-radius:60px; color:white; text-decoration:none; font-size:12px; transition:0.2s; }
+        .social-link:hover { background:white; color:black; }
+        .footer-bottom { display:flex; align-items:center; justify-content:center; padding-top:22px; border-top:1px solid rgba(255,255,255,0.08); max-width:1400px; margin:0 auto; padding-left:24px; padding-right:24px; }
+        .copyright { font-size:0.7rem; color:rgba(255,255,255,0.4); text-align:center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            <img src="Youcho1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+        </div>
+        <div class="center-title">
+            <img src="Youcho2.png" alt="Youcho" class="center-logo-img" onerror="this.style.display='none'">
+            <div class="lang-toggle-header" id="globalLangToggle">
+                <button class="lang-btn active" data-lang="id">🇮🇩 IND</button>
+                <button class="lang-btn" data-lang="en">🇬🇧 ENG</button>
+            </div>
+        </div>
+        <div class="desktop-nav-container">
+            <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
+            <div class="desktop-nav-dropdown" id="desktopNavDropdown">
+                <a href="#" class="nav-button" data-key="home">Home</a>
+                <a href="#" class="nav-button" data-key="theKachoo">The Kachoo</a>
+            </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+</header>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#" class="mobile-menu-link" data-key="home">Home</a>
+    <a href="#" class="mobile-menu-link" data-key="theKachoo">The Kachoo</a>
+</div>
+
+<div class="main-content">
+    <h1 class="page-title" data-key="pageTitle">Create your media!</h1>
+    
+    <div class="settings-layout">
+        <div class="form-panel">
+            <div class="form-group">
+                <label data-key="avatarLabel">Avatar Profile (1:1)</label>
+                <div class="file-upload-btn" id="uploadAvatarBtn">Upload & Crop 1:1</div>
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="divider"></div>
+            <div class="form-group">
+                <label data-key="titleLabel">Title Video</label>
+                <input type="text" id="videoTitle" placeholder="The Kachoo rilis fitur CHODATE!">
+            </div>
+            <div class="form-group">
+                <label data-key="viewsLabel">Jumlah Views</label>
+                <input type="text" id="videoViews" placeholder="1.2M views">
+            </div>
+            <div class="form-group">
+                <label data-key="durationVideoLabel">Durasi Video</label>
+                <input type="text" id="videoDuration" placeholder="10:24">
+            </div>
+            <div class="form-group">
+                <label data-key="currentWatchingLabel">Durasi Nonton Saat Ini (Opsional)</label>
+                <input type="text" id="currentWatchDuration" placeholder="cth: 03:15">
+            </div>
+            <div class="form-group">
+                <label data-key="progressSliderLabel">Atur Progress (Garis Merah)</label>
+                <input type="range" id="progressSlider" class="range-input" min="0" max="100" value="70">
+                <div style="font-size:12px; margin-top:5px;" id="progressPercentLabel">70%</div>
+            </div>
+            <div class="form-group">
+                <label data-key="likesLabel">Jumlah Like</label>
+                <input type="text" id="videoLikes" placeholder="15K">
+            </div>
+            <div class="form-group">
+                <label data-key="dislikesLabel">Jumlah Dislike</label>
+                <input type="text" id="videoDislikes" placeholder="320">
+            </div>
+            <div class="form-group">
+                <label data-key="publishLabel">Waktu Publish</label>
+                <input type="text" id="videoPublish" placeholder="Dipublikasikan 3 jam lalu">
+            </div>
+            <div class="form-group">
+                <label data-key="subscribeLabel">Subscribe / Unsubscribe</label>
+                <div class="switch-wrapper">
+                    <span class="switch-label" data-key="statusChannel">Status Channel</span>
+                    <label class="switch-toggle">
+                        <input type="checkbox" id="subscribeToggle">
+                        <span class="slider-round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="form-group">
+                <label data-key="mediaLabel">Gambar Media</label>
+                <div class="file-upload-btn" id="uploadMediaBtn">Upload & Crop 16:9</div>
+                <input type="file" id="mediaFileInput" accept="image/*" style="display: none;">
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div class="yt-preview-card" id="youtubePreviewCard">
+                <div class="yt-thumb" id="thumbArea">
+                    <div class="yt-thumb-placeholder" id="thumbPlaceholderText"><i class="fas fa-play-circle"></i> Thumbnail 16:9</div>
+                    <img id="thumbnailImg" style="display: none;" alt="thumbnail">
+                    <span class="yt-badge" id="durationBadge">10:24</span>
+                    <div class="progress-red-bar" id="progressRedBar"></div>
+                </div>
+                <div class="yt-info">
+                    <div class="channel-row">
+                        <div class="avatar-profile" id="avatarPreview"><div style="width:100%;height:100%;background:#ccc;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:18px;"></i></div></div>
+                        <div class="video-details">
+                            <div class="video-title" id="previewTitle">The Kachoo rilis fitur CHODATE!</div>
+                            <div class="channel-name"><span id="channelNameDisplay">MyChannel</span><button class="subscribe-btn" id="subscribePreviewBtn">SUBSCRIBE</button></div>
+                        </div>
+                    </div>
+                    <div class="stats-row"><div class="stats-item"><i class="fas fa-eye"></i> <span id="viewsPreview">1.2M views</span></div></div>
+                    <div class="stats-row publish-line"><div class="stats-item"><i class="fas fa-calendar-week"></i> <span id="publishPreview">Dipublikasikan 3 jam lalu</span></div></div>
+                    <div class="action-icons">
+                        <div class="action-icon"><i class="fas fa-thumbs-up"></i> <span id="likesPreview">15K</span></div>
+                        <div class="action-icon"><i class="fas fa-thumbs-down"></i> <span id="dislikesPreview">320</span></div>
+                        <div class="action-icon"><i class="fas fa-share"></i> SHARE</div>
+                        <div class="action-icon"><i class="fas fa-download"></i> SAVE</div>
+                    </div>
+                </div>
+            </div>
+            <button class="download-btn" id="screenshotBtn">Download</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section footer-brand"><h3>CHODATE</h3><p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p><div class="social-links"><a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a><a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a></div></div>
+        <div class="footer-section"><h3>Explore</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li><li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li><li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li><li><a href="https://thekachoo.github.io/Home/kaboom.html">Kaboom</a></li><li><a href="#">Kadio</a></li></ul></div>
+        <div class="footer-section"><h3>More</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/CHOBANK/transaction.html">Chobank</a></li><li><a href="https://thekachoo.github.io/CHONNECT/index.html">Chonnect</a></li><li><a href="https://thekachoo.github.io/Games/CHOSONG/CHOSONG.html">Chosong</a></li><li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li></ul></div>
+        <div class="footer-section"><h3>Meet Us</h3><ul class="footer-links"><li><a href="https://x.com/thekachoo" target="_blank">X</a></li><li><a href="mailto:ohkachoo@gmail.com">Email</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div></div>
+</footer>
+
+<div id="cropModal" class="crop-modal"><div class="crop-container"><img id="cropImage" src=""></div><div class="crop-buttons"><button class="crop-btn crop-cancel" id="cancelCropBtn">Batal</button><button class="crop-btn crop-save" id="saveCropBtn">Terapkan Crop</button></div></div>
+<div class="toast-msg" id="toastMsg"></div>
+
+<script>
+    let currentCropType = null;
+    let avatarCropper = null, mediaCropper = null;
+    let avatarImageBlobUrl = null, mediaImageBlobUrl = null;
+    let currentLang = 'id';
+    const translations = {
+        id: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile (1:1)", titleLabel:"Title Video", viewsLabel:"Jumlah Views", durationVideoLabel:"Durasi Video", currentWatchingLabel:"Durasi Nonton Saat Ini (Opsional)", progressSliderLabel:"Atur Progress (Garis Merah)", likesLabel:"Jumlah Like", dislikesLabel:"Jumlah Dislike", publishLabel:"Waktu Publish", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Status Channel", mediaLabel:"Gambar Media", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" },
+        en: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile (1:1)", titleLabel:"Video Title", viewsLabel:"View Count", durationVideoLabel:"Video Duration", currentWatchingLabel:"Current Watching Duration (Optional)", progressSliderLabel:"Adjust Progress (Red Bar)", likesLabel:"Like Count", dislikesLabel:"Dislike Count", publishLabel:"Published Date", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Channel Status", mediaLabel:"Thumbnail Image", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" }
+    };
+    function updatePageLanguage() { document.querySelectorAll('[data-key]').forEach(el => { let key = el.getAttribute('data-key'); if(translations[currentLang][key]) el.innerText = translations[currentLang][key]; }); if(subscribeToggle.checked) subscribePreviewBtn.innerText = translations[currentLang].subscribed; else subscribePreviewBtn.innerText = translations[currentLang].subscribe; }
+    document.querySelectorAll('.lang-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentLang = btn.getAttribute('data-lang'); updatePageLanguage(); updatePreviewData(); }); });
+    
+    const videoTitleInput = document.getElementById('videoTitle'), videoViewsInput = document.getElementById('videoViews'), videoDurationInput = document.getElementById('videoDuration'), currentWatchInput = document.getElementById('currentWatchDuration'), videoLikesInput = document.getElementById('videoLikes'), videoDislikesInput = document.getElementById('videoDislikes'), videoPublishInput = document.getElementById('videoPublish'), subscribeToggle = document.getElementById('subscribeToggle'), subscribePreviewBtn = document.getElementById('subscribePreviewBtn'), previewTitle = document.getElementById('previewTitle'), viewsPreview = document.getElementById('viewsPreview'), durationBadge = document.getElementById('durationBadge'), likesPreview = document.getElementById('likesPreview'), dislikesPreview = document.getElementById('dislikesPreview'), publishPreview = document.getElementById('publishPreview'), progressSlider = document.getElementById('progressSlider'), progressRedBar = document.getElementById('progressRedBar'), progressPercentLabel = document.getElementById('progressPercentLabel');
+    
+    function updateProgressBar() { let val = progressSlider.value; progressRedBar.style.width = val + '%'; progressPercentLabel.innerText = val + '%'; }
+    progressSlider.addEventListener('input', updateProgressBar);
+    
+    function updatePreviewData() {
+        let title = videoTitleInput.value.trim() || (currentLang === 'id' ? "The Kachoo rilis fitur CHODATE!" : "The Kachoo releases CHODATE feature!");
+        let views = videoViewsInput.value.trim() || (currentLang === 'id' ? "1.2M views" : "1.2M views");
+        let duration = videoDurationInput.value.trim();
+        let currentWatch = currentWatchInput.value.trim();
+        let finalBadge = duration;
+        if(currentWatch && currentWatch.length > 0) { finalBadge = currentWatch + " / " + duration; }
+        else { finalBadge = duration || (currentLang === 'id' ? "10:24" : "10:24"); }
+        let likes = videoLikesInput.value.trim() || (currentLang === 'id' ? "15K" : "15K");
+        let dislikes = videoDislikesInput.value.trim() || (currentLang === 'id' ? "320" : "320");
+        let publish = videoPublishInput.value.trim() || (currentLang === 'id' ? "Dipublikasikan 3 jam lalu" : "Published 3 hours ago");
+        previewTitle.innerText = title;
+        viewsPreview.innerText = views;
+        durationBadge.innerText = finalBadge;
+        likesPreview.innerText = likes;
+        dislikesPreview.innerText = dislikes;
+        publishPreview.innerText = publish;
+        if(subscribeToggle.checked) { subscribePreviewBtn.innerText = translations[currentLang].subscribed; subscribePreviewBtn.classList.add("subscribed"); }
+        else { subscribePreviewBtn.innerText = translations[currentLang].subscribe; subscribePreviewBtn.classList.remove("subscribed"); }
+    }
+    videoTitleInput.addEventListener('input', updatePreviewData); videoViewsInput.addEventListener('input', updatePreviewData); videoDurationInput.addEventListener('input', updatePreviewData); currentWatchInput.addEventListener('input', updatePreviewData); videoLikesInput.addEventListener('input', updatePreviewData); videoDislikesInput.addEventListener('input', updatePreviewData); videoPublishInput.addEventListener('input', updatePreviewData); subscribeToggle.addEventListener('change', updatePreviewData);
+    
+    const avatarUploadBtn = document.getElementById('uploadAvatarBtn'), avatarFileInput = document.getElementById('avatarFileInput'), mediaUploadBtn = document.getElementById('uploadMediaBtn'), mediaFileInput = document.getElementById('mediaFileInput'), cropModal = document.getElementById('cropModal'), cropImageEl = document.getElementById('cropImage'), cancelCrop = document.getElementById('cancelCropBtn'), saveCrop = document.getElementById('saveCropBtn'), toastMsg = document.getElementById('toastMsg'), avatarPreviewDiv = document.getElementById('avatarPreview'), thumbnailImg = document.getElementById('thumbnailImg'), thumbPlaceholder = document.getElementById('thumbPlaceholderText');
+    function showToast(text) { toastMsg.innerText = text; toastMsg.style.opacity = '1'; setTimeout(() => { toastMsg.style.opacity = '0'; }, 2000); }
+    avatarUploadBtn.addEventListener('click', () => avatarFileInput.click());
+    avatarFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'avatar'; cropModal.style.display = 'flex'; if (avatarCropper) avatarCropper.destroy(); setTimeout(() => { avatarCropper = new Cropper(cropImageEl, { aspectRatio: 1, viewMode: 2, autoCropArea: 0.9 }); }, 100); e.target.value = ''; });
+    mediaUploadBtn.addEventListener('click', () => mediaFileInput.click());
+    mediaFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'media'; cropModal.style.display = 'flex'; if (mediaCropper) mediaCropper.destroy(); setTimeout(() => { mediaCropper = new Cropper(cropImageEl, { aspectRatio: 16/9, viewMode: 2, autoCropArea: 1 }); }, 100); e.target.value = ''; });
+    cancelCrop.addEventListener('click', () => { cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; });
+    saveCrop.addEventListener('click', () => { let cropper = (currentCropType === 'avatar') ? avatarCropper : mediaCropper; if (!cropper) return; const canvas = cropper.getCroppedCanvas({ width: currentCropType === 'avatar' ? 300 : 640, height: currentCropType === 'avatar' ? 300 : 360 }); canvas.toBlob(blob => { const blobUrl = URL.createObjectURL(blob); if (currentCropType === 'avatar') { if (avatarImageBlobUrl) URL.revokeObjectURL(avatarImageBlobUrl); avatarImageBlobUrl = blobUrl; avatarPreviewDiv.innerHTML = `<img src="${blobUrl}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; showToast("Avatar updated"); } else { if (mediaImageBlobUrl) URL.revokeObjectURL(mediaImageBlobUrl); mediaImageBlobUrl = blobUrl; thumbnailImg.src = blobUrl; thumbnailImg.style.display = 'block'; thumbPlaceholder.style.display = 'none'; showToast("Thumbnail 16:9 updated"); } cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; }, 'image/png'); });
+    subscribePreviewBtn.addEventListener('click', () => { subscribeToggle.checked = !subscribeToggle.checked; updatePreviewData(); });
+    document.getElementById('screenshotBtn').addEventListener('click', async () => { const card = document.getElementById('youtubePreviewCard'); if (!card) return; try { const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }); const link = document.createElement('a'); link.download = 'youtube_media_preview.png'; link.href = canvas.toDataURL('image/png'); link.click(); showToast("Preview downloaded!"); } catch (err) { showToast("Failed to generate image"); } });
+    updateProgressBar(); updatePreviewData(); updatePageLanguage();
+    if (!avatarImageBlobUrl) avatarPreviewDiv.innerHTML = `<div style="width:100%;height:100%;background:#aaa;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:20px;"></i></div>`;
+    if (!mediaImageBlobUrl) { thumbnailImg.style.display = 'none'; thumbPlaceholder.style.display = 'flex'; }
+    const mobileBtn = document.getElementById('mobileMenuBtn'), mobileMenu = document.getElementById('mobileMenu'), overlay = document.getElementById('mobileMenuOverlay');
+    mobileBtn.addEventListener('click', () => { mobileMenu.classList.toggle('active'); overlay.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; });
+    overlay.addEventListener('click', () => { mobileMenu.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; });
+    const desktopTrigger = document.getElementById('desktopNavTrigger'), desktopDropdown = document.getElementById('desktopNavDropdown');
+    if (desktopTrigger) { desktopTrigger.addEventListener('click', (e) => { e.stopPropagation(); desktopDropdown.classList.toggle('active'); }); document.addEventListener('click', (e) => { if (!desktopTrigger.contains(e.target) && !desktopDropdown.contains(e.target)) desktopDropdown.classList.remove('active'); }); }
+</script>
+</body>
+</html>
