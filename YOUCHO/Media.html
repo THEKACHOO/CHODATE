@@ -4,25 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>YOUCHO MEDIA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f9f9f9; color: #0f0f0f; }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f9f9f9;
-            color: #0f0f0f;
-        }
-
-        /* HEADER (SAMA PERSIS) */
         header {
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(16px);
@@ -44,17 +34,9 @@
         }
         .logo-container { display: flex; align-items: center; cursor: pointer; }
         .logo-img { height: 38px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .center-title { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
         .center-logo-img { height: 100px; width: auto; object-fit: contain; }
-        .lang-toggle-header {
-            display: flex; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 60px;
-        }
-        .lang-btn {
-            background: transparent; border: none; color: white; font-weight: 600; font-size: 13px;
-            cursor: pointer; padding: 4px 8px; border-radius: 40px; transition: 0.2s;
-        }
-        .lang-btn.active { background: #ff0000; color: white; }
-        @media (max-width: 640px) { .center-logo-img { height: 70px; } .logo-img { height: 30px; } .lang-toggle-header { padding: 3px 8px; } .lang-btn { font-size: 11px; } }
+        @media (max-width: 640px) { .center-logo-img { height: 70px; } .logo-img { height: 30px; } }
 
         .desktop-nav-container { position: relative; display: block; }
         @media (max-width: 768px) { .desktop-nav-container { display: none; } }
@@ -101,7 +83,6 @@
             margin-bottom: 10px; text-align: center; font-size: 14px;
         }
 
-        /* MAIN CONTENT */
         .main-content {
             padding: 100px 24px 60px;
             max-width: 1300px;
@@ -113,14 +94,12 @@
             text-align: center;
             margin-bottom: 28px;
             color: #000000;
-            letter-spacing: -0.3px;
         }
         @media (max-width: 640px) {
-            .page-title { font-size: 26px; margin-bottom: 20px; }
+            .page-title { font-size: 26px; }
             .main-content { padding: 88px 16px 40px; }
         }
 
-        /* Layout */
         .settings-layout {
             display: flex;
             flex-wrap: wrap;
@@ -139,8 +118,8 @@
             height: fit-content;
         }
         .preview-panel {
-            flex: 1.2;
-            min-width: 320px;
+            flex: 1.5;
+            min-width: 340px;
             background: transparent;
             display: flex;
             flex-direction: column;
@@ -148,9 +127,7 @@
             gap: 24px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
         label {
             font-size: 12px;
             font-weight: 600;
@@ -167,17 +144,13 @@
             border-radius: 14px;
             font-size: 14px;
             font-family: inherit;
-            transition: 0.2s;
-            background: white;
         }
         input:focus {
             border-color: #000000;
             outline: none;
             box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
         }
-        .range-input {
-            padding: 8px;
-        }
+        .range-input { padding: 8px; }
         .file-upload-btn {
             background: #f2f2f2;
             border-radius: 40px;
@@ -187,12 +160,8 @@
             font-weight: 500;
             cursor: pointer;
             border: 1px dashed #bbb;
-            transition: 0.2s;
         }
-        .file-upload-btn:hover {
-            background: #e6e6e6;
-            border-color: #000000;
-        }
+        .file-upload-btn:hover { background: #e6e6e6; border-color: #000000; }
         .switch-wrapper {
             display: flex;
             align-items: center;
@@ -202,22 +171,14 @@
             border-radius: 40px;
             border: 1px solid #e0e0e0;
         }
-        .switch-label {
-            font-weight: 600;
-            font-size: 13px;
-            color: #111;
-        }
+        .switch-label { font-weight: 600; font-size: 13px; color: #111; }
         .switch-toggle {
             position: relative;
             display: inline-block;
             width: 48px;
             height: 24px;
         }
-        .switch-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch-toggle input { opacity: 0; width: 0; height: 0; }
         .slider-round {
             position: absolute;
             cursor: pointer;
@@ -240,24 +201,33 @@
             transition: 0.3s;
             border-radius: 50%;
         }
-        input:checked + .slider-round {
-            background-color: #000000;
+        input:checked + .slider-round { background-color: #000000; }
+        input:checked + .slider-round:before { transform: translateX(24px); }
+        .divider { height: 1px; background: #eee; margin: 18px 0; }
+        .lang-switch-inline {
+            background: #f0f0f0;
+            padding: 8px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 12px;
+            border-radius: 60px;
+            border: 1px solid #ddd;
         }
-        input:checked + .slider-round:before {
-            transform: translateX(24px);
+        .lang-switch-inline .lang-btn {
+            background: #e0e0e0;
+            border: none;
+            padding: 6px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 40px;
         }
-        .divider {
-            height: 1px;
-            background: #eee;
-            margin: 18px 0;
-        }
+        .lang-switch-inline .lang-btn.active { background: #000; color: white; }
 
-        /* PREVIEW CARD */
         .yt-preview-card {
             width: 100%;
-            max-width: 500px;
             background: #ffffff;
-            border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 12px 30px rgba(0,0,0,0.12);
             font-family: 'Inter', Roboto, Arial, sans-serif;
@@ -265,7 +235,6 @@
         .yt-thumb {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
             background: #0a0a0a;
             overflow: hidden;
             display: flex;
@@ -274,19 +243,18 @@
         }
         .yt-thumb img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
         }
         .yt-thumb-placeholder {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 16 / 9;
             background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
         }
         .yt-badge {
@@ -302,7 +270,6 @@
             backdrop-filter: blur(4px);
             z-index: 3;
         }
-        /* GARIS MERAH PROGRESS BAR dengan lebar dinamis */
         .progress-red-bar {
             position: absolute;
             bottom: 0;
@@ -313,106 +280,110 @@
             transition: width 0.2s ease;
         }
         .yt-info {
-            padding: 12px 14px;
+            padding: 14px 16px;
         }
-        .channel-row {
+        .video-title {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: #0f0f0f;
+        }
+        
+        .channel-action-row {
             display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
             gap: 12px;
-            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+        .channel-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         .avatar-profile {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
             background: #ddd;
+            border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
         }
-        .avatar-profile img {
+        .avatar-profile img, .avatar-profile div {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .video-details {
-            flex: 1;
-        }
-        .video-title {
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 1.3;
-            margin-bottom: 6px;
+        .channel-name-text {
+            font-weight: 600;
+            font-size: 15px;
             color: #0f0f0f;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .channel-name {
-            font-size: 13px;
-            font-weight: 500;
-            color: #606060;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
+            margin-top: -12px;
         }
         .subscribe-btn {
             background: #0f0f0f;
             color: white;
             border: none;
-            border-radius: 40px;
-            padding: 6px 14px;
+            border-radius: 18px;
+            padding: 5px 14px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
-            margin-left: auto;
+            white-space: nowrap;
         }
         .subscribe-btn.subscribed {
             background: #f2f2f2;
             color: #0f0f0f;
         }
-        .stats-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            font-size: 12px;
-            color: #606060;
-            margin-top: 8px;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 8px;
-        }
-        .publish-line {
-            margin-top: 4px;
-            border-top: none;
-            padding-top: 0;
-        }
-        .stats-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
         .action-icons {
             display: flex;
-            gap: 16px;
-            margin-top: 10px;
-            border-top: 1px solid #e5e5e5;
-            padding-top: 10px;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         .action-icon {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             font-size: 12px;
             font-weight: 500;
             color: #606060;
             cursor: default;
+            white-space: nowrap;
         }
         .action-icon i {
-            font-size: 18px;
+            font-size: 14px;
         }
-
+        .more-icon { cursor: pointer; }
+        
+        .subscriber-row {
+            margin-left: 52px;
+            margin-top: -23px;
+            margin-bottom: 12px;
+        }
+        .subscriber-count {
+            font-size: 12px;
+            color: #606060;
+        }
+        
+        .stats-line {
+            font-size: 13px;
+            color: #606060;
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+        .stats-separator {
+            color: #aaa;
+        }
+        
         .download-btn {
             background: #181818;
             border: none;
@@ -423,19 +394,11 @@
             font-size: 14px;
             cursor: pointer;
             transition: 0.2s;
-            margin-top: 8px;
             width: 100%;
             max-width: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-        .download-btn:hover {
-            background: #ff0000;
-            transform: scale(0.98);
-        }
+        .download-btn:hover { background: #ff0000; transform: scale(0.98); }
 
-        /* MODAL CROP */
         .crop-modal {
             display: none;
             position: fixed;
@@ -453,22 +416,9 @@
             border-radius: 20px;
             overflow: hidden;
         }
-        .crop-modal img {
-            max-width: 100%;
-            max-height: 65vh;
-        }
-        .crop-buttons {
-            display: flex;
-            gap: 14px;
-            margin-top: 18px;
-        }
-        .crop-btn {
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-        }
+        .crop-modal img { max-width: 100%; max-height: 65vh; }
+        .crop-buttons { display: flex; gap: 14px; margin-top: 18px; }
+        .crop-btn { padding: 10px 28px; border-radius: 40px; font-weight: 700; border: none; cursor: pointer; }
         .crop-save { background: #000000; color: white; }
         .crop-cancel { background: #333; color: white; }
         .toast-msg {
@@ -526,16 +476,12 @@
         </div>
         <div class="center-title">
             <img src="Youcho2.png" alt="Youcho" class="center-logo-img" onerror="this.style.display='none'">
-            <div class="lang-toggle-header" id="globalLangToggle">
-                <button class="lang-btn active" data-lang="id">IND</button>
-                <button class="lang-btn" data-lang="en">ENG</button>
-            </div>
         </div>
         <div class="desktop-nav-container">
             <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
             <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                <a href="#" class="nav-button" data-key="home">Home</a>
-                <a href="#" class="nav-button" data-key="theKachoo">The Kachoo</a>
+                <a href="#" class="nav-button" id="menuHome">Home</a>
+                <a href="#" class="nav-button" id="menuKachoo">The Kachoo</a>
             </div>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -543,70 +489,35 @@
 </header>
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
-    <a href="#" class="mobile-menu-link" data-key="home">Home</a>
-    <a href="#" class="mobile-menu-link" data-key="theKachoo">The Kachoo</a>
+    <a href="#" class="mobile-menu-link" id="mobileHome">Home</a>
+    <a href="#" class="mobile-menu-link" id="mobileKachoo">The Kachoo</a>
 </div>
 
 <div class="main-content">
-    <h1 class="page-title" data-key="pageTitle">Create your media!</h1>
+    <h1 class="page-title" id="pageTitle">Buat media kamu!</h1>
     
     <div class="settings-layout">
         <div class="form-panel">
-            <div class="form-group">
-                <label data-key="avatarLabel">Avatar Profile</label>
-                <div class="file-upload-btn" id="uploadAvatarBtn">Upload</div>
-                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+            <div class="lang-switch-inline" id="inlineLangSwitch">
+                <button class="lang-btn active" data-lang="id">IND</button>
+                <button class="lang-btn" data-lang="en">ENG</button>
             </div>
             <div class="divider"></div>
-            <div class="form-group">
-                <label data-key="titleLabel">Title Video</label>
-                <input type="text" id="videoTitle" placeholder="The Kachoo rilis fitur CHODATE!">
-            </div>
-            <div class="form-group">
-                <label data-key="viewsLabel">Jumlah Views</label>
-                <input type="text" id="videoViews" placeholder="1.2M views">
-            </div>
-            <div class="form-group">
-                <label data-key="durationVideoLabel">Durasi Video</label>
-                <input type="text" id="videoDuration" placeholder="10:24">
-            </div>
-            <div class="form-group">
-                <label data-key="currentWatchingLabel">Durasi Nonton Saat Ini (Opsional)</label>
-                <input type="text" id="currentWatchDuration" placeholder="cth: 03:15">
-            </div>
-            <div class="form-group">
-                <label data-key="progressSliderLabel">Atur Progress</label>
-                <input type="range" id="progressSlider" class="range-input" min="0" max="100" value="70">
-                <div style="font-size:12px; margin-top:5px;" id="progressPercentLabel">70%</div>
-            </div>
-            <div class="form-group">
-                <label data-key="likesLabel">Jumlah Like</label>
-                <input type="text" id="videoLikes" placeholder="15K">
-            </div>
-            <div class="form-group">
-                <label data-key="dislikesLabel">Jumlah Dislike</label>
-                <input type="text" id="videoDislikes" placeholder="320">
-            </div>
-            <div class="form-group">
-                <label data-key="publishLabel">Waktu Publish</label>
-                <input type="text" id="videoPublish" placeholder="Dipublikasikan 3 jam lalu">
-            </div>
-            <div class="form-group">
-                <label data-key="subscribeLabel">Subscribe / Unsubscribe</label>
-                <div class="switch-wrapper">
-                    <span class="switch-label" data-key="statusChannel">Status Channel</span>
-                    <label class="switch-toggle">
-                        <input type="checkbox" id="subscribeToggle">
-                        <span class="slider-round"></span>
-                    </label>
-                </div>
-            </div>
+            <div class="form-group"><label id="avatarLabel">Avatar Profil</label><div class="file-upload-btn" id="uploadAvatarBtn">Unggah</div><input type="file" id="avatarFileInput" accept="image/*" style="display: none;"></div>
+            <div class="form-group"><label id="channelNameLabel">Nama Channel</label><input type="text" id="channelNameInput" placeholder="Channel Saya"></div>
+            <div class="form-group"><label id="subscriberCountLabel">Jumlah Subscriber</label><input type="text" id="subscriberCountInput" placeholder="1,2 jt subscriber"></div>
             <div class="divider"></div>
-            <div class="form-group">
-                <label data-key="mediaLabel">Gambar Media</label>
-                <div class="file-upload-btn" id="uploadMediaBtn">Upload</div>
-                <input type="file" id="mediaFileInput" accept="image/*" style="display: none;">
-            </div>
+            <div class="form-group"><label id="titleLabel">Judul Video</label><input type="text" id="videoTitle" placeholder="The Kachoo rilis fitur CHODATE!"></div>
+            <div class="form-group"><label id="viewsLabel">Jumlah Views</label><input type="text" id="videoViews" placeholder="64 rb x ditonton"></div>
+            <div class="form-group"><label id="durationVideoLabel">Durasi Video</label><input type="text" id="videoDuration" placeholder="10:24"></div>
+            <div class="form-group"><label id="currentWatchingLabel">Durasi Nonton Saat Ini (Opsional)</label><input type="text" id="currentWatchDuration" placeholder="cth: 03:15"></div>
+            <div class="form-group"><label id="progressSliderLabel">Atur Progress</label><input type="range" id="progressSlider" class="range-input" min="0" max="100" value="70"><div style="font-size:12px; margin-top:5px;" id="progressPercentLabel">70%</div></div>
+            <div class="form-group"><label id="likesLabel">Jumlah Like</label><input type="text" id="videoLikes" placeholder="1,2 rb"></div>
+            <div class="form-group"><label id="dislikesLabel">Jumlah Dislike</label><input type="text" id="videoDislikes" placeholder="120"></div>
+            <div class="form-group"><label id="publishLabel">Waktu Publish</label><input type="text" id="videoPublish" placeholder="1 hari yang lalu"></div>
+            <div class="form-group"><label id="subscribeLabel">Subscribe / Berhenti Langganan</label><div class="switch-wrapper"><span class="switch-label" id="statusChannel">Status Channel</span><label class="switch-toggle"><input type="checkbox" id="subscribeToggle"><span class="slider-round"></span></label></div></div>
+            <div class="divider"></div>
+            <div class="form-group"><label id="mediaLabel">Gambar Miniatur (Thumbnail)</label><div class="file-upload-btn" id="uploadMediaBtn">Unggah</div><input type="file" id="mediaFileInput" accept="image/*" style="display: none;"></div>
         </div>
 
         <div class="preview-panel">
@@ -618,98 +529,311 @@
                     <div class="progress-red-bar" id="progressRedBar"></div>
                 </div>
                 <div class="yt-info">
-                    <div class="channel-row">
-                        <div class="avatar-profile" id="avatarPreview"><div style="width:100%;height:100%;background:#ccc;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:18px;"></i></div></div>
-                        <div class="video-details">
-                            <div class="video-title" id="previewTitle">The Kachoo rilis fitur CHODATE!</div>
-                            <div class="channel-name"><span id="channelNameDisplay">MyChannel</span><button class="subscribe-btn" id="subscribePreviewBtn">SUBSCRIBE</button></div>
+                    <div class="video-title" id="previewTitle">The Kachoo rilis fitur CHODATE!</div>
+                    
+                    <div class="channel-action-row">
+                        <div class="channel-left">
+                            <div class="avatar-profile" id="avatarPreview"><div style="width:100%;height:100%;background:#aaa;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:18px;"></i></div></div>
+                            <span class="channel-name-text" id="channelNameDisplay">Channel Saya</span>
+                            <button class="subscribe-btn" id="subscribePreviewBtn">BERLANGGANAN</button>
+                        </div>
+                        <div class="action-icons">
+                            <div class="action-icon"><i class="fas fa-thumbs-up"></i> <span id="likesPreview">1,2 rb</span></div>
+                            <div class="action-icon"><i class="fas fa-thumbs-down"></i> <span id="dislikesPreview">120</span></div>
+                            <div class="action-icon"><i class="fas fa-share"></i> BAGIKAN</div>
+                            <div class="action-icon"><i class="fas fa-download"></i> UNDUH</div>
+                            <div class="action-icon more-icon"><i class="fas fa-ellipsis-h"></i> LAINNYA</div>
                         </div>
                     </div>
-                    <div class="stats-row"><div class="stats-item"><i class="fas fa-eye"></i> <span id="viewsPreview">1.2M views</span></div></div>
-                    <div class="stats-row publish-line"><div class="stats-item"><i class="fas fa-calendar-week"></i> <span id="publishPreview">Dipublikasikan 3 jam lalu</span></div></div>
-                    <div class="action-icons">
-                        <div class="action-icon"><i class="fas fa-thumbs-up"></i> <span id="likesPreview">15K</span></div>
-                        <div class="action-icon"><i class="fas fa-thumbs-down"></i> <span id="dislikesPreview">320</span></div>
-                        <div class="action-icon"><i class="fas fa-share"></i> SHARE</div>
-                        <div class="action-icon"><i class="fas fa-download"></i> SAVE</div>
+                    
+                    <div class="subscriber-row">
+                        <span class="subscriber-count" id="subscriberDisplay">1,2 jt subscriber</span>
+                    </div>
+                    
+                    <div class="stats-line">
+                        <span id="viewsPreviewStats">64 rb x ditonton</span>
+                        <span class="stats-separator">•</span>
+                        <span id="publishPreviewStats">1 hari yang lalu</span>
                     </div>
                 </div>
             </div>
-            <button class="download-btn" id="screenshotBtn">Download</button>
+            <button class="download-btn" id="screenshotBtn">Unduh Gambar Pratinjau</button>
         </div>
     </div>
 </div>
 
 <footer>
     <div class="footer-grid">
-        <div class="footer-section footer-brand"><h3>CHODATE</h3><p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p><div class="social-links"><a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a><a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a></div></div>
-        <div class="footer-section"><h3>Explore</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li><li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li><li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li><li><a href="https://thekachoo.github.io/Home/kaboom.html">Kaboom</a></li><li><a href="#">Kadio</a></li></ul></div>
-        <div class="footer-section"><h3>More</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/CHOBANK/transaction.html">Chobank</a></li><li><a href="https://thekachoo.github.io/CHONNECT/index.html">Chonnect</a></li><li><a href="https://thekachoo.github.io/Games/CHOSONG/CHOSONG.html">Chosong</a></li><li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li></ul></div>
-        <div class="footer-section"><h3>Meet Us</h3><ul class="footer-links"><li><a href="https://x.com/thekachoo" target="_blank">X</a></li><li><a href="mailto:ohkachoo@gmail.com">Email</a></li></ul></div>
+        <div class="footer-section footer-brand"><h3>CHODATE</h3><p>CHODATE adalah fitur yang dikembangkan oleh Kachoo untuk pembaruan konten media sosial, ditujukan untuk keperluan roleplay.</p><div class="social-links"><a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a><a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a></div></div>
+        <div class="footer-section"><h3>Jelajahi</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li><li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li><li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li><li><a href="https://thekachoo.github.io/Home/kaboom.html">Kaboom</a></li><li><a href="#">Kadio</a></li></ul></div>
+        <div class="footer-section"><h3>Lainnya</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/CHOBANK/transaction.html">Chobank</a></li><li><a href="https://thekachoo.github.io/CHONNECT/index.html">Chonnect</a></li><li><a href="https://thekachoo.github.io/Games/CHOSONG/CHOSONG.html">Chosong</a></li><li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li></ul></div>
+        <div class="footer-section"><h3>Temui Kami</h3><ul class="footer-links"><li><a href="https://x.com/thekachoo" target="_blank">X</a></li><li><a href="mailto:ohkachoo@gmail.com">Email</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div></div>
+    <div class="footer-bottom"><div class="copyright">© 2026 CHODATE oleh The Kachoo. Hak cipta dilindungi undang-undang.</div></div>
 </footer>
 
-<div id="cropModal" class="crop-modal"><div class="crop-container"><img id="cropImage" src=""></div><div class="crop-buttons"><button class="crop-btn crop-cancel" id="cancelCropBtn">Batal</button><button class="crop-btn crop-save" id="saveCropBtn">Terapkan Crop</button></div></div>
+<div id="cropModal" class="crop-modal"><div class="crop-container"><img id="cropImage" src=""></div><div class="crop-buttons"><button class="crop-btn crop-cancel" id="cancelCropBtn">Batal</button><button class="crop-btn crop-save" id="saveCropBtn">Terapkan Potong</button></div></div>
 <div class="toast-msg" id="toastMsg"></div>
 
 <script>
-    let currentCropType = null;
-    let avatarCropper = null, mediaCropper = null;
+    let currentCropType = null, avatarCropper = null, mediaCropper = null;
     let avatarImageBlobUrl = null, mediaImageBlobUrl = null;
     let currentLang = 'id';
-    const translations = {
-        id: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile", titleLabel:"Title Video", viewsLabel:"Jumlah Views", durationVideoLabel:"Durasi Video", currentWatchingLabel:"Durasi Nonton Saat Ini (Opsional)", progressSliderLabel:"Atur Progress", likesLabel:"Jumlah Like", dislikesLabel:"Jumlah Dislike", publishLabel:"Waktu Publish", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Status Channel", mediaLabel:"Gambar Media", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" },
-        en: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile", titleLabel:"Video Title", viewsLabel:"View Count", durationVideoLabel:"Video Duration", currentWatchingLabel:"Current Watching Duration (Optional)", progressSliderLabel:"Adjust Progress", likesLabel:"Like Count", dislikesLabel:"Dislike Count", publishLabel:"Published Date", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Channel Status", mediaLabel:"Thumbnail Image", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" }
-    };
-    function updatePageLanguage() { document.querySelectorAll('[data-key]').forEach(el => { let key = el.getAttribute('data-key'); if(translations[currentLang][key]) el.innerText = translations[currentLang][key]; }); if(subscribeToggle.checked) subscribePreviewBtn.innerText = translations[currentLang].subscribed; else subscribePreviewBtn.innerText = translations[currentLang].subscribe; }
-    document.querySelectorAll('.lang-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentLang = btn.getAttribute('data-lang'); updatePageLanguage(); updatePreviewData(); }); });
     
-    const videoTitleInput = document.getElementById('videoTitle'), videoViewsInput = document.getElementById('videoViews'), videoDurationInput = document.getElementById('videoDuration'), currentWatchInput = document.getElementById('currentWatchDuration'), videoLikesInput = document.getElementById('videoLikes'), videoDislikesInput = document.getElementById('videoDislikes'), videoPublishInput = document.getElementById('videoPublish'), subscribeToggle = document.getElementById('subscribeToggle'), subscribePreviewBtn = document.getElementById('subscribePreviewBtn'), previewTitle = document.getElementById('previewTitle'), viewsPreview = document.getElementById('viewsPreview'), durationBadge = document.getElementById('durationBadge'), likesPreview = document.getElementById('likesPreview'), dislikesPreview = document.getElementById('dislikesPreview'), publishPreview = document.getElementById('publishPreview'), progressSlider = document.getElementById('progressSlider'), progressRedBar = document.getElementById('progressRedBar'), progressPercentLabel = document.getElementById('progressPercentLabel');
+    const translations = {
+        id: {
+            pageTitle: "Buat media kamu!",
+            avatarLabel: "Avatar Profil",
+            channelNameLabel: "Nama Channel",
+            subscriberCountLabel: "Jumlah Subscriber",
+            titleLabel: "Judul Video",
+            viewsLabel: "Jumlah Views",
+            durationVideoLabel: "Durasi Video",
+            currentWatchingLabel: "Durasi Nonton Saat Ini (Opsional)",
+            progressSliderLabel: "Atur Progress",
+            likesLabel: "Jumlah Like",
+            dislikesLabel: "Jumlah Dislike",
+            publishLabel: "Waktu Publish",
+            subscribeLabel: "Subscribe / Berhenti Langganan",
+            statusChannel: "Status Channel",
+            mediaLabel: "Gambar Miniatur (Thumbnail)",
+            uploadAvatar: "Unggah",
+            uploadMedia: "Unggah",
+            subscribe: "BERLANGGANAN",
+            subscribed: "BERLANGGANAN",
+            share: "BAGIKAN",
+            download: "UNDUH",
+            more: "LAINNYA",
+            downloadBtn: "Unduh Gambar Pratinjau",
+            thumbPlaceholder: "Thumbnail 16:9",
+            menuHome: "Beranda",
+            menuKachoo: "The Kachoo",
+            menu: "Menu",
+            channelPlaceholder: "Channel Saya",
+            subscriberPlaceholder: "1,2 jt subscriber",
+            titlePlaceholder: "The Kachoo rilis fitur CHODATE!",
+            viewsPlaceholder: "64 rb x ditonton",
+            durationPlaceholder: "10:24",
+            currentWatchPlaceholder: "cth: 03:15",
+            likesPlaceholder: "1,2 rb",
+            dislikesPlaceholder: "120",
+            publishPlaceholder: "1 hari yang lalu",
+            footerDesc: "CHODATE adalah fitur yang dikembangkan oleh Kachoo untuk pembaruan konten media sosial, ditujukan untuk keperluan roleplay.",
+            footerExplore: "Jelajahi",
+            footerMore: "Lainnya",
+            footerMeet: "Temui Kami",
+            footerCopyright: "© 2026 CHODATE oleh The Kachoo. Hak cipta dilindungi undang-undang.",
+            cropCancel: "Batal",
+            cropSave: "Terapkan Potong",
+            toastAvatarUpdated: "Avatar diperbarui",
+            toastThumbUpdated: "Thumbnail diperbarui",
+            toastDownloadSuccess: "Pratinjau berhasil diunduh!",
+            toastDownloadFailed: "Gagal menghasilkan gambar"
+        },
+        en: {
+            pageTitle: "Create your media!",
+            avatarLabel: "Avatar Profile",
+            channelNameLabel: "Channel Name",
+            subscriberCountLabel: "Subscriber Count",
+            titleLabel: "Video Title",
+            viewsLabel: "View Count",
+            durationVideoLabel: "Video Duration",
+            currentWatchingLabel: "Current Watching Duration (Optional)",
+            progressSliderLabel: "Adjust Progress",
+            likesLabel: "Like Count",
+            dislikesLabel: "Dislike Count",
+            publishLabel: "Published Date",
+            subscribeLabel: "Subscribe / Unsubscribe",
+            statusChannel: "Channel Status",
+            mediaLabel: "Thumbnail Image",
+            uploadAvatar: "Upload",
+            uploadMedia: "Upload",
+            subscribe: "SUBSCRIBE",
+            subscribed: "SUBSCRIBED",
+            share: "SHARE",
+            download: "DOWNLOAD",
+            more: "MORE",
+            downloadBtn: "Download Preview Image",
+            thumbPlaceholder: "Thumbnail 16:9",
+            menuHome: "Home",
+            menuKachoo: "The Kachoo",
+            menu: "Menu",
+            channelPlaceholder: "MyChannel",
+            subscriberPlaceholder: "1.2M subscribers",
+            titlePlaceholder: "The Kachoo releases CHODATE feature!",
+            viewsPlaceholder: "64K views",
+            durationPlaceholder: "10:24",
+            currentWatchPlaceholder: "ex: 03:15",
+            likesPlaceholder: "1.2K",
+            dislikesPlaceholder: "120",
+            publishPlaceholder: "1 day ago",
+            footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
+            footerExplore: "Explore",
+            footerMore: "More",
+            footerMeet: "Meet Us",
+            footerCopyright: "© 2026 CHODATE by The Kachoo. All rights reserved.",
+            cropCancel: "Cancel",
+            cropSave: "Apply Crop",
+            toastAvatarUpdated: "Avatar updated",
+            toastThumbUpdated: "Thumbnail updated",
+            toastDownloadSuccess: "Preview downloaded successfully!",
+            toastDownloadFailed: "Failed to generate image"
+        }
+    };
+    
+    function updatePageLanguage() {
+        // Update semua elemen berdasarkan ID
+        const elements = ['pageTitle', 'avatarLabel', 'channelNameLabel', 'subscriberCountLabel', 'titleLabel', 'viewsLabel', 'durationVideoLabel', 'currentWatchingLabel', 'progressSliderLabel', 'likesLabel', 'dislikesLabel', 'publishLabel', 'subscribeLabel', 'statusChannel', 'mediaLabel'];
+        elements.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = translations[currentLang][id];
+        });
+        
+        // Update tombol upload        document.getElementById('uploadAvatarBtn').innerText = translations[currentLang].uploadAvatar;
+        document.getElementById('uploadMediaBtn').innerText = translations[currentLang].uploadMedia;
+        
+        // Update tombol download
+        document.getElementById('screenshotBtn').innerText = translations[currentLang].downloadBtn;
+        
+        // Update placeholder text
+        document.getElementById('channelNameInput').placeholder = translations[currentLang].channelPlaceholder;
+        document.getElementById('subscriberCountInput').placeholder = translations[currentLang].subscriberPlaceholder;
+        document.getElementById('videoTitle').placeholder = translations[currentLang].titlePlaceholder;
+        document.getElementById('videoViews').placeholder = translations[currentLang].viewsPlaceholder;
+        document.getElementById('videoDuration').placeholder = translations[currentLang].durationPlaceholder;
+        document.getElementById('currentWatchDuration').placeholder = translations[currentLang].currentWatchPlaceholder;
+        document.getElementById('videoLikes').placeholder = translations[currentLang].likesPlaceholder;
+        document.getElementById('videoDislikes').placeholder = translations[currentLang].dislikesPlaceholder;
+        document.getElementById('videoPublish').placeholder = translations[currentLang].publishPlaceholder;
+        
+        // Update thumbnail placeholder
+        document.getElementById('thumbPlaceholderText').innerHTML = `<i class="fas fa-play-circle"></i> ${translations[currentLang].thumbPlaceholder}`;
+        
+        // Update action icons di preview
+        const actionIcons = document.querySelectorAll('.action-icon');
+        if (actionIcons[2]) actionIcons[2].innerHTML = `<i class="fas fa-share"></i> ${translations[currentLang].share}`;
+        if (actionIcons[3]) actionIcons[3].innerHTML = `<i class="fas fa-download"></i> ${translations[currentLang].download}`;
+        if (actionIcons[4]) actionIcons[4].innerHTML = `<i class="fas fa-ellipsis-h"></i> ${translations[currentLang].more}`;
+        
+        // Update menu dropdown dan mobile
+        document.getElementById('menuHome').innerText = translations[currentLang].menuHome;
+        document.getElementById('menuKachoo').innerText = translations[currentLang].menuKachoo;
+        document.getElementById('mobileHome').innerText = translations[currentLang].menuHome;
+        document.getElementById('mobileKachoo').innerText = translations[currentLang].menuKachoo;
+        document.querySelector('.desktop-nav-trigger').innerHTML = `${translations[currentLang].menu} <i class="fas fa-chevron-down"></i>`;
+        
+        // Update footer
+        document.querySelector('.footer-brand h3').innerText = 'CHODATE';
+        document.querySelector('.footer-brand p').innerText = translations[currentLang].footerDesc;
+        const footerSections = document.querySelectorAll('.footer-section h3');
+        if (footerSections[1]) footerSections[1].innerText = translations[currentLang].footerExplore;
+        if (footerSections[2]) footerSections[2].innerText = translations[currentLang].footerMore;
+        if (footerSections[3]) footerSections[3].innerText = translations[currentLang].footerMeet;
+        document.querySelector('.copyright').innerText = translations[currentLang].footerCopyright;
+        
+        // Update crop modal buttons
+        document.getElementById('cancelCropBtn').innerText = translations[currentLang].cropCancel;
+        document.getElementById('saveCropBtn').innerText = translations[currentLang].cropSave;
+        
+        // Update subscribe button di preview
+        if (subscribeToggle.checked) {
+            subscribePreviewBtn.innerText = translations[currentLang].subscribed;
+        } else {
+            subscribePreviewBtn.innerText = translations[currentLang].subscribe;
+        }
+    }
+    
+    document.querySelectorAll('#inlineLangSwitch .lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#inlineLangSwitch .lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentLang = btn.getAttribute('data-lang');
+            updatePageLanguage();
+            updatePreviewData();
+        });
+    });
+    
+    const channelNameInput = document.getElementById('channelNameInput'), subscriberCountInput = document.getElementById('subscriberCountInput');
+    const channelNameDisplay = document.getElementById('channelNameDisplay'), subscriberDisplay = document.getElementById('subscriberDisplay');
+    const videoTitleInput = document.getElementById('videoTitle'), videoViewsInput = document.getElementById('videoViews');
+    const videoDurationInput = document.getElementById('videoDuration'), currentWatchInput = document.getElementById('currentWatchDuration');
+    const videoLikesInput = document.getElementById('videoLikes'), videoDislikesInput = document.getElementById('videoDislikes');
+    const videoPublishInput = document.getElementById('videoPublish'), subscribeToggle = document.getElementById('subscribeToggle');
+    const subscribePreviewBtn = document.getElementById('subscribePreviewBtn'), previewTitle = document.getElementById('previewTitle');
+    const durationBadge = document.getElementById('durationBadge'), likesPreview = document.getElementById('likesPreview');
+    const dislikesPreview = document.getElementById('dislikesPreview'), viewsPreviewStats = document.getElementById('viewsPreviewStats');
+    const publishPreviewStats = document.getElementById('publishPreviewStats'), progressSlider = document.getElementById('progressSlider');
+    const progressRedBar = document.getElementById('progressRedBar'), progressPercentLabel = document.getElementById('progressPercentLabel');
     
     function updateProgressBar() { let val = progressSlider.value; progressRedBar.style.width = val + '%'; progressPercentLabel.innerText = val + '%'; }
     progressSlider.addEventListener('input', updateProgressBar);
     
     function updatePreviewData() {
-        let title = videoTitleInput.value.trim() || (currentLang === 'id' ? "The Kachoo rilis fitur CHODATE!" : "The Kachoo releases CHODATE feature!");
-        let views = videoViewsInput.value.trim() || (currentLang === 'id' ? "1.2M views" : "1.2M views");
+        channelNameDisplay.innerText = channelNameInput.value.trim() || (currentLang === 'id' ? "Channel Saya" : "MyChannel");
+        subscriberDisplay.innerText = subscriberCountInput.value.trim() || (currentLang === 'id' ? "1,2 jt subscriber" : "1.2M subscribers");
+        previewTitle.innerText = videoTitleInput.value.trim() || (currentLang === 'id' ? "The Kachoo rilis fitur CHODATE!" : "The Kachoo releases CHODATE feature!");
+        viewsPreviewStats.innerText = videoViewsInput.value.trim() || (currentLang === 'id' ? "64 rb x ditonton" : "64K views");
         let duration = videoDurationInput.value.trim();
         let currentWatch = currentWatchInput.value.trim();
         let finalBadge = duration;
-        if(currentWatch && currentWatch.length > 0) { finalBadge = currentWatch + " / " + duration; }
-        else { finalBadge = duration || (currentLang === 'id' ? "10:24" : "10:24"); }
-        let likes = videoLikesInput.value.trim() || (currentLang === 'id' ? "15K" : "15K");
-        let dislikes = videoDislikesInput.value.trim() || (currentLang === 'id' ? "320" : "320");
-        let publish = videoPublishInput.value.trim() || (currentLang === 'id' ? "Dipublikasikan 3 jam lalu" : "Published 3 hours ago");
-        previewTitle.innerText = title;
-        viewsPreview.innerText = views;
+        if(currentWatch && currentWatch.length > 0) finalBadge = currentWatch + " / " + duration;
+        else finalBadge = duration || (currentLang === 'id' ? "10:24" : "10:24");
         durationBadge.innerText = finalBadge;
-        likesPreview.innerText = likes;
-        dislikesPreview.innerText = dislikes;
-        publishPreview.innerText = publish;
-        if(subscribeToggle.checked) { subscribePreviewBtn.innerText = translations[currentLang].subscribed; subscribePreviewBtn.classList.add("subscribed"); }
-        else { subscribePreviewBtn.innerText = translations[currentLang].subscribe; subscribePreviewBtn.classList.remove("subscribed"); }
+        likesPreview.innerText = videoLikesInput.value.trim() || (currentLang === 'id' ? "1,2 rb" : "1.2K");
+        dislikesPreview.innerText = videoDislikesInput.value.trim() || (currentLang === 'id' ? "120" : "120");
+        publishPreviewStats.innerText = videoPublishInput.value.trim() || (currentLang === 'id' ? "1 hari yang lalu" : "1 day ago");
+        if(subscribeToggle.checked) {
+            subscribePreviewBtn.innerText = translations[currentLang].subscribed;
+            subscribePreviewBtn.classList.add("subscribed");
+        } else {
+            subscribePreviewBtn.innerText = translations[currentLang].subscribe;
+            subscribePreviewBtn.classList.remove("subscribed");
+        }
     }
-    videoTitleInput.addEventListener('input', updatePreviewData); videoViewsInput.addEventListener('input', updatePreviewData); videoDurationInput.addEventListener('input', updatePreviewData); currentWatchInput.addEventListener('input', updatePreviewData); videoLikesInput.addEventListener('input', updatePreviewData); videoDislikesInput.addEventListener('input', updatePreviewData); videoPublishInput.addEventListener('input', updatePreviewData); subscribeToggle.addEventListener('change', updatePreviewData);
     
-    const avatarUploadBtn = document.getElementById('uploadAvatarBtn'), avatarFileInput = document.getElementById('avatarFileInput'), mediaUploadBtn = document.getElementById('uploadMediaBtn'), mediaFileInput = document.getElementById('mediaFileInput'), cropModal = document.getElementById('cropModal'), cropImageEl = document.getElementById('cropImage'), cancelCrop = document.getElementById('cancelCropBtn'), saveCrop = document.getElementById('saveCropBtn'), toastMsg = document.getElementById('toastMsg'), avatarPreviewDiv = document.getElementById('avatarPreview'), thumbnailImg = document.getElementById('thumbnailImg'), thumbPlaceholder = document.getElementById('thumbPlaceholderText');
+    channelNameInput.addEventListener('input', updatePreviewData);
+    subscriberCountInput.addEventListener('input', updatePreviewData);
+    videoTitleInput.addEventListener('input', updatePreviewData);
+    videoViewsInput.addEventListener('input', updatePreviewData);
+    videoDurationInput.addEventListener('input', updatePreviewData);
+    currentWatchInput.addEventListener('input', updatePreviewData);
+    videoLikesInput.addEventListener('input', updatePreviewData);
+    videoDislikesInput.addEventListener('input', updatePreviewData);
+    videoPublishInput.addEventListener('input', updatePreviewData);
+    subscribeToggle.addEventListener('change', updatePreviewData);
+    
+    const avatarUploadBtn = document.getElementById('uploadAvatarBtn'), avatarFileInput = document.getElementById('avatarFileInput');
+    const mediaUploadBtn = document.getElementById('uploadMediaBtn'), mediaFileInput = document.getElementById('mediaFileInput');
+    const cropModal = document.getElementById('cropModal'), cropImageEl = document.getElementById('cropImage');
+    const cancelCrop = document.getElementById('cancelCropBtn'), saveCrop = document.getElementById('saveCropBtn');
+    const toastMsg = document.getElementById('toastMsg'), avatarPreviewDiv = document.getElementById('avatarPreview');
+    const thumbnailImg = document.getElementById('thumbnailImg'), thumbPlaceholder = document.getElementById('thumbPlaceholderText');
+    
     function showToast(text) { toastMsg.innerText = text; toastMsg.style.opacity = '1'; setTimeout(() => { toastMsg.style.opacity = '0'; }, 2000); }
+    
     avatarUploadBtn.addEventListener('click', () => avatarFileInput.click());
     avatarFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'avatar'; cropModal.style.display = 'flex'; if (avatarCropper) avatarCropper.destroy(); setTimeout(() => { avatarCropper = new Cropper(cropImageEl, { aspectRatio: 1, viewMode: 2, autoCropArea: 0.9 }); }, 100); e.target.value = ''; });
     mediaUploadBtn.addEventListener('click', () => mediaFileInput.click());
-    mediaFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'media'; cropModal.style.display = 'flex'; if (mediaCropper) mediaCropper.destroy(); setTimeout(() => { mediaCropper = new Cropper(cropImageEl, { aspectRatio: 16/9, viewMode: 2, autoCropArea: 1 }); }, 100); e.target.value = ''; });
+    mediaFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'media'; cropModal.style.display = 'flex'; if (mediaCropper) mediaCropper.destroy(); setTimeout(() => { mediaCropper = new Cropper(cropImageEl, { aspectRatio: 0, viewMode: 2, autoCropArea: 1 }); }, 100); e.target.value = ''; });
     cancelCrop.addEventListener('click', () => { cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; });
-    saveCrop.addEventListener('click', () => { let cropper = (currentCropType === 'avatar') ? avatarCropper : mediaCropper; if (!cropper) return; const canvas = cropper.getCroppedCanvas({ width: currentCropType === 'avatar' ? 300 : 640, height: currentCropType === 'avatar' ? 300 : 360 }); canvas.toBlob(blob => { const blobUrl = URL.createObjectURL(blob); if (currentCropType === 'avatar') { if (avatarImageBlobUrl) URL.revokeObjectURL(avatarImageBlobUrl); avatarImageBlobUrl = blobUrl; avatarPreviewDiv.innerHTML = `<img src="${blobUrl}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; showToast("Avatar updated"); } else { if (mediaImageBlobUrl) URL.revokeObjectURL(mediaImageBlobUrl); mediaImageBlobUrl = blobUrl; thumbnailImg.src = blobUrl; thumbnailImg.style.display = 'block'; thumbPlaceholder.style.display = 'none'; showToast("Thumbnail updated"); } cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; }, 'image/png'); });
+    saveCrop.addEventListener('click', () => { let cropper = (currentCropType === 'avatar') ? avatarCropper : mediaCropper; if (!cropper) return; const canvas = cropper.getCroppedCanvas({ width: currentCropType === 'avatar' ? 300 : 800, height: currentCropType === 'avatar' ? 300 : undefined }); canvas.toBlob(blob => { const blobUrl = URL.createObjectURL(blob); if (currentCropType === 'avatar') { if (avatarImageBlobUrl) URL.revokeObjectURL(avatarImageBlobUrl); avatarImageBlobUrl = blobUrl; avatarPreviewDiv.innerHTML = `<img src="${blobUrl}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; showToast(translations[currentLang].toastAvatarUpdated); } else { if (mediaImageBlobUrl) URL.revokeObjectURL(mediaImageBlobUrl); mediaImageBlobUrl = blobUrl; thumbnailImg.src = blobUrl; thumbnailImg.style.display = 'block'; thumbPlaceholder.style.display = 'none'; showToast(translations[currentLang].toastThumbUpdated); } cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; }, 'image/png'); });
     subscribePreviewBtn.addEventListener('click', () => { subscribeToggle.checked = !subscribeToggle.checked; updatePreviewData(); });
-    document.getElementById('screenshotBtn').addEventListener('click', async () => { const card = document.getElementById('youtubePreviewCard'); if (!card) return; try { const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }); const link = document.createElement('a'); link.download = 'youtube_media_preview.png'; link.href = canvas.toDataURL('image/png'); link.click(); showToast("Preview downloaded!"); } catch (err) { showToast("Failed to generate image"); } });
-    updateProgressBar(); updatePreviewData(); updatePageLanguage();
-    if (!avatarImageBlobUrl) avatarPreviewDiv.innerHTML = `<div style="width:100%;height:100%;background:#aaa;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:20px;"></i></div>`;
-    if (!mediaImageBlobUrl) { thumbnailImg.style.display = 'none'; thumbPlaceholder.style.display = 'flex'; }
+    document.getElementById('screenshotBtn').addEventListener('click', async () => { const card = document.getElementById('youtubePreviewCard'); if (!card) return; try { const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }); const link = document.createElement('a'); link.download = 'youtube_media_preview.png'; link.href = canvas.toDataURL('image/png'); link.click(); showToast(translations[currentLang].toastDownloadSuccess); } catch (err) { showToast(translations[currentLang].toastDownloadFailed); } });
+    
+    document.getElementById('menuHome')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "https://thekachoo.github.io/CHODATE/"; });
+    document.getElementById('menuKachoo')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "https://thekachoo.github.io/Home/"; });
+    document.getElementById('mobileHome')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "https://thekachoo.github.io/CHODATE/"; });
+    document.getElementById('mobileKachoo')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "https://thekachoo.github.io/Home/"; });
+    
     const mobileBtn = document.getElementById('mobileMenuBtn'), mobileMenu = document.getElementById('mobileMenu'), overlay = document.getElementById('mobileMenuOverlay');
     mobileBtn.addEventListener('click', () => { mobileMenu.classList.toggle('active'); overlay.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; });
     overlay.addEventListener('click', () => { mobileMenu.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; });
     const desktopTrigger = document.getElementById('desktopNavTrigger'), desktopDropdown = document.getElementById('desktopNavDropdown');
     if (desktopTrigger) { desktopTrigger.addEventListener('click', (e) => { e.stopPropagation(); desktopDropdown.classList.toggle('active'); }); document.addEventListener('click', (e) => { if (!desktopTrigger.contains(e.target) && !desktopDropdown.contains(e.target)) desktopDropdown.classList.remove('active'); }); }
+    
+    updateProgressBar(); updatePreviewData(); updatePageLanguage();
+    if (!avatarImageBlobUrl) avatarPreviewDiv.innerHTML = `<div style="width:100%;height:100%;background:#aaa;display:flex;align-items:center;justify-content:center;border-radius:50%;"><i class="fas fa-user" style="color:#fff; font-size:20px;"></i></div>`;
+    if (!mediaImageBlobUrl) { thumbnailImg.style.display = 'none'; thumbPlaceholder.style.display = 'flex'; }
 </script>
 </body>
 </html>
