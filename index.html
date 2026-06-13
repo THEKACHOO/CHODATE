@@ -7,11 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li {
             font-family: 'Outfit', sans-serif !important;
@@ -20,7 +16,6 @@
         :root {
             --primary-black: #000000;
             --primary-white: #FFFFFF;
-            --text-gray: #555555;
             --border-light: #eaeaea;
         }
 
@@ -39,19 +34,15 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
+            .container { padding: 0 20px; }
         }
 
         /* ========== HEADER ========== */
         header {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255,255,255,0.98);
             border-bottom: 1px solid var(--border-light);
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             backdrop-filter: blur(4px);
         }
@@ -60,7 +51,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* FIX 2: padding kiri kanan lebih besar supaya tidak mepet */
             padding: 12px 16px;
             position: relative;
         }
@@ -95,7 +85,6 @@
             .logo-img { height: 28px; }
         }
 
-        /* Desktop Navigation - FIX 2: gap lebih lebar, padding tombol cukup */
         .desktop-nav {
             display: flex;
             gap: 10px;
@@ -147,8 +136,7 @@
             border: 1px solid #ddd;
             font-size: 20px;
             color: #000;
-            width: 42px;
-            height: 42px;
+            width: 42px; height: 42px;
             border-radius: 60px;
             cursor: pointer;
             flex-shrink: 0;
@@ -162,10 +150,8 @@
 
         .mobile-menu {
             position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 320px;
+            top: 0; right: -100%;
+            width: 85%; max-width: 320px;
             height: 100vh;
             background: white;
             box-shadow: -5px 0 30px rgba(0,0,0,0.05);
@@ -182,8 +168,7 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(3px);
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transition: all 0.25s;
             z-index: 998;
         }
@@ -200,6 +185,9 @@
             font-size: 18px;
             color: #000;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .mobile-menu-link {
@@ -217,323 +205,401 @@
             border: 1px solid #eee;
             width: 100%;
             text-align: left;
+            font-size: 14px;
         }
 
-        .mobile-menu-link:hover {
-            background: #000;
-            color: white;
-        }
+        .mobile-menu-link:hover { background: #000; color: white; }
 
-        /* ========== HERO AREA: spacer + 3 grid langsung di bawah header ========== */
-        .hero-spacer {
-            padding-top: 72px; /* tinggi header saja, tidak ada ruang tambahan */
-        }
+        /* ========== MAIN ========== */
+        .hero-spacer { padding-top: 72px; }
 
-        /* FIX 1: section utama sekarang hanya berisi 3 grid, tanpa icon trigger card INSTACHO */
         .main-section {
-            padding: 40px 0 60px;
+            padding: 48px 0 0;
             background: white;
         }
 
-        /* ====== GRID OVERLAY ====== */
-        .grid-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0.2s, opacity 0.2s ease;
-        }
-
-        .grid-overlay.active { visibility: visible; opacity: 1; }
-
-        .grid-modal-container {
-            background: white;
-            border-radius: 40px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 28px 24px 36px;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        }
-
-        .close-grid-btn {
-            position: absolute;
-            top: 20px; right: 24px;
-            background: #f0f0f0;
-            border: none;
-            width: 42px; height: 42px;
-            border-radius: 60px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-grid-btn:hover { background: #000; color: white; }
-
-        .mini-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .mini-card {
-            flex: 1 1 160px;
-            min-width: 140px;
-            max-width: 190px;
-            background: white;
-            border-radius: 28px;
-            padding: 22px 12px;
-            border: 1px solid #eaeaea;
+        /* ========== CHOOSE YOUR NEEDS TITLE ========== */
+        .choose-title {
             text-align: center;
+            margin-bottom: 32px;
+        }
+        .choose-title h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        @media (max-width: 640px) {
+            .choose-title h1 { font-size: 1.8rem; }
+        }
+
+/* ========== DISCLAIMER CONTAINER - STYLE MODERN ========== */
+.disclaimer-container {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 24px 28px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    backdrop-filter: blur(2px);
+}
+
+.disclaimer-container h4 {
+   text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.disclaimer-container p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #000000;
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .disclaimer-container {
+        margin: 30px 16px 0;
+        padding: 18px 20px;
+    }
+    .disclaimer-container p {
+        font-size: 0.75rem;
+    }
+}
+        /* ========== SLIDE CONTAINER (HORIZONTAL SCROLL) ========== */
+        .slide-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            cursor: grab;
+            white-space: nowrap;
+            border-radius: 28px;
+            margin-bottom: 28px;
+            position: relative;
+            background: white;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        
+        .slide-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 32px -12px rgba(0,0,0,0.12);
+        }
+        
+        .slide-container:active {
+            cursor: grabbing;
+        }
+        
+        .slide-wrapper {
+            display: inline-flex;
+            gap: 24px;
+            padding: 32px;
+            white-space: normal;
+        }
+        
+        .slide-item {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 380px;
+            background: white;
+            border: 1px solid #eaeaea;
+            border-radius: 28px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+        
+        @media (max-width: 860px) {
+            .slide-item { width: 320px; padding: 20px; }
+            .slide-wrapper { gap: 16px; padding: 20px; }
+        }
+        
+        @media (max-width: 550px) {
+            .slide-item { width: 280px; padding: 16px; }
+            .slide-wrapper { gap: 12px; padding: 16px; }
+        }
+        
+        .slide-container::-webkit-scrollbar {
+            height: 4px;
+        }
+        .slide-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .slide-container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+        .slide-container::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+        
+        .slide-item-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin-bottom: 20px;
+            color: #000;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            transition: all 0.3s;
+        }
+        
+        /* ========== APP GRID ========== */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .app-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        /* INSTACHO GRID: Profile | Post di baris 1, Live | Story di baris 2 */
+        .instacho-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        /* Tidak ada special, semua card sama rata 2x2 */
+        
+        .app-card {
+            aspect-ratio: 1 / 1;
+            background: #fafafa;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+        
+        .app-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+        
+        .app-card:hover::before { opacity: 1; }
+        .app-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 22px 32px -12px rgba(0,0,0,0.2);
+            border-color: #000;
+        }
+        .app-card:hover .app-card-icon,
+        .app-card:hover .app-card-name { 
+            color: white; 
+            animation: subtlePulse 0.5s ease;
+        }
+        
+        @keyframes subtlePulse {
+            0% { transform: scale(0.96); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .app-card-icon {
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s ease, color 0.2s;
+        }
+        .app-card:hover .app-card-icon {
+            transform: scale(1.08);
+        }
+        
+        .app-card-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.1px;
             transition: all 0.2s;
         }
-
-        .mini-card:hover {
-            transform: translateY(-5px);
-            border-color: #000;
-            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.1);
+        
+        .app-card {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: cardFloatUp 0.5s ease forwards;
         }
-
-        .mini-icon { font-size: 2.2rem; margin-bottom: 14px; }
-        .mini-title { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.2px; }
-
-        @media (max-width: 540px) {
-            .mini-card { flex-basis: 130px; min-width: 120px; padding: 18px 8px; }
-            .mini-title { font-size: 1.1rem; }
-            .mini-icon { font-size: 1.8rem; }
-        }
-
-        /* ========== 3 GRID UTAMA ========== */
-        .cho-main-grid {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 28px;
-            flex-wrap: wrap;
-        }
-
-        .cho-card {
-            flex: 1;
-            min-width: 200px;
-            max-width: 260px;
-            background: white;
-            border-radius: 32px;
-            padding: 32px 20px 28px;
-            text-align: center;
-            border: 1px solid #eaeaea;
-            transition: all 0.25s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .cho-card:hover {
-            transform: translateY(-6px);
-            border-color: #bbb;
-            box-shadow: 0 15px 25px -12px rgba(0,0,0,0.1);
-        }
-
-        .cho-card .cho-image {
-            width: 80px;
-            height: auto;
-            margin: 0 auto 16px;
-            display: block;
-        }
-
-        .cho-icon { font-size: 2.8rem; margin-bottom: 14px; color: #000; }
-        .cho-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.3px; }
-
-        @media (max-width: 700px) {
-            .cho-main-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.1s; }
+        .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
+        
+        @keyframes cardFloatUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .cho-card {
-                max-width: none;
-                min-width: auto;
-                width: 100%;
-                padding: 22px 16px;
-            }
-            .cho-card:last-child {
-                grid-column: span 2;
-                justify-self: center;
-                max-width: 280px;
-                width: 100%;
-                margin: 0 auto;
-            }
-            .cho-title { font-size: 1.5rem; }
-            .cho-card .cho-image { width: 65px; }
-            .cho-icon { font-size: 2.3rem; }
         }
-
-        @media (max-width: 480px) {
-            .cho-card { padding: 18px 12px; }
-            .cho-title { font-size: 1.3rem; }
-            .cho-card .cho-image { width: 55px; }
+        
+        .app-card, .nav-btn, .social-link, .mobile-menu-link {
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
         }
-
-        /* ========== FOOTER: FIX 3 - grid horizontal ========== */
+        
+        .social-link i {
+            transition: transform 0.2s;
+        }
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* ===== FOOTER ===== */
         footer {
             background: #000;
             color: #ddd;
             padding: 50px 0 28px;
-            margin-top: 20px;
+            margin-top: 40px;
         }
-
-        /* Grid footer: 4 kolom di desktop, kolaps di mobile */
         .footer-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 40px;
-            align-items: start;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
         }
-
         @media (max-width: 860px) {
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 28px;
+                gap: 24px;
             }
         }
-
-        @media (max-width: 480px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-        }
-
         .footer-section h3 {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: white;
             text-transform: uppercase;
             letter-spacing: 1.2px;
         }
-
         .footer-links {
             list-style: none;
         }
-
         .footer-links li {
-            margin-bottom: 8px;
+            margin-bottom: 2px;
         }
-
         .footer-links a {
-            color: rgba(255,255,255,0.55);
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             transition: 0.2s;
         }
-
         .footer-links a:hover {
             color: white;
+            transform: translateX(4px);
+            display: inline-block;
         }
-
         .footer-brand p {
-            color: rgba(255,255,255,0.55);
-            font-size: 0.82rem;
-            max-width: 200px;
-            margin-bottom: 16px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            max-width: 280px;
+            margin-bottom: 14px;
             line-height: 1.6;
         }
-
         .social-links {
             display: flex;
             gap: 10px;
         }
-
         .social-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 34px; height: 34px;
+            width: 32px;
+            height: 32px;
             background: rgba(255,255,255,0.08);
             border-radius: 60px;
             color: white;
             text-decoration: none;
-            transition: 0.2s;
-            font-size: 13px;
+            font-size: 12px;
+            transition: all 0.25s;
         }
-
-        .social-link:hover { background: white; color: black; }
-
+        .social-link:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
+        }
         .footer-bottom {
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            padding-top: 24px;
+            padding-top: 22px;
             border-top: 1px solid rgba(255,255,255,0.08);
-            gap: 16px;
-            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
         }
-
         .copyright {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.4);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            letter-spacing: 0.3px;
         }
-
+        
         button { background: none; border: none; }
         body { overflow-x: hidden; }
         img, svg { max-width: 100%; }
-
-        .coming-soon-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            z-index: 3000;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            white-space: nowrap;
+        
+        @keyframes gentleGlow {
+            0% { opacity: 0.95; background-position: 0% 50%; }
+            100% { opacity: 1; background-position: 100% 50%; }
         }
-
-        @media (max-width: 500px) {
-            .coming-soon-toast {
-                white-space: normal;
-                text-align: center;
-                width: 80%;
-                font-size: 0.8rem;
-            }
+        .slide-item-title {
+            background-size: 120% auto;
+            animation: gentleGlow 4s infinite alternate;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container header-content">
-            <div class="logo-container" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
                 <img src="Chodate.png" alt="Chodate Logo" class="logo-img" onerror="this.src='https://placehold.co/100x36?text=CHODATE'">
             </div>
             <div class="center-logo-text">CHODATE</div>
             <div class="desktop-nav">
                 <a href="https://thekachoo.github.io/Home" class="nav-btn nav-kachoo">The Kachoo</a>
-                <button class="nav-btn" id="instachoPostBtnDesktop">Instacho Post</button>
-                <button class="nav-btn" id="instachoStoryBtnDesktop">Instacho Story</button>
-                <button class="nav-btn" id="instachoProfileBtnDesktop">Instacho Profile</button>
+                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">Instacho Post</button>
+                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">Instacho Story</button>
+                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">Instacho Profile</button>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -548,174 +614,222 @@
         </button>
         <div>
             <a href="https://thekachoo.github.io/Home" class="mobile-menu-link" onclick="closeMobileMenuFunc()">The Kachoo</a>
-            <button class="mobile-menu-link" id="mobileInstachoPost">Instacho Post</button>
-            <button class="mobile-menu-link" id="mobileInstachoStory">Instacho Story</button>
-            <button class="mobile-menu-link" id="mobileInstachoProfile">Instacho Profile</button>
+            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">Instacho Post</button>
+            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">Instacho Story</button>
+            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">Instacho Profile</button>
         </div>
     </div>
 
-    <!-- FIX 1: hero spacer minimal, 3 grid langsung muncul tepat di bawah header -->
     <div class="hero-spacer"></div>
 
     <section class="main-section">
         <div class="container">
-
-            <!-- Grid Overlay untuk konten Profile | Post | Story -->
-            <div class="grid-overlay" id="gridOverlay">
-                <div class="grid-modal-container">
-                    <button class="close-grid-btn" id="closeGridBtn"><i class="fas fa-times"></i></button>
-                    <div class="mini-grid">
-                        <div class="mini-card" id="profileModalCard">
-                            <div class="mini-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="mini-title">Profile</div>
-                        </div>
-                        <div class="mini-card" id="postModalCard">
-                            <div class="mini-icon"><i class="fas fa-camera"></i></div>
-                            <div class="mini-title">Post</div>
-                        </div>
-                        <div class="mini-card" id="storyModalCard">
-                            <div class="mini-icon"><i class="fas fa-play-circle"></i></div>
-                            <div class="mini-title">Story</div>
+            
+            <!-- TITLE: Choose your needs! -->
+            <div class="choose-title">
+                <h1>Choose your needs!</h1>
+            </div>
+            
+            <div class="slide-container" id="slideContainer">
+                <div class="slide-wrapper">
+                    
+                    <!-- INSTACHO: Profile | Post (baris 1), Live | Story (baris 2) -->
+                    <div class="slide-item">
+                        <div class="slide-item-title">INSTACHO</div>
+                        <div class="instacho-grid">
+                            <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">
+                                <div class="app-card-icon"><i class="fas fa-user-circle"></i></div>
+                                <div class="app-card-name">Profile</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">
+                                <div class="app-card-icon"><i class="fas fa-camera"></i></div>
+                                <div class="app-card-name">Post</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div>
+                                <div class="app-card-name">Live</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">
+                                <div class="app-card-icon"><i class="fas fa-play-circle"></i></div>
+                                <div class="app-card-name">Story</div>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- YOUCHO -->
+                    <div class="slide-item">
+                        <div class="slide-item-title">YOUCHO</div>
+                        <div class="app-grid">
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-house"></i></div>
+                                <div class="app-card-name">Home</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-video"></i></div>
+                                <div class="app-card-name">Video</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CHATCHO -->
+                    <div class="slide-item">
+                        <div class="slide-item-title">CHATCHO</div>
+                        <div class="app-grid-4">
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-phone"></i></div>
+                                <div class="app-card-name">Call</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-comment-dots"></i></div>
+                                <div class="app-card-name">Chat</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-video"></i></div>
+                                <div class="app-card-name">Video Call</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-bell"></i></div>
+                                <div class="app-card-name">Notification</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- TWICHO -->
+                    <div class="slide-item">
+                        <div class="slide-item-title">TWICHO</div>
+                        <div class="app-grid">
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fab fa-twitter"></i></div>
+                                <div class="app-card-name">Profile</div>
+                            </div>
+                            <div class="app-card" onclick="location.href='#'">
+                                <div class="app-card-icon"><i class="fas fa-pen"></i></div>
+                                <div class="app-card-name">Post</div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-
-            <!-- FIX 1: 3 grid langsung di bagian atas, tanpa icon trigger card di atasnya -->
-            <div class="cho-main-grid">
-                <div class="cho-card" id="choInstachoTrigger">
-                    <img src="Instacho.png" alt="INSTACHO" class="cho-image" onerror="this.src='https://placehold.co/200x200?text=INSTACHO'">
-                    <div class="cho-title">INSTACHO</div>
-                </div>
-                <div class="cho-card" id="chatchoCard">
-                    <div class="cho-icon"><i class="fas fa-comment-dots"></i></div>
-                    <div class="cho-title">CHATCHO</div>
-                </div>
-                <div class="cho-card" id="xchoCard">
-                    <div class="cho-icon"><i class="fab fa-twitter"></i></div>
-                    <div class="cho-title">X-CHO</div>
-                </div>
+            
+            <!-- DISCLAIMER CONTAINER (sebelum footer) -->
+            <div class="disclaimer-container">
+                <h4>Disclaimer</h4>
+                <p>This feature is intended for roleplay purposes only. There are no commercial activities or payments involved in the use of this feature. The feature may be freely used within the roleplay community. Please use this feature wisely.</p>
             </div>
+            
         </div>
     </section>
 
-    <!-- FIX 3: Footer grid horizontal -->
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section footer-brand">
-                    <h3>CHODATE</h3>
-                    <p>Creative ecosystem by The Kachoo.</p>
-                    <div class="social-links">
-                        <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                        <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Explore</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">The Kachoo</a></li>
-                        <li><a href="#">Kafkapages</a></li>
-                        <li><a href="#">Kaboom</a></li>
-                        <li><a href="#">Kazine</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>More</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Kadio</a></li>
-                        <li><a href="#">Chobank</a></li>
-                        <li><a href="#">Chonnect</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://twitter.com/thekachoo" target="_blank">Twitter</a></li>
-                        <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-                    </ul>
+        <div class="footer-grid">
+            <div class="footer-section footer-brand">
+                <h3>CHODATE</h3>
+                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <div class="social-links">
+                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="copyright">&copy; 2026 CHODATE by The Kachoo. All rights reserved.</div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kaboom.html">Kaboom</a></li>
+                    <li><a href="#">Kadio</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/CHOBANK/transaction.html">Chobank</a></li>
+                    <li><a href="https://thekachoo.github.io/CHONNECT/index.html">Chonnect</a></li>
+                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/CHOSONG.html">Chosong</a></li>
+                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meet Us</h3>
+                <ul class="footer-links">
+                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
         </div>
     </footer>
 
-    <div id="comingSoonToast" class="coming-soon-toast">Coming Soon</div>
-
     <script>
-        let toastTimeout;
-        function showComingSoon() {
-            const toast = document.getElementById('comingSoonToast');
-            if(!toast) return;
-            clearTimeout(toastTimeout);
-            toast.style.opacity = '1';
-            toastTimeout = setTimeout(() => { toast.style.opacity = '0'; }, 1800);
-        }
-
-        // Mobile menu
         const mobileBtn = document.getElementById('mobileMenuBtn');
         const mobileMenuDiv = document.getElementById('mobileMenu');
         const overlayMenu = document.getElementById('mobileMenuOverlay');
         const closeMobileBtn = document.getElementById('mobileMenuClose');
-        function openMobileMenu() { mobileMenuDiv.classList.add('active'); overlayMenu.classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeMobileMenuFunc() { mobileMenuDiv.classList.remove('active'); overlayMenu.classList.remove('active'); document.body.style.overflow = ''; }
-        if(mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
-        if(closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenuFunc);
-        if(overlayMenu) overlayMenu.addEventListener('click', closeMobileMenuFunc);
+
+        function openMobileMenu() {
+            mobileMenuDiv.classList.add('active');
+            overlayMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenuFunc() {
+            mobileMenuDiv.classList.remove('active');
+            overlayMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
+        if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenuFunc);
+        if (overlayMenu) overlayMenu.addEventListener('click', closeMobileMenuFunc);
         window.closeMobileMenuFunc = closeMobileMenuFunc;
 
-        // Grid overlay
-        const gridOverlay = document.getElementById('gridOverlay');
-        const closeGridBtn = document.getElementById('closeGridBtn');
-        const choInstachoTrigger = document.getElementById('choInstachoTrigger');
+        const logoEl = document.querySelector('.logo-img');
+        if (logoEl) logoEl.onerror = function() { this.src = 'https://placehold.co/100x36?text=CHODATE'; };
 
-        function openGridOverlay() { gridOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeGridOverlay() { gridOverlay.classList.remove('active'); document.body.style.overflow = ''; }
-
-        if(choInstachoTrigger) choInstachoTrigger.addEventListener('click', openGridOverlay);
-        if(closeGridBtn) closeGridBtn.addEventListener('click', closeGridOverlay);
-        gridOverlay.addEventListener('click', function(e) { if(e.target === gridOverlay) closeGridOverlay(); });
-
-        // Navigate
-        const profileModal = document.getElementById('profileModalCard');
-        const postModal = document.getElementById('postModalCard');
-        const storyModal = document.getElementById('storyModalCard');
-        function navigateTo(page) { window.location.href = page; }
-        if(profileModal) profileModal.addEventListener('click', () => navigateTo('Profile.html'));
-        if(postModal) postModal.addEventListener('click', () => navigateTo('Post.html'));
-        if(storyModal) storyModal.addEventListener('click', () => navigateTo('Story.html'));
-
-        // Desktop nav
-        const desktopPost = document.getElementById('instachoPostBtnDesktop');
-        const desktopStory = document.getElementById('instachoStoryBtnDesktop');
-        const desktopProfile = document.getElementById('instachoProfileBtnDesktop');
-        const mobilePost = document.getElementById('mobileInstachoPost');
-        const mobileStory = document.getElementById('mobileInstachoStory');
-        const mobileProfile = document.getElementById('mobileInstachoProfile');
-        if(desktopPost) desktopPost.addEventListener('click', () => navigateTo('Post.html'));
-        if(desktopStory) desktopStory.addEventListener('click', () => navigateTo('Story.html'));
-        if(desktopProfile) desktopProfile.addEventListener('click', () => navigateTo('Profile.html'));
-        if(mobilePost) mobilePost.addEventListener('click', () => navigateTo('Post.html'));
-        if(mobileStory) mobileStory.addEventListener('click', () => navigateTo('Story.html'));
-        if(mobileProfile) mobileProfile.addEventListener('click', () => navigateTo('Profile.html'));
-
-        document.querySelectorAll('.mobile-menu-link').forEach(link => {
-            link.addEventListener('click', () => { setTimeout(closeMobileMenuFunc, 100); });
+        const cards = document.querySelectorAll('.app-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const icon = card.querySelector('.app-card-icon');
+                if(icon) icon.style.transform = 'scale(1.08)';
+            });
+            card.addEventListener('mouseleave', (e) => {
+                const icon = card.querySelector('.app-card-icon');
+                if(icon) icon.style.transform = 'scale(1)';
+            });
         });
-
-        // Coming Soon
-        const chatchoCard = document.getElementById('chatchoCard');
-        const xchoCard = document.getElementById('xchoCard');
-        if(chatchoCard) chatchoCard.addEventListener('click', (e) => { e.preventDefault(); showComingSoon(); });
-        if(xchoCard) xchoCard.addEventListener('click', (e) => { e.preventDefault(); showComingSoon(); });
-
-        // Image fallbacks
-        const instachoImg = document.querySelector('.cho-image');
-        if(instachoImg) instachoImg.onerror = function() { this.src = 'https://placehold.co/200x200?text=INSTACHO'; };
-        const logoElement = document.querySelector('.logo-img');
-        if(logoElement) logoElement.onerror = function() { this.src = 'https://placehold.co/100x36?text=CHODATE'; };
+        
+        const slider = document.getElementById('slideContainer');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        if (slider) {
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.style.cursor = 'grabbing';
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.style.cursor = 'grab';
+            });
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.style.cursor = 'grab';
+            });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                slider.scrollLeft = scrollLeft - walk;
+            });
+            slider.style.cursor = 'grab';
+        }
     </script>
 </body>
-</html>
+    </html>
