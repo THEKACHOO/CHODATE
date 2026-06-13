@@ -527,8 +527,8 @@
         <div class="center-title">
             <img src="Youcho2.png" alt="Youcho" class="center-logo-img" onerror="this.style.display='none'">
             <div class="lang-toggle-header" id="globalLangToggle">
-                <button class="lang-btn active" data-lang="id">🇮🇩 IND</button>
-                <button class="lang-btn" data-lang="en">🇬🇧 ENG</button>
+                <button class="lang-btn active" data-lang="id">IND</button>
+                <button class="lang-btn" data-lang="en">ENG</button>
             </div>
         </div>
         <div class="desktop-nav-container">
@@ -553,8 +553,8 @@
     <div class="settings-layout">
         <div class="form-panel">
             <div class="form-group">
-                <label data-key="avatarLabel">Avatar Profile (1:1)</label>
-                <div class="file-upload-btn" id="uploadAvatarBtn">Upload & Crop 1:1</div>
+                <label data-key="avatarLabel">Avatar Profile</label>
+                <div class="file-upload-btn" id="uploadAvatarBtn">Upload</div>
                 <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
             </div>
             <div class="divider"></div>
@@ -575,7 +575,7 @@
                 <input type="text" id="currentWatchDuration" placeholder="cth: 03:15">
             </div>
             <div class="form-group">
-                <label data-key="progressSliderLabel">Atur Progress (Garis Merah)</label>
+                <label data-key="progressSliderLabel">Atur Progress</label>
                 <input type="range" id="progressSlider" class="range-input" min="0" max="100" value="70">
                 <div style="font-size:12px; margin-top:5px;" id="progressPercentLabel">70%</div>
             </div>
@@ -604,7 +604,7 @@
             <div class="divider"></div>
             <div class="form-group">
                 <label data-key="mediaLabel">Gambar Media</label>
-                <div class="file-upload-btn" id="uploadMediaBtn">Upload & Crop 16:9</div>
+                <div class="file-upload-btn" id="uploadMediaBtn">Upload</div>
                 <input type="file" id="mediaFileInput" accept="image/*" style="display: none;">
             </div>
         </div>
@@ -659,8 +659,8 @@
     let avatarImageBlobUrl = null, mediaImageBlobUrl = null;
     let currentLang = 'id';
     const translations = {
-        id: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile (1:1)", titleLabel:"Title Video", viewsLabel:"Jumlah Views", durationVideoLabel:"Durasi Video", currentWatchingLabel:"Durasi Nonton Saat Ini (Opsional)", progressSliderLabel:"Atur Progress (Garis Merah)", likesLabel:"Jumlah Like", dislikesLabel:"Jumlah Dislike", publishLabel:"Waktu Publish", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Status Channel", mediaLabel:"Gambar Media", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" },
-        en: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile (1:1)", titleLabel:"Video Title", viewsLabel:"View Count", durationVideoLabel:"Video Duration", currentWatchingLabel:"Current Watching Duration (Optional)", progressSliderLabel:"Adjust Progress (Red Bar)", likesLabel:"Like Count", dislikesLabel:"Dislike Count", publishLabel:"Published Date", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Channel Status", mediaLabel:"Thumbnail Image", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" }
+        id: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile", titleLabel:"Title Video", viewsLabel:"Jumlah Views", durationVideoLabel:"Durasi Video", currentWatchingLabel:"Durasi Nonton Saat Ini (Opsional)", progressSliderLabel:"Atur Progress", likesLabel:"Jumlah Like", dislikesLabel:"Jumlah Dislike", publishLabel:"Waktu Publish", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Status Channel", mediaLabel:"Gambar Media", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" },
+        en: { pageTitle:"Create your media view!", avatarLabel:"Avatar Profile", titleLabel:"Video Title", viewsLabel:"View Count", durationVideoLabel:"Video Duration", currentWatchingLabel:"Current Watching Duration (Optional)", progressSliderLabel:"Adjust Progress", likesLabel:"Like Count", dislikesLabel:"Dislike Count", publishLabel:"Published Date", subscribeLabel:"Subscribe / Unsubscribe", statusChannel:"Channel Status", mediaLabel:"Thumbnail Image", home:"Home", theKachoo:"The Kachoo", subscribe:"SUBSCRIBE", subscribed:"SUBSCRIBED" }
     };
     function updatePageLanguage() { document.querySelectorAll('[data-key]').forEach(el => { let key = el.getAttribute('data-key'); if(translations[currentLang][key]) el.innerText = translations[currentLang][key]; }); if(subscribeToggle.checked) subscribePreviewBtn.innerText = translations[currentLang].subscribed; else subscribePreviewBtn.innerText = translations[currentLang].subscribe; }
     document.querySelectorAll('.lang-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentLang = btn.getAttribute('data-lang'); updatePageLanguage(); updatePreviewData(); }); });
@@ -699,7 +699,7 @@
     mediaUploadBtn.addEventListener('click', () => mediaFileInput.click());
     mediaFileInput.addEventListener('change', (e) => { if (!e.target.files[0]) return; const url = URL.createObjectURL(e.target.files[0]); cropImageEl.src = url; currentCropType = 'media'; cropModal.style.display = 'flex'; if (mediaCropper) mediaCropper.destroy(); setTimeout(() => { mediaCropper = new Cropper(cropImageEl, { aspectRatio: 16/9, viewMode: 2, autoCropArea: 1 }); }, 100); e.target.value = ''; });
     cancelCrop.addEventListener('click', () => { cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; });
-    saveCrop.addEventListener('click', () => { let cropper = (currentCropType === 'avatar') ? avatarCropper : mediaCropper; if (!cropper) return; const canvas = cropper.getCroppedCanvas({ width: currentCropType === 'avatar' ? 300 : 640, height: currentCropType === 'avatar' ? 300 : 360 }); canvas.toBlob(blob => { const blobUrl = URL.createObjectURL(blob); if (currentCropType === 'avatar') { if (avatarImageBlobUrl) URL.revokeObjectURL(avatarImageBlobUrl); avatarImageBlobUrl = blobUrl; avatarPreviewDiv.innerHTML = `<img src="${blobUrl}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; showToast("Avatar updated"); } else { if (mediaImageBlobUrl) URL.revokeObjectURL(mediaImageBlobUrl); mediaImageBlobUrl = blobUrl; thumbnailImg.src = blobUrl; thumbnailImg.style.display = 'block'; thumbPlaceholder.style.display = 'none'; showToast("Thumbnail 16:9 updated"); } cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; }, 'image/png'); });
+    saveCrop.addEventListener('click', () => { let cropper = (currentCropType === 'avatar') ? avatarCropper : mediaCropper; if (!cropper) return; const canvas = cropper.getCroppedCanvas({ width: currentCropType === 'avatar' ? 300 : 640, height: currentCropType === 'avatar' ? 300 : 360 }); canvas.toBlob(blob => { const blobUrl = URL.createObjectURL(blob); if (currentCropType === 'avatar') { if (avatarImageBlobUrl) URL.revokeObjectURL(avatarImageBlobUrl); avatarImageBlobUrl = blobUrl; avatarPreviewDiv.innerHTML = `<img src="${blobUrl}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; showToast("Avatar updated"); } else { if (mediaImageBlobUrl) URL.revokeObjectURL(mediaImageBlobUrl); mediaImageBlobUrl = blobUrl; thumbnailImg.src = blobUrl; thumbnailImg.style.display = 'block'; thumbPlaceholder.style.display = 'none'; showToast("Thumbnail updated"); } cropModal.style.display = 'none'; if (avatarCropper) { avatarCropper.destroy(); avatarCropper = null; } if (mediaCropper) { mediaCropper.destroy(); mediaCropper = null; } if (cropImageEl.src) URL.revokeObjectURL(cropImageEl.src); cropImageEl.src = ''; }, 'image/png'); });
     subscribePreviewBtn.addEventListener('click', () => { subscribeToggle.checked = !subscribeToggle.checked; updatePreviewData(); });
     document.getElementById('screenshotBtn').addEventListener('click', async () => { const card = document.getElementById('youtubePreviewCard'); if (!card) return; try { const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }); const link = document.createElement('a'); link.download = 'youtube_media_preview.png'; link.href = canvas.toDataURL('image/png'); link.click(); showToast("Preview downloaded!"); } catch (err) { showToast("Failed to generate image"); } });
     updateProgressBar(); updatePreviewData(); updatePageLanguage();
