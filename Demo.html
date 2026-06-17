@@ -6,16 +6,42 @@
     <title>INSTACHO | Insta Story</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { font-family: 'Outfit', sans-serif; background-color: #f5f5f5; line-height: 1.6; }
-        body { padding-top: 80px; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; width: 100%; }
-        @media (max-width: 1024px) { .container { padding: 0 24px; } }
-        @media (max-width: 768px) { .container { padding: 0 16px; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body,
+        html {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        body {
+            padding-top: 80px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+        }
 
         .page-title {
             text-align: center;
@@ -25,17 +51,21 @@
             color: #1a1a1a;
         }
         @media (max-width: 768px) {
-            .page-title { font-size: 1.6rem; }
+            .page-title {
+                font-size: 1.6rem;
+            }
         }
 
         /* ===== HEADER ===== */
         header {
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(16px);
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .header-content {
             display: flex;
@@ -46,80 +76,453 @@
             margin: 0 auto;
             position: relative;
         }
-        .logo-container { display: flex; align-items: center; cursor: pointer; }
-        .logo-img { height: 38px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
-        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
-        @media (max-width: 640px) { .center-logo-img { height: 100px; } .logo-img { height: 30px; } }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .logo-img {
+            height: 38px;
+            width: auto;
+        }
+        .center-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .center-logo-img {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        @media (max-width: 640px) {
+            .center-logo-img {
+                height: 100px;
+            }
+            .logo-img {
+                height: 30px;
+            }
+        }
 
-        .desktop-nav-container { position: relative; display: block; }
-        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
-        .desktop-nav-trigger { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 14px; color: white; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
-        .desktop-nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 200px; background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); }
-        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; transition: 0.2s; }
-        .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
+        .desktop-nav-container {
+            position: relative;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav-container {
+                display: none;
+            }
+        }
+        .desktop-nav-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .desktop-nav-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 200px;
+            background: rgba(10, 10, 10, 0.97);
+            border-radius: 18px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .desktop-nav-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .desktop-nav-dropdown .nav-button {
+            display: block;
+            width: 100%;
+            padding: 11px 20px;
+            font-weight: 500;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .desktop-nav-dropdown .nav-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-        .mobile-menu-btn { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998; }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
-        .mobile-menu-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; width: 36px; height: 36px; border-radius: 50%; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 260px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.97);
+            padding: 90px 20px 40px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-link {
+            display: block;
+            padding: 13px 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* ===== MAIN ===== */
-        .main-content { padding: 28px 0 60px; }
-        .mode-selector { display: flex; justify-content: center; gap: 24px; margin: 32px 0 52px; flex-wrap: wrap; }
-        .mode-card { background: white; border-radius: 28px; padding: 36px 44px; text-align: center; cursor: pointer; transition: all 0.22s; border: 1px solid #e0e0e0; width: 240px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        .mode-card:hover { transform: translateY(-5px); border-color: #0095f6; box-shadow: 0 16px 28px -10px rgba(0,0,0,0.1); }
-        .mode-card i { font-size: 44px; margin-bottom: 18px; color: #000; }
-        .mode-card h2 { font-size: 22px; color: #1a1a1a; }
+        .main-content {
+            padding: 28px 0 60px;
+        }
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0 52px;
+            flex-wrap: wrap;
+        }
+        .mode-card {
+            background: white;
+            border-radius: 28px;
+            padding: 36px 44px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.22s;
+            border: 1px solid #e0e0e0;
+            width: 240px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+        .mode-card:hover {
+            transform: translateY(-5px);
+            border-color: #0095f6;
+            box-shadow: 0 16px 28px -10px rgba(0, 0, 0, 0.1);
+        }
+        .mode-card i {
+            font-size: 44px;
+            margin-bottom: 18px;
+            color: #000;
+        }
+        .mode-card h2 {
+            font-size: 22px;
+            color: #1a1a1a;
+        }
 
-        .studio-wrapper { display: none; }
-        .studio-wrapper.active-view { display: block; }
-        .story-studio { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start; }
-        @media (max-width: 860px) { .story-studio { flex-direction: column; align-items: center; } }
+        .studio-wrapper {
+            display: none;
+        }
+        .studio-wrapper.active-view {
+            display: block;
+        }
+        .story-studio {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        @media (max-width: 860px) {
+            .story-studio {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
 
         /* ===== FORM PANEL ===== */
-        .form-panel { background: white; border-radius: 24px; padding: 22px 20px; width: 340px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eaeaea; }
-        @media (max-width: 860px) { .form-panel { width: 100%; max-width: 420px; } }
-        .lang-buttons { display: flex; gap: 8px; margin-bottom: 18px; }
-        .lang-btn { flex: 1; padding: 8px; background: #f2f2f2; border: 1px solid #ddd; border-radius: 100px; cursor: pointer; font-weight: 600; font-size: 12px; transition: 0.2s; }
-        .lang-btn.active { background: #111; color: white; border-color: #111; }
-        .form-group { margin-bottom: 14px; }
-        label { font-weight: 600; font-size: 11px; display: block; margin-bottom: 5px; color: #666; text-transform: uppercase; letter-spacing: 0.4px; }
-        input[type="text"], textarea, select { width: 100%; padding: 10px 13px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 13px; outline: none; background: white; font-family: 'Outfit', sans-serif; }
-        input[type="text"]:focus, select:focus { border-color: #0095f6; }
-        input[type="text"]::placeholder { color: #bbb; opacity: 1; }
-        .file-input-label { background: #f7f7f7; text-align: center; padding: 9px 12px; border-radius: 12px; margin-top: 5px; cursor: pointer; font-size: 12px; border: 1px solid #e8e8e8; }
-        .section-divider { margin: 16px 0 10px; border-top: 1px solid #f0f0f0; padding-top: 12px; font-weight: 700; font-size: 12px; color: #444; display: flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.4px; }
-        .bg-options-row { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
-        .bg-option { width: 40px; height: 40px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
-        .bg-black { background: #000; border: 1px solid #555; }
-        .bg-white { background: #fff; border: 1px solid #aaa; }
-        .bg-transparent { background: conic-gradient(#ccc 0deg 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg 360deg); background-size: 12px 12px; border: 1px solid #aaa; }
-        .active-bg-choice { border-color: #0095f6 !important; }
-        .color-picker-small { width: 40px; height: 40px; border-radius: 12px; border: 1px solid #ccc; cursor: pointer; }
-        .toggle-switch { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; padding: 9px 14px; border-radius: 60px; cursor: pointer; margin-bottom: 9px; }
-        .toggle-switch span { font-size: 12px; font-weight: 500; color: #333; }
-        .toggle-slider { width: 42px; height: 22px; background: #ccc; border-radius: 30px; position: relative; transition: 0.2s; flex-shrink: 0; }
-        .toggle-slider.active { background: #0095f6; }
-        .toggle-slider::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
-        .toggle-slider.active::after { left: 22px; }
-        .toggle-follow-control { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; padding: 9px 14px; border-radius: 60px; cursor: pointer; margin-bottom: 9px; }
-        .toggle-follow-control span { font-size: 12px; font-weight: 500; color: #333; }
-        .follow-toggle-slider { width: 42px; height: 22px; background: #ccc; border-radius: 30px; position: relative; transition: 0.2s; flex-shrink: 0; }
-        .follow-toggle-slider.active { background: #0095f6; }
-        .follow-toggle-slider::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
-        .follow-toggle-slider.active::after { left: 22px; }
-        
-        .theme-selector { display: none; }
+        .form-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 22px 20px;
+            width: 340px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eaeaea;
+        }
+        @media (max-width: 860px) {
+            .form-panel {
+                width: 100%;
+                max-width: 420px;
+            }
+        }
+        .lang-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .lang-btn {
+            flex: 1;
+            padding: 8px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 100px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .lang-btn.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+            font-family: 'Outfit', sans-serif;
+        }
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #0095f6;
+        }
+        input[type="text"]::placeholder {
+            color: #bbb;
+            opacity: 1;
+        }
+        .file-input-label {
+            background: #f7f7f7;
+            text-align: center;
+            padding: 9px 12px;
+            border-radius: 12px;
+            margin-top: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid #e8e8e8;
+        }
+        .section-divider {
+            margin: 16px 0 10px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+            font-weight: 700;
+            font-size: 12px;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .bg-options-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .bg-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.15s;
+        }
+        .bg-black {
+            background: #000;
+            border: 1px solid #555;
+        }
+        .bg-white {
+            background: #fff;
+            border: 1px solid #aaa;
+        }
+        .bg-transparent {
+            background: conic-gradient(#ccc 0deg 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg 360deg);
+            background-size: 12px 12px;
+            border: 1px solid #aaa;
+        }
+        .active-bg-choice {
+            border-color: #0095f6 !important;
+        }
+        .color-picker-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 9px 14px;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-bottom: 9px;
+        }
+        .toggle-switch span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+        }
+        .toggle-slider {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 30px;
+            position: relative;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+        .toggle-slider.active {
+            background: #0095f6;
+        }
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+        .toggle-slider.active::after {
+            left: 22px;
+        }
+        .toggle-follow-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 9px 14px;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-bottom: 9px;
+        }
+        .toggle-follow-control span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+        }
+        .follow-toggle-slider {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 30px;
+            position: relative;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+        .follow-toggle-slider.active {
+            background: #0095f6;
+        }
+        .follow-toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+        .follow-toggle-slider.active::after {
+            left: 22px;
+        }
+
+        .theme-selector {
+            display: none;
+        }
 
         /* ===== STORY CARD WRAPPER ===== */
-        .story-card-wrapper { width: 300px; }
-        @media (max-width: 860px) { .story-card-wrapper { width: 100%; max-width: 340px; } }
+        .story-card-wrapper {
+            width: 300px;
+        }
+        @media (max-width: 860px) {
+            .story-card-wrapper {
+                width: 100%;
+                max-width: 340px;
+            }
+        }
 
         .story-outer {
             background-color: #000;
@@ -129,11 +532,12 @@
             width: 100%;
         }
 
-        .my-story-card, .other-story-card {
+        /* TINGGI CARD DIBUAT LEBIH TINGGI 9:18 */
+        .my-story-card,
+        .other-story-card {
             background: #111;
             border-radius: 18px;
-            overflow: hidden;
-            aspect-ratio: 9 / 16;
+            aspect-ratio: 9 / 18;
             position: relative;
             background-size: cover;
             background-position: center;
@@ -143,6 +547,7 @@
             width: 100%;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
+            overflow: hidden;
         }
 
         .story-progress {
@@ -157,7 +562,7 @@
         .progress-bar {
             flex: 1;
             height: 2px;
-            background: rgba(255,255,255,0.35);
+            background: rgba(255, 255, 255, 0.35);
             border-radius: 2px;
             overflow: hidden;
         }
@@ -166,42 +571,101 @@
             background: white;
             width: 100%;
         }
-        .progress-bar:first-child .progress-fill { width: 60%; }
+        .progress-bar:first-child .progress-fill {
+            width: 60%;
+        }
 
         .story-header-row {
             position: absolute;
             top: 18px;
-            left: 0; right: 0;
+            left: 0;
+            right: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 10px;
             z-index: 3;
         }
-        .header-left { display: flex; align-items: center; gap: 8px; }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .story-avatar {
-            width: 34px; height: 34px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.9);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
             object-fit: cover;
             background: #0095f6;
             flex-shrink: 0;
         }
-        .self-avatar-container { position: relative; display: inline-block; }
-        .story-username { font-weight: 700; font-size: 12px; color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        .story-time { font-size: 10px; color: rgba(255,255,255,0.75); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-        .cf-badge-header { display: inline-flex; align-items: center; gap: 3px; background: #2e9b4c; border-radius: 20px; padding: 2px 7px; font-size: 9px; font-weight: 700; color: white; margin-top: 3px; width: fit-content; }
-        .verified-icon { color: #0095f6; font-size: 11px; margin-left: 3px; vertical-align: middle; }
-        .header-right { display: flex; gap: 14px; align-items: center; }
-        .header-right i { font-size: 16px; color: white; cursor: default; }
-        .plus-badge { position: absolute; bottom: 0px; right: -1px; background: #0095f6; border: 1.5px solid white; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white; }
+        .self-avatar-container {
+            position: relative;
+            display: inline-block;
+        }
+        .story-username {
+            font-weight: 700;
+            font-size: 12px;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .story-time {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.75);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .cf-badge-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: #2e9b4c;
+            border-radius: 20px;
+            padding: 2px 7px;
+            font-size: 9px;
+            font-weight: 700;
+            color: white;
+            margin-top: 3px;
+            width: fit-content;
+        }
+        .verified-icon {
+            color: #0095f6;
+            font-size: 11px;
+            margin-left: 3px;
+            vertical-align: middle;
+        }
+        .header-right {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+        .header-right i {
+            font-size: 16px;
+            color: white;
+            cursor: default;
+        }
+        .plus-badge {
+            position: absolute;
+            bottom: 0px;
+            right: -1px;
+            background: #0095f6;
+            border: 1.5px solid white;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: white;
+        }
 
         .follow-btn-story {
             padding: 5px 14px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
-            border: 1.5px solid rgba(255,255,255,0.8);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
             cursor: pointer;
             background: transparent;
             color: white;
@@ -209,9 +673,9 @@
             letter-spacing: 0.2px;
         }
         .follow-btn-story.following {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.4);
-            color: rgba(255,255,255,0.7);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .my-bottom-bar {
@@ -232,7 +696,7 @@
             gap: 4px;
         }
         .activity-circle {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -260,7 +724,7 @@
             gap: 4px;
         }
         .action-circle {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -294,7 +758,7 @@
         }
         .send-message-pill {
             flex: 1;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 22px;
             padding: 8px 14px;
             display: flex;
@@ -310,7 +774,9 @@
             flex: 1;
             width: 100%;
         }
-        .send-message-input::placeholder { color: rgba(255,255,255,0.65); }
+        .send-message-input::placeholder {
+            color: rgba(255, 255, 255, 0.65);
+        }
         .story-action-icons {
             display: flex;
             gap: 8px;
@@ -318,20 +784,27 @@
             flex-shrink: 0;
         }
         .story-icon-btn {
-            width: 28px; height: 28px;
-            display: flex; align-items: center; justify-content: center;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
             cursor: pointer;
         }
         .story-icon-btn svg {
-            width: 22px; height: 22px;
+            width: 22px;
+            height: 22px;
             fill: none;
             stroke: white;
             stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-        .story-icon-btn.liked svg { fill: #ff3040; stroke: #ff3040; }
+        .story-icon-btn.liked svg {
+            fill: #ff3040;
+            stroke: #ff3040;
+        }
 
         .header-right-social {
             display: flex;
@@ -344,10 +817,45 @@
             cursor: pointer;
         }
 
-        .download-group { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
-        .download-single { background: #111; border: none; padding: 11px 26px; border-radius: 100px; font-weight: 600; color: white; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-family: 'Outfit', sans-serif; }
-        .download-single:hover { background: #333; }
-        .back-btn { background: #1e1e1e; border: 1px solid #333; padding: 9px 22px; border-radius: 100px; font-weight: 600; color: white; cursor: pointer; font-size: 13px; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; }
+        .download-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .download-single {
+            background: #111;
+            border: none;
+            padding: 11px 26px;
+            border-radius: 100px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+        .download-single:hover {
+            background: #333;
+        }
+        .back-btn {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            padding: 9px 22px;
+            border-radius: 100px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', sans-serif;
+        }
 
         /* ===== DRAGGABLE TEXT ===== */
         .draggable-text {
@@ -361,7 +869,8 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: none;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            /* shadow lebih tipis */
             pointer-events: auto;
             border-radius: 4px;
             transition: outline 0.15s;
@@ -380,12 +889,13 @@
             right: -14px;
             display: flex;
             gap: 3px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
             border-radius: 50%;
             padding: 2px;
             z-index: 30;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            /* shadow teks */
         }
         .draggable-text .text-actions button {
             width: 24px;
@@ -417,31 +927,157 @@
             outline-offset: 2px;
         }
 
+        /* tombol X saat di-download */
+        .draggable-text.hide-actions .text-actions {
+            display: none !important;
+        }
+
         /* ===== FOOTER ===== */
-        footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
-        .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 36px; max-width: 1400px; margin-left: auto; margin-right: auto; padding: 0 24px; }
-        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-        .footer-section h3 { font-size: 0.7rem; font-weight: 700; margin-bottom: 14px; color: white; text-transform: uppercase; letter-spacing: 1.2px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 8px; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
-        .footer-links a:hover { color: white; }
-        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 280px; margin-bottom: 14px; line-height: 1.6; }
-        .social-links { display: flex; gap: 10px; }
-        .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 60px; color: white; text-decoration: none; font-size: 12px; transition: 0.2s; }
-        .social-link:hover { background: white; color: black; }
-        .footer-bottom { display: flex; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        footer {
+            background: #000;
+            color: #ddd;
+            padding: 50px 0 28px;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
+        }
+        @media (max-width: 860px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+        .footer-section h3 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.83rem;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            max-width: 280px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .social-link:hover {
+            background: white;
+            color: black;
+        }
+        .footer-bottom {
+            display: flex;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        .copyright {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
 
-        .crop-modal { display: none; position: fixed; inset: 0; background: #000; z-index: 20000; justify-content: center; align-items: center; flex-direction: column; }
-        .crop-container { max-width: 90vw; max-height: 80vh; overflow: hidden; border-radius: 20px; background: #111; }
-        .crop-modal-buttons { padding: 18px; display: flex; gap: 14px; }
-        .crop-modal-btn { padding: 11px 28px; border-radius: 100px; font-weight: 700; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; }
-        .crop-modal-btn.cancel { background: #333; color: white; }
-        .crop-modal-btn.save { background: #0095f6; color: white; }
-        .toast-msg { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 11px 22px; border-radius: 60px; font-weight: 500; font-size: 13px; z-index: 30000; opacity: 0; transition: 0.2s; pointer-events: none; white-space: nowrap; }
+        .crop-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .crop-container {
+            max-width: 90vw;
+            max-height: 80vh;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #111;
+        }
+        .crop-modal-buttons {
+            padding: 18px;
+            display: flex;
+            gap: 14px;
+        }
+        .crop-modal-btn {
+            padding: 11px 28px;
+            border-radius: 100px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+        .crop-modal-btn.cancel {
+            background: #333;
+            color: white;
+        }
+        .crop-modal-btn.save {
+            background: #0095f6;
+            color: white;
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 13px;
+            z-index: 30000;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
 
-        input::placeholder, textarea::placeholder {
+        input::placeholder,
+        textarea::placeholder {
             color: #bbb;
             opacity: 1;
         }
@@ -455,870 +1091,948 @@
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-        </div>
-        <div class="center-title">
-            <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
-        </div>
-        <div class="desktop-nav-container">
-            <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
-            <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                <a href="index.html" class="nav-button">Home</a>
-                <a href="Profile.html" class="nav-button">Instacho Profile</a>
-                <a href="Story.html" class="nav-button">Instacho Story</a>
+    <header>
+        <div class="header-content">
+            <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
+            <div class="center-title">
+                <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+            </div>
+            <div class="desktop-nav-container">
+                <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
+                <div class="desktop-nav-dropdown" id="desktopNavDropdown">
+                    <a href="index.html" class="nav-button">Home</a>
+                    <a href="Profile.html" class="nav-button">Instacho Profile</a>
+                    <a href="Story.html" class="nav-button">Instacho Story</a>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
+        <a href="index.html" class="mobile-menu-link">Home</a>
+        <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+        <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
     </div>
-</header>
 
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
-    <a href="index.html" class="mobile-menu-link">Home</a>
-    <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-    <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
-</div>
-
-<div class="main-content">
-    <div class="container">
-        <h1 class="page-title">Create your story!</h1>
-        <div id="modeSelection" class="mode-selector">
-            <div class="mode-card" data-mode="myview">
-                <i class="fas fa-user-circle"></i><h2>Self View</h2>
-            </div>
-            <div class="mode-card" data-mode="public">
-                <i class="fas fa-globe"></i><h2>Social View</h2>
-            </div>
-        </div>
-
-        <!-- ===== SELF VIEW STUDIO ===== -->
-        <div id="studioMyView" class="studio-wrapper">
-            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Back to Mode</span></button>
-            <div class="story-studio">
-                <div class="form-panel">
-                    <div class="lang-buttons">
-                        <button class="lang-btn active" id="btnIndonesiaMy">Bahasa Indonesia</button>
-                        <button class="lang-btn" id="btnInggrisMy">English</button>
-                    </div>
-                    <div class="section-divider"><i class="fas fa-user-circle"></i> <span id="myProfileLabel">Profil Saya</span></div>
-                    <div class="form-group">
-                        <label id="avatarLabel">Foto Profil</label>
-                        <input type="file" id="myAvatarUpload" accept="image/*" style="display:none;">
-                        <div class="file-input-label" id="myAvatarLabel">Upload Avatar (1:1)</div>
-                    </div>
-                    <div class="form-group">
-                        <label id="timeLabel">Waktu Tayang</label>
-                        <select id="myTimeSelect">
-                            <option value="Just now" id="justNowOption">Baru saja</option>
-                            <option value="Custom" id="customOption">Custom</option>
-                        </select>
-                        <input type="text" id="myCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
-                    </div>
-                    <div class="form-group">
-                        <label id="storyLabel">Gambar Story</label>
-                        <input type="file" id="myBgUpload" accept="image/*" style="display:none;">
-                        <div class="file-input-label" id="myBgLabel">Upload latar story (9:16)</div>
-                    </div>
-                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerBgLabel">Background Luar</span></div>
-                    <div class="form-group">
-                        <label id="outerColorLabel">Warna Luar Frame</label>
-                        <div class="bg-options-row">
-                            <div class="bg-option bg-black active-bg-choice" data-outer="black"></div>
-                            <div class="bg-option bg-white" data-outer="white"></div>
-                            <div class="bg-option bg-transparent" data-outer="transparent"></div>
-                            <input type="color" id="myOuterColor" class="color-picker-small" value="#000000">
-                        </div>
-                    </div>
-                    <div class="toggle-switch" id="myCloseFriendsToggle">
-                        <span id="closeFriendsText">Close Friends</span>
-                        <div class="toggle-slider" id="myCfSlider"></div>
-                    </div>
-
-                    <!-- ===== FORM TEKS (OPTIONAL) ===== -->
-                    <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
-                    <div class="form-group">
-                        <label>Isi Teks</label>
-                        <input type="text" id="myTextInput" placeholder="Tulis teks..." value="">
-                    </div>
-                    <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <label style="flex:1; min-width:50px;">Warna</label>
-                        <input type="color" id="myTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
-                        <label style="flex:1; min-width:50px;">Ukuran</label>
-                        <input type="range" id="myTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
-                        <span id="myTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Font</label>
-                        <select id="myTextFont">
-                            <option value="'Outfit', sans-serif">Outfit</option>
-                            <option value="Arial, sans-serif">Arial</option>
-                            <option value="'Georgia', serif">Georgia</option>
-                            <option value="'Courier New', monospace">Courier New</option>
-                            <option value="'Times New Roman', serif">Times New Roman</option>
-                            <option value="'Comic Sans MS', cursive">Comic Sans</option>
-                        </select>
-                    </div>
-                    <button class="download-single" id="myAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Create your story!</h1>
+            <div id="modeSelection" class="mode-selector">
+                <div class="mode-card" data-mode="myview">
+                    <i class="fas fa-user-circle"></i><h2>Self View</h2>
                 </div>
-
-                <!-- Self View Story Card -->
-                <div class="story-card-wrapper">
-                    <div id="myOuterFrame" class="story-outer">
-                        <div class="my-story-card" id="myViewStoryCard">
-                            <div class="story-progress">
-                                <div class="progress-bar"><div class="progress-fill"></div></div>
-                                <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                            </div>
-                            <div class="story-header-row">
-                                <div class="header-left">
-                                    <div class="self-avatar-container">
-                                        <img class="story-avatar" id="myViewAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%230095f6'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EY%3C/text%3E%3C/svg%3E">
-                                        <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
-                                    </div>
-                                    <div>
-                                        <div class="story-username" id="yourStoryText">Your Story</div>
-                                        <div class="story-time" id="myViewTime">Baru saja</div>
-                                        <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
-                                    </div>
-                                </div>
-                                <div class="header-right">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                    <i class="fas fa-times"></i>
-                                </div>
-                            </div>
-                            <div class="my-bottom-bar">
-                                <div class="activity-left">
-                                    <div class="activity-circle"><i class="far fa-heart"></i></div>
-                                    <span class="activity-label" id="activityText">Activity</span>
-                                </div>
-                                <div class="actions-right">
-                                    <div class="action-item">
-                                        <div class="action-circle"><i class="fas fa-rocket"></i></div>
-                                        <span class="action-label" id="boostText">Boost</span>
-                                    </div>
-                                    <div class="action-item">
-                                        <div class="action-circle"><i class="fas fa-bookmark"></i></div>
-                                        <span class="action-label" id="highlightText">Highlight</span>
-                                    </div>
-                                    <div class="action-item">
-                                        <div class="action-circle"><i class="fas fa-at"></i></div>
-                                        <span class="action-label" id="mentionText">Mention</span>
-                                    </div>
-                                    <div class="action-item">
-                                        <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
-                                        <span class="action-label" id="moreText">More</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="download-group">
-                        <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span id="downloadText">Unduh</span></button>
-                    </div>
+                <div class="mode-card" data-mode="public">
+                    <i class="fas fa-globe"></i><h2>Social View</h2>
                 </div>
             </div>
-        </div>
 
-        <!-- ===== SOCIAL VIEW STUDIO ===== -->
-        <div id="studioPublicView" class="studio-wrapper">
-            <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Back to Mode</span></button>
-            <div class="story-studio">
-                <div class="form-panel">
-                    <div class="lang-buttons">
-                        <button class="lang-btn active" id="btnIndonesiaPub">Bahasa Indonesia</button>
-                        <button class="lang-btn" id="btnInggrisPub">English</button>
-                    </div>
-                    <div class="section-divider"><i class="fas fa-user"></i> <span id="profileLabelPub">Profil & Interaksi</span></div>
-                    <div class="form-group">
-                        <label id="avatarLabelPub">Foto Profil</label>
-                        <input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;">
-                        <div class="file-input-label" id="pubAvatarLabel">Upload avatar</div>
-                    </div>
-                    <div class="form-group">
-                        <label id="usernameLabel">Username</label>
-                        <input type="text" id="pubUsername" placeholder="thekachoo" value="">
-                    </div>
-                    <div class="toggle-switch" id="pubVerifiedToggle">
-                        <span id="verifiedText">Akun Terverifikasi</span>
-                        <div class="toggle-slider" id="pubVerifiedSlider"></div>
-                    </div>
-                    <div class="form-group">
-                        <label id="timeLabelPub">Waktu Tayang</label>
-                        <select id="pubTimeSelect">
-                            <option value="Just now" id="justNowOptionPub">Baru saja</option>
-                            <option value="Custom" id="customOptionPub">Custom</option>
-                        </select>
-                        <input type="text" id="pubCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
-                    </div>
-                    <div class="form-group">
-                        <label id="storyLabelPub">Gambar Story</label>
-                        <input type="file" id="pubBgUpload" accept="image/*" style="display:none;">
-                        <div class="file-input-label" id="pubBgLabel">Upload latar story (9:16)</div>
-                    </div>
-                    <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerLabelPub">Background Luar</span></div>
-                    <div class="form-group">
-                        <label id="outerColorLabelPub">Warna Luar Frame</label>
-                        <div class="bg-options-row">
-                            <div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div>
-                            <div class="bg-option bg-white" data-outer-pub="white"></div>
-                            <div class="bg-option bg-transparent" data-outer-pub="transparent"></div>
-                            <input type="color" id="pubOuterColor" class="color-picker-small" value="#000000">
+            <!-- ===== SELF VIEW STUDIO ===== -->
+            <div id="studioMyView" class="studio-wrapper">
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Back to Mode</span></button>
+                <div class="story-studio">
+                    <div class="form-panel">
+                        <div class="lang-buttons">
+                            <button class="lang-btn active" id="btnIndonesiaMy">Bahasa Indonesia</button>
+                            <button class="lang-btn" id="btnInggrisMy">English</button>
                         </div>
-                    </div>
-                    <div class="toggle-switch" id="pubCloseFriendsToggle">
-                        <span id="cfTextPub">Close Friends</span>
-                        <div class="toggle-slider" id="pubCfSlider"></div>
-                    </div>
-                    <div class="toggle-follow-control" id="toggleFollowControl">
-                        <span id="followText">Follow / Following</span>
-                        <div class="follow-toggle-slider" id="followToggleSlider"></div>
-                    </div>
-
-                    <!-- ===== FORM TEKS (OPTIONAL) ===== -->
-                    <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
-                    <div class="form-group">
-                        <label>Isi Teks</label>
-                        <input type="text" id="pubTextInput" placeholder="Tulis teks..." value="">
-                    </div>
-                    <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <label style="flex:1; min-width:50px;">Warna</label>
-                        <input type="color" id="pubTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
-                        <label style="flex:1; min-width:50px;">Ukuran</label>
-                        <input type="range" id="pubTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
-                        <span id="pubTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Font</label>
-                        <select id="pubTextFont">
-                            <option value="'Outfit', sans-serif">Outfit</option>
-                            <option value="Arial, sans-serif">Arial</option>
-                            <option value="'Georgia', serif">Georgia</option>
-                            <option value="'Courier New', monospace">Courier New</option>
-                            <option value="'Times New Roman', serif">Times New Roman</option>
-                            <option value="'Comic Sans MS', cursive">Comic Sans</option>
-                        </select>
-                    </div>
-                    <button class="download-single" id="pubAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
-                </div>
-
-                <div class="story-card-wrapper">
-                    <div id="pubOuterFrame" class="story-outer">
-                        <div class="other-story-card" id="publicStoryCard">
-                            <div class="story-progress">
-                                <div class="progress-bar"><div class="progress-fill"></div></div>
-                                <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
+                        <div class="section-divider"><i class="fas fa-user-circle"></i> <span id="myProfileLabel">Profil Saya</span></div>
+                        <div class="form-group">
+                            <label id="avatarLabel">Foto Profil</label>
+                            <input type="file" id="myAvatarUpload" accept="image/*" style="display:none;">
+                            <div class="file-input-label" id="myAvatarLabel">Upload Avatar (1:1)</div>
+                        </div>
+                        <div class="form-group">
+                            <label id="timeLabel">Waktu Tayang</label>
+                            <select id="myTimeSelect">
+                                <option value="Just now" id="justNowOption">Baru saja</option>
+                                <option value="Custom" id="customOption">Custom</option>
+                            </select>
+                            <input type="text" id="myCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
+                        </div>
+                        <div class="form-group">
+                            <label id="storyLabel">Gambar Story</label>
+                            <input type="file" id="myBgUpload" accept="image/*" style="display:none;">
+                            <div class="file-input-label" id="myBgLabel">Upload latar story (9:16)</div>
+                        </div>
+                        <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerBgLabel">Background Luar</span></div>
+                        <div class="form-group">
+                            <label id="outerColorLabel">Warna Luar Frame</label>
+                            <div class="bg-options-row">
+                                <div class="bg-option bg-black active-bg-choice" data-outer="black"></div>
+                                <div class="bg-option bg-white" data-outer="white"></div>
+                                <div class="bg-option bg-transparent" data-outer="transparent"></div>
+                                <input type="color" id="myOuterColor" class="color-picker-small" value="#000000">
                             </div>
-                            <div class="story-header-row">
-                                <div class="header-left">
-                                    <img class="story-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%23e4405f'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EK%3C/text%3E%3C/svg%3E">
-                                    <div>
-                                        <div class="story-username">
-                                            <span id="pubUsernameLabel">thekachoo</span>
-                                            <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
+                        </div>
+                        <div class="toggle-switch" id="myCloseFriendsToggle">
+                            <span id="closeFriendsText">Close Friends</span>
+                            <div class="toggle-slider" id="myCfSlider"></div>
+                        </div>
+
+                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
+                        <div class="form-group">
+                            <label>Isi Teks</label>
+                            <input type="text" id="myTextInput" placeholder="Tulis teks..." value="">
+                        </div>
+                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <label style="flex:1; min-width:50px;">Warna</label>
+                            <input type="color" id="myTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
+                            <label style="flex:1; min-width:50px;">Ukuran</label>
+                            <input type="range" id="myTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
+                            <span id="myTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Font</label>
+                            <select id="myTextFont">
+                                <option value="'Outfit', sans-serif">Outfit</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Georgia', serif">Georgia</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                            </select>
+                        </div>
+                        <button class="download-single" id="myAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
+                    </div>
+
+                    <!-- Self View Story Card -->
+                    <div class="story-card-wrapper">
+                        <div id="myOuterFrame" class="story-outer">
+                            <div class="my-story-card" id="myViewStoryCard">
+                                <div class="story-progress">
+                                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
+                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
+                                </div>
+                                <div class="story-header-row">
+                                    <div class="header-left">
+                                        <div class="self-avatar-container">
+                                            <img class="story-avatar" id="myViewAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%230095f6'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EY%3C/text%3E%3C/svg%3E">
+                                            <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                         </div>
-                                        <div class="story-time" id="pubTimeLabel">Baru saja</div>
-                                        <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Close friends</span></div>
+                                        <div>
+                                            <div class="story-username" id="yourStoryText">Your Story</div>
+                                            <div class="story-time" id="myViewTime">Baru saja</div>
+                                            <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="header-right">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                        <i class="fas fa-times"></i>
                                     </div>
                                 </div>
-                                <div class="header-right-social">
-                                    <button class="follow-btn-story" id="pubFollowAction">Follow</button>
-                                    <i class="fas fa-ellipsis-h three-dots"></i>
-                                </div>
-                            </div>
-                            <div class="send-message-bar">
-                                <div class="send-message-pill">
-                                    <input class="send-message-input" id="pubMessageInput" placeholder="Send message...">
-                                </div>
-                                <div class="story-action-icons">
-                                    <div class="story-icon-btn" id="pubLikeBtn">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                        </svg>
+                                <div class="my-bottom-bar">
+                                    <div class="activity-left">
+                                        <div class="activity-circle"><i class="far fa-heart"></i></div>
+                                        <span class="activity-label" id="activityText">Activity</span>
                                     </div>
-                                    <div class="story-icon-btn">
-                                        <svg viewBox="0 0 24 24">
-                                            <line x1="22" y1="2" x2="11" y2="13"/>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                                        </svg>
+                                    <div class="actions-right">
+                                        <div class="action-item">
+                                            <div class="action-circle"><i class="fas fa-rocket"></i></div>
+                                            <span class="action-label" id="boostText">Boost</span>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-circle"><i class="fas fa-bookmark"></i></div>
+                                            <span class="action-label" id="highlightText">Highlight</span>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-circle"><i class="fas fa-at"></i></div>
+                                            <span class="action-label" id="mentionText">Mention</span>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
+                                            <span class="action-label" id="moreText">More</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="download-group">
+                            <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span id="downloadText">Unduh</span></button>
+                        </div>
                     </div>
-                    <div class="download-group">
-                        <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span id="downloadTextPub">Unduh</span></button>
+                </div>
+            </div>
+
+            <!-- ===== SOCIAL VIEW STUDIO ===== -->
+            <div id="studioPublicView" class="studio-wrapper">
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Back to Mode</span></button>
+                <div class="story-studio">
+                    <div class="form-panel">
+                        <div class="lang-buttons">
+                            <button class="lang-btn active" id="btnIndonesiaPub">Bahasa Indonesia</button>
+                            <button class="lang-btn" id="btnInggrisPub">English</button>
+                        </div>
+                        <div class="section-divider"><i class="fas fa-user"></i> <span id="profileLabelPub">Profil & Interaksi</span></div>
+                        <div class="form-group">
+                            <label id="avatarLabelPub">Foto Profil</label>
+                            <input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;">
+                            <div class="file-input-label" id="pubAvatarLabel">Upload avatar</div>
+                        </div>
+                        <div class="form-group">
+                            <label id="usernameLabel">Username</label>
+                            <input type="text" id="pubUsername" placeholder="thekachoo" value="">
+                        </div>
+                        <div class="toggle-switch" id="pubVerifiedToggle">
+                            <span id="verifiedText">Akun Terverifikasi</span>
+                            <div class="toggle-slider" id="pubVerifiedSlider"></div>
+                        </div>
+                        <div class="form-group">
+                            <label id="timeLabelPub">Waktu Tayang</label>
+                            <select id="pubTimeSelect">
+                                <option value="Just now" id="justNowOptionPub">Baru saja</option>
+                                <option value="Custom" id="customOptionPub">Custom</option>
+                            </select>
+                            <input type="text" id="pubCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
+                        </div>
+                        <div class="form-group">
+                            <label id="storyLabelPub">Gambar Story</label>
+                            <input type="file" id="pubBgUpload" accept="image/*" style="display:none;">
+                            <div class="file-input-label" id="pubBgLabel">Upload latar story (9:16)</div>
+                        </div>
+                        <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerLabelPub">Background Luar</span></div>
+                        <div class="form-group">
+                            <label id="outerColorLabelPub">Warna Luar Frame</label>
+                            <div class="bg-options-row">
+                                <div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div>
+                                <div class="bg-option bg-white" data-outer-pub="white"></div>
+                                <div class="bg-option bg-transparent" data-outer-pub="transparent"></div>
+                                <input type="color" id="pubOuterColor" class="color-picker-small" value="#000000">
+                            </div>
+                        </div>
+                        <div class="toggle-switch" id="pubCloseFriendsToggle">
+                            <span id="cfTextPub">Close Friends</span>
+                            <div class="toggle-slider" id="pubCfSlider"></div>
+                        </div>
+                        <div class="toggle-follow-control" id="toggleFollowControl">
+                            <span id="followText">Follow / Following</span>
+                            <div class="follow-toggle-slider" id="followToggleSlider"></div>
+                        </div>
+
+                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
+                        <div class="form-group">
+                            <label>Isi Teks</label>
+                            <input type="text" id="pubTextInput" placeholder="Tulis teks..." value="">
+                        </div>
+                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <label style="flex:1; min-width:50px;">Warna</label>
+                            <input type="color" id="pubTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
+                            <label style="flex:1; min-width:50px;">Ukuran</label>
+                            <input type="range" id="pubTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
+                            <span id="pubTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Font</label>
+                            <select id="pubTextFont">
+                                <option value="'Outfit', sans-serif">Outfit</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Georgia', serif">Georgia</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                            </select>
+                        </div>
+                        <button class="download-single" id="pubAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
+                    </div>
+
+                    <div class="story-card-wrapper">
+                        <div id="pubOuterFrame" class="story-outer">
+                            <div class="other-story-card" id="publicStoryCard">
+                                <div class="story-progress">
+                                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
+                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
+                                </div>
+                                <div class="story-header-row">
+                                    <div class="header-left">
+                                        <img class="story-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%23e4405f'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EK%3C/text%3E%3C/svg%3E">
+                                        <div>
+                                            <div class="story-username">
+                                                <span id="pubUsernameLabel">thekachoo</span>
+                                                <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
+                                            </div>
+                                            <div class="story-time" id="pubTimeLabel">Baru saja</div>
+                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Close friends</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="header-right-social">
+                                        <button class="follow-btn-story" id="pubFollowAction">Follow</button>
+                                        <i class="fas fa-ellipsis-h three-dots"></i>
+                                    </div>
+                                </div>
+                                <div class="send-message-bar">
+                                    <div class="send-message-pill">
+                                        <input class="send-message-input" id="pubMessageInput" placeholder="Send message...">
+                                    </div>
+                                    <div class="story-action-icons">
+                                        <div class="story-icon-btn" id="pubLikeBtn">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="story-icon-btn">
+                                            <svg viewBox="0 0 24 24">
+                                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="download-group">
+                            <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span id="downloadTextPub">Unduh</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-section footer-brand">
-            <h3>CHODATE</h3>
-            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
-            <div class="social-links">
-                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-brand">
+                <h3>CHODATE</h3>
+                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <div class="social-links">
+                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#">The Kachoo</a></li>
+                    <li><a href="#">Kafkapages</a></li>
+                    <li><a href="#">Kaboom</a></li>
+                    <li><a href="#">Kazine</a></li>
+                    <li><a href="#">Kadio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Chobank</a></li>
+                    <li><a href="#">Chonnect</a></li>
+                    <li><a href="#">Chosong</a></li>
+                    <li><a href="#">Chodate</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meet Us</h3>
+                <ul class="footer-links">
+                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+                </ul>
             </div>
         </div>
-        <div class="footer-section">
-            <h3>Explore</h3>
-            <ul class="footer-links">
-                <li><a href="#">The Kachoo</a></li>
-                <li><a href="#">Kafkapages</a></li>
-                <li><a href="#">Kaboom</a></li>
-                <li><a href="#">Kazine</a></li>
-                <li><a href="#">Kadio</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
         </div>
-        <div class="footer-section">
-            <h3>More</h3>
-            <ul class="footer-links">
-                <li><a href="#">Chobank</a></li>
-                <li><a href="#">Chonnect</a></li>
-                <li><a href="#">Chosong</a></li>
-                <li><a href="#">Chodate</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Meet Us</h3>
-            <ul class="footer-links">
-                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
-                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-            </ul>
+    </footer>
+
+    <div class="crop-modal" id="cropModal">
+        <div class="crop-container"><img id="cropImage"></div>
+        <div class="crop-modal-buttons">
+            <button class="crop-modal-btn cancel" id="cancelCrop">Batal</button>
+            <button class="crop-modal-btn save" id="saveCrop">Simpan</button>
         </div>
     </div>
-    <div class="footer-bottom">
-        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
-    </div>
-</footer>
+    <div class="toast-msg" id="toastMsg"></div>
 
-<div class="crop-modal" id="cropModal">
-    <div class="crop-container"><img id="cropImage"></div>
-    <div class="crop-modal-buttons">
-        <button class="crop-modal-btn cancel" id="cancelCrop">Batal</button>
-        <button class="crop-modal-btn save" id="saveCrop">Simpan</button>
-    </div>
-</div>
-<div class="toast-msg" id="toastMsg"></div>
+    <script>
+        let activeCropper = null;
+        let myBgUrl = null,
+            pubBgUrl = null,
+            myAvatarUrl = null,
+            pubAvatarUrl = null;
+        let myCfActive = false,
+            pubCfActive = false,
+            pubVerified = false,
+            pubFollowActive = false,
+            pubLiked = false;
+        let currentMyLang = 'id',
+            currentPubLang = 'id';
+        let myOuterBg = '#000000',
+            pubOuterBg = '#000000';
+        let myTextTheme = 'white',
+            pubTextTheme = 'white';
 
-<script>
-    let activeCropper = null;
-    let myBgUrl = null, pubBgUrl = null, myAvatarUrl = null, pubAvatarUrl = null;
-    let myCfActive = false, pubCfActive = false, pubVerified = false, pubFollowActive = false, pubLiked = false;
-    let currentMyLang = 'id', currentPubLang = 'id';
-    let myOuterBg = '#000000', pubOuterBg = '#000000';
-    let myTextTheme = 'white', pubTextTheme = 'white';
-
-    // ========== TRANSLATIONS ==========
-    const translations = {
-        id: {
-            backToMode: "Kembali ke Mode",
-            myProfile: "Profil Saya",
-            avatarLabel: "Foto Profil",
-            uploadAvatar: "Upload Avatar (1:1)",
-            timeLabel: "Waktu Tayang",
-            justNow: "Baru saja",
-            custom: "Kustom",
-            customTimePlaceholder: "Isi waktu...",
-            storyLabel: "Gambar Story",
-            uploadStoryBg: "Upload latar story (9:16)",
-            outerBgLabel: "Background Luar",
-            outerColorLabel: "Warna Luar Frame",
-            closeFriends: "Teman Dekat",
-            yourStory: "Story Anda",
-            activity: "Aktivitas",
-            boost: "Promosi",
-            highlight: "Sorotan",
-            mention: "Mention",
-            more: "Lainnya",
-            download: "Unduh",
-            closeFriendsBadge: "Teman Dekat",
-            profileLabelPub: "Profil & Interaksi",
-            avatarLabelPub: "Foto Profil",
-            uploadAvatarPub: "Upload avatar",
-            usernameLabel: "Username",
-            verifiedText: "Akun Terverifikasi",
-            timeLabelPub: "Waktu Tayang",
-            storyLabelPub: "Gambar Story",
-            outerLabelPub: "Background Luar",
-            outerColorLabelPub: "Warna Luar Frame",
-            cfTextPub: "Teman Dekat",
-            followText: "Ikuti / Mengikuti",
-            sendMessagePlaceholder: "Kirim pesan...",
-            follow: "Ikuti",
-            following: "Mengikuti"
-        },
-        en: {
-            backToMode: "Back to Mode",
-            myProfile: "My Profile",
-            avatarLabel: "Profile Photo",
-            uploadAvatar: "Upload Avatar (1:1)",
-            timeLabel: "Time Posted",
-            justNow: "Just now",
-            custom: "Custom",
-            customTimePlaceholder: "Enter time...",
-            storyLabel: "Story Image",
-            uploadStoryBg: "Upload story background (9:16)",
-            outerBgLabel: "Outer Background",
-            outerColorLabel: "Outer Frame Color",
-            closeFriends: "Close Friends",
-            yourStory: "Your Story",
-            activity: "Activity",
-            boost: "Boost",
-            highlight: "Highlight",
-            mention: "Mention",
-            more: "More",
-            download: "Download",
-            closeFriendsBadge: "Close Friends",
-            profileLabelPub: "Profile & Interaction",
-            avatarLabelPub: "Profile Photo",
-            uploadAvatarPub: "Upload avatar",
-            usernameLabel: "Username",
-            verifiedText: "Verified Account",
-            timeLabelPub: "Time Posted",
-            storyLabelPub: "Story Image",
-            outerLabelPub: "Outer Background",
-            outerColorLabelPub: "Outer Frame Color",
-            cfTextPub: "Close Friends",
-            followText: "Follow / Following",
-            sendMessagePlaceholder: "Send message...",
-            follow: "Follow",
-            following: "Following"
-        }
-    };
-
-    function applyLanguage(lang, isMyView) {
-        const t = translations[lang];
-        if (!t) return;
-        
-        if (isMyView) {
-            document.getElementById('backToModeText') && (document.getElementById('backToModeText').innerText = t.backToMode);
-            document.getElementById('myProfileLabel') && (document.getElementById('myProfileLabel').innerText = t.myProfile);
-            document.getElementById('avatarLabel') && (document.getElementById('avatarLabel').innerText = t.avatarLabel);
-            document.getElementById('myAvatarLabel') && (document.getElementById('myAvatarLabel').innerText = t.uploadAvatar);
-            document.getElementById('timeLabel') && (document.getElementById('timeLabel').innerText = t.timeLabel);
-            document.getElementById('justNowOption') && (document.getElementById('justNowOption').innerText = t.justNow);
-            document.getElementById('customOption') && (document.getElementById('customOption').innerText = t.custom);
-            document.getElementById('storyLabel') && (document.getElementById('storyLabel').innerText = t.storyLabel);
-            document.getElementById('myBgLabel') && (document.getElementById('myBgLabel').innerText = t.uploadStoryBg);
-            document.getElementById('outerBgLabel') && (document.getElementById('outerBgLabel').innerText = t.outerBgLabel);
-            document.getElementById('outerColorLabel') && (document.getElementById('outerColorLabel').innerText = t.outerColorLabel);
-            document.getElementById('closeFriendsText') && (document.getElementById('closeFriendsText').innerText = t.closeFriends);
-            document.getElementById('yourStoryText') && (document.getElementById('yourStoryText').innerText = t.yourStory);
-            document.getElementById('activityText') && (document.getElementById('activityText').innerText = t.activity);
-            document.getElementById('boostText') && (document.getElementById('boostText').innerText = t.boost);
-            document.getElementById('highlightText') && (document.getElementById('highlightText').innerText = t.highlight);
-            document.getElementById('mentionText') && (document.getElementById('mentionText').innerText = t.mention);
-            document.getElementById('moreText') && (document.getElementById('moreText').innerText = t.more);
-            document.getElementById('downloadText') && (document.getElementById('downloadText').innerText = t.download);
-            document.getElementById('closeFriendsBadgeText') && (document.getElementById('closeFriendsBadgeText').innerText = t.closeFriendsBadge);
-            
-            let timeVal = document.getElementById('myTimeSelect').value;
-            if (timeVal === 'Just now') {
-                document.getElementById('myViewTime').innerText = t.justNow;
+        // ========== TRANSLATIONS ==========
+        const translations = {
+            id: {
+                backToMode: "Kembali ke Mode",
+                myProfile: "Profil Saya",
+                avatarLabel: "Foto Profil",
+                uploadAvatar: "Upload Avatar (1:1)",
+                timeLabel: "Waktu Tayang",
+                justNow: "Baru saja",
+                custom: "Kustom",
+                customTimePlaceholder: "Isi waktu...",
+                storyLabel: "Gambar Story",
+                uploadStoryBg: "Upload latar story (9:16)",
+                outerBgLabel: "Background Luar",
+                outerColorLabel: "Warna Luar Frame",
+                closeFriends: "Teman Dekat",
+                yourStory: "Story Anda",
+                activity: "Aktivitas",
+                boost: "Promosi",
+                highlight: "Sorotan",
+                mention: "Mention",
+                more: "Lainnya",
+                download: "Unduh",
+                closeFriendsBadge: "Teman Dekat",
+                profileLabelPub: "Profil & Interaksi",
+                avatarLabelPub: "Foto Profil",
+                uploadAvatarPub: "Upload avatar",
+                usernameLabel: "Username",
+                verifiedText: "Akun Terverifikasi",
+                timeLabelPub: "Waktu Tayang",
+                storyLabelPub: "Gambar Story",
+                outerLabelPub: "Background Luar",
+                outerColorLabelPub: "Warna Luar Frame",
+                cfTextPub: "Teman Dekat",
+                followText: "Ikuti / Mengikuti",
+                sendMessagePlaceholder: "Kirim pesan...",
+                follow: "Ikuti",
+                following: "Mengikuti"
+            },
+            en: {
+                backToMode: "Back to Mode",
+                myProfile: "My Profile",
+                avatarLabel: "Profile Photo",
+                uploadAvatar: "Upload Avatar (1:1)",
+                timeLabel: "Time Posted",
+                justNow: "Just now",
+                custom: "Custom",
+                customTimePlaceholder: "Enter time...",
+                storyLabel: "Story Image",
+                uploadStoryBg: "Upload story background (9:16)",
+                outerBgLabel: "Outer Background",
+                outerColorLabel: "Outer Frame Color",
+                closeFriends: "Close Friends",
+                yourStory: "Your Story",
+                activity: "Activity",
+                boost: "Boost",
+                highlight: "Highlight",
+                mention: "Mention",
+                more: "More",
+                download: "Download",
+                closeFriendsBadge: "Close Friends",
+                profileLabelPub: "Profile & Interaction",
+                avatarLabelPub: "Profile Photo",
+                uploadAvatarPub: "Upload avatar",
+                usernameLabel: "Username",
+                verifiedText: "Verified Account",
+                timeLabelPub: "Time Posted",
+                storyLabelPub: "Story Image",
+                outerLabelPub: "Outer Background",
+                outerColorLabelPub: "Outer Frame Color",
+                cfTextPub: "Close Friends",
+                followText: "Follow / Following",
+                sendMessagePlaceholder: "Send message...",
+                follow: "Follow",
+                following: "Following"
             }
-        } else {
-            document.getElementById('backToModeTextPub') && (document.getElementById('backToModeTextPub').innerText = t.backToMode);
-            document.getElementById('profileLabelPub') && (document.getElementById('profileLabelPub').innerText = t.profileLabelPub);
-            document.getElementById('avatarLabelPub') && (document.getElementById('avatarLabelPub').innerText = t.avatarLabelPub);
-            document.getElementById('pubAvatarLabel') && (document.getElementById('pubAvatarLabel').innerText = t.uploadAvatarPub);
-            document.getElementById('usernameLabel') && (document.getElementById('usernameLabel').innerText = t.usernameLabel);
-            document.getElementById('verifiedText') && (document.getElementById('verifiedText').innerText = t.verifiedText);
-            document.getElementById('timeLabelPub') && (document.getElementById('timeLabelPub').innerText = t.timeLabelPub);
-            document.getElementById('justNowOptionPub') && (document.getElementById('justNowOptionPub').innerText = t.justNow);
-            document.getElementById('customOptionPub') && (document.getElementById('customOptionPub').innerText = t.custom);
-            document.getElementById('storyLabelPub') && (document.getElementById('storyLabelPub').innerText = t.storyLabelPub);
-            document.getElementById('pubBgLabel') && (document.getElementById('pubBgLabel').innerText = t.uploadStoryBg);
-            document.getElementById('outerLabelPub') && (document.getElementById('outerLabelPub').innerText = t.outerBgLabel);
-            document.getElementById('outerColorLabelPub') && (document.getElementById('outerColorLabelPub').innerText = t.outerColorLabel);
-            document.getElementById('cfTextPub') && (document.getElementById('cfTextPub').innerText = t.closeFriends);
-            document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
-            document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
-            document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
-            document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').setAttribute('placeholder', t.sendMessagePlaceholder));
-            
-            if (pubFollowActive) {
-                document.getElementById('pubFollowAction').innerText = t.following;
+        };
+
+        function applyLanguage(lang, isMyView) {
+            const t = translations[lang];
+            if (!t) return;
+
+            if (isMyView) {
+                document.getElementById('backToModeText') && (document.getElementById('backToModeText').innerText = t.backToMode);
+                document.getElementById('myProfileLabel') && (document.getElementById('myProfileLabel').innerText = t.myProfile);
+                document.getElementById('avatarLabel') && (document.getElementById('avatarLabel').innerText = t.avatarLabel);
+                document.getElementById('myAvatarLabel') && (document.getElementById('myAvatarLabel').innerText = t.uploadAvatar);
+                document.getElementById('timeLabel') && (document.getElementById('timeLabel').innerText = t.timeLabel);
+                document.getElementById('justNowOption') && (document.getElementById('justNowOption').innerText = t.justNow);
+                document.getElementById('customOption') && (document.getElementById('customOption').innerText = t.custom);
+                document.getElementById('storyLabel') && (document.getElementById('storyLabel').innerText = t.storyLabel);
+                document.getElementById('myBgLabel') && (document.getElementById('myBgLabel').innerText = t.uploadStoryBg);
+                document.getElementById('outerBgLabel') && (document.getElementById('outerBgLabel').innerText = t.outerBgLabel);
+                document.getElementById('outerColorLabel') && (document.getElementById('outerColorLabel').innerText = t.outerColorLabel);
+                document.getElementById('closeFriendsText') && (document.getElementById('closeFriendsText').innerText = t.closeFriends);
+                document.getElementById('yourStoryText') && (document.getElementById('yourStoryText').innerText = t.yourStory);
+                document.getElementById('activityText') && (document.getElementById('activityText').innerText = t.activity);
+                document.getElementById('boostText') && (document.getElementById('boostText').innerText = t.boost);
+                document.getElementById('highlightText') && (document.getElementById('highlightText').innerText = t.highlight);
+                document.getElementById('mentionText') && (document.getElementById('mentionText').innerText = t.mention);
+                document.getElementById('moreText') && (document.getElementById('moreText').innerText = t.more);
+                document.getElementById('downloadText') && (document.getElementById('downloadText').innerText = t.download);
+                document.getElementById('closeFriendsBadgeText') && (document.getElementById('closeFriendsBadgeText').innerText = t.closeFriendsBadge);
+
+                let timeVal = document.getElementById('myTimeSelect').value;
+                if (timeVal === 'Just now') {
+                    document.getElementById('myViewTime').innerText = t.justNow;
+                }
             } else {
-                document.getElementById('pubFollowAction').innerText = t.follow;
+                document.getElementById('backToModeTextPub') && (document.getElementById('backToModeTextPub').innerText = t.backToMode);
+                document.getElementById('profileLabelPub') && (document.getElementById('profileLabelPub').innerText = t.profileLabelPub);
+                document.getElementById('avatarLabelPub') && (document.getElementById('avatarLabelPub').innerText = t.avatarLabelPub);
+                document.getElementById('pubAvatarLabel') && (document.getElementById('pubAvatarLabel').innerText = t.uploadAvatarPub);
+                document.getElementById('usernameLabel') && (document.getElementById('usernameLabel').innerText = t.usernameLabel);
+                document.getElementById('verifiedText') && (document.getElementById('verifiedText').innerText = t.verifiedText);
+                document.getElementById('timeLabelPub') && (document.getElementById('timeLabelPub').innerText = t.timeLabelPub);
+                document.getElementById('justNowOptionPub') && (document.getElementById('justNowOptionPub').innerText = t.justNow);
+                document.getElementById('customOptionPub') && (document.getElementById('customOptionPub').innerText = t.custom);
+                document.getElementById('storyLabelPub') && (document.getElementById('storyLabelPub').innerText = t.storyLabelPub);
+                document.getElementById('pubBgLabel') && (document.getElementById('pubBgLabel').innerText = t.uploadStoryBg);
+                document.getElementById('outerLabelPub') && (document.getElementById('outerLabelPub').innerText = t.outerBgLabel);
+                document.getElementById('outerColorLabelPub') && (document.getElementById('outerColorLabelPub').innerText = t.outerColorLabel);
+                document.getElementById('cfTextPub') && (document.getElementById('cfTextPub').innerText = t.closeFriends);
+                document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
+                document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
+                document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
+                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').setAttribute('placeholder', t.sendMessagePlaceholder));
+
+                if (pubFollowActive) {
+                    document.getElementById('pubFollowAction').innerText = t.following;
+                } else {
+                    document.getElementById('pubFollowAction').innerText = t.follow;
+                }
+
+                let timeVal = document.getElementById('pubTimeSelect').value;
+                if (timeVal === 'Just now') {
+                    document.getElementById('pubTimeLabel').innerText = t.justNow;
+                }
             }
-            
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toastMsg');
+            t.innerText = msg;
+            t.style.opacity = '1';
+            setTimeout(() => t.style.opacity = '0', 2000);
+        }
+
+        function cropImageRatio(file, ratio) {
+            return new Promise(resolve => {
+                const modal = document.getElementById('cropModal');
+                const img = document.getElementById('cropImage');
+                img.src = URL.createObjectURL(file);
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    if (activeCropper) activeCropper.destroy();
+                    activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1, autoCropArea: 1 });
+                }, 100);
+                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none'; if (activeCropper) { activeCropper
+                            .destroy();
+                        activeCropper = null; } resolve(null); };
+                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas()
+                            .toBlob(blob => { const url = URL.createObjectURL(blob);
+                            modal.style.display = 'none';
+                            activeCropper.destroy();
+                            activeCropper = null;
+                            resolve(url); }, 'image/png'); } };
+            });
+        }
+
+        function applyTextTheme(cardEl, theme) {
+            const color = theme === 'white' ? '#fff' : '#000';
+            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style
+                .color = color);
+            const followBtn = cardEl.querySelector('.follow-btn-story');
+            if (followBtn) followBtn.style.color = color;
+            const msgInput = cardEl.querySelector('.send-message-input');
+            if (msgInput) msgInput.style.color = color;
+            const threeDots = cardEl.querySelector('.three-dots');
+            if (threeDots) threeDots.style.color = color;
+        }
+
+        function updateMyView() {
+            let timeVal = document.getElementById('myTimeSelect').value;
+            if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
+            const t = translations[currentMyLang];
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
+            'Baru saja'));
+            document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
+            if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
+            document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
+            if (myAvatarUrl) document.getElementById('myViewAvatar').src = myAvatarUrl;
+            const card = document.getElementById('myViewStoryCard');
+            card.style.backgroundImage = myBgUrl ? `url(${myBgUrl})` : 'none';
+            card.style.backgroundColor = myBgUrl ? 'transparent' : '#111';
+            if (myBgUrl) { card.style.backgroundSize = 'cover';
+                card.style.backgroundPosition = 'center'; }
+            document.getElementById('myOuterFrame').style.backgroundColor = myOuterBg;
+            applyTextTheme(card, myTextTheme);
+        }
+
+        function updatePublicView() {
+            const uname = document.getElementById('pubUsername').value.trim() || 'thekachoo';
+            document.getElementById('pubUsernameLabel').innerText = uname;
+            document.getElementById('pubVerifiedIcon').style.display = pubVerified ? 'inline' : 'none';
             let timeVal = document.getElementById('pubTimeSelect').value;
-            if (timeVal === 'Just now') {
-                document.getElementById('pubTimeLabel').innerText = t.justNow;
+            if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
+            const t = translations[currentPubLang];
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
+            'Baru saja'));
+            document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
+            if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
+            document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
+            const followBtn = document.getElementById('pubFollowAction');
+            if (t) {
+                followBtn.innerText = pubFollowActive ? t.following : t.follow;
+            } else {
+                followBtn.innerText = pubFollowActive ? 'Following' : 'Follow';
+            }
+            followBtn.classList.toggle('following', pubFollowActive);
+            const likeBtn = document.getElementById('pubLikeBtn');
+            likeBtn.classList.toggle('liked', pubLiked);
+            if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
+            const card = document.getElementById('publicStoryCard');
+            card.style.backgroundImage = pubBgUrl ? `url(${pubBgUrl})` : 'none';
+            card.style.backgroundColor = pubBgUrl ? 'transparent' : '#111';
+            if (pubBgUrl) { card.style.backgroundSize = 'cover';
+                card.style.backgroundPosition = 'center'; }
+            document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
+            applyTextTheme(card, pubTextTheme);
+        }
+
+        // Theme hanya white
+        myTextTheme = 'white';
+        pubTextTheme = 'white';
+
+        // ========== DRAGGABLE TEXT ==========
+        function makeDraggable(el, container) {
+            let isDragging = false;
+            let startX, startY, startLeft, startTop;
+
+            function onStart(e) {
+                if (e.target.closest('.text-actions button')) return;
+
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                isDragging = true;
+                el.classList.add('dragging');
+                el.classList.add('selected-text');
+
+                const rect = container.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+
+                startX = touch.clientX - rect.left;
+                startY = touch.clientY - rect.top;
+
+                const leftPx = (parseFloat(el.style.left) / 100) * rect.width;
+                const topPx = (parseFloat(el.style.top) / 100) * rect.height;
+                startLeft = leftPx || 0;
+                startTop = topPx || 0;
+            }
+
+            function onMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                const rect = container.getBoundingClientRect();
+
+                let deltaX = (touch.clientX - rect.left) - startX;
+                let deltaY = (touch.clientY - rect.top) - startY;
+
+                let newLeftPx = startLeft + deltaX;
+                let newTopPx = startTop + deltaY;
+
+                const elW = el.offsetWidth;
+                const elH = el.offsetHeight;
+                newLeftPx = Math.max(0, Math.min(rect.width - elW, newLeftPx));
+                newTopPx = Math.max(0, Math.min(rect.height - elH, newTopPx));
+
+                const leftPercent = (newLeftPx / rect.width) * 100;
+                const topPercent = (newTopPx / rect.height) * 100;
+
+                el.style.left = leftPercent + '%';
+                el.style.top = topPercent + '%';
+            }
+
+            function onEnd(e) {
+                if (isDragging) {
+                    isDragging = false;
+                    el.classList.remove('dragging');
+                }
+            }
+
+            el.addEventListener('mousedown', onStart);
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+
+            el.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onEnd);
+        }
+
+        function addDraggableText(container, text, color, size, font, x, y) {
+            const el = document.createElement('div');
+            el.className = 'draggable-text';
+            el.textContent = text;
+            el.style.color = color || '#ffffff';
+            el.style.fontSize = (size || 24) + 'px';
+            el.style.fontFamily = font || "'Outfit', sans-serif";
+            el.style.left = (x || 20) + '%';
+            el.style.top = (y || 20) + '%';
+
+            const actions = document.createElement('div');
+            actions.className = 'text-actions';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.title = 'Hapus teks';
+
+            function deleteHandler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                el.remove();
+                showToast('Teks dihapus');
+            }
+
+            deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
+            deleteBtn.addEventListener('click', deleteHandler);
+
+            actions.appendChild(deleteBtn);
+            el.appendChild(actions);
+
+            container.appendChild(el);
+            makeDraggable(el, container);
+
+            el.addEventListener('click', function(e) {
+                if (e.target.closest('.text-actions button')) return;
+                document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
+                this.classList.add('selected-text');
+            });
+
+            return el;
+        }
+
+        // ========== INIT DRAGGABLE TEXT FOR SELF VIEW ==========
+        let myTextContainer = document.getElementById('myViewStoryCard');
+        let myTexts = [];
+
+        document.getElementById('myAddTextBtn').addEventListener('click', function() {
+            const text = document.getElementById('myTextInput').value || 'Teks';
+            const color = document.getElementById('myTextColor').value;
+            const size = parseInt(document.getElementById('myTextSize').value);
+            const font = document.getElementById('myTextFont').value;
+            const x = 15 + Math.random() * 50;
+            const y = 15 + Math.random() * 50;
+            const el = addDraggableText(myTextContainer, text, color, size, font, x, y);
+            myTexts.push(el);
+            showToast('Teks ditambahkan!');
+        });
+
+        document.getElementById('myTextSize').addEventListener('input', function() {
+            document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
+        });
+
+        // ========== INIT DRAGGABLE TEXT FOR PUBLIC VIEW ==========
+        let pubTextContainer = document.getElementById('publicStoryCard');
+        let pubTexts = [];
+
+        document.getElementById('pubAddTextBtn').addEventListener('click', function() {
+            const text = document.getElementById('pubTextInput').value || 'Teks';
+            const color = document.getElementById('pubTextColor').value;
+            const size = parseInt(document.getElementById('pubTextSize').value);
+            const font = document.getElementById('pubTextFont').value;
+            const x = 15 + Math.random() * 50;
+            const y = 15 + Math.random() * 50;
+            const el = addDraggableText(pubTextContainer, text, color, size, font, x, y);
+            pubTexts.push(el);
+            showToast('Teks ditambahkan!');
+        });
+
+        document.getElementById('pubTextSize').addEventListener('input', function() {
+            document.getElementById('pubTextSizeLabel').textContent = this.value + 'px';
+        });
+
+        // ========== DOWNLOAD ==========
+        async function downloadEl(el, name) {
+            try {
+                // Sembunyikan tombol X pada semua teks sebelum download
+                const allTexts = el.querySelectorAll('.draggable-text');
+                allTexts.forEach(t => t.classList.add('hide-actions'));
+
+                const c = await html2canvas(el, {
+                    scale: 2.5,
+                    backgroundColor: null,
+                    useCORS: true,
+                    logging: false,
+                    windowWidth: el.scrollWidth,
+                    windowHeight: el.scrollHeight
+                });
+
+                // Tampilkan kembali tombol X
+                allTexts.forEach(t => t.classList.remove('hide-actions'));
+
+                const a = document.createElement('a');
+                a.download = name;
+                a.href = c.toDataURL('image/png');
+                a.click();
+                showToast('Berhasil diunduh');
+            } catch (e) {
+                console.error(e);
+                // Tampilkan kembali tombol X jika terjadi error
+                const allTexts = el.querySelectorAll('.draggable-text');
+                allTexts.forEach(t => t.classList.remove('hide-actions'));
+                showToast('Gagal');
             }
         }
-    }
 
-    function showToast(msg) { 
-        const t = document.getElementById('toastMsg'); 
-        t.innerText = msg; 
-        t.style.opacity = '1'; 
-        setTimeout(() => t.style.opacity = '0', 2000); 
-    }
+        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'),
+            `selfstory_${Date.now()}.png`);
+        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'),
+            `socialstory_${Date.now()}.png`);
 
-    function cropImageRatio(file, ratio) {
-        return new Promise(resolve => {
-            const modal = document.getElementById('cropModal');
-            const img = document.getElementById('cropImage');
-            img.src = URL.createObjectURL(file);
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                if (activeCropper) activeCropper.destroy();
-                activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1, autoCropArea: 1 });
-            }, 100);
-            document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none'; if(activeCropper){activeCropper.destroy();activeCropper=null;} resolve(null); };
-            document.getElementById('saveCrop').onclick = () => { if(activeCropper){ activeCropper.getCroppedCanvas().toBlob(blob => { const url=URL.createObjectURL(blob); modal.style.display='none'; activeCropper.destroy(); activeCropper=null; resolve(url); }, 'image/png'); } };
+        // ========== EXISTING FUNCTIONS ==========
+        // Avatar & Background uploads
+        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload')
+            .click());
+        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 1); if (u) { myAvatarUrl = u;
+                updateMyView(); } } });
+        document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
+        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { myBgUrl = u;
+                updateMyView(); } } });
+        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload')
+            .click());
+        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 1); if (u) { pubAvatarUrl = u;
+                updatePublicView(); } } });
+        document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
+        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { pubBgUrl = u;
+                updatePublicView(); } } });
+
+        // Time selects
+        document.getElementById('myTimeSelect').addEventListener('change', function() {
+            document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updateMyView();
         });
-    }
+        document.getElementById('myCustomTime').addEventListener('input', updateMyView);
+        document.getElementById('pubTimeSelect').addEventListener('change', function() {
+            document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updatePublicView();
+        });
+        document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
 
-    function applyTextTheme(cardEl, theme) {
-        const color = theme === 'white' ? '#fff' : '#000';
-        cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style.color = color);
-        const followBtn = cardEl.querySelector('.follow-btn-story');
-        if (followBtn) followBtn.style.color = color;
-        const msgInput = cardEl.querySelector('.send-message-input');
-        if (msgInput) msgInput.style.color = color;
-        const threeDots = cardEl.querySelector('.three-dots');
-        if (threeDots) threeDots.style.color = color;
-    }
+        // Toggles
+        document.getElementById('myCfSlider').addEventListener('click', () => { myCfActive = !myCfActive;
+            document.getElementById('myCfSlider').classList.toggle('active');
+            updateMyView(); });
+        document.getElementById('pubVerifiedSlider').addEventListener('click', () => { pubVerified = !pubVerified;
+            document.getElementById('pubVerifiedSlider').classList.toggle('active');
+            updatePublicView(); });
+        document.getElementById('pubCfSlider').addEventListener('click', () => { pubCfActive = !pubCfActive;
+            document.getElementById('pubCfSlider').classList.toggle('active');
+            updatePublicView(); });
+        document.getElementById('toggleFollowControl').addEventListener('click', () => { pubFollowActive = !pubFollowActive;
+            document.getElementById('followToggleSlider').classList.toggle('active');
+            updatePublicView(); });
+        document.getElementById('pubLikeBtn').addEventListener('click', () => { pubLiked = !pubLiked;
+            updatePublicView(); });
+        document.getElementById('pubUsername').addEventListener('input', updatePublicView);
 
-    function updateMyView() {
-        let timeVal = document.getElementById('myTimeSelect').value;
-        if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
-        const t = translations[currentMyLang];
-        const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-        document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
-        if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
-        document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
-        if (myAvatarUrl) document.getElementById('myViewAvatar').src = myAvatarUrl;
-        const card = document.getElementById('myViewStoryCard');
-        card.style.backgroundImage = myBgUrl ? `url(${myBgUrl})` : 'none';
-        card.style.backgroundColor = myBgUrl ? 'transparent' : '#111';
-        if (myBgUrl) { card.style.backgroundSize = 'cover'; card.style.backgroundPosition = 'center'; }
-        document.getElementById('myOuterFrame').style.backgroundColor = myOuterBg;
-        applyTextTheme(card, myTextTheme);
-    }
+        // Outer background
+        document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg = e.target.value;
+            updateMyView(); });
+        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el
+                .getAttribute('data-outer');
+            myOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
+            updateMyView(); }));
+        document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg = e.target.value;
+            updatePublicView(); });
+        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el
+                .getAttribute('data-outer-pub');
+            pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
+            updatePublicView(); }));
 
-    function updatePublicView() {
-        const uname = document.getElementById('pubUsername').value.trim() || 'thekachoo';
-        document.getElementById('pubUsernameLabel').innerText = uname;
-        document.getElementById('pubVerifiedIcon').style.display = pubVerified ? 'inline' : 'none';
-        let timeVal = document.getElementById('pubTimeSelect').value;
-        if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
-        const t = translations[currentPubLang];
-        const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-        document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
-        if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
-        document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
-        const followBtn = document.getElementById('pubFollowAction');
-        if (t) {
-            followBtn.innerText = pubFollowActive ? t.following : t.follow;
-        } else {
-            followBtn.innerText = pubFollowActive ? 'Following' : 'Follow';
-        }
-        followBtn.classList.toggle('following', pubFollowActive);
-        const likeBtn = document.getElementById('pubLikeBtn');
-        likeBtn.classList.toggle('liked', pubLiked);
-        if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
-        const card = document.getElementById('publicStoryCard');
-        card.style.backgroundImage = pubBgUrl ? `url(${pubBgUrl})` : 'none';
-        card.style.backgroundColor = pubBgUrl ? 'transparent' : '#111';
-        if (pubBgUrl) { card.style.backgroundSize = 'cover'; card.style.backgroundPosition = 'center'; }
-        document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
-        applyTextTheme(card, pubTextTheme);
-    }
-
-    // Theme hanya white
-    myTextTheme = 'white';
-    pubTextTheme = 'white';
-
-    // ========== DRAGGABLE TEXT ==========
-    function makeDraggable(el, container) {
-        let isDragging = false;
-        let startX, startY, startLeft, startTop;
-
-        function onStart(e) {
-            // Cek apakah yang diklik adalah tombol hapus
-            if (e.target.closest('.text-actions button')) return;
-            
-            e.preventDefault();
-            const touch = e.touches ? e.touches[0] : e;
-            isDragging = true;
-            el.classList.add('dragging');
-            el.classList.add('selected-text');
-
-            const rect = container.getBoundingClientRect();
-            const elRect = el.getBoundingClientRect();
-
-            startX = touch.clientX - rect.left;
-            startY = touch.clientY - rect.top;
-
-            const leftPx = (parseFloat(el.style.left) / 100) * rect.width;
-            const topPx = (parseFloat(el.style.top) / 100) * rect.height;
-            startLeft = leftPx || 0;
-            startTop = topPx || 0;
-        }
-
-        function onMove(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            const touch = e.touches ? e.touches[0] : e;
-            const rect = container.getBoundingClientRect();
-
-            let deltaX = (touch.clientX - rect.left) - startX;
-            let deltaY = (touch.clientY - rect.top) - startY;
-
-            let newLeftPx = startLeft + deltaX;
-            let newTopPx = startTop + deltaY;
-
-            const elW = el.offsetWidth;
-            const elH = el.offsetHeight;
-            newLeftPx = Math.max(0, Math.min(rect.width - elW, newLeftPx));
-            newTopPx = Math.max(0, Math.min(rect.height - elH, newTopPx));
-
-            const leftPercent = (newLeftPx / rect.width) * 100;
-            const topPercent = (newTopPx / rect.height) * 100;
-
-            el.style.left = leftPercent + '%';
-            el.style.top = topPercent + '%';
-        }
-
-        function onEnd(e) {
-            if (isDragging) {
-                isDragging = false;
-                el.classList.remove('dragging');
+        // Mode selection
+        window.resetToModeSelection = function() {
+            document.getElementById('modeSelection').style.display = 'flex';
+            document.getElementById('studioMyView').classList.remove('active-view');
+            document.getElementById('studioPublicView').classList.remove('active-view');
+            document.getElementById('studioMyView').style.display = 'none';
+            document.getElementById('studioPublicView').style.display = 'none';
+        };
+        document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
+            const mode = card.getAttribute('data-mode');
+            document.getElementById('modeSelection').style.display = 'none';
+            if (mode === 'myview') {
+                document.getElementById('studioMyView').style.display = 'block';
+                document.getElementById('studioMyView').classList.add('active-view');
+                updateMyView();
+            } else {
+                document.getElementById('studioPublicView').style.display = 'block';
+                document.getElementById('studioPublicView').classList.add('active-view');
+                updatePublicView();
             }
-        }
+        }));
 
-        el.addEventListener('mousedown', onStart);
-        document.addEventListener('mousemove', onMove);
-        document.addEventListener('mouseup', onEnd);
-
-        el.addEventListener('touchstart', onStart, { passive: false });
-        document.addEventListener('touchmove', onMove, { passive: false });
-        document.addEventListener('touchend', onEnd);
-    }
-
-    function addDraggableText(container, text, color, size, font, x, y) {
-        const el = document.createElement('div');
-        el.className = 'draggable-text';
-        el.textContent = text;
-        el.style.color = color || '#ffffff';
-        el.style.fontSize = (size || 24) + 'px';
-        el.style.fontFamily = font || "'Outfit', sans-serif";
-        el.style.left = (x || 20) + '%';
-        el.style.top = (y || 20) + '%';
-        
-        // Tombol hapus (X) - support touch + click
-        const actions = document.createElement('div');
-        actions.className = 'text-actions';
-        
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = '✕';
-        deleteBtn.title = 'Hapus teks';
-        
-        // Handler hapus
-        function deleteHandler(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            el.remove();
-            showToast('Teks dihapus');
-        }
-        
-        deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
-        deleteBtn.addEventListener('click', deleteHandler);
-        
-        actions.appendChild(deleteBtn);
-        el.appendChild(actions);
-        
-        container.appendChild(el);
-        makeDraggable(el, container);
-        
-        // Click untuk select
-        el.addEventListener('click', function(e) {
-            if (e.target.closest('.text-actions button')) return;
-            document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
-            this.classList.add('selected-text');
+        // Language buttons for Self View
+        document.getElementById('btnIndonesiaMy').addEventListener('click', () => {
+            currentMyLang = 'id';
+            document.getElementById('btnIndonesiaMy').classList.add('active');
+            document.getElementById('btnInggrisMy').classList.remove('active');
+            applyLanguage('id', true);
+            updateMyView();
         });
-        
-        return el;
-    }
+        document.getElementById('btnInggrisMy').addEventListener('click', () => {
+            currentMyLang = 'en';
+            document.getElementById('btnInggrisMy').classList.add('active');
+            document.getElementById('btnIndonesiaMy').classList.remove('active');
+            applyLanguage('en', true);
+            updateMyView();
+        });
 
-    // ========== INIT DRAGGABLE TEXT FOR SELF VIEW ==========
-    let myTextContainer = document.getElementById('myViewStoryCard');
-    let myTexts = [];
+        // Language buttons for Social View
+        document.getElementById('btnIndonesiaPub').addEventListener('click', () => {
+            currentPubLang = 'id';
+            document.getElementById('btnIndonesiaPub').classList.add('active');
+            document.getElementById('btnInggrisPub').classList.remove('active');
+            applyLanguage('id', false);
+            updatePublicView();
+        });
+        document.getElementById('btnInggrisPub').addEventListener('click', () => {
+            currentPubLang = 'en';
+            document.getElementById('btnInggrisPub').classList.add('active');
+            document.getElementById('btnIndonesiaPub').classList.remove('active');
+            applyLanguage('en', false);
+            updatePublicView();
+        });
 
-    document.getElementById('myAddTextBtn').addEventListener('click', function() {
-        const text = document.getElementById('myTextInput').value || 'Teks';
-        const color = document.getElementById('myTextColor').value;
-        const size = parseInt(document.getElementById('myTextSize').value);
-        const font = document.getElementById('myTextFont').value;
-        const x = 15 + Math.random() * 50;
-        const y = 15 + Math.random() * 50;
-        const el = addDraggableText(myTextContainer, text, color, size, font, x, y);
-        myTexts.push(el);
-        showToast('Teks ditambahkan!');
-    });
-
-    document.getElementById('myTextSize').addEventListener('input', function() {
-        document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
-    });
-
-    // ========== INIT DRAGGABLE TEXT FOR PUBLIC VIEW ==========
-    let pubTextContainer = document.getElementById('publicStoryCard');
-    let pubTexts = [];
-
-    document.getElementById('pubAddTextBtn').addEventListener('click', function() {
-        const text = document.getElementById('pubTextInput').value || 'Teks';
-        const color = document.getElementById('pubTextColor').value;
-        const size = parseInt(document.getElementById('pubTextSize').value);
-        const font = document.getElementById('pubTextFont').value;
-        const x = 15 + Math.random() * 50;
-        const y = 15 + Math.random() * 50;
-        const el = addDraggableText(pubTextContainer, text, color, size, font, x, y);
-        pubTexts.push(el);
-        showToast('Teks ditambahkan!');
-    });
-
-    document.getElementById('pubTextSize').addEventListener('input', function() {
-        document.getElementById('pubTextSizeLabel').textContent = this.value + 'px';
-    });
-
-    // ========== EXISTING FUNCTIONS ==========
-    // Avatar & Background uploads
-    document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
-    document.getElementById('myAvatarUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],1); if(u){myAvatarUrl=u; updateMyView();} } });
-    document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
-    document.getElementById('myBgUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],9/16); if(u){myBgUrl=u; updateMyView();} } });
-    document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload').click());
-    document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],1); if(u){pubAvatarUrl=u; updatePublicView();} } });
-    document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
-    document.getElementById('pubBgUpload').addEventListener('change', async e => { if(e.target.files[0]){ const u=await cropImageRatio(e.target.files[0],9/16); if(u){pubBgUrl=u; updatePublicView();} } });
-
-    // Time selects
-    document.getElementById('myTimeSelect').addEventListener('change', function(){ document.getElementById('myCustomTime').style.display=this.value==='Custom'?'block':'none'; updateMyView(); });
-    document.getElementById('myCustomTime').addEventListener('input', updateMyView);
-    document.getElementById('pubTimeSelect').addEventListener('change', function(){ document.getElementById('pubCustomTime').style.display=this.value==='Custom'?'block':'none'; updatePublicView(); });
-    document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
-
-    // Toggles
-    document.getElementById('myCfSlider').addEventListener('click', () => { myCfActive=!myCfActive; document.getElementById('myCfSlider').classList.toggle('active'); updateMyView(); });
-    document.getElementById('pubVerifiedSlider').addEventListener('click', () => { pubVerified=!pubVerified; document.getElementById('pubVerifiedSlider').classList.toggle('active'); updatePublicView(); });
-    document.getElementById('pubCfSlider').addEventListener('click', () => { pubCfActive=!pubCfActive; document.getElementById('pubCfSlider').classList.toggle('active'); updatePublicView(); });
-    document.getElementById('toggleFollowControl').addEventListener('click', () => { pubFollowActive=!pubFollowActive; document.getElementById('followToggleSlider').classList.toggle('active'); updatePublicView(); });
-    document.getElementById('pubLikeBtn').addEventListener('click', () => { pubLiked=!pubLiked; updatePublicView(); });
-    document.getElementById('pubUsername').addEventListener('input', updatePublicView);
-
-    // Outer background
-    document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg=e.target.value; updateMyView(); });
-    document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer'); myOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updateMyView(); }));
-    document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg=e.target.value; updatePublicView(); });
-    document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v=el.getAttribute('data-outer-pub'); pubOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updatePublicView(); }));
-
-    // Download
-    async function downloadEl(el, name) { 
-        try { 
-            const c = await html2canvas(el, {
-                scale: 2.5,
-                backgroundColor: null,
-                useCORS: true,
-                logging: false,
-                windowWidth: el.scrollWidth,
-                windowHeight: el.scrollHeight
-            }); 
-            const a = document.createElement('a'); 
-            a.download = name; 
-            a.href = c.toDataURL('image/png'); 
-            a.click(); 
-            showToast('Berhasil diunduh'); 
-        } catch(e){ 
-            console.error(e);
-            showToast('Gagal'); 
-        } 
-    }
-    document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
-    document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
-
-    // Mode selection
-    window.resetToModeSelection = function(){ document.getElementById('modeSelection').style.display='flex'; document.getElementById('studioMyView').classList.remove('active-view'); document.getElementById('studioPublicView').classList.remove('active-view'); document.getElementById('studioMyView').style.display='none'; document.getElementById('studioPublicView').style.display='none'; };
-    document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
-        const mode = card.getAttribute('data-mode');
-        document.getElementById('modeSelection').style.display = 'none';
-        if (mode === 'myview') { 
-            document.getElementById('studioMyView').style.display='block'; 
-            document.getElementById('studioMyView').classList.add('active-view'); 
-            updateMyView(); 
-        } else { 
-            document.getElementById('studioPublicView').style.display='block'; 
-            document.getElementById('studioPublicView').classList.add('active-view'); 
-            updatePublicView(); 
+        // Navigation
+        const deskTrigger = document.getElementById('desktopNavTrigger');
+        const deskDrop = document.getElementById('desktopNavDropdown');
+        if (deskTrigger) {
+            deskTrigger.addEventListener('click', e => { e.stopPropagation();
+                deskDrop.classList.toggle('active'); });
+            document.addEventListener('click', () => deskDrop.classList.remove('active'));
         }
-    }));
+        const mobBtn = document.getElementById('mobileMenuBtn'),
+            mobMenu = document.getElementById('mobileMenu'),
+            mobOverlay = document.getElementById('mobileMenuOverlay'),
+            mobClose = document.getElementById(
+            'mobileMenuClose');
+        if (mobBtn) {
+            mobBtn.onclick = () => { mobMenu.classList.add('active');
+                mobOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; };
+        }
+        const closeMob = () => { mobMenu.classList.remove('active');
+            mobOverlay.classList.remove('active');
+            document.body.style.overflow = ''; };
+        if (mobClose) mobClose.onclick = closeMob;
+        if (mobOverlay) mobOverlay.onclick = closeMob;
 
-    // Language buttons for Self View
-    document.getElementById('btnIndonesiaMy').addEventListener('click', () => {
-        currentMyLang = 'id';
-        document.getElementById('btnIndonesiaMy').classList.add('active');
-        document.getElementById('btnInggrisMy').classList.remove('active');
+        // Initial updates
+        updateMyView();
+        updatePublicView();
         applyLanguage('id', true);
-        updateMyView();
-    });
-    document.getElementById('btnInggrisMy').addEventListener('click', () => {
-        currentMyLang = 'en';
-        document.getElementById('btnInggrisMy').classList.add('active');
-        document.getElementById('btnIndonesiaMy').classList.remove('active');
-        applyLanguage('en', true);
-        updateMyView();
-    });
-
-    // Language buttons for Social View
-    document.getElementById('btnIndonesiaPub').addEventListener('click', () => {
-        currentPubLang = 'id';
-        document.getElementById('btnIndonesiaPub').classList.add('active');
-        document.getElementById('btnInggrisPub').classList.remove('active');
         applyLanguage('id', false);
-        updatePublicView();
-    });
-    document.getElementById('btnInggrisPub').addEventListener('click', () => {
-        currentPubLang = 'en';
-        document.getElementById('btnInggrisPub').classList.add('active');
-        document.getElementById('btnIndonesiaPub').classList.remove('active');
-        applyLanguage('en', false);
-        updatePublicView();
-    });
-
-    // Navigation
-    const deskTrigger = document.getElementById('desktopNavTrigger');
-    const deskDrop = document.getElementById('desktopNavDropdown');
-    if (deskTrigger) {
-        deskTrigger.addEventListener('click', e => { e.stopPropagation(); deskDrop.classList.toggle('active'); });
-        document.addEventListener('click', () => deskDrop.classList.remove('active'));
-    }
-    const mobBtn = document.getElementById('mobileMenuBtn'), mobMenu = document.getElementById('mobileMenu'), mobOverlay = document.getElementById('mobileMenuOverlay'), mobClose = document.getElementById('mobileMenuClose');
-    if (mobBtn) {
-        mobBtn.onclick = () => { mobMenu.classList.add('active'); mobOverlay.classList.add('active'); document.body.style.overflow='hidden'; };
-    }
-    const closeMob = () => { mobMenu.classList.remove('active'); mobOverlay.classList.remove('active'); document.body.style.overflow=''; };
-    if (mobClose) mobClose.onclick = closeMob;
-    if (mobOverlay) mobOverlay.onclick = closeMob;
-
-    // Initial updates
-    updateMyView();
-    updatePublicView();
-    applyLanguage('id', true);
-    applyLanguage('id', false);
-</script>
+    </script>
 </body>
-</html>
+    </html>
