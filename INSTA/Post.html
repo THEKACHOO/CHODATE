@@ -153,9 +153,9 @@
         .media-container { width: 100%; background: #efefef; display: flex; justify-content: center; align-items: center; }
         .media-container img { width: 100%; height: auto; display: block; }
 
-        .action-buttons { padding: 6px 11px 4px; display: flex; gap: 14px; align-items: center; }
-        .action-icons { display: flex; gap: 14px; align-items: center; }
-        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .action-buttons { padding: 8px 13px 4px; display: flex; gap: 14px; align-items: center; }
+        .action-icons { padding: 10px 11 px 4px; /*increased top padding */; display: flex; gap: 14px; align-items: center; }
+        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; transform: translateY(4px); /*lowers icons */}
         .action-icon svg { width: 100%; height: 100%; }
         .action-icon img { width: 100%; height: 100%; object-fit: contain; }
         /* Ukuran icon comment, repost, share diperbesar */
@@ -167,10 +167,10 @@
         }
         .save-icon { margin-left: auto; }
 
-        .like-count { font-weight: 600; font-size: 13px; padding: 2px 13px 5px; color: #262626; }
+        .like-count { font-weight: 600; font-size: 13px; padding: 3px 13px 2px; color: #262626; }
         /* FIX 4: caption block only in v1 — JS handles display */
-        .caption-text { padding: 0 13px 7px; font-size: 13px; line-height: 1.4; }
-        .caption-username { font-weight: 700; margin-right: 4px; }
+        .caption-text { padding: 0 13px 4px; font-size: 13px; line-height: 1.2; }
+        .caption-username { font-weight: 700; margin-right: 2px; }
         .timestamp { padding: 0 13px 11px; font-size: 10px; color: #8e8e8e; }
         .post-footer-spacer { height: 6px; }
 
