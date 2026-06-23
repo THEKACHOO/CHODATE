@@ -85,9 +85,9 @@
             .logo-img { height: 28px; }
         }
 
-        /* DESKTOP: Menu icon (three dots) - visible only on desktop, hides the old nav buttons */
+        /* DESKTOP: Menu icon (three dots) */
         .desktop-menu-icon {
-            display: none; /* hidden by default, shown only on desktop via media query */
+            display: none;
             background: #f0f0f0;
             border: 1px solid #ddd;
             width: 44px;
@@ -108,7 +108,6 @@
             transform: translateY(-2px);
         }
 
-        /* Desktop dropdown menu (hidden by default, appears on icon click) */
         .desktop-dropdown {
             position: fixed;
             top: 70px;
@@ -123,7 +122,6 @@
             visibility: hidden;
             transform: translateY(-12px);
             transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            backdrop-filter: blur(0);
         }
         .desktop-dropdown.active {
             opacity: 1;
@@ -163,7 +161,6 @@
             display: block;
         }
 
-        /* old desktop-nav hidden on desktop (replaced by icon menu) */
         .desktop-nav {
             display: flex;
             gap: 10px;
@@ -200,7 +197,6 @@
             border-color: #000;
         }
 
-        /* Desktop view: hide original nav buttons, show the three-dots icon */
         @media (min-width: 781px) {
             .desktop-nav {
                 display: none !important;
@@ -215,11 +211,11 @@
                 display: none !important;
             }
             .desktop-nav {
-                display: none; /* already hidden by mobile rule, but keep */
+                display: none;
             }
         }
 
-        /* Mobile Menu (unchanged) */
+        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: #f0f0f0;
@@ -326,192 +322,30 @@
             .choose-title h1 { font-size: 1.8rem; }
         }
 
-        /* ========== DISCLAIMER CONTAINER - STYLE MODERN ========== */
-        .disclaimer-container {
-            max-width: 900px;
-            margin: 40px auto 0;
-            padding: 24px 28px;
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-            backdrop-filter: blur(2px);
+        /* ========== INSTACHO CONTAINER ========== */
+        .instacho-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
 
-        .disclaimer-container h4 {
+        .instacho-title {
             text-align: center;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #000000;
-            margin-bottom: 12px;
+            margin-bottom: 24px;
         }
 
-        .disclaimer-container p {
-            font-size: 0.85rem;
-            line-height: 1.55;
-            color: #000000;
-            margin: 0;
+        .instacho-title img {
+            max-width: 200px;
+            height: auto;
+            display: inline-block;
         }
 
-        @media (max-width: 640px) {
-            .disclaimer-container {
-                margin: 30px 16px 0;
-                padding: 18px 20px;
-            }
-            .disclaimer-container p {
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* ========== SLIDE CONTAINER (HORIZONTAL SCROLL) - UPDATED: desktop arrow icons ========== */
-        .slider-outer {
-            position: relative;
-            margin-bottom: 28px;
-        }
-        .slide-container {
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            cursor: grab;
-            white-space: nowrap;
-            border-radius: 28px;
-            background: white;
-            border: 1px solid #eaeaea;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-        }
-        
-        .slide-container:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 32px -12px rgba(0,0,0,0.12);
-        }
-        
-        .slide-container:active {
-            cursor: grabbing;
-        }
-        
-        .slide-wrapper {
-            display: inline-flex;
-            gap: 25px;
-            padding: 0px;
-            white-space: normal;
-        }
-        
-        .slide-item {
-            scroll-snap-align: start;
-            flex-shrink: 0;
-            width: 380px;
-            background: white;
-            border: 1px solid #eaeaea;
-            border-radius: 28px;
-            padding: 30px;
-            transition: all 0.2s ease;
-        }
-        
-        @media (max-width: 860px) {
-            .slide-item { width: 360px; padding: 20px; }
-            .slide-wrapper { gap: 16px; padding: 20px; }
-        }
-        
-        @media (max-width: 550px) {
-            .slide-item { width: 280px; padding: 16px; }
-            .slide-wrapper { gap: 12px; padding: 16px; }
-        }
-        
-        .slide-container::-webkit-scrollbar {
-            height: 4px;
-        }
-        .slide-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        .slide-container::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
-        .slide-container::-webkit-scrollbar-thumb:hover {
-            background: #999;
-        }
-        
-        /* DESKTOP navigation arrows - samar (subtle) icons ONLY on desktop, hidden on mobile */
-        .slider-nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 42px;
-            height: 42px;
-            background: rgba(255,255,255,0.65);
-            backdrop-filter: blur(2px);
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #1a1a1a;
-            font-size: 1.6rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.08);
-            z-index: 12;
-            opacity: 0.1;
-        }
-        .slider-nav-arrow:hover {
-            opacity: 0.2;
-            background: rgba(0,0,0,0.75);
-            color: white;
-            transform: translateY(-50%) scale(1.03);
-        }
-        .slider-nav-left {
-            left: 0px;
-        }
-        .slider-nav-right {
-            right: 0px;
-        }
-        /* On mobile, hide arrow icons */
-        @media (max-width: 780px) {
-            .slider-nav-arrow {
-                display: none !important;
-            }
-        }
-        
-        .slide-item-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            margin-bottom: 20px;
-            color: #000;
-            text-align: center;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-            background: linear-gradient(135deg, #000 0%, #333 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            transition: all 0.3s;
-        }
-        
-        /* ========== APP GRID ========== */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-        
-        .app-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-        
         .instacho-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 16px;
         }
-        
+
         .app-card {
             aspect-ratio: 1 / 1;
             background: #fafafa;
@@ -559,7 +393,7 @@
         }
         
         .app-card-icon {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             position: relative;
             z-index: 1;
             transition: transform 0.2s ease, color 0.2s;
@@ -569,7 +403,7 @@
         }
         
         .app-card-name {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 700;
             position: relative;
             z-index: 1;
@@ -593,18 +427,44 @@
                 transform: translateY(0);
             }
         }
-        
-        .app-card, .nav-btn, .social-link, .mobile-menu-link {
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+
+        /* ========== DISCLAIMER CONTAINER ========== */
+        .disclaimer-container {
+            max-width: 900px;
+            margin: 40px auto 0;
+            padding: 24px 28px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
         }
-        
-        .social-link i {
-            transition: transform 0.2s;
+
+        .disclaimer-container h4 {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            margin-bottom: 12px;
         }
-        .social-link:hover i {
-            transform: scale(1.2);
+
+        .disclaimer-container p {
+            font-size: 0.85rem;
+            line-height: 1.55;
+            color: #000000;
+            margin: 0;
         }
-        
+
+        @media (max-width: 640px) {
+            .disclaimer-container {
+                margin: 30px 16px 0;
+                padding: 18px 20px;
+            }
+            .disclaimer-container p {
+                font-size: 0.75rem;
+            }
+        }
+
         /* ===== FOOTER ===== */
         footer {
             background: #000;
@@ -704,15 +564,6 @@
         body { overflow-x: hidden; }
         img, svg { max-width: 100%; }
         
-        @keyframes gentleGlow {
-            0% { opacity: 0.95; background-position: 0% 50%; }
-            100% { opacity: 1; background-position: 100% 50%; }
-        }
-        .slide-item-title {
-            background-size: 120% auto;
-            animation: gentleGlow 4s infinite alternate;
-        }
-        
         html {
             scroll-behavior: smooth;
         }
@@ -726,14 +577,15 @@
                 <img src="Chodate.png" alt="Chodate Logo" class="logo-img" onerror="this.src='https://placehold.co/100x36?text=CHODATE'">
             </div>
             <div class="center-logo-text">CHODATE</div>
-            <!-- original desktop nav now hidden via CSS on desktop, preserved but not visible -->
             <div class="desktop-nav">
                 <a href="https://thekachoo.github.io/Home" class="nav-btn nav-kachoo">The Kachoo</a>
-                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">Instacho Post</button>
-                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">Instacho Story</button>
-                <button class="nav-btn" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">Instacho Profile</button>
+                <a href="https://thekachoo.github.io/Home/kafkapages.html" class="nav-btn">Kafkapages</a>
+                <a href="https://thekachoo.github.io/KAZINE/COLLECTION.html" class="nav-btn">Kazine</a>
+                <a href="https://thekachoo.github.io/KABOOM/" class="nav-btn">Kaboom</a>
+                <a href="https://thekachoo.github.io/CHOBANK/" class="nav-btn">Chobank</a>
+                <a href="https://thekachoo.github.io/CHONNECT/" class="nav-btn">Chonnect</a>
+                <a href="https://thekachoo.github.io/CHOSONG/" class="nav-btn">Chosong</a>
             </div>
-            <!-- DESKTOP: three dots icon menu -->
             <button class="desktop-menu-icon" id="desktopMenuIcon">
                 <i class="fas fa-ellipsis-v"></i>
             </button>
@@ -743,13 +595,15 @@
         </div>
     </header>
 
-    <!-- Desktop dropdown overlay & menu -->
     <div class="desktop-dropdown-overlay" id="desktopOverlay"></div>
     <div class="desktop-dropdown" id="desktopDropdown">
         <a href="https://thekachoo.github.io/Home" class="dropdown-item"><i class="fas fa-home"></i> The Kachoo</a>
-        <button class="dropdown-item" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'"><i class="fas fa-camera"></i> Instacho Post</button>
-        <button class="dropdown-item" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'"><i class="fas fa-play-circle"></i> Instacho Story</button>
-        <button class="dropdown-item" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'"><i class="fas fa-user-circle"></i> Instacho Profile</button>
+        <a href="https://thekachoo.github.io/Home/kafkapages.html" class="dropdown-item"><i class="fas fa-book"></i> Kafkapages</a>
+        <a href="https://thekachoo.github.io/KAZINE/COLLECTION.html" class="dropdown-item"><i class="fas fa-magazine"></i> Kazine</a>
+        <a href="https://thekachoo.github.io/KABOOM/" class="dropdown-item"><i class="fas fa-bolt"></i> Kaboom</a>
+        <a href="https://thekachoo.github.io/CHOBANK/" class="dropdown-item"><i class="fas fa-university"></i> Chobank</a>
+        <a href="https://thekachoo.github.io/CHONNECT/" class="dropdown-item"><i class="fas fa-link"></i> Chonnect</a>
+        <a href="https://thekachoo.github.io/CHOSONG/" class="dropdown-item"><i class="fas fa-music"></i> Chosong</a>
     </div>
 
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
@@ -758,10 +612,13 @@
             <i class="fas fa-times"></i>
         </button>
         <div>
-            <a href="https://thekachoo.github.io/Home" class="mobile-menu-link" onclick="closeMobileMenuFunc()">The Kachoo</a>
-            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">Instacho Post</button>
-            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">Instacho Story</button>
-            <button class="mobile-menu-link" onclick="closeMobileMenuFunc();location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">Instacho Profile</button>
+            <a href="https://thekachoo.github.io/Home" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-home"></i> The Kachoo</a>
+            <a href="https://thekachoo.github.io/Home/kafkapages.html" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-book"></i> Kafkapages</a>
+            <a href="https://thekachoo.github.io/KAZINE/COLLECTION.html" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-magazine"></i> Kazine</a>
+            <a href="https://thekachoo.github.io/KABOOM/" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-bolt"></i> Kaboom</a>
+            <a href="https://thekachoo.github.io/CHOBANK/" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-university"></i> Chobank</a>
+            <a href="https://thekachoo.github.io/CHONNECT/" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-link"></i> Chonnect</a>
+            <a href="https://thekachoo.github.io/CHOSONG/" class="mobile-menu-link" onclick="closeMobileMenuFunc()"><i class="fas fa-music"></i> Chosong</a>
         </div>
     </div>
 
@@ -773,41 +630,29 @@
                 <h1>Choose your needs!</h1>
             </div>
             
-            <!-- Slider outer wrapper with arrow icons (DESKTOP only) -->
-            <div class="slider-outer">
-                <div class="slide-container" id="slideContainer">
-                    <div class="slide-wrapper">
-                        <!-- INSTACHO slide -->
-                        <div class="slide-item">
-                            <div class="slide-item-title">INSTACHO</div>
-                            <div class="instacho-grid">
-                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'"><div class="app-card-icon"><i class="fas fa-user-circle"></i></div><div class="app-card-name">Profile</div></div>
-                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'"><div class="app-card-icon"><i class="fas fa-camera"></i></div><div class="app-card-name">Post</div></div>
-                                <div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div><div class="app-card-name">Live</div></div>
-                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'"><div class="app-card-icon"><i class="fas fa-play-circle"></i></div><div class="app-card-name">Story</div></div>
-                            </div>
-                        </div>
-                        <!-- YOUCHO -->
-                        <div class="slide-item">
-                            <div class="slide-item-title">YOUCHO</div>
-                            <div class="app-grid"><div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/YOUCHO/Feed.html'"><div class="app-card-icon"><i class="fas fa-house"></i></div><div class="app-card-name">Home</div></div>
-                            <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/YOUCHO/Media.html'"><div class="app-card-icon"><i class="fas fa-video"></i></div><div class="app-card-name">Media</div></div></div>
-                        </div>
-                        <!-- CHATCHO -->
-                        <div class="slide-item">
-                            <div class="slide-item-title">CHATCHO</div>
-                            <div class="app-grid-4"><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-phone"></i></div><div class="app-card-name">Call</div></div><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-comment-dots"></i></div><div class="app-card-name">Chat</div></div><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-video"></i></div><div class="app-card-name">Video Call</div></div><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-bell"></i></div><div class="app-card-name">Notification</div></div></div>
-                        </div>
-                        <!-- TWICHO -->
-                        <div class="slide-item">
-                            <div class="slide-item-title">TWICHO</div>
-                            <div class="app-grid"><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fab fa-twitter"></i></div><div class="app-card-name">Profile</div></div><div class="app-card" onclick="location.href='#'"><div class="app-card-icon"><i class="fas fa-pen"></i></div><div class="app-card-name">Post</div></div></div>
-                        </div>
+            <div class="instacho-container">
+                <div class="instacho-title">
+                    <img src="Instacho2.1.png" alt="Instacho" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                    <span style="display:none;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#000 0%,#333 100%);background-clip:text;-webkit-background-clip:text;color:transparent;">INSTACHO</span>
+                </div>
+                <div class="instacho-grid">
+                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">
+                        <div class="app-card-icon"><i class="fas fa-user-circle"></i></div>
+                        <div class="app-card-name">Profile</div>
+                    </div>
+                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">
+                        <div class="app-card-icon"><i class="fas fa-camera"></i></div>
+                        <div class="app-card-name">Post</div>
+                    </div>
+                    <div class="app-card" onclick="location.href='#'">
+                        <div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div>
+                        <div class="app-card-name">Live</div>
+                    </div>
+                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">
+                        <div class="app-card-icon"><i class="fas fa-play-circle"></i></div>
+                        <div class="app-card-name">Story</div>
                     </div>
                 </div>
-                <!-- Desktop arrow icons: samar -->
-                <div class="slider-nav-arrow slider-nav-left" id="sliderLeftArrow"><i class="fas fa-chevron-left"></i></div>
-                <div class="slider-nav-arrow slider-nav-right" id="sliderRightArrow"><i class="fas fa-chevron-right"></i></div>
             </div>
             
             <div class="disclaimer-container">
@@ -828,7 +673,7 @@
     </footer>
 
     <script>
-        // Mobile menu logic (unchanged)
+        // Mobile menu logic
         const mobileBtn = document.getElementById('mobileMenuBtn');
         const mobileMenuDiv = document.getElementById('mobileMenu');
         const overlayMenu = document.getElementById('mobileMenuOverlay');
@@ -841,7 +686,7 @@
         if (overlayMenu) overlayMenu.addEventListener('click', closeMobileMenuFunc);
         window.closeMobileMenuFunc = closeMobileMenuFunc;
 
-        // DESKTOP icon menu logic (three dots)
+        // DESKTOP icon menu logic
         const desktopIcon = document.getElementById('desktopMenuIcon');
         const desktopDropdown = document.getElementById('desktopDropdown');
         const desktopOverlay = document.getElementById('desktopOverlay');
@@ -855,30 +700,11 @@
         const logoEl = document.querySelector('.logo-img');
         if(logoEl) logoEl.onerror = function() { this.src = 'https://placehold.co/100x36?text=CHODATE'; };
         
-        // Slider arrow navigation (DESKTOP ONLY: adds left/right icons with subtle style)
-        const sliderContainer = document.getElementById('slideContainer');
-        const leftArrow = document.getElementById('sliderLeftArrow');
-        const rightArrow = document.getElementById('sliderRightArrow');
-        if(sliderContainer && leftArrow && rightArrow) {
-            leftArrow.addEventListener('click', () => { sliderContainer.scrollBy({ left: -360, behavior: 'smooth' }); });
-            rightArrow.addEventListener('click', () => { sliderContainer.scrollBy({ left: 360, behavior: 'smooth' }); });
-        }
-        
-        // Mouse drag (grab) for slider remains intact
-        let isDown = false; let startX; let scrollLeft;
-        if(sliderContainer) {
-            sliderContainer.addEventListener('mousedown', (e) => { isDown = true; sliderContainer.style.cursor = 'grabbing'; startX = e.pageX - sliderContainer.offsetLeft; scrollLeft = sliderContainer.scrollLeft; });
-            sliderContainer.addEventListener('mouseleave', () => { isDown = false; sliderContainer.style.cursor = 'grab'; });
-            sliderContainer.addEventListener('mouseup', () => { isDown = false; sliderContainer.style.cursor = 'grab'; });
-            sliderContainer.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - sliderContainer.offsetLeft; const walk = (x - startX) * 1.5; sliderContainer.scrollLeft = scrollLeft - walk; });
-            sliderContainer.style.cursor = 'grab';
-        }
-        
-        // Card hover micro-interactions (optional)
+        // Card hover micro-interactions
         document.querySelectorAll('.app-card').forEach(card => {
             card.addEventListener('mouseenter', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1.08)'; });
             card.addEventListener('mouseleave', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1)'; });
         });
     </script>
 </body>
-</html>
+    </html>
