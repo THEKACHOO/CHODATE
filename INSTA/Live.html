@@ -136,29 +136,10 @@
             overflow: hidden;
         }
 
-        /* ===== PROGRESS BAR STATIS ===== */
-        .progress-bar-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            z-index: 15;
-            background: rgba(255,255,255,0.15);
-        }
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #8b5cf6, #ec4899);
-            border-radius: 0 2px 2px 0;
-        }
-
         /* ===== TOP BAR ===== */
         .live-top-bar {
             position: absolute;
-            top: 6px;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             padding: 12px 14px 8px;
             display: flex;
             justify-content: space-between;
@@ -463,11 +444,6 @@
             <div class="story-card-wrapper">
                 <div id="pubOuterFrame" class="story-outer">
                     <div class="other-story-card" id="publicStoryCard">
-                        <!-- PROGRESS BAR STATIS -->
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" id="progressFill" style="width: 35%;"></div>
-                        </div>
-
                         <!-- Top Bar -->
                         <div class="live-top-bar">
                             <div class="live-user-row">
@@ -712,4 +688,4 @@
     if(mobOverlay){ mobOverlay.addEventListener('click', ()=>{ mobMenu.classList.remove('active'); mobOverlay.classList.remove('active'); document.body.style.overflow = ''; }); }
 </script>
 </body>
-    </html>
+                                                                                                                                                     </html>
