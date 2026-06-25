@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>INSTACHO | Background Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; overflow-x: hidden; }
+        body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label {
+            font-family: 'Arial', 'Outfit', sans-serif !important;
+        }
+        body { background-color: #f5f5f5; line-height: 1.6; }
+
+        /* ===== HEADER ===== */
+        header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .logo-container { display: flex; align-items: center; cursor: pointer; }
+        .logo-img { height: 38px; width: auto; }
+        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
+        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
+        @media (max-width: 640px) { .center-logo-img { height: 100px; } .logo-img { height: 30px; } }
+
+        .desktop-nav-container { position: relative; display: block; }
+        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
+        .desktop-nav-trigger { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 14px; color: white; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
+        .desktop-nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 200px; background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); }
+        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; transition: 0.2s; }
+        .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
+
+        .mobile-menu-btn { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; align-items: center; justify-content: center; }
+        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998; }
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            padding: 96px 24px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .main-content { padding: 82px 16px 40px; }
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 36px;
+            color: #111;
+            letter-spacing: -0.5px;
+        }
+        @media (max-width: 640px) {
+            .page-title { font-size: 28px; margin-bottom: 22px; }
+        }
+
+        .editor-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 36px;
+        }
+        @media (max-width: 900px) {
+            .editor-wrapper { flex-wrap: wrap; gap: 20px; }
+        }
+
+        /* ===== PANEL KONTROL ===== */
+        .control-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 22px 20px;
+            width: 360px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 1px solid #e8e8e8;
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+        }
+        @media (max-width: 900px) {
+            .control-panel { width: 100%; max-width: 100%; max-height: none; overflow-y: visible; }
+        }
+
+        .control-group {
+            margin-bottom: 16px;
+        }
+        .control-group label {
+            font-weight: 600;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .bg-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .bg-btn {
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .bg-btn.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+        .color-picker-input {
+            width: 42px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .ratio-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .ratio-btn {
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .ratio-btn.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+
+        .file-input-label {
+            background: #f7f7f7;
+            text-align: center;
+            padding: 9px 12px;
+            border-radius: 12px;
+            margin-top: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid #e8e8e8;
+            transition: 0.2s;
+        }
+        .file-input-label:hover {
+            background: #efefef;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .slider-group label {
+            min-width: 80px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin: 0;
+        }
+        .slider-group input[type="range"] {
+            flex: 1;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 4px;
+            outline: none;
+            padding: 0;
+        }
+        .slider-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #111;
+            cursor: pointer;
+        }
+        .slider-value {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ===== PREVIEW FRAME ===== */
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 900px) {
+            .preview-container { width: 100%; }
+        }
+
+        .preview-outer {
+            padding: 24px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            background: radial-gradient(circle at 30% 20%, rgba(0,0,0,0.04), rgba(0,0,0,0.01));
+            transition: background 0.2s;
+        }
+
+        .frame-container {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-color: #efefef;
+        }
+
+        .frame-container .center-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: none;
+            display: block;
+        }
+
+        .frame-info {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+        .download-btn:hover {
+            background: #333;
+        }
+
+        /* ===== FOOTER ===== */
+        footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
+        }
+        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+        .footer-section h3 { font-size: 0.7rem; font-weight: 700; margin-bottom: 14px; color: white; text-transform: uppercase; letter-spacing: 1.2px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0px; }
+        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
+        .footer-links a:hover { color: white; }
+        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 200px; margin-bottom: 14px; line-height: 1.6; }
+        .social-links { display: flex; gap: 10px; }
+        .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 60px; color: white; text-decoration: none; font-size: 12px; transition: 0.2s; }
+        .social-link:hover { background: white; color: black; }
+        .footer-bottom { display: flex; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 13px;
+            z-index: 30000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="header-content">
+        <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+        </div>
+        <div class="center-title">
+            <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+        </div>
+        <div class="desktop-nav-container">
+            <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
+            <div class="desktop-nav-dropdown" id="desktopNavDropdown">
+                <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
+                <a href="Profile.html" class="nav-button">Instacho Profile</a>
+                <a href="Story.html" class="nav-button">Instacho Story</a>
+            </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+</header>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
+    <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+    <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+    <h1 class="page-title">Background Editor</h1>
+    <div class="editor-wrapper">
+
+        <!-- Panel Kontrol -->
+        <div class="control-panel">
+            <div class="control-group">
+                <label>Background</label>
+                <div class="bg-options">
+                    <button class="bg-btn active" data-bg="transparent">Transparan</button>
+                    <button class="bg-btn" data-bg="white">Putih</button>
+                    <button class="bg-btn" data-bg="black">Hitam</button>
+                    <input type="color" id="customColorPicker" class="color-picker-input" value="#f5f5f5">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Gambar Background</label>
+                <div class="file-input-label" id="uploadBgLabel">Upload gambar background</div>
+                <input type="file" id="bgUpload" accept="image/*" style="display:none;">
+            </div>
+
+            <div class="control-group">
+                <label>Rasio</label>
+                <div class="ratio-options" id="ratioOptions">
+                    <button class="ratio-btn active" data-ratio="1:1">1:1</button>
+                    <button class="ratio-btn" data-ratio="4:5">4:5</button>
+                    <button class="ratio-btn" data-ratio="16:9">16:9</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Foto Tengah (Wajib)</label>
+                <div class="file-input-label" id="uploadCenterLabel">Upload foto tengah</div>
+                <input type="file" id="centerUpload" accept="image/*" style="display:none;">
+            </div>
+
+            <div class="control-group">
+                <label>Zoom</label>
+                <div class="slider-group">
+                    <input type="range" id="zoomSlider" min="0.1" max="5" step="0.01" value="1">
+                    <span class="slider-value" id="zoomValue">1.0x</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Filter</label>
+                <div class="slider-group">
+                    <label>Brightness</label>
+                    <input type="range" id="brightnessSlider" min="0" max="3" step="0.01" value="1">
+                    <span class="slider-value" id="brightnessValue">1.0</span>
+                </div>
+                <div class="slider-group">
+                    <label>Saturation</label>
+                    <input type="range" id="saturationSlider" min="0" max="3" step="0.01" value="1">
+                    <span class="slider-value" id="saturationValue">1.0</span>
+                </div>
+                <div class="slider-group">
+                    <label>Contrast</label>
+                    <input type="range" id="contrastSlider" min="0" max="3" step="0.01" value="1">
+                    <span class="slider-value" id="contrastValue">1.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-container">
+            <div class="preview-outer" id="previewOuter">
+                <div class="frame-container" id="frameContainer">
+                    <img id="centerImage" class="center-image" src="https://placehold.co/400x400/EFEFEF/999999?text=Upload+Foto" alt="Foto Tengah">
+                </div>
+                <div class="frame-info" id="frameInfo">1:1 · 400×400</div>
+            </div>
+            <button class="download-btn" id="downloadBtn">Unduh HD</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section footer-brand">
+            <h3>CHODATE</h3>
+            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+            <div class="social-links">
+                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Explore</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                <li><a href="#">Kadio</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>More</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Meet Us</h3>
+            <ul class="footer-links">
+                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+    </div>
+</footer>
+
+<div class="toast-msg" id="toastMsg"></div>
+
+<script>
+    // ===== ELEMEN =====
+    const frameContainer = document.getElementById('frameContainer');
+    const centerImage = document.getElementById('centerImage');
+    const previewOuter = document.getElementById('previewOuter');
+    const frameInfo = document.getElementById('frameInfo');
+
+    const zoomSlider = document.getElementById('zoomSlider');
+    const brightnessSlider = document.getElementById('brightnessSlider');
+    const saturationSlider = document.getElementById('saturationSlider');
+    const contrastSlider = document.getElementById('contrastSlider');
+    const zoomValue = document.getElementById('zoomValue');
+    const brightnessValue = document.getElementById('brightnessValue');
+    const saturationValue = document.getElementById('saturationValue');
+    const contrastValue = document.getElementById('contrastValue');
+
+    let currentBg = 'transparent';
+    let currentRatio = '1:1';
+    let bgImageUrl = null;
+    let bgImageData = null;
+    let centerImageData = null;
+
+    // ===== FUNGSI UPDATE PREVIEW =====
+    function updateFrame() {
+        let width, height;
+        const baseSize = 400;
+        switch (currentRatio) {
+            case '1:1': width = baseSize; height = baseSize; break;
+            case '4:5': width = baseSize * 0.8; height = baseSize; break;
+            case '16:9': width = baseSize; height = baseSize * 0.5625; break;
+            default: width = baseSize; height = baseSize;
+        }
+        frameContainer.style.width = width + 'px';
+        frameContainer.style.height = height + 'px';
+        frameInfo.textContent = `${currentRatio} · ${Math.round(width)}×${Math.round(height)}`;
+
+        // Background preview-outer
+        if (currentBg === 'transparent') {
+            previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.04), rgba(0,0,0,0.01))';
+        } else if (currentBg === 'white') {
+            previewOuter.style.background = 'white';
+        } else if (currentBg === 'black') {
+            previewOuter.style.background = 'black';
+        } else {
+            previewOuter.style.background = currentBg;
+        }
+
+        // Background image di frame
+        if (bgImageUrl) {
+            frameContainer.style.backgroundImage = `url(${bgImageUrl})`;
+            frameContainer.style.backgroundSize = 'cover';
+            frameContainer.style.backgroundPosition = 'center';
+        } else {
+            frameContainer.style.backgroundImage = 'none';
+            frameContainer.style.backgroundColor = '#efefef';
+        }
+
+        // Zoom & Filter
+        const zoom = parseFloat(zoomSlider.value);
+        const brightness = parseFloat(brightnessSlider.value);
+        const saturasi = parseFloat(saturationSlider.value);
+        const kontras = parseFloat(contrastSlider.value);
+
+        centerImage.style.transform = `scale(${zoom})`;
+        centerImage.style.filter = `brightness(${brightness}) saturate(${saturasi}) contrast(${kontras})`;
+        centerImage.style.transformOrigin = 'center center';
+
+        zoomValue.textContent = zoom.toFixed(1) + 'x';
+        brightnessValue.textContent = brightness.toFixed(1);
+        saturationValue.textContent = saturasi.toFixed(1);
+        contrastValue.textContent = kontras.toFixed(1);
+    }
+
+    // ===== RENDER ULANG KE CANVAS (TANPA SCREENSHOT) =====
+    function renderToCanvas() {
+        return new Promise((resolve, reject) => {
+            // Ambil semua parameter
+            const zoom = parseFloat(zoomSlider.value);
+            const brightness = parseFloat(brightnessSlider.value);
+            const saturasi = parseFloat(saturationSlider.value);
+            const kontras = parseFloat(contrastSlider.value);
+
+            // Ukuran frame sesuai rasio (pakai base 1200px untuk HD)
+            let frameWidth, frameHeight;
+            const baseSize = 1200;
+            switch (currentRatio) {
+                case '1:1': frameWidth = baseSize; frameHeight = baseSize; break;
+                case '4:5': frameWidth = baseSize * 0.8; frameHeight = baseSize; break;
+                case '16:9': frameWidth = baseSize; frameHeight = baseSize * 0.5625; break;
+                default: frameWidth = baseSize; frameHeight = baseSize;
+            }
+
+            // Buat canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = frameWidth;
+            canvas.height = frameHeight;
+            const ctx = canvas.getContext('2d');
+
+            // 1. Gambar background
+            if (bgImageData) {
+                // Gambar background full cover
+                const bgImg = new Image();
+                bgImg.onload = function() {
+                    // Cover mode
+                    const imgRatio = bgImg.width / bgImg.height;
+                    const canvasRatio = canvas.width / canvas.height;
+                    let drawWidth, drawHeight, offsetX = 0, offsetY = 0;
+                    if (imgRatio > canvasRatio) {
+                        drawHeight = canvas.height;
+                        drawWidth = canvas.height * imgRatio;
+                        offsetX = (canvas.width - drawWidth) / 2;
+                    } else {
+                        drawWidth = canvas.width;
+                        drawHeight = canvas.width / imgRatio;
+                        offsetY = (canvas.height - drawHeight) / 2;
+                    }
+                    ctx.drawImage(bgImg, offsetX, offsetY, drawWidth, drawHeight);
+                    drawCenterImage();
+                };
+                bgImg.onerror = function() {
+                    // Jika gagal load, lanjut tanpa background
+                    drawCenterImage();
+                };
+                bgImg.src = bgImageData;
+            } else {
+                // Background warna solid
+                if (currentBg === 'transparent') {
+                    // Transparan
+                } else if (currentBg === 'white') {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else if (currentBg === 'black') {
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else {
+                    ctx.fillStyle = currentBg;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+                drawCenterImage();
+            }
+
+            function drawCenterImage() {
+                // 2. Gambar foto tengah
+                if (centerImageData) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Hitung ukuran maksimal (90% dari frame)
+                        const maxW = canvas.width * 0.9;
+                        const maxH = canvas.height * 0.9;
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxW) { h = h * (maxW / w); w = maxW; }
+                        if (h > maxH) { w = w * (maxH / h); h = maxH; }
+
+                        // Terapkan zoom
+                        w = w * zoom;
+                        h = h * zoom;
+
+                        // Posisi tengah
+                        const x = (canvas.width - w) / 2;
+                        const y = (canvas.height - h) / 2;
+
+                        // Apply filter via canvas
+                        ctx.save();
+                        ctx.filter = `brightness(${brightness}) saturate(${saturasi}) contrast(${kontras})`;
+                        ctx.drawImage(img, x, y, w, h);
+                        ctx.restore();
+
+                        resolve(canvas);
+                    };
+                    img.onerror = function() {
+                        reject(new Error('Gagal load gambar center'));
+                    };
+                    img.src = centerImageData;
+                } else {
+                    // Tidak ada foto tengah
+                    reject(new Error('Foto tengah belum diupload!'));
+                }
+            }
+        });
+    }
+
+    // ===== DOWNLOAD =====
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        if (!centerImageData) {
+            showToast('⚠️ Upload foto tengah dulu!');
+            return;
+        }
+
+        this.textContent = 'Memproses...';
+        this.disabled = true;
+
+        renderToCanvas()
+            .then(canvas => {
+                const link = document.createElement('a');
+                link.download = `background_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('Berhasil diunduh!');
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('❌ Gagal: ' + err.message);
+            })
+            .finally(() => {
+                document.getElementById('downloadBtn').textContent = 'Unduh HD';
+                document.getElementById('downloadBtn').disabled = false;
+            });
+    });
+
+    // ===== EVENT =====
+    zoomSlider.addEventListener('input', updateFrame);
+    brightnessSlider.addEventListener('input', updateFrame);
+    saturationSlider.addEventListener('input', updateFrame);
+    contrastSlider.addEventListener('input', updateFrame);
+
+    document.querySelectorAll('.bg-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentBg = this.getAttribute('data-bg');
+            updateFrame();
+        });
+    });
+
+    document.getElementById('customColorPicker').addEventListener('input', function(e) {
+        document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
+        currentBg = e.target.value;
+        updateFrame();
+    });
+
+    document.querySelectorAll('#ratioOptions .ratio-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('#ratioOptions .ratio-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentRatio = this.getAttribute('data-ratio');
+            updateFrame();
+        });
+    });
+
+    // Upload Background
+    document.getElementById('uploadBgLabel').addEventListener('click', () => {
+        document.getElementById('bgUpload').click();
+    });
+    document.getElementById('bgUpload').addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                bgImageData = ev.target.result;
+                bgImageUrl = ev.target.result;
+                updateFrame();
+                showToast('Background berhasil diupload!');
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // Upload Center Image
+    document.getElementById('uploadCenterLabel').addEventListener('click', () => {
+        document.getElementById('centerUpload').click();
+    });
+    document.getElementById('centerUpload').addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                centerImageData = ev.target.result;
+                centerImage.src = ev.target.result;
+                showToast('Foto tengah berhasil diupload!');
+                updateFrame();
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toastMsg');
+        t.innerText = msg;
+        t.style.opacity = '1';
+        clearTimeout(t._timeout);
+        t._timeout = setTimeout(() => { t.style.opacity = '0'; }, 2500);
+    }
+
+    // ===== MOBILE MENU =====
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileMenuOverlay');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    mobileOverlay.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    const trigger = document.getElementById('desktopNavTrigger');
+    const dropdown = document.getElementById('desktopNavDropdown');
+    trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', e => {
+        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+
+    // ===== INIT =====
+    updateFrame();
+</script>
+
+</body>
+    </html>
