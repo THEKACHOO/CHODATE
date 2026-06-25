@@ -6,9 +6,7 @@
     <title>INSTACHO | Background Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
-        /* ===== RESET ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { width: 100%; overflow-x: hidden; }
         body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label {
@@ -16,7 +14,7 @@
         }
         body { background-color: #f5f5f5; line-height: 1.6; }
 
-        /* ===== HEADER (TETAP DARI HTML ASLI) ===== */
+        /* ===== HEADER ===== */
         header {
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(16px);
@@ -56,7 +54,7 @@
         .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
         .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
 
-        /* ===== MAIN CONTENT (BARU UNTUK BACKGROUND EDITOR) ===== */
+        /* ===== MAIN CONTENT ===== */
         .main-content {
             padding: 96px 24px 60px;
             max-width: 1400px;
@@ -182,7 +180,6 @@
             background: #efefef;
         }
 
-        /* Slider styling */
         .slider-group {
             display: flex;
             align-items: center;
@@ -263,7 +260,8 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-            transition: transform 0.1s, filter 0.1s;
+            transition: none;
+            display: block;
         }
 
         .frame-info {
@@ -288,7 +286,7 @@
             background: #333;
         }
 
-        /* ===== FOOTER (TETAP DARI HTML ASLI) ===== */
+        /* ===== FOOTER ===== */
         footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
         .footer-grid {
             display: grid;
@@ -335,7 +333,7 @@
 </head>
 <body>
 
-<!-- ===== HEADER (TETAP DARI HTML ASLI) ===== -->
+<!-- ===== HEADER ===== -->
 <header>
     <div class="header-content">
         <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -363,14 +361,13 @@
     <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
 </div>
 
-<!-- ===== MAIN CONTENT (BARU) ===== -->
+<!-- ===== MAIN CONTENT ===== -->
 <div class="main-content">
     <h1 class="page-title">Background Editor</h1>
     <div class="editor-wrapper">
 
         <!-- Panel Kontrol -->
         <div class="control-panel">
-            <!-- Background -->
             <div class="control-group">
                 <label>Background</label>
                 <div class="bg-options">
@@ -381,14 +378,12 @@
                 </div>
             </div>
 
-            <!-- Background Image -->
             <div class="control-group">
                 <label>Gambar Background</label>
                 <div class="file-input-label" id="uploadBgLabel">Upload gambar background</div>
                 <input type="file" id="bgUpload" accept="image/*" style="display:none;">
             </div>
 
-            <!-- Rasio -->
             <div class="control-group">
                 <label>Rasio</label>
                 <div class="ratio-options" id="ratioOptions">
@@ -398,14 +393,12 @@
                 </div>
             </div>
 
-            <!-- Foto Tengah -->
             <div class="control-group">
                 <label>Foto Tengah (Wajib)</label>
                 <div class="file-input-label" id="uploadCenterLabel">Upload foto tengah</div>
                 <input type="file" id="centerUpload" accept="image/*" style="display:none;">
             </div>
 
-            <!-- Zoom -->
             <div class="control-group">
                 <label>Zoom</label>
                 <div class="slider-group">
@@ -414,7 +407,6 @@
                 </div>
             </div>
 
-            <!-- Filter -->
             <div class="control-group">
                 <label>Filter</label>
                 <div class="slider-group">
@@ -449,7 +441,7 @@
     </div>
 </div>
 
-<!-- ===== FOOTER (TETAP DARI HTML ASLI) ===== -->
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="footer-grid">
         <div class="footer-section footer-brand">
@@ -492,7 +484,6 @@
     </div>
 </footer>
 
-<!-- Toast -->
 <div class="toast-msg" id="toastMsg"></div>
 
 <script>
@@ -514,35 +505,24 @@
     let currentBg = 'transparent';
     let currentRatio = '1:1';
     let bgImageUrl = null;
-    let centerImageUrl = null;
+    let bgImageData = null;
+    let centerImageData = null;
 
-    // ===== FUNGSI UPDATE =====
+    // ===== FUNGSI UPDATE PREVIEW =====
     function updateFrame() {
-        // Update ukuran frame berdasarkan rasio
         let width, height;
         const baseSize = 400;
         switch (currentRatio) {
-            case '1:1':
-                width = baseSize;
-                height = baseSize;
-                break;
-            case '4:5':
-                width = baseSize * 0.8;
-                height = baseSize;
-                break;
-            case '16:9':
-                width = baseSize;
-                height = baseSize * 0.5625;
-                break;
-            default:
-                width = baseSize;
-                height = baseSize;
+            case '1:1': width = baseSize; height = baseSize; break;
+            case '4:5': width = baseSize * 0.8; height = baseSize; break;
+            case '16:9': width = baseSize; height = baseSize * 0.5625; break;
+            default: width = baseSize; height = baseSize;
         }
         frameContainer.style.width = width + 'px';
         frameContainer.style.height = height + 'px';
         frameInfo.textContent = `${currentRatio} · ${Math.round(width)}×${Math.round(height)}`;
 
-        // Update background
+        // Background preview-outer
         if (currentBg === 'transparent') {
             previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.04), rgba(0,0,0,0.01))';
         } else if (currentBg === 'white') {
@@ -553,7 +533,7 @@
             previewOuter.style.background = currentBg;
         }
 
-        // Background image
+        // Background image di frame
         if (bgImageUrl) {
             frameContainer.style.backgroundImage = `url(${bgImageUrl})`;
             frameContainer.style.backgroundSize = 'cover';
@@ -571,6 +551,7 @@
 
         centerImage.style.transform = `scale(${zoom})`;
         centerImage.style.filter = `brightness(${brightness}) saturate(${saturasi}) contrast(${kontras})`;
+        centerImage.style.transformOrigin = 'center center';
 
         zoomValue.textContent = zoom.toFixed(1) + 'x';
         brightnessValue.textContent = brightness.toFixed(1);
@@ -578,21 +559,154 @@
         contrastValue.textContent = kontras.toFixed(1);
     }
 
-    // ===== EVENT LISTENER =====
+    // ===== RENDER ULANG KE CANVAS (TANPA SCREENSHOT) =====
+    function renderToCanvas() {
+        return new Promise((resolve, reject) => {
+            // Ambil semua parameter
+            const zoom = parseFloat(zoomSlider.value);
+            const brightness = parseFloat(brightnessSlider.value);
+            const saturasi = parseFloat(saturationSlider.value);
+            const kontras = parseFloat(contrastSlider.value);
+
+            // Ukuran frame sesuai rasio (pakai base 1200px untuk HD)
+            let frameWidth, frameHeight;
+            const baseSize = 1200;
+            switch (currentRatio) {
+                case '1:1': frameWidth = baseSize; frameHeight = baseSize; break;
+                case '4:5': frameWidth = baseSize * 0.8; frameHeight = baseSize; break;
+                case '16:9': frameWidth = baseSize; frameHeight = baseSize * 0.5625; break;
+                default: frameWidth = baseSize; frameHeight = baseSize;
+            }
+
+            // Buat canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = frameWidth;
+            canvas.height = frameHeight;
+            const ctx = canvas.getContext('2d');
+
+            // 1. Gambar background
+            if (bgImageData) {
+                // Gambar background full cover
+                const bgImg = new Image();
+                bgImg.onload = function() {
+                    // Cover mode
+                    const imgRatio = bgImg.width / bgImg.height;
+                    const canvasRatio = canvas.width / canvas.height;
+                    let drawWidth, drawHeight, offsetX = 0, offsetY = 0;
+                    if (imgRatio > canvasRatio) {
+                        drawHeight = canvas.height;
+                        drawWidth = canvas.height * imgRatio;
+                        offsetX = (canvas.width - drawWidth) / 2;
+                    } else {
+                        drawWidth = canvas.width;
+                        drawHeight = canvas.width / imgRatio;
+                        offsetY = (canvas.height - drawHeight) / 2;
+                    }
+                    ctx.drawImage(bgImg, offsetX, offsetY, drawWidth, drawHeight);
+                    drawCenterImage();
+                };
+                bgImg.onerror = function() {
+                    // Jika gagal load, lanjut tanpa background
+                    drawCenterImage();
+                };
+                bgImg.src = bgImageData;
+            } else {
+                // Background warna solid
+                if (currentBg === 'transparent') {
+                    // Transparan
+                } else if (currentBg === 'white') {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else if (currentBg === 'black') {
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else {
+                    ctx.fillStyle = currentBg;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+                drawCenterImage();
+            }
+
+            function drawCenterImage() {
+                // 2. Gambar foto tengah
+                if (centerImageData) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Hitung ukuran maksimal (90% dari frame)
+                        const maxW = canvas.width * 0.9;
+                        const maxH = canvas.height * 0.9;
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxW) { h = h * (maxW / w); w = maxW; }
+                        if (h > maxH) { w = w * (maxH / h); h = maxH; }
+
+                        // Terapkan zoom
+                        w = w * zoom;
+                        h = h * zoom;
+
+                        // Posisi tengah
+                        const x = (canvas.width - w) / 2;
+                        const y = (canvas.height - h) / 2;
+
+                        // Apply filter via canvas
+                        ctx.save();
+                        ctx.filter = `brightness(${brightness}) saturate(${saturasi}) contrast(${kontras})`;
+                        ctx.drawImage(img, x, y, w, h);
+                        ctx.restore();
+
+                        resolve(canvas);
+                    };
+                    img.onerror = function() {
+                        reject(new Error('Gagal load gambar center'));
+                    };
+                    img.src = centerImageData;
+                } else {
+                    // Tidak ada foto tengah
+                    reject(new Error('Foto tengah belum diupload!'));
+                }
+            }
+        });
+    }
+
+    // ===== DOWNLOAD =====
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        if (!centerImageData) {
+            showToast('⚠️ Upload foto tengah dulu!');
+            return;
+        }
+
+        this.textContent = 'Memproses...';
+        this.disabled = true;
+
+        renderToCanvas()
+            .then(canvas => {
+                const link = document.createElement('a');
+                link.download = `background_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('✅ Berhasil diunduh! Sama persis dengan preview');
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('❌ Gagal: ' + err.message);
+            })
+            .finally(() => {
+                document.getElementById('downloadBtn').textContent = 'Unduh HD';
+                document.getElementById('downloadBtn').disabled = false;
+            });
+    });
+
+    // ===== EVENT =====
     zoomSlider.addEventListener('input', updateFrame);
     brightnessSlider.addEventListener('input', updateFrame);
     saturationSlider.addEventListener('input', updateFrame);
     contrastSlider.addEventListener('input', updateFrame);
 
-    // Background buttons
     document.querySelectorAll('.bg-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.bg-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             currentBg = this.getAttribute('data-bg');
-            if (currentBg !== 'transparent' && currentBg !== 'white' && currentBg !== 'black') {
-                // custom color
-            }
             updateFrame();
         });
     });
@@ -603,7 +717,6 @@
         updateFrame();
     });
 
-    // Ratio buttons
     document.querySelectorAll('#ratioOptions .ratio-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('#ratioOptions .ratio-btn').forEach(b => b.classList.remove('active'));
@@ -613,7 +726,7 @@
         });
     });
 
-    // Upload background image
+    // Upload Background
     document.getElementById('uploadBgLabel').addEventListener('click', () => {
         document.getElementById('bgUpload').click();
     });
@@ -621,6 +734,7 @@
         if (this.files && this.files[0]) {
             const reader = new FileReader();
             reader.onload = function(ev) {
+                bgImageData = ev.target.result;
                 bgImageUrl = ev.target.result;
                 updateFrame();
                 showToast('Background berhasil diupload!');
@@ -629,7 +743,7 @@
         }
     });
 
-    // Upload center image
+    // Upload Center Image
     document.getElementById('uploadCenterLabel').addEventListener('click', () => {
         document.getElementById('centerUpload').click();
     });
@@ -637,34 +751,13 @@
         if (this.files && this.files[0]) {
             const reader = new FileReader();
             reader.onload = function(ev) {
+                centerImageData = ev.target.result;
                 centerImage.src = ev.target.result;
-                centerImageUrl = ev.target.result;
                 showToast('Foto tengah berhasil diupload!');
                 updateFrame();
             };
             reader.readAsDataURL(this.files[0]);
         }
-    });
-
-    // ===== DOWNLOAD HD =====
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-        const scale = 3;
-        html2canvas(previewOuter, {
-            scale: scale,
-            backgroundColor: null,
-            useCORS: true,
-            logging: false,
-            width: frameContainer.offsetWidth,
-            height: frameContainer.offsetHeight + 40
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `background_${Date.now()}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast('Gambar berhasil diunduh dalam HD!');
-        }).catch(() => {
-            showToast('Gagal mengunduh gambar');
-        });
     });
 
     // ===== TOAST =====
@@ -673,10 +766,10 @@
         t.innerText = msg;
         t.style.opacity = '1';
         clearTimeout(t._timeout);
-        t._timeout = setTimeout(() => { t.style.opacity = '0'; }, 2000);
+        t._timeout = setTimeout(() => { t.style.opacity = '0'; }, 2500);
     }
 
-    // ===== MOBILE MENU (TETAP) =====
+    // ===== MOBILE MENU =====
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileOverlay = document.getElementById('mobileMenuOverlay');
@@ -691,7 +784,6 @@
         document.body.style.overflow = '';
     });
 
-    // ===== DESKTOP NAV DROPDOWN (TETAP) =====
     const trigger = document.getElementById('desktopNavTrigger');
     const dropdown = document.getElementById('desktopNavDropdown');
     trigger.addEventListener('click', e => {
@@ -709,4 +801,4 @@
 </script>
 
 </body>
-                    </html>
+    </html>
