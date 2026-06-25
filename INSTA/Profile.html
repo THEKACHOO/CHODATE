@@ -477,6 +477,11 @@
             font-weight: 300;
         }
 
+        /* versi 4:5 */
+        .post-grid-item.ratio-45 {
+            aspect-ratio: 4 / 5;
+        }
+
         .verif-section {
             margin: 15px 0;
             border-top: 1px solid #eee;
@@ -497,6 +502,26 @@
             background: #0095f6;
             color: white;
             border-color: #0095f6;
+        }
+        .verif-btn-custom.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .private-btn-custom {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .private-btn-custom.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
         }
 
         /* PREVIEW STYLE */
@@ -574,6 +599,15 @@
             display: inline-flex;
             align-items: center;
         }
+        .top-lock-badge {
+            color: #262626;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .dark-theme .top-lock-badge {
+            color: #f5f5f5;
+        }
 
         .profile-header-section {
             padding: 16px 16px 8px;
@@ -630,7 +664,7 @@
             color: #dddddd;
         }
 
-        /* LINK ROW - bisa diganti, hidden jika kosong */
+        /* LINK ROW */
         .profile-link-row {
             padding: 0 16px 8px 16px;
             background: inherit;
@@ -746,6 +780,9 @@
             gap: 2px;
             background: inherit;
         }
+        .posts-grid-preview.ratio-45 .preview-post-item {
+            aspect-ratio: 4 / 5;
+        }
         .preview-post-item {
             aspect-ratio: 1 / 1;
             background: #efefef;
@@ -826,6 +863,28 @@
             cursor: pointer;
             font-size: 16px;
             transition: 0.2s;
+        }
+
+        .version-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .version-btn {
+            flex: 1;
+            padding: 8px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 100px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .version-btn.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
         }
 
         /* FOOTER */
@@ -974,7 +1033,6 @@
             white-space: nowrap;
         }
 
-        /* form untuk ganti link */
         .link-input-group {
             display: flex;
             gap: 8px;
@@ -1049,9 +1107,13 @@
                 <div class="form-panel">
                     <div class="lang-buttons"><button class="lang-btn active" id="btnIndonesia">Bahasa Indonesia</button><button class="lang-btn" id="btnInggris">English</button></div>
                     <div class="theme-buttons"><button class="theme-btn active" id="themeLightBtn">Light Mode</button><button class="theme-btn" id="themeDarkBtn">Dark Mode</button></div>
+                    <div class="version-buttons"><button class="version-btn active" id="version1Btn">Versi 1:1</button><button class="version-btn" id="version2Btn">Versi 4:5</button></div>
                     <div class="form-group"><label id="labelAvatar">Foto Profil</label><div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div><input type="file" id="avatarUpload" accept="image/*" style="display: none;"></div>
                     <div class="form-group"><label id="labelUsername">Username</label><input type="text" id="username" placeholder="thekachoo" value=""></div>
-                    <div class="form-group verif-section"><button class="verif-btn-custom" id="verificationBtn"><i class="fas fa-check-circle"></i> <span id="verifText">Verifikasi</span></button></div>
+                    <div class="form-group verif-section">
+                        <button class="verif-btn-custom" id="verificationBtn"><i class="fas fa-check-circle"></i> <span id="verifText">Verifikasi</span></button>
+                        <button class="private-btn-custom" id="privateBtn"><i class="fas fa-lock"></i> <span id="privateText">Private</span></button>
+                    </div>
                     <div class="profile-stats-row">
                         <div class="stat-item"><div class="stat-label" id="labelPosts">Posts</div><input type="text" id="postsCount" class="stat-input" placeholder="248"></div>
                         <div class="stat-item"><div class="stat-label" id="labelFollowers">Followers</div><input type="text" id="followersCount" class="stat-input" placeholder="10.5M"></div>
@@ -1059,7 +1121,6 @@
                     </div>
                     <div class="form-group bio-area"><label id="labelBio">Bio</label><textarea id="bioText" placeholder="Tulis bio kamu disini..."></textarea></div>
 
-                    <!-- Form untuk ganti link - placeholder kosong -->
                     <div class="form-group">
                         <label>Link Profil</label>
                         <div class="link-input-group">
@@ -1077,7 +1138,7 @@
                         <div class="instagram-profile-preview" id="profilePreviewCard">
                             <div class="preview-top-bar">
                                 <div class="top-left-icon"><i class="fas fa-plus"></i></div>
-                                <div class="top-center-username" id="previewTopUsername">thekachoo<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span></div>
+                                <div class="top-center-username" id="previewTopUsername">thekachoo<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span><span id="previewTopLockBadge" style="display:none;"><i class="fas fa-lock top-lock-badge"></i></span></div>
                                 <div class="top-right-icons"><i class="fas fa-at"></i><i class="fas fa-bars"></i></div>
                             </div>
                             <div class="profile-header-section">
@@ -1087,7 +1148,6 @@
                             <div class="profile-bio">
                                 <div class="bio-text" id="previewBio">Content Creator | Jakarta</div>
                             </div>
-                            <!-- LINK TAMBAHAN: antara bio dan tombol edit profile, hidden jika kosong -->
                             <div class="profile-link-row" id="profileLinkRow">
                                 <a href="#" class="profile-link-wrapper" id="profileLink">
                                     <i class="fas fa-link"></i>
@@ -1101,7 +1161,6 @@
                                     <img src="Icon-contact1.png" class="contact-icon-img" id="contactIconImg" alt="add contact">
                                 </div>
                             </div>
-                            <!-- Story tab row -->
                             <div class="story-tab-row">
                                 <img src="Icon-grid1.png" class="grid-icon-img" id="gridIconImg" alt="grid">
                                 <img src="icon-media1.png" class="tab-icon-img media-icon" id="mediaIconImg" alt="media">
@@ -1109,7 +1168,6 @@
                                 <img src="icon-tag1.png" class="tab-icon-img tag-icon" id="tagIconImg" alt="user tag">
                             </div>
                             <div class="posts-grid-preview" id="previewGridPosts"><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div></div>
-                            <!-- Bottom navbar -->
                             <div class="bottom-nav-bar">
                                 <img src="Icon-home1.png" class="nav-icon-img-custom" id="homeIconImg" alt="home">
                                 <img src="icon-media1.png" class="nav-icon-img-custom" id="bottomMediaImg" alt="media">
@@ -1141,16 +1199,18 @@
 
     <script>
         let isVerified = false;
+        let isPrivate = false;
         let currentTheme = 'light';
         let currentLang = 'id';
+        let currentVersion = '1'; // '1' = 1:1, '2' = 4:5
         let postImages = new Array(6).fill(null);
         let currentPostIndex = 0;
         let postCropper = null,
             profileCropper = null;
 
         const translations = {
-            id: { postsLabel: "Postingan", followersLabel: "Pengikut", followingLabel: "Mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!" },
-            en: { postsLabel: "Posts", followersLabel: "Followers", followingLabel: "Following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!" }
+            id: { postsLabel: "Postingan", followersLabel: "Pengikut", followingLabel: "Mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!" },
+            en: { postsLabel: "Posts", followersLabel: "Followers", followingLabel: "Following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!" }
         };
 
         function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
@@ -1158,18 +1218,50 @@
         function updatePreview() {
             let username = document.getElementById('username').value.trim() || 'thekachoo';
             const topUsernameSpan = document.getElementById('previewTopUsername');
-            topUsernameSpan.innerHTML = username + '<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span>';
+            topUsernameSpan.innerHTML = username + 
+                '<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span>' +
+                '<span id="previewTopLockBadge" style="display:none;"><i class="fas fa-lock top-lock-badge"></i></span>';
+            
             document.getElementById('previewPosts').innerText = document.getElementById('postsCount').value.trim() || '0';
             document.getElementById('previewFollowers').innerText = document.getElementById('followersCount').value.trim() || '0';
             document.getElementById('previewFollowing').innerText = document.getElementById('followingCount').value.trim() || '0';
             document.getElementById('previewBio').innerText = document.getElementById('bioText').value || '';
 
             const topBadge = document.getElementById('previewTopVerifBadge');
-            if (topBadge) topBadge.style.display = isVerified ? 'inline-flex' : 'none';
+            const lockBadge = document.getElementById('previewTopLockBadge');
+            
+            // Verifikasi hanya aktif jika tidak private
+            if (topBadge) topBadge.style.display = (isVerified && !isPrivate) ? 'inline-flex' : 'none';
+            if (lockBadge) lockBadge.style.display = isPrivate ? 'inline-flex' : 'none';
 
-            if (isVerified) document.getElementById('verificationBtn').classList.add('active');
-            else document.getElementById('verificationBtn').classList.remove('active');
+            // Update tombol verifikasi
+            const verifBtn = document.getElementById('verificationBtn');
+            if (isPrivate) {
+                verifBtn.classList.add('disabled');
+                verifBtn.style.opacity = '0.5';
+                verifBtn.style.cursor = 'not-allowed';
+            } else {
+                verifBtn.classList.remove('disabled');
+                verifBtn.style.opacity = '1';
+                verifBtn.style.cursor = 'pointer';
+                if (isVerified) verifBtn.classList.add('active');
+                else verifBtn.classList.remove('active');
+            }
+
             document.getElementById('bottomNavAvatar').src = document.getElementById('previewAvatarImg').src;
+        }
+
+        function updateVersion() {
+            const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
+            const previewGrid = document.getElementById('previewGridPosts');
+            
+            if (currentVersion === '2') {
+                formItems.forEach(item => item.classList.add('ratio-45'));
+                previewGrid.classList.add('ratio-45');
+            } else {
+                formItems.forEach(item => item.classList.remove('ratio-45'));
+                previewGrid.classList.remove('ratio-45');
+            }
         }
 
         function updateTheme() {
@@ -1212,10 +1304,43 @@
 
         function renderPostGrids() {
             const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
-            formItems.forEach((item, idx) => { item.innerHTML = ''; if (postImages[idx]) { const img = document.createElement('img'); img.src = postImages[idx]; item.appendChild(img); } else { const div = document.createElement('div'); div.className = 'post-grid-placeholder'; div.innerText = '+'; item.appendChild(div); } item.onclick = (e) => { e.stopPropagation(); currentPostIndex = idx; document.getElementById('postImageUpload').click(); }; });
+            formItems.forEach((item, idx) => { 
+                item.innerHTML = ''; 
+                if (postImages[idx]) { 
+                    const img = document.createElement('img'); 
+                    img.src = postImages[idx]; 
+                    item.appendChild(img); 
+                } else { 
+                    const div = document.createElement('div'); 
+                    div.className = 'post-grid-placeholder'; 
+                    div.innerText = '+'; 
+                    item.appendChild(div); 
+                } 
+                item.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    currentPostIndex = idx; 
+                    document.getElementById('postImageUpload').click(); 
+                }; 
+            });
+            
             const previewGrid = document.getElementById('previewGridPosts');
             previewGrid.innerHTML = '';
-            for (let i = 0; i < 6; i++) { const div = document.createElement('div'); div.className = 'preview-post-item'; if (postImages[i]) { const img = document.createElement('img'); img.src = postImages[i]; div.appendChild(img); } else { const ph = document.createElement('div'); ph.className = 'preview-post-placeholder'; ph.innerText = '+'; div.appendChild(ph); } previewGrid.appendChild(div); }
+            for (let i = 0; i < 6; i++) { 
+                const div = document.createElement('div'); 
+                div.className = 'preview-post-item'; 
+                if (postImages[i]) { 
+                    const img = document.createElement('img'); 
+                    img.src = postImages[i]; 
+                    div.appendChild(img); 
+                } else { 
+                    const ph = document.createElement('div'); 
+                    ph.className = 'preview-post-placeholder'; 
+                    ph.innerText = '+'; 
+                    div.appendChild(ph); 
+                } 
+                previewGrid.appendChild(div); 
+            }
+            updateVersion();
         }
 
         function showPostCropModal(file) { const modal = document.getElementById('postGridCropModal'); const img = document.getElementById('postGridCropImage'); img.src = URL.createObjectURL(file); modal.style.display = 'flex'; setTimeout(() => { if (postCropper) postCropper.destroy(); postCropper = new Cropper(img, { aspectRatio: 1, viewMode: 1, autoCropArea: 1 }); }, 100); }
@@ -1230,24 +1355,82 @@
         document.getElementById('cancelProfileCrop').addEventListener('click', () => { document.getElementById('profileCropModal').style.display = 'none'; if (profileCropper) profileCropper.destroy(); profileCropper = null; });
         document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload').click());
         document.getElementById('avatarUpload').addEventListener('change', (e) => { if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); });
-        document.getElementById('verificationBtn').addEventListener('click', () => { isVerified = !isVerified; updatePreview(); showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed')); });
+
+        document.getElementById('verificationBtn').addEventListener('click', () => {
+            if (isPrivate) {
+                showToast('Nonaktifkan Private dulu untuk verifikasi');
+                return;
+            }
+            isVerified = !isVerified; 
+            updatePreview(); 
+            showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed')); 
+        });
+
+        document.getElementById('privateBtn').addEventListener('click', () => {
+            isPrivate = !isPrivate;
+            if (isPrivate) {
+                isVerified = false;
+                document.getElementById('privateBtn').classList.add('active');
+                document.getElementById('verificationBtn').classList.remove('active');
+            } else {
+                document.getElementById('privateBtn').classList.remove('active');
+            }
+            updatePreview();
+            showToast(isPrivate ? (currentLang === 'id' ? 'Akun diprivat' : 'Account privatized') : (currentLang === 'id' ? 'Akun dipublik' : 'Account public'));
+        });
+
         document.getElementById('username').addEventListener('input', updatePreview);
         document.getElementById('postsCount').addEventListener('input', updatePreview);
         document.getElementById('followersCount').addEventListener('input', updatePreview);
         document.getElementById('followingCount').addEventListener('input', updatePreview);
         document.getElementById('bioText').addEventListener('input', updatePreview);
 
-        function updateFormLanguage() { const t = translations[currentLang]; document.getElementById('labelAvatar').innerText = t.labelAvatar; document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel; document.getElementById('labelUsername').innerText = t.labelUsername; document.getElementById('labelBio').innerText = t.labelBio; document.getElementById('labelPostsGrid').innerText = t.labelPostsGrid; document.getElementById('labelPosts').innerText = t.postsLabel; document.getElementById('labelFollowers').innerText = t.followersLabel; document.getElementById('labelFollowing').innerText = t.followingLabel; document.getElementById('statPostsLabel').innerText = t.postsLabel; document.getElementById('statFollowersLabel').innerText = t.followersLabel; document.getElementById('statFollowingLabel').innerText = t.followingLabel; document.getElementById('editProfileText').innerText = t.editProfile; document.getElementById('shareProfileText').innerText = t.shareProfile; document.getElementById('pageTitle').innerText = t.pageTitle; document.getElementById('verifText').innerText = t.verifBtn; updatePreview(); }
+        function updateFormLanguage() { 
+            const t = translations[currentLang]; 
+            document.getElementById('labelAvatar').innerText = t.labelAvatar; 
+            document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel; 
+            document.getElementById('labelUsername').innerText = t.labelUsername; 
+            document.getElementById('labelBio').innerText = t.labelBio; 
+            document.getElementById('labelPostsGrid').innerText = t.labelPostsGrid; 
+            document.getElementById('labelPosts').innerText = t.postsLabel; 
+            document.getElementById('labelFollowers').innerText = t.followersLabel; 
+            document.getElementById('labelFollowing').innerText = t.followingLabel; 
+            document.getElementById('statPostsLabel').innerText = t.postsLabel; 
+            document.getElementById('statFollowersLabel').innerText = t.followersLabel; 
+            document.getElementById('statFollowingLabel').innerText = t.followingLabel; 
+            document.getElementById('editProfileText').innerText = t.editProfile; 
+            document.getElementById('shareProfileText').innerText = t.shareProfile; 
+            document.getElementById('pageTitle').innerText = t.pageTitle; 
+            document.getElementById('verifText').innerText = t.verifBtn;
+            document.getElementById('privateText').innerText = t.privateBtn;
+            updatePreview(); 
+        }
+
         document.getElementById('btnIndonesia').addEventListener('click', () => { currentLang = 'id'; document.getElementById('btnIndonesia').classList.add('active'); document.getElementById('btnInggris').classList.remove('active'); updateFormLanguage(); });
         document.getElementById('btnInggris').addEventListener('click', () => { currentLang = 'en'; document.getElementById('btnInggris').classList.add('active'); document.getElementById('btnIndonesia').classList.remove('active'); updateFormLanguage(); });
         document.getElementById('themeLightBtn').addEventListener('click', () => { currentTheme = 'light'; document.getElementById('themeLightBtn').classList.add('active'); document.getElementById('themeDarkBtn').classList.remove('active'); updateTheme(); });
         document.getElementById('themeDarkBtn').addEventListener('click', () => { currentTheme = 'dark'; document.getElementById('themeDarkBtn').classList.add('active'); document.getElementById('themeLightBtn').classList.remove('active'); updateTheme(); });
+
+        document.getElementById('version1Btn').addEventListener('click', () => { 
+            currentVersion = '1'; 
+            document.getElementById('version1Btn').classList.add('active'); 
+            document.getElementById('version2Btn').classList.remove('active'); 
+            updateVersion(); 
+            showToast('Versi 1:1'); 
+        });
+        document.getElementById('version2Btn').addEventListener('click', () => { 
+            currentVersion = '2'; 
+            document.getElementById('version2Btn').classList.add('active'); 
+            document.getElementById('version1Btn').classList.remove('active'); 
+            updateVersion(); 
+            showToast('Versi 4:5'); 
+        });
+
         document.getElementById('downloadBtn').addEventListener('click', async () => { const element = document.getElementById('previewOuter'); try { const canvas = await html2canvas(element, { scale: 3, backgroundColor: null, useCORS: true }); const link = document.createElement('a'); link.download = `instaprofile_${Date.now()}.png`; link.href = canvas.toDataURL('image/png'); link.click(); showToast(translations[currentLang].downloadToast); } catch (e) { showToast(translations[currentLang].errorToast); } });
 
         document.getElementById('editProfileBtn').addEventListener('click', () => showToast('Edit profil akan segera hadir'));
         document.getElementById('shareProfileBtn').addEventListener('click', () => showToast('Bagikan profil akan segera hadir'));
 
-        // Fungsi untuk update link profil - kosongkan untuk sembunyikan
         function updateProfileLink() {
             const input = document.getElementById('profileLinkInput');
             let url = input.value.trim();
@@ -1256,7 +1439,6 @@
             const linkEl = document.getElementById('profileLink');
 
             if (!url) {
-                // Sembunyikan link
                 linkRow.classList.remove('visible');
                 linkText.innerText = '';
                 linkEl.href = '#';
@@ -1264,7 +1446,6 @@
                 return;
             }
 
-            // Tampilkan link
             linkRow.classList.add('visible');
             let displayText = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
             if (displayText.length > 30) displayText = displayText.substring(0, 30) + '...';
@@ -1296,8 +1477,8 @@
         updateTheme();
         renderPostGrids();
         updatePreview();
+        updateVersion();
 
-        // Inisialisasi: link kosong, jadi tersembunyi
         document.getElementById('profileLinkRow').classList.remove('visible');
         document.getElementById('profileLinkInput').value = '';
         document.getElementById('profileLinkText').innerText = '';
