@@ -1067,6 +1067,11 @@
             margin-top: 4px;
             font-style: italic;
         }
+
+        /* fix untuk html2canvas biar ga lonjong */
+        .preview-outer-inner {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -1338,18 +1343,101 @@
             updateVersion();
         }
 
-        function showPostCropModal(file) { const modal = document.getElementById('postGridCropModal'); const img = document.getElementById('postGridCropImage'); img.src = URL.createObjectURL(file); modal.style.display = 'flex'; setTimeout(() => { if (postCropper) postCropper.destroy(); postCropper = new Cropper(img, { aspectRatio: 1, viewMode: 1, autoCropArea: 1 }); }, 100); }
-        document.getElementById('savePostCrop').addEventListener('click', () => { if (postCropper) { const canvas = postCropper.getCroppedCanvas({ width: 600, height: 600 }); canvas.toBlob(blob => { postImages[currentPostIndex] = URL.createObjectURL(blob); renderPostGrids(); document.getElementById('postGridCropModal').style.display = 'none'; if (postCropper) postCropper.destroy(); postCropper = null; showToast('Foto postingan berhasil diupdate'); }); } });
-        document.getElementById('cancelPostCrop').addEventListener('click', () => { document.getElementById('postGridCropModal').style.display = 'none'; if (postCropper) postCropper.destroy(); postCropper = null; });
-        const postImageUpload = document.getElementById('postImageUpload');
-        postImageUpload.addEventListener('change', (e) => { if (e.target.files.length > 0 && e.target.files[0].type.startsWith('image/')) showPostCropModal(e.target.files[0]); postImageUpload.value = ''; });
-        document.getElementById('uploadPostLabel').addEventListener('click', () => { currentPostIndex = 0; postImageUpload.click(); });
+        function getCropRatio() {
+            return currentVersion === '2' ? 4/5 : 1;
+        }
 
-        function showProfileCrop(file) { const modal = document.getElementById('profileCropModal'); const img = document.getElementById('profileCropImage'); img.src = URL.createObjectURL(file); modal.style.display = 'flex'; setTimeout(() => { if (profileCropper) profileCropper.destroy(); profileCropper = new Cropper(img, { aspectRatio: 1, viewMode: 1, autoCropArea: 1 }); }, 100); }
-        document.getElementById('saveProfileCrop').addEventListener('click', () => { if (profileCropper) { const canvas = profileCropper.getCroppedCanvas({ width: 300, height: 300 }); canvas.toBlob(blob => { const url = URL.createObjectURL(blob); document.getElementById('previewAvatarImg').src = url; document.getElementById('bottomNavAvatar').src = url; document.getElementById('profileCropModal').style.display = 'none'; if (profileCropper) profileCropper.destroy(); profileCropper = null; showToast('Foto profil diupdate'); updatePreview(); }); } });
-        document.getElementById('cancelProfileCrop').addEventListener('click', () => { document.getElementById('profileCropModal').style.display = 'none'; if (profileCropper) profileCropper.destroy(); profileCropper = null; });
+        function showPostCropModal(file) { 
+            const modal = document.getElementById('postGridCropModal'); 
+            const img = document.getElementById('postGridCropImage'); 
+            img.src = URL.createObjectURL(file); 
+            modal.style.display = 'flex'; 
+            setTimeout(() => { 
+                if (postCropper) postCropper.destroy(); 
+                const ratio = getCropRatio();
+                postCropper = new Cropper(img, { 
+                    aspectRatio: ratio, 
+                    viewMode: 1, 
+                    autoCropArea: 1 
+                }); 
+            }, 100); 
+        }
+
+        document.getElementById('savePostCrop').addEventListener('click', () => { 
+            if (postCropper) { 
+                const canvas = postCropper.getCroppedCanvas({ 
+                    width: 600, 
+                    height: 600 / getCropRatio() 
+                }); 
+                canvas.toBlob(blob => { 
+                    postImages[currentPostIndex] = URL.createObjectURL(blob); 
+                    renderPostGrids(); 
+                    document.getElementById('postGridCropModal').style.display = 'none'; 
+                    if (postCropper) postCropper.destroy(); 
+                    postCropper = null; 
+                    showToast('Foto postingan berhasil diupdate'); 
+                }); 
+            } 
+        });
+
+        document.getElementById('cancelPostCrop').addEventListener('click', () => { 
+            document.getElementById('postGridCropModal').style.display = 'none'; 
+            if (postCropper) postCropper.destroy(); 
+            postCropper = null; 
+        });
+
+        const postImageUpload = document.getElementById('postImageUpload');
+        postImageUpload.addEventListener('change', (e) => { 
+            if (e.target.files.length > 0 && e.target.files[0].type.startsWith('image/')) 
+                showPostCropModal(e.target.files[0]); 
+            postImageUpload.value = ''; 
+        });
+        document.getElementById('uploadPostLabel').addEventListener('click', () => { 
+            currentPostIndex = 0; 
+            postImageUpload.click(); 
+        });
+
+        function showProfileCrop(file) { 
+            const modal = document.getElementById('profileCropModal'); 
+            const img = document.getElementById('profileCropImage'); 
+            img.src = URL.createObjectURL(file); 
+            modal.style.display = 'flex'; 
+            setTimeout(() => { 
+                if (profileCropper) profileCropper.destroy(); 
+                profileCropper = new Cropper(img, { 
+                    aspectRatio: 1, 
+                    viewMode: 1, 
+                    autoCropArea: 1 
+                }); 
+            }, 100); 
+        }
+
+        document.getElementById('saveProfileCrop').addEventListener('click', () => { 
+            if (profileCropper) { 
+                const canvas = profileCropper.getCroppedCanvas({ width: 300, height: 300 }); 
+                canvas.toBlob(blob => { 
+                    const url = URL.createObjectURL(blob); 
+                    document.getElementById('previewAvatarImg').src = url; 
+                    document.getElementById('bottomNavAvatar').src = url; 
+                    document.getElementById('profileCropModal').style.display = 'none'; 
+                    if (profileCropper) profileCropper.destroy(); 
+                    profileCropper = null; 
+                    showToast('Foto profil diupdate'); 
+                    updatePreview(); 
+                }); 
+            } 
+        });
+
+        document.getElementById('cancelProfileCrop').addEventListener('click', () => { 
+            document.getElementById('profileCropModal').style.display = 'none'; 
+            if (profileCropper) profileCropper.destroy(); 
+            profileCropper = null; 
+        });
+
         document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload').click());
-        document.getElementById('avatarUpload').addEventListener('change', (e) => { if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); });
+        document.getElementById('avatarUpload').addEventListener('change', (e) => { 
+            if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); 
+        });
 
         document.getElementById('verificationBtn').addEventListener('click', () => {
             if (isPrivate) {
@@ -1401,10 +1489,33 @@
             updatePreview(); 
         }
 
-        document.getElementById('btnIndonesia').addEventListener('click', () => { currentLang = 'id'; document.getElementById('btnIndonesia').classList.add('active'); document.getElementById('btnInggris').classList.remove('active'); updateFormLanguage(); });
-        document.getElementById('btnInggris').addEventListener('click', () => { currentLang = 'en'; document.getElementById('btnInggris').classList.add('active'); document.getElementById('btnIndonesia').classList.remove('active'); updateFormLanguage(); });
-        document.getElementById('themeLightBtn').addEventListener('click', () => { currentTheme = 'light'; document.getElementById('themeLightBtn').classList.add('active'); document.getElementById('themeDarkBtn').classList.remove('active'); updateTheme(); });
-        document.getElementById('themeDarkBtn').addEventListener('click', () => { currentTheme = 'dark'; document.getElementById('themeDarkBtn').classList.add('active'); document.getElementById('themeLightBtn').classList.remove('active'); updateTheme(); });
+        document.getElementById('btnIndonesia').addEventListener('click', () => { 
+            currentLang = 'id'; 
+            document.getElementById('btnIndonesia').classList.add('active'); 
+            document.getElementById('btnInggris').classList.remove('active'); 
+            updateFormLanguage(); 
+        });
+
+        document.getElementById('btnInggris').addEventListener('click', () => { 
+            currentLang = 'en'; 
+            document.getElementById('btnInggris').classList.add('active'); 
+            document.getElementById('btnIndonesia').classList.remove('active'); 
+            updateFormLanguage(); 
+        });
+
+        document.getElementById('themeLightBtn').addEventListener('click', () => { 
+            currentTheme = 'light'; 
+            document.getElementById('themeLightBtn').classList.add('active'); 
+            document.getElementById('themeDarkBtn').classList.remove('active'); 
+            updateTheme(); 
+        });
+
+        document.getElementById('themeDarkBtn').addEventListener('click', () => { 
+            currentTheme = 'dark'; 
+            document.getElementById('themeDarkBtn').classList.add('active'); 
+            document.getElementById('themeLightBtn').classList.remove('active'); 
+            updateTheme(); 
+        });
 
         document.getElementById('version1Btn').addEventListener('click', () => { 
             currentVersion = '1'; 
@@ -1413,6 +1524,7 @@
             updateVersion(); 
             showToast('Versi 1:1'); 
         });
+
         document.getElementById('version2Btn').addEventListener('click', () => { 
             currentVersion = '2'; 
             document.getElementById('version2Btn').classList.add('active'); 
@@ -1424,15 +1536,16 @@
         document.getElementById('downloadBtn').addEventListener('click', async () => { 
             const element = document.getElementById('previewOuter'); 
             try { 
-                // Set scale lebih tinggi untuk kualitas, tapi tetap pertahankan proporsi
+                // Ambil ukuran asli elemen
+                const rect = element.getBoundingClientRect();
                 const canvas = await html2canvas(element, { 
                     scale: 3, 
                     backgroundColor: null, 
                     useCORS: true,
                     allowTaint: true,
                     logging: false,
-                    width: element.scrollWidth,
-                    height: element.scrollHeight
+                    width: rect.width,
+                    height: rect.height
                 }); 
                 const link = document.createElement('a'); 
                 link.download = `instaprofile_${Date.now()}.png`; 
@@ -1478,15 +1591,32 @@
 
         const desktopNavTrigger = document.getElementById('desktopNavTrigger'),
             desktopNavDropdown = document.getElementById('desktopNavDropdown');
-        if (desktopNavTrigger && desktopNavDropdown) { desktopNavTrigger.addEventListener('click', (e) => { e.stopPropagation(); desktopNavDropdown.classList.toggle('active'); }); document.addEventListener('click', (e) => { if (!desktopNavTrigger.contains(e.target) && !desktopNavDropdown.contains(e.target)) desktopNavDropdown.classList.remove('active'); }); }
+        if (desktopNavTrigger && desktopNavDropdown) { 
+            desktopNavTrigger.addEventListener('click', (e) => { 
+                e.stopPropagation(); 
+                desktopNavDropdown.classList.toggle('active'); 
+            }); 
+            document.addEventListener('click', (e) => { 
+                if (!desktopNavTrigger.contains(e.target) && !desktopNavDropdown.contains(e.target)) 
+                    desktopNavDropdown.classList.remove('active'); 
+            }); 
+        }
 
         const mobileMenuBtn = document.getElementById('mobileMenuBtn'),
             mobileMenu = document.getElementById('mobileMenu'),
             mobileOverlay = document.getElementById('mobileMenuOverlay');
 
-        function toggleMobileMenu() { mobileMenu.classList.toggle('active'); mobileOverlay.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; }
+        function toggleMobileMenu() { 
+            mobileMenu.classList.toggle('active'); 
+            mobileOverlay.classList.toggle('active'); 
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; 
+        }
 
-        function closeMobileMenu() { mobileMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+        function closeMobileMenu() { 
+            mobileMenu.classList.remove('active'); 
+            mobileOverlay.classList.remove('active'); 
+            document.body.style.overflow = ''; 
+        }
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         mobileOverlay.addEventListener('click', closeMobileMenu);
 
@@ -1502,4 +1632,4 @@
         document.getElementById('profileLink').href = '#';
     </script>
 </body>
-</html>
+    </html>
