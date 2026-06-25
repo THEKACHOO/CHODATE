@@ -19,7 +19,7 @@
         }
         body,
         html {
-            font-family: Arial, 'Outfit', sans-serif;
+            font-family: 'Outfit', sans-serif;
             background-color: #f5f5f5;
             line-height: 1.6;
         }
@@ -43,7 +43,6 @@
             }
         }
 
-        /* Title Center */
         .page-title {
             text-align: center;
             font-size: 2.2rem;
@@ -277,6 +276,23 @@
             font-size: 22px;
             color: #1a1a1a;
         }
+        .mode-hint {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-top: -32px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        @media (max-width: 640px) {
+            .mode-hint {
+                font-size: 12px;
+                margin-top: -20px;
+                margin-bottom: 16px;
+                padding: 0 16px;
+            }
+        }
 
         .studio-wrapper {
             display: none;
@@ -361,6 +377,10 @@
         input[type="text"]:focus,
         select:focus {
             border-color: #0095f6;
+        }
+        input[type="text"]::placeholder {
+            color: #bbb;
+            opacity: 1;
         }
         .file-input-label {
             background: #f7f7f7;
@@ -506,19 +526,18 @@
             left: 22px;
         }
 
-        /* Hapus tema teks dark, hanya white */
         .theme-selector {
             display: none;
         }
 
         /* ===== STORY CARD WRAPPER ===== */
         .story-card-wrapper {
-            width: 360px;
+            width: 300px;
         }
         @media (max-width: 860px) {
             .story-card-wrapper {
                 width: 100%;
-                max-width: 380px;
+                max-width: 340px;
             }
         }
 
@@ -530,11 +549,11 @@
             width: 100%;
         }
 
+        /* TINGGI CARD DIBUAT LEBIH TINGGI 9:17 */
         .my-story-card,
         .other-story-card {
             background: #111;
             border-radius: 18px;
-            overflow: hidden;
             aspect-ratio: 9 / 17;
             position: relative;
             background-size: cover;
@@ -545,6 +564,7 @@
             width: 100%;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
+            overflow: hidden;
         }
 
         .story-progress {
@@ -574,13 +594,13 @@
 
         .story-header-row {
             position: absolute;
-            top: 25px;
+            top: 18px;
             left: 0;
             right: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 10px;
             z-index: 3;
         }
         .header-left {
@@ -606,13 +626,11 @@
             font-size: 12px;
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin-top: -8px;
         }
         .story-time {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.75);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin-top: -2px;
         }
         .cf-badge-header {
             display: inline-flex;
@@ -637,7 +655,6 @@
             display: flex;
             gap: 14px;
             align-items: center;
-            margin-top: -28px;
         }
         .header-right i {
             font-size: 16px;
@@ -646,7 +663,7 @@
         }
         .plus-badge {
             position: absolute;
-            bottom: 5px;
+            bottom: 0px;
             right: -1px;
             background: #0095f6;
             border: 1.5px solid white;
@@ -693,12 +710,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1px;
-            transform: translateY(-6px);
-            /*move up*/
+            gap: 4px;
         }
         .activity-circle {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -709,24 +724,15 @@
             font-size: 18px;
             color: white;
         }
-        .activity-circle img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
         .activity-label {
             font-size: 10px;
             font-weight: 500;
             color: white;
-            margin-top: 1.5px;
-            line-height: 1;
         }
         .actions-right {
             display: flex;
-            gap: 7px;
+            gap: 12px;
             align-items: flex-end;
-            transform: translateY(-6px);
-            /*move up*/
         }
         .action-item {
             display: flex;
@@ -735,7 +741,7 @@
             gap: 4px;
         }
         .action-circle {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -746,56 +752,34 @@
             font-size: 18px;
             color: white;
         }
-        .action-circle img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
         .action-label {
             font-size: 10px;
             font-weight: 500;
             color: white;
-            margin-top: -1px;
-            line-height: 1;
         }
 
-        /* Send message bar dengan background hitam */
-        .send-message-bg {
+        /* Send message bar */
+        .send-message-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65px;
-            background: #000000;
-            border-bottom-left-radius: 18px;
-            border-bottom-right-radius: 18px;
-            z-index: 3;
-        }
-        .send-message-bar {
-            position: absolute;
-            bottom: 15px;
-            left: 10px;
-            right: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
-            z-index: 4;
-            padding: 0;
+            z-index: 3;
+            background: #000000;
+            padding: 10px 12px;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
         }
         .send-message-pill {
             flex: 1;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 22px;
-            height: 36px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
-            padding: 0 14px;
-        }
-        .send-message-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.65);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            pointer-events: none;
         }
         .send-message-input {
             background: transparent;
@@ -807,7 +791,7 @@
             flex: 1;
             width: 100%;
         }
-        .send-message-input: {
+        .send-message-input::placeholder {
             color: rgba(255, 255, 255, 0.65);
         }
         .story-action-icons {
@@ -817,8 +801,8 @@
             flex-shrink: 0;
         }
         .story-icon-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -826,8 +810,8 @@
             cursor: pointer;
         }
         .story-icon-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: none;
             stroke: white;
             stroke-width: 1.8;
@@ -839,7 +823,6 @@
             stroke: #ff3040;
         }
 
-        /* Three dots menu beside follow button */
         .header-right-social {
             display: flex;
             gap: 12px;
@@ -891,6 +874,81 @@
             font-family: 'Outfit', sans-serif;
         }
 
+        /* ===== DRAGGABLE TEXT ===== */
+        .draggable-text {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: grab;
+            padding: 4px 8px;
+            z-index: 10;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            /* shadow lebih tipis */
+            pointer-events: auto;
+            border-radius: 4px;
+            transition: outline 0.15s;
+        }
+        .draggable-text:active {
+            cursor: grabbing;
+            z-index: 20;
+        }
+        .draggable-text.dragging {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+        .draggable-text .text-actions {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            display: flex;
+            gap: 3px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 50%;
+            padding: 2px;
+            z-index: 30;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            /* shadow teks */
+        }
+        .draggable-text .text-actions button {
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+            color: white;
+            line-height: 1;
+            background: #ff3040;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+        .draggable-text .text-actions button:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+        }
+        .draggable-text .text-actions button:active {
+            transform: scale(0.9);
+        }
+        .draggable-text.selected-text {
+            outline: 2px solid #0095f6;
+            outline-offset: 2px;
+        }
+
+        /* tombol X saat di-download */
+        .draggable-text.hide-actions .text-actions {
+            display: none !important;
+        }
+
         /* ===== FOOTER ===== */
         footer {
             background: #000;
@@ -926,7 +984,7 @@
             list-style: none;
         }
         .footer-links li {
-            margin-bottom: 0px;
+            margin-bottom: 8px;
         }
         .footer-links a {
             color: rgba(255, 255, 255, 0.5);
@@ -1035,7 +1093,6 @@
             white-space: nowrap;
         }
 
-        /* Placeholder tenggelam/isian form */
         input::placeholder,
         textarea::placeholder {
             color: #bbb;
@@ -1057,14 +1114,14 @@
                 <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
             <div class="center-title">
-                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+                <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
             </div>
             <div class="desktop-nav-container">
                 <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
                 <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                    <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
-                    <a href="Post.html" class="nav-button">Instacho Post</a>
+                    <a href="index.html" class="nav-button">Home</a>
                     <a href="Profile.html" class="nav-button">Instacho Profile</a>
+                    <a href="Story.html" class="nav-button">Instacho Story</a>
                 </div>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -1074,9 +1131,9 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
-        <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
-        <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
+        <a href="index.html" class="mobile-menu-link">Home</a>
         <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+        <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
     </div>
 
     <div class="main-content">
@@ -1093,7 +1150,7 @@
 
             <!-- ===== SELF VIEW STUDIO ===== -->
             <div id="studioMyView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Kembali ke Mode</span></button>
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Back to Mode</span></button>
                 <div class="story-studio">
                     <div class="form-panel">
                         <div class="lang-buttons">
@@ -1130,9 +1187,34 @@
                             </div>
                         </div>
                         <div class="toggle-switch" id="myCloseFriendsToggle">
-                            <span id="closeFriendsText">Teman Dekat</span>
+                            <span id="closeFriendsText">Close Friends</span>
                             <div class="toggle-slider" id="myCfSlider"></div>
                         </div>
+
+                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
+                        <div class="form-group">
+                            <label>Isi Teks</label>
+                            <input type="text" id="myTextInput" placeholder="Tulis teks..." value="">
+                        </div>
+                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <label style="flex:1; min-width:50px;">Warna</label>
+                            <input type="color" id="myTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
+                            <label style="flex:1; min-width:50px;">Ukuran</label>
+                            <input type="range" id="myTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
+                            <span id="myTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Font</label>
+                            <select id="myTextFont">
+                                <option value="'Outfit', sans-serif">Outfit</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Georgia', serif">Georgia</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                            </select>
+                        </div>
+                        <button class="download-single" id="myAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
                     </div>
 
                     <!-- Self View Story Card -->
@@ -1151,7 +1233,7 @@
                                             <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                         </div>
                                         <div>
-                                            <div class="story-username" id="yourStoryText">Story Anda</div>
+                                            <div class="story-username" id="yourStoryText">Your Story</div>
                                             <div class="story-time" id="myViewTime">Baru saja</div>
                                             <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
                                         </div>
@@ -1163,33 +1245,25 @@
                                 </div>
                                 <div class="my-bottom-bar">
                                     <div class="activity-left">
-                                        <div class="activity-circle">
-                                            <img src="Activity-icon.png" alt="Activity" id="activityIconMy">
-                                        </div>
-                                        <span class="activity-label" id="activityText">Aktivitas</span>
+                                        <div class="activity-circle"><i class="far fa-heart"></i></div>
+                                        <span class="activity-label" id="activityText">Activity</span>
                                     </div>
                                     <div class="actions-right">
                                         <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="Boost-icon.png" alt="Boost" id="boostIconMy">
-                                            </div>
-                                            <span class="action-label" id="boostText">Bagikan</span>
+                                            <div class="action-circle"><i class="fas fa-rocket"></i></div>
+                                            <span class="action-label" id="boostText">Boost</span>
                                         </div>
                                         <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="Highlight-icon.png" alt="Highlight" id="highlightIconMy">
-                                            </div>
-                                            <span class="action-label" id="highlightText">Sorotan</span>
+                                            <div class="action-circle"><i class="fas fa-bookmark"></i></div>
+                                            <span class="action-label" id="highlightText">Highlight</span>
                                         </div>
                                         <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="Mention-icon.png" alt="Mention" id="mentionIconMy">
-                                            </div>
-                                            <span class="action-label" id="mentionText">Sebut</span>
+                                            <div class="action-circle"><i class="fas fa-at"></i></div>
+                                            <span class="action-label" id="mentionText">Mention</span>
                                         </div>
                                         <div class="action-item">
                                             <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
-                                            <span class="action-label" id="moreText">Lainnya</span>
+                                            <span class="action-label" id="moreText">More</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1204,7 +1278,7 @@
 
             <!-- ===== SOCIAL VIEW STUDIO ===== -->
             <div id="studioPublicView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Kembali ke Mode</span></button>
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Back to Mode</span></button>
                 <div class="story-studio">
                     <div class="form-panel">
                         <div class="lang-buttons">
@@ -1249,13 +1323,38 @@
                             </div>
                         </div>
                         <div class="toggle-switch" id="pubCloseFriendsToggle">
-                            <span id="cfTextPub">Teman Dekat</span>
+                            <span id="cfTextPub">Close Friends</span>
                             <div class="toggle-slider" id="pubCfSlider"></div>
                         </div>
                         <div class="toggle-follow-control" id="toggleFollowControl">
-                            <span id="followText">Ikuti / Mengikuti</span>
+                            <span id="followText">Follow / Following</span>
                             <div class="follow-toggle-slider" id="followToggleSlider"></div>
                         </div>
+
+                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
+                        <div class="form-group">
+                            <label>Isi Teks</label>
+                            <input type="text" id="pubTextInput" placeholder="Tulis teks..." value="">
+                        </div>
+                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <label style="flex:1; min-width:50px;">Warna</label>
+                            <input type="color" id="pubTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
+                            <label style="flex:1; min-width:50px;">Ukuran</label>
+                            <input type="range" id="pubTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
+                            <span id="pubTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Font</label>
+                            <select id="pubTextFont">
+                                <option value="'Outfit', sans-serif">Outfit</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Georgia', serif">Georgia</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                            </select>
+                        </div>
+                        <button class="download-single" id="pubAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
                     </div>
 
                     <div class="story-card-wrapper">
@@ -1275,18 +1374,17 @@
                                                 <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
                                             </div>
                                             <div class="story-time" id="pubTimeLabel">Baru saja</div>
-                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Teman dekat</span></div>
+                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Close friends</span></div>
                                         </div>
                                     </div>
                                     <div class="header-right-social">
-                                        <button class="follow-btn-story" id="pubFollowAction">Ikuti</button>
+                                        <button class="follow-btn-story" id="pubFollowAction">Follow</button>
                                         <i class="fas fa-ellipsis-h three-dots"></i>
                                     </div>
                                 </div>
-                                <div class="send-message-bg"></div>
                                 <div class="send-message-bar">
                                     <div class="send-message-pill">
-                                        <span class="send-message-label" id="pubMessageInput">Kirim pesan...</span>
+                                        <input class="send-message-input" id="pubMessageInput" placeholder="Send message...">
                                     </div>
                                     <div class="story-action-icons">
                                         <div class="story-icon-btn" id="pubLikeBtn">
@@ -1327,20 +1425,20 @@
             <div class="footer-section">
                 <h3>Explore</h3>
                 <ul class="footer-links">
-                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
-                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
-                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
-                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                    <li><a href="#">The Kachoo</a></li>
+                    <li><a href="#">Kafkapages</a></li>
+                    <li><a href="#">Kaboom</a></li>
+                    <li><a href="#">Kazine</a></li>
                     <li><a href="#">Kadio</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>More</h3>
                 <ul class="footer-links">
-                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
-                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
-                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+                    <li><a href="#">Chobank</a></li>
+                    <li><a href="#">Chonnect</a></li>
+                    <li><a href="#">Chosong</a></li>
+                    <li><a href="#">Chodate</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1401,9 +1499,9 @@
                 closeFriends: "Teman Dekat",
                 yourStory: "Story Anda",
                 activity: "Aktivitas",
-                boost: "Bagikan",
+                boost: "Promosi",
                 highlight: "Sorotan",
-                mention: "Sebut",
+                mention: "Mention",
                 more: "Lainnya",
                 download: "Unduh",
                 closeFriendsBadge: "Teman Dekat",
@@ -1438,7 +1536,7 @@
                 closeFriends: "Close Friends",
                 yourStory: "Your Story",
                 activity: "Activity",
-                boost: "Share",
+                boost: "Boost",
                 highlight: "Highlight",
                 mention: "Mention",
                 more: "More",
@@ -1509,7 +1607,7 @@
                 document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
                 document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
                 document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
-                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').innerText = t.sendMessagePlaceholder);
+                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').setAttribute('placeholder', t.sendMessagePlaceholder));
 
                 if (pubFollowActive) {
                     document.getElementById('pubFollowAction').innerText = t.following;
@@ -1541,11 +1639,11 @@
                     if (activeCropper) activeCropper.destroy();
                     activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1, autoCropArea: 1 });
                 }, 100);
-                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none';
-                    if (activeCropper) { activeCropper.destroy();
-                        activeCropper = null; }
-                    resolve(null); };
-                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas().toBlob(blob => { const url = URL.createObjectURL(blob);
+                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none'; if (activeCropper) { activeCropper
+                            .destroy();
+                        activeCropper = null; } resolve(null); };
+                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas()
+                            .toBlob(blob => { const url = URL.createObjectURL(blob);
                             modal.style.display = 'none';
                             activeCropper.destroy();
                             activeCropper = null;
@@ -1555,7 +1653,8 @@
 
         function applyTextTheme(cardEl, theme) {
             const color = theme === 'white' ? '#fff' : '#000';
-            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style.color = color);
+            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style
+                .color = color);
             const followBtn = cardEl.querySelector('.follow-btn-story');
             if (followBtn) followBtn.style.color = color;
             const msgInput = cardEl.querySelector('.send-message-input');
@@ -1568,7 +1667,8 @@
             let timeVal = document.getElementById('myTimeSelect').value;
             if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
             const t = translations[currentMyLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
+            'Baru saja'));
             document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
             if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
             document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
@@ -1589,7 +1689,8 @@
             let timeVal = document.getElementById('pubTimeSelect').value;
             if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
             const t = translations[currentPubLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
+            'Baru saja'));
             document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
             if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
             document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
@@ -1616,30 +1717,223 @@
         myTextTheme = 'white';
         pubTextTheme = 'white';
 
+        // ========== DRAGGABLE TEXT ==========
+        function makeDraggable(el, container) {
+            let isDragging = false;
+            let startX, startY, startLeft, startTop;
+
+            function onStart(e) {
+                if (e.target.closest('.text-actions button')) return;
+
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                isDragging = true;
+                el.classList.add('dragging');
+                el.classList.add('selected-text');
+
+                const rect = container.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+
+                startX = touch.clientX - rect.left;
+                startY = touch.clientY - rect.top;
+
+                const leftPx = (parseFloat(el.style.left) / 100) * rect.width;
+                const topPx = (parseFloat(el.style.top) / 100) * rect.height;
+                startLeft = leftPx || 0;
+                startTop = topPx || 0;
+            }
+
+            function onMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                const rect = container.getBoundingClientRect();
+
+                let deltaX = (touch.clientX - rect.left) - startX;
+                let deltaY = (touch.clientY - rect.top) - startY;
+
+                let newLeftPx = startLeft + deltaX;
+                let newTopPx = startTop + deltaY;
+
+                const elW = el.offsetWidth;
+                const elH = el.offsetHeight;
+                newLeftPx = Math.max(0, Math.min(rect.width - elW, newLeftPx));
+                newTopPx = Math.max(0, Math.min(rect.height - elH, newTopPx));
+
+                const leftPercent = (newLeftPx / rect.width) * 100;
+                const topPercent = (newTopPx / rect.height) * 100;
+
+                el.style.left = leftPercent + '%';
+                el.style.top = topPercent + '%';
+            }
+
+            function onEnd(e) {
+                if (isDragging) {
+                    isDragging = false;
+                    el.classList.remove('dragging');
+                }
+            }
+
+            el.addEventListener('mousedown', onStart);
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+
+            el.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onEnd);
+        }
+
+        function addDraggableText(container, text, color, size, font, x, y) {
+            const el = document.createElement('div');
+            el.className = 'draggable-text';
+            el.textContent = text;
+            el.style.color = color || '#ffffff';
+            el.style.fontSize = (size || 24) + 'px';
+            el.style.fontFamily = font || "'Outfit', sans-serif";
+            el.style.left = (x || 20) + '%';
+            el.style.top = (y || 20) + '%';
+
+            const actions = document.createElement('div');
+            actions.className = 'text-actions';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.title = 'Hapus teks';
+
+            function deleteHandler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                el.remove();
+                showToast('Teks dihapus');
+            }
+
+            deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
+            deleteBtn.addEventListener('click', deleteHandler);
+
+            actions.appendChild(deleteBtn);
+            el.appendChild(actions);
+
+            container.appendChild(el);
+            makeDraggable(el, container);
+
+            el.addEventListener('click', function(e) {
+                if (e.target.closest('.text-actions button')) return;
+                document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
+                this.classList.add('selected-text');
+            });
+
+            return el;
+        }
+
+        // ========== INIT DRAGGABLE TEXT FOR SELF VIEW ==========
+        let myTextContainer = document.getElementById('myViewStoryCard');
+        let myTexts = [];
+
+        document.getElementById('myAddTextBtn').addEventListener('click', function() {
+            const text = document.getElementById('myTextInput').value || 'Teks';
+            const color = document.getElementById('myTextColor').value;
+            const size = parseInt(document.getElementById('myTextSize').value);
+            const font = document.getElementById('myTextFont').value;
+            const x = 15 + Math.random() * 50;
+            const y = 15 + Math.random() * 50;
+            const el = addDraggableText(myTextContainer, text, color, size, font, x, y);
+            myTexts.push(el);
+            showToast('Teks ditambahkan!');
+        });
+
+        document.getElementById('myTextSize').addEventListener('input', function() {
+            document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
+        });
+
+        // ========== INIT DRAGGABLE TEXT FOR PUBLIC VIEW ==========
+        let pubTextContainer = document.getElementById('publicStoryCard');
+        let pubTexts = [];
+
+        document.getElementById('pubAddTextBtn').addEventListener('click', function() {
+            const text = document.getElementById('pubTextInput').value || 'Teks';
+            const color = document.getElementById('pubTextColor').value;
+            const size = parseInt(document.getElementById('pubTextSize').value);
+            const font = document.getElementById('pubTextFont').value;
+            const x = 15 + Math.random() * 50;
+            const y = 15 + Math.random() * 50;
+            const el = addDraggableText(pubTextContainer, text, color, size, font, x, y);
+            pubTexts.push(el);
+            showToast('Teks ditambahkan!');
+        });
+
+        document.getElementById('pubTextSize').addEventListener('input', function() {
+            document.getElementById('pubTextSizeLabel').textContent = this.value + 'px';
+        });
+
+        // ========== DOWNLOAD ==========
+        async function downloadEl(el, name) {
+            try {
+                // Sembunyikan tombol X pada semua teks sebelum download
+                const allTexts = el.querySelectorAll('.draggable-text');
+                allTexts.forEach(t => t.classList.add('hide-actions'));
+
+                const c = await html2canvas(el, {
+                    scale: 2.5,
+                    backgroundColor: null,
+                    useCORS: true,
+                    logging: false,
+                    windowWidth: el.scrollWidth,
+                    windowHeight: el.scrollHeight
+                });
+
+                // Tampilkan kembali tombol X
+                allTexts.forEach(t => t.classList.remove('hide-actions'));
+
+                const a = document.createElement('a');
+                a.download = name;
+                a.href = c.toDataURL('image/png');
+                a.click();
+                showToast('Berhasil diunduh');
+            } catch (e) {
+                console.error(e);
+                // Tampilkan kembali tombol X jika terjadi error
+                const allTexts = el.querySelectorAll('.draggable-text');
+                allTexts.forEach(t => t.classList.remove('hide-actions'));
+                showToast('Gagal');
+            }
+        }
+
+        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'),
+            `selfstory_${Date.now()}.png`);
+        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'),
+            `socialstory_${Date.now()}.png`);
+
+        // ========== EXISTING FUNCTIONS ==========
         // Avatar & Background uploads
-        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
-        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
-                if (u) { myAvatarUrl = u;
-                    updateMyView(); } } });
+        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload')
+            .click());
+        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 1); if (u) { myAvatarUrl = u;
+                updateMyView(); } } });
         document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
-        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
-                if (u) { myBgUrl = u;
-                    updateMyView(); } } });
-        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload').click());
-        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
-                if (u) { pubAvatarUrl = u;
-                    updatePublicView(); } } });
+        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { myBgUrl = u;
+                updateMyView(); } } });
+        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload')
+            .click());
+        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 1); if (u) { pubAvatarUrl = u;
+                updatePublicView(); } } });
         document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
-        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
-                if (u) { pubBgUrl = u;
-                    updatePublicView(); } } });
+        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
+                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { pubBgUrl = u;
+                updatePublicView(); } } });
 
         // Time selects
-        document.getElementById('myTimeSelect').addEventListener('change', function() { document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updateMyView(); });
+        document.getElementById('myTimeSelect').addEventListener('change', function() {
+            document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updateMyView();
+        });
         document.getElementById('myCustomTime').addEventListener('input', updateMyView);
-        document.getElementById('pubTimeSelect').addEventListener('change', function() { document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updatePublicView(); });
+        document.getElementById('pubTimeSelect').addEventListener('change', function() {
+            document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updatePublicView();
+        });
         document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
 
         // Toggles
@@ -1662,51 +1956,25 @@
         // Outer background
         document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg = e.target.value;
             updateMyView(); });
-        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer');
+        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el
+                .getAttribute('data-outer');
             myOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updateMyView(); }));
         document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg = e.target.value;
             updatePublicView(); });
-        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer-pub');
+        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el
+                .getAttribute('data-outer-pub');
             pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updatePublicView(); }));
 
-        // Download - capture full element without cropping
-        async function downloadEl(el, name) {
-            try {
-                const c = await html2canvas(el, {
-                    scale: 2.5,
-                    backgroundColor: null,
-                    useCORS: true,
-                    allowTaint: true,
-                    logging: false,
-                    onclone: function(clonedDoc, clonedEl) {
-                        // Temporarily remove overflow:hidden from story cards so send bar is not clipped
-                        clonedEl.querySelectorAll('.my-story-card, .other-story-card').forEach(function(card) {
-                            card.style.overflow = 'visible';
-                            card.style.borderRadius = '18px';
-                        });
-                    }
-                });
-                const a = document.createElement('a');
-                a.download = name;
-                a.href = c.toDataURL('image/png');
-                a.click();
-                showToast('Berhasil diunduh');
-            } catch (e) {
-                console.error(e);
-                showToast('Gagal');
-            }
-        }
-        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
-        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
-
         // Mode selection
-        window.resetToModeSelection = function() { document.getElementById('modeSelection').style.display = 'flex';
+        window.resetToModeSelection = function() {
+            document.getElementById('modeSelection').style.display = 'flex';
             document.getElementById('studioMyView').classList.remove('active-view');
             document.getElementById('studioPublicView').classList.remove('active-view');
             document.getElementById('studioMyView').style.display = 'none';
-            document.getElementById('studioPublicView').style.display = 'none'; };
+            document.getElementById('studioPublicView').style.display = 'none';
+        };
         document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
             const mode = card.getAttribute('data-mode');
             document.getElementById('modeSelection').style.display = 'none';
@@ -1764,7 +2032,8 @@
         const mobBtn = document.getElementById('mobileMenuBtn'),
             mobMenu = document.getElementById('mobileMenu'),
             mobOverlay = document.getElementById('mobileMenuOverlay'),
-            mobClose = document.getElementById('mobileMenuClose');
+            mobClose = document.getElementById(
+            'mobileMenuClose');
         if (mobBtn) {
             mobBtn.onclick = () => { mobMenu.classList.add('active');
                 mobOverlay.classList.add('active');
