@@ -19,7 +19,7 @@
         }
         body,
         html {
-            font-family: 'Outfit', sans-serif;
+            font-family: Arial, 'Outfit', sans-serif;
             background-color: #f5f5f5;
             line-height: 1.6;
         }
@@ -43,6 +43,7 @@
             }
         }
 
+        /* Title Center */
         .page-title {
             text-align: center;
             font-size: 2.2rem;
@@ -276,23 +277,6 @@
             font-size: 22px;
             color: #1a1a1a;
         }
-        .mode-hint {
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            margin-top: -32px;
-            margin-bottom: 20px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-        @media (max-width: 640px) {
-            .mode-hint {
-                font-size: 12px;
-                margin-top: -20px;
-                margin-bottom: 16px;
-                padding: 0 16px;
-            }
-        }
 
         .studio-wrapper {
             display: none;
@@ -377,10 +361,6 @@
         input[type="text"]:focus,
         select:focus {
             border-color: #0095f6;
-        }
-        input[type="text"]::placeholder {
-            color: #bbb;
-            opacity: 1;
         }
         .file-input-label {
             background: #f7f7f7;
@@ -526,18 +506,19 @@
             left: 22px;
         }
 
+        /* Hapus tema teks dark, hanya white */
         .theme-selector {
             display: none;
         }
 
         /* ===== STORY CARD WRAPPER ===== */
         .story-card-wrapper {
-            width: 300px;
+            width: 360px;
         }
         @media (max-width: 860px) {
             .story-card-wrapper {
                 width: 100%;
-                max-width: 340px;
+                max-width: 380px;
             }
         }
 
@@ -549,11 +530,11 @@
             width: 100%;
         }
 
-        /* TINGGI CARD DIBUAT LEBIH TINGGI 9:17 */
         .my-story-card,
         .other-story-card {
             background: #111;
             border-radius: 18px;
+            overflow: hidden;
             aspect-ratio: 9 / 17;
             position: relative;
             background-size: cover;
@@ -564,7 +545,6 @@
             width: 100%;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
-            overflow: hidden;
         }
 
         .story-progress {
@@ -594,13 +574,13 @@
 
         .story-header-row {
             position: absolute;
-            top: 18px;
+            top: 25px;
             left: 0;
             right: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 12px;
             z-index: 3;
         }
         .header-left {
@@ -626,11 +606,13 @@
             font-size: 12px;
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin-top: -8px;
         }
         .story-time {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.75);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin-top: -2px;
         }
         .cf-badge-header {
             display: inline-flex;
@@ -655,6 +637,7 @@
             display: flex;
             gap: 14px;
             align-items: center;
+            margin-top: -28px;
         }
         .header-right i {
             font-size: 16px;
@@ -663,7 +646,7 @@
         }
         .plus-badge {
             position: absolute;
-            bottom: 0px;
+            bottom: 5px;
             right: -1px;
             background: #0095f6;
             border: 1.5px solid white;
@@ -710,10 +693,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 1px;
+            transform: translateY(-6px);
+            /*move up*/
         }
         .activity-circle {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -724,15 +709,24 @@
             font-size: 18px;
             color: white;
         }
+        .activity-circle img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
         .activity-label {
             font-size: 10px;
             font-weight: 500;
             color: white;
+            margin-top: 1.5px;
+            line-height: 1;
         }
         .actions-right {
             display: flex;
-            gap: 12px;
+            gap: 7px;
             align-items: flex-end;
+            transform: translateY(-6px);
+            /*move up*/
         }
         .action-item {
             display: flex;
@@ -741,7 +735,7 @@
             gap: 4px;
         }
         .action-circle {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
             width: 40px;
             height: 40px;
@@ -752,34 +746,56 @@
             font-size: 18px;
             color: white;
         }
+        .action-circle img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
         .action-label {
             font-size: 10px;
             font-weight: 500;
             color: white;
+            margin-top: -1px;
+            line-height: 1;
         }
 
-        /* Send message bar */
-        .send-message-bar {
+        /* Send message bar dengan background hitam */
+        .send-message-bg {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
+            height: 65px;
+            background: #000000;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            z-index: 3;
+        }
+        .send-message-bar {
+            position: absolute;
+            bottom: 15px;
+            left: 10px;
+            right: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
-            z-index: 3;
-            background: #000000;
-            padding: 10px 12px;
-            border-bottom-left-radius: 18px;
-            border-bottom-right-radius: 18px;
+            z-index: 4;
+            padding: 0;
         }
         .send-message-pill {
             flex: 1;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 22px;
-            padding: 8px 14px;
+            height: 36px;
             display: flex;
             align-items: center;
+            padding: 0 14px;
+        }
+        .send-message-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.65);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            pointer-events: none;
         }
         .send-message-input {
             background: transparent;
@@ -791,7 +807,7 @@
             flex: 1;
             width: 100%;
         }
-        .send-message-input::placeholder {
+        .send-message-input: {
             color: rgba(255, 255, 255, 0.65);
         }
         .story-action-icons {
@@ -801,8 +817,8 @@
             flex-shrink: 0;
         }
         .story-icon-btn {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -810,8 +826,8 @@
             cursor: pointer;
         }
         .story-icon-btn svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             fill: none;
             stroke: white;
             stroke-width: 1.8;
@@ -823,6 +839,7 @@
             stroke: #ff3040;
         }
 
+        /* Three dots menu beside follow button */
         .header-right-social {
             display: flex;
             gap: 12px;
@@ -887,7 +904,6 @@
             -webkit-user-select: none;
             touch-action: none;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-            /* shadow lebih tipis */
             pointer-events: auto;
             border-radius: 4px;
             transition: outline 0.15s;
@@ -912,7 +928,6 @@
             padding: 2px;
             z-index: 30;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            /* shadow teks */
         }
         .draggable-text .text-actions button {
             width: 24px;
@@ -943,8 +958,6 @@
             outline: 2px solid #0095f6;
             outline-offset: 2px;
         }
-
-        /* tombol X saat di-download */
         .draggable-text.hide-actions .text-actions {
             display: none !important;
         }
@@ -984,7 +997,7 @@
             list-style: none;
         }
         .footer-links li {
-            margin-bottom: 8px;
+            margin-bottom: 0px;
         }
         .footer-links a {
             color: rgba(255, 255, 255, 0.5);
@@ -1093,6 +1106,7 @@
             white-space: nowrap;
         }
 
+        /* Placeholder tenggelam/isian form */
         input::placeholder,
         textarea::placeholder {
             color: #bbb;
@@ -1114,14 +1128,14 @@
                 <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
             <div class="center-title">
-                <img src="Instapost2.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
             </div>
             <div class="desktop-nav-container">
                 <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
                 <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                    <a href="index.html" class="nav-button">Home</a>
+                    <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
+                    <a href="Post.html" class="nav-button">Instacho Post</a>
                     <a href="Profile.html" class="nav-button">Instacho Profile</a>
-                    <a href="Story.html" class="nav-button">Instacho Story</a>
                 </div>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -1131,9 +1145,9 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
-        <a href="index.html" class="mobile-menu-link">Home</a>
+        <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
+        <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
         <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-        <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
     </div>
 
     <div class="main-content">
@@ -1150,7 +1164,7 @@
 
             <!-- ===== SELF VIEW STUDIO ===== -->
             <div id="studioMyView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Back to Mode</span></button>
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Kembali ke Mode</span></button>
                 <div class="story-studio">
                     <div class="form-panel">
                         <div class="lang-buttons">
@@ -1187,10 +1201,11 @@
                             </div>
                         </div>
                         <div class="toggle-switch" id="myCloseFriendsToggle">
-                            <span id="closeFriendsText">Close Friends</span>
+                            <span id="closeFriendsText">Teman Dekat</span>
                             <div class="toggle-slider" id="myCfSlider"></div>
                         </div>
 
+                        <!-- ===== TEKS OPSIONAL SELF VIEW ===== -->
                         <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
                         <div class="form-group">
                             <label>Isi Teks</label>
@@ -1233,7 +1248,7 @@
                                             <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                         </div>
                                         <div>
-                                            <div class="story-username" id="yourStoryText">Your Story</div>
+                                            <div class="story-username" id="yourStoryText">Story Anda</div>
                                             <div class="story-time" id="myViewTime">Baru saja</div>
                                             <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
                                         </div>
@@ -1245,25 +1260,33 @@
                                 </div>
                                 <div class="my-bottom-bar">
                                     <div class="activity-left">
-                                        <div class="activity-circle"><i class="far fa-heart"></i></div>
-                                        <span class="activity-label" id="activityText">Activity</span>
+                                        <div class="activity-circle">
+                                            <img src="Activity-icon.png" alt="Activity" id="activityIconMy">
+                                        </div>
+                                        <span class="activity-label" id="activityText">Aktivitas</span>
                                     </div>
                                     <div class="actions-right">
                                         <div class="action-item">
-                                            <div class="action-circle"><i class="fas fa-rocket"></i></div>
-                                            <span class="action-label" id="boostText">Boost</span>
+                                            <div class="action-circle">
+                                                <img src="Boost-icon.png" alt="Boost" id="boostIconMy">
+                                            </div>
+                                            <span class="action-label" id="boostText">Bagikan</span>
                                         </div>
                                         <div class="action-item">
-                                            <div class="action-circle"><i class="fas fa-bookmark"></i></div>
-                                            <span class="action-label" id="highlightText">Highlight</span>
+                                            <div class="action-circle">
+                                                <img src="Highlight-icon.png" alt="Highlight" id="highlightIconMy">
+                                            </div>
+                                            <span class="action-label" id="highlightText">Sorotan</span>
                                         </div>
                                         <div class="action-item">
-                                            <div class="action-circle"><i class="fas fa-at"></i></div>
-                                            <span class="action-label" id="mentionText">Mention</span>
+                                            <div class="action-circle">
+                                                <img src="Mention-icon.png" alt="Mention" id="mentionIconMy">
+                                            </div>
+                                            <span class="action-label" id="mentionText">Sebut</span>
                                         </div>
                                         <div class="action-item">
                                             <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
-                                            <span class="action-label" id="moreText">More</span>
+                                            <span class="action-label" id="moreText">Lainnya</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1278,7 +1301,7 @@
 
             <!-- ===== SOCIAL VIEW STUDIO ===== -->
             <div id="studioPublicView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Back to Mode</span></button>
+                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Kembali ke Mode</span></button>
                 <div class="story-studio">
                     <div class="form-panel">
                         <div class="lang-buttons">
@@ -1323,14 +1346,15 @@
                             </div>
                         </div>
                         <div class="toggle-switch" id="pubCloseFriendsToggle">
-                            <span id="cfTextPub">Close Friends</span>
+                            <span id="cfTextPub">Teman Dekat</span>
                             <div class="toggle-slider" id="pubCfSlider"></div>
                         </div>
                         <div class="toggle-follow-control" id="toggleFollowControl">
-                            <span id="followText">Follow / Following</span>
+                            <span id="followText">Ikuti / Mengikuti</span>
                             <div class="follow-toggle-slider" id="followToggleSlider"></div>
                         </div>
 
+                        <!-- ===== TEKS OPSIONAL SOCIAL VIEW ===== -->
                         <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
                         <div class="form-group">
                             <label>Isi Teks</label>
@@ -1374,17 +1398,18 @@
                                                 <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
                                             </div>
                                             <div class="story-time" id="pubTimeLabel">Baru saja</div>
-                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Close friends</span></div>
+                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Teman dekat</span></div>
                                         </div>
                                     </div>
                                     <div class="header-right-social">
-                                        <button class="follow-btn-story" id="pubFollowAction">Follow</button>
+                                        <button class="follow-btn-story" id="pubFollowAction">Ikuti</button>
                                         <i class="fas fa-ellipsis-h three-dots"></i>
                                     </div>
                                 </div>
+                                <div class="send-message-bg"></div>
                                 <div class="send-message-bar">
                                     <div class="send-message-pill">
-                                        <input class="send-message-input" id="pubMessageInput" placeholder="Send message...">
+                                        <span class="send-message-label" id="pubMessageInput">Kirim pesan...</span>
                                     </div>
                                     <div class="story-action-icons">
                                         <div class="story-icon-btn" id="pubLikeBtn">
@@ -1425,20 +1450,20 @@
             <div class="footer-section">
                 <h3>Explore</h3>
                 <ul class="footer-links">
-                    <li><a href="#">The Kachoo</a></li>
-                    <li><a href="#">Kafkapages</a></li>
-                    <li><a href="#">Kaboom</a></li>
-                    <li><a href="#">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
                     <li><a href="#">Kadio</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>More</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Chobank</a></li>
-                    <li><a href="#">Chonnect</a></li>
-                    <li><a href="#">Chosong</a></li>
-                    <li><a href="#">Chodate</a></li>
+                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1499,9 +1524,9 @@
                 closeFriends: "Teman Dekat",
                 yourStory: "Story Anda",
                 activity: "Aktivitas",
-                boost: "Promosi",
+                boost: "Bagikan",
                 highlight: "Sorotan",
-                mention: "Mention",
+                mention: "Sebut",
                 more: "Lainnya",
                 download: "Unduh",
                 closeFriendsBadge: "Teman Dekat",
@@ -1536,7 +1561,7 @@
                 closeFriends: "Close Friends",
                 yourStory: "Your Story",
                 activity: "Activity",
-                boost: "Boost",
+                boost: "Share",
                 highlight: "Highlight",
                 mention: "Mention",
                 more: "More",
@@ -1607,7 +1632,7 @@
                 document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
                 document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
                 document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
-                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').setAttribute('placeholder', t.sendMessagePlaceholder));
+                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').innerText = t.sendMessagePlaceholder);
 
                 if (pubFollowActive) {
                     document.getElementById('pubFollowAction').innerText = t.following;
@@ -1639,11 +1664,11 @@
                     if (activeCropper) activeCropper.destroy();
                     activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1, autoCropArea: 1 });
                 }, 100);
-                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none'; if (activeCropper) { activeCropper
-                            .destroy();
-                        activeCropper = null; } resolve(null); };
-                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas()
-                            .toBlob(blob => { const url = URL.createObjectURL(blob);
+                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none';
+                    if (activeCropper) { activeCropper.destroy();
+                        activeCropper = null; }
+                    resolve(null); };
+                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas().toBlob(blob => { const url = URL.createObjectURL(blob);
                             modal.style.display = 'none';
                             activeCropper.destroy();
                             activeCropper = null;
@@ -1653,8 +1678,7 @@
 
         function applyTextTheme(cardEl, theme) {
             const color = theme === 'white' ? '#fff' : '#000';
-            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style
-                .color = color);
+            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style.color = color);
             const followBtn = cardEl.querySelector('.follow-btn-story');
             if (followBtn) followBtn.style.color = color;
             const msgInput = cardEl.querySelector('.send-message-input');
@@ -1667,8 +1691,7 @@
             let timeVal = document.getElementById('myTimeSelect').value;
             if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
             const t = translations[currentMyLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
-            'Baru saja'));
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
             document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
             if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
             document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
@@ -1689,8 +1712,7 @@
             let timeVal = document.getElementById('pubTimeSelect').value;
             if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
             const t = translations[currentPubLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow :
-            'Baru saja'));
+            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
             document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
             if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
             document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
@@ -1876,9 +1898,15 @@
                     scale: 2.5,
                     backgroundColor: null,
                     useCORS: true,
+                    allowTaint: true,
                     logging: false,
-                    windowWidth: el.scrollWidth,
-                    windowHeight: el.scrollHeight
+                    onclone: function(clonedDoc, clonedEl) {
+                        // Temporarily remove overflow:hidden from story cards so send bar is not clipped
+                        clonedEl.querySelectorAll('.my-story-card, .other-story-card').forEach(function(card) {
+                            card.style.overflow = 'visible';
+                            card.style.borderRadius = '18px';
+                        });
+                    }
                 });
 
                 // Tampilkan kembali tombol X
@@ -1898,42 +1926,33 @@
             }
         }
 
-        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'),
-            `selfstory_${Date.now()}.png`);
-        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'),
-            `socialstory_${Date.now()}.png`);
+        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
+        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
 
-        // ========== EXISTING FUNCTIONS ==========
         // Avatar & Background uploads
-        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload')
-            .click());
-        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
-                await cropImageRatio(e.target.files[0], 1); if (u) { myAvatarUrl = u;
-                updateMyView(); } } });
+        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
+        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
+                if (u) { myAvatarUrl = u;
+                    updateMyView(); } } });
         document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
-        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
-                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { myBgUrl = u;
-                updateMyView(); } } });
-        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload')
-            .click());
-        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
-                await cropImageRatio(e.target.files[0], 1); if (u) { pubAvatarUrl = u;
-                updatePublicView(); } } });
+        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
+                if (u) { myBgUrl = u;
+                    updateMyView(); } } });
+        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload').click());
+        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
+                if (u) { pubAvatarUrl = u;
+                    updatePublicView(); } } });
         document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
-        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u =
-                await cropImageRatio(e.target.files[0], 9 / 16); if (u) { pubBgUrl = u;
-                updatePublicView(); } } });
+        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
+                if (u) { pubBgUrl = u;
+                    updatePublicView(); } } });
 
         // Time selects
-        document.getElementById('myTimeSelect').addEventListener('change', function() {
-            document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updateMyView();
-        });
+        document.getElementById('myTimeSelect').addEventListener('change', function() { document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updateMyView(); });
         document.getElementById('myCustomTime').addEventListener('input', updateMyView);
-        document.getElementById('pubTimeSelect').addEventListener('change', function() {
-            document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updatePublicView();
-        });
+        document.getElementById('pubTimeSelect').addEventListener('change', function() { document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
+            updatePublicView(); });
         document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
 
         // Toggles
@@ -1956,25 +1975,21 @@
         // Outer background
         document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg = e.target.value;
             updateMyView(); });
-        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el
-                .getAttribute('data-outer');
+        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer');
             myOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updateMyView(); }));
         document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg = e.target.value;
             updatePublicView(); });
-        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el
-                .getAttribute('data-outer-pub');
+        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer-pub');
             pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updatePublicView(); }));
 
         // Mode selection
-        window.resetToModeSelection = function() {
-            document.getElementById('modeSelection').style.display = 'flex';
+        window.resetToModeSelection = function() { document.getElementById('modeSelection').style.display = 'flex';
             document.getElementById('studioMyView').classList.remove('active-view');
             document.getElementById('studioPublicView').classList.remove('active-view');
             document.getElementById('studioMyView').style.display = 'none';
-            document.getElementById('studioPublicView').style.display = 'none';
-        };
+            document.getElementById('studioPublicView').style.display = 'none'; };
         document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
             const mode = card.getAttribute('data-mode');
             document.getElementById('modeSelection').style.display = 'none';
@@ -2032,8 +2047,7 @@
         const mobBtn = document.getElementById('mobileMenuBtn'),
             mobMenu = document.getElementById('mobileMenu'),
             mobOverlay = document.getElementById('mobileMenuOverlay'),
-            mobClose = document.getElementById(
-            'mobileMenuClose');
+            mobClose = document.getElementById('mobileMenuClose');
         if (mobBtn) {
             mobBtn.onclick = () => { mobMenu.classList.add('active');
                 mobOverlay.classList.add('active');
