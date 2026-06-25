@@ -7,24 +7,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { font-family: 'Outfit', sans-serif; background-color: #f5f5f5; line-height: 1.5; }
-        body { padding-top: 80px; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; width: 100%; }
-        @media (max-width: 1024px) { .container { padding: 0 24px; } }
-        @media (max-width: 768px) { .container { padding: 0 16px; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body,
+        html {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.5;
+        }
+        body {
+            padding-top: 80px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+        }
 
         header {
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(16px);
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .header-content {
             display: flex;
@@ -35,32 +63,171 @@
             margin: 0 auto;
             position: relative;
         }
-        .logo-container { display: flex; align-items: center; cursor: pointer; }
-        .logo-img { height: 38px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
-        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
-        @media (max-width: 640px) { .center-logo-img { height: 100px; } .logo-img { height: 30px; } }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .logo-img {
+            height: 38px;
+            width: auto;
+        }
+        .center-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .center-logo-img {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        @media (max-width: 640px) {
+            .center-logo-img {
+                height: 100px;
+            }
+            .logo-img {
+                height: 30px;
+            }
+        }
 
-        .desktop-nav-container { position: relative; display: block; }
-        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
-        .desktop-nav-trigger { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 14px; color: white; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
-        .desktop-nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 200px; background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); }
-        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; transition: 0.2s; }
-        .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
+        .desktop-nav-container {
+            position: relative;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav-container {
+                display: none;
+            }
+        }
+        .desktop-nav-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .desktop-nav-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 200px;
+            background: rgba(10, 10, 10, 0.97);
+            border-radius: 18px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .desktop-nav-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .desktop-nav-dropdown .nav-button {
+            display: block;
+            width: 100%;
+            padding: 11px 20px;
+            font-weight: 500;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .desktop-nav-dropdown .nav-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-        .mobile-menu-btn { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998; }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 260px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.97);
+            padding: 90px 20px 40px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-link {
+            display: block;
+            padding: 13px 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
 
-        .main-content { padding: 28px 0 60px; }
-        .story-studio { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start; }
-        @media (max-width: 860px) { .story-studio { flex-direction: column; align-items: center; } }
-        
+        .main-content {
+            padding: 28px 0 60px;
+        }
+        .story-studio {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        @media (max-width: 860px) {
+            .story-studio {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
         .settings-title {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
@@ -70,58 +237,207 @@
             text-align: center;
             letter-spacing: 0.5px;
         }
-        .settings-title span { color: #000; }
+        .settings-title span {
+            color: #000;
+        }
 
         .form-panel {
             background: white;
             border-radius: 24px;
             padding: 22px 20px;
             width: 340px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid #eaeaea;
         }
-        @media (max-width: 860px) { .form-panel { width: 100%; max-width: 420px; } }
-        .section-divider { margin: 16px 0 10px; border-top: 1px solid #f0f0f0; padding-top: 12px; font-weight: 700; font-size: 12px; color: #444; display: flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.4px; }
-        .form-group { margin-bottom: 14px; }
-        label { font-weight: 600; font-size: 11px; display: block; margin-bottom: 5px; color: #666; text-transform: uppercase; letter-spacing: 0.4px; }
-        input[type="text"], input[type="number"], select { 
-            width: 100%; 
-            padding: 10px 13px; 
-            border: 1px solid #e0e0e0; 
-            border-radius: 12px; 
-            font-size: 13px; 
-            outline: none; 
-            background: white; 
+        @media (max-width: 860px) {
+            .form-panel {
+                width: 100%;
+                max-width: 420px;
+            }
+        }
+        .section-divider {
+            margin: 16px 0 10px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+            font-weight: 700;
+            font-size: 12px;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 13px;
+            outline: none;
+            background: white;
             font-family: 'Outfit', sans-serif;
             color: #000;
         }
-        input::placeholder { 
-            color: #aaa; 
+        input::placeholder {
+            color: #aaa;
             opacity: 1;
         }
-        .file-input-label { background: #f7f7f7; text-align: center; padding: 9px 12px; border-radius: 12px; margin-top: 5px; cursor: pointer; font-size: 12px; border: 1px solid #e8e8e8; }
-        .bg-options-row { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
-        .bg-option { width: 40px; height: 40px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
-        .bg-black { background: #000; border: 1px solid #555; }
-        .bg-white { background: #fff; border: 1px solid #aaa; }
-        .bg-transparent { background: conic-gradient(#ccc 0deg 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg 360deg); background-size: 12px 12px; border: 1px solid #aaa; }
-        .active-bg-choice { border-color: #0095f6 !important; }
-        .color-picker-small { width: 40px; height: 40px; border-radius: 12px; border: 1px solid #ccc; cursor: pointer; }
-        .toggle-switch { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; padding: 9px 14px; border-radius: 60px; cursor: pointer; margin-bottom: 9px; }
-        .toggle-switch span { font-size: 12px; font-weight: 500; color: #333; }
-        .toggle-slider { width: 42px; height: 22px; background: #ccc; border-radius: 30px; position: relative; transition: 0.2s; flex-shrink: 0; }
-        .toggle-slider.active { background: #0095f6; }
-        .toggle-slider::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
-        .toggle-slider.active::after { left: 22px; }
-        .toggle-follow-control { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; padding: 9px 14px; border-radius: 60px; cursor: pointer; margin-bottom: 9px; }
-        .follow-toggle-slider { width: 42px; height: 22px; background: #ccc; border-radius: 30px; position: relative; transition: 0.2s; }
-        .follow-toggle-slider.active { background: #0095f6; }
-        .follow-toggle-slider::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
-        .follow-toggle-slider.active::after { left: 22px; }
+        .file-input-label {
+            background: #f7f7f7;
+            text-align: center;
+            padding: 9px 12px;
+            border-radius: 12px;
+            margin-top: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid #e8e8e8;
+        }
+        .bg-options-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .bg-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.15s;
+        }
+        .bg-black {
+            background: #000;
+            border: 1px solid #555;
+        }
+        .bg-white {
+            background: #fff;
+            border: 1px solid #aaa;
+        }
+        .bg-transparent {
+            background: conic-gradient(#ccc 0deg 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg 360deg);
+            background-size: 12px 12px;
+            border: 1px solid #aaa;
+        }
+        .active-bg-choice {
+            border-color: #0095f6 !important;
+        }
+        .color-picker-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 9px 14px;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-bottom: 9px;
+        }
+        .toggle-switch span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+        }
+        .toggle-slider {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 30px;
+            position: relative;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+        .toggle-slider.active {
+            background: #0095f6;
+        }
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+        .toggle-slider.active::after {
+            left: 22px;
+        }
+        .toggle-follow-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            padding: 9px 14px;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-bottom: 9px;
+        }
+        .follow-toggle-slider {
+            width: 42px;
+            height: 22px;
+            background: #ccc;
+            border-radius: 30px;
+            position: relative;
+            transition: 0.2s;
+        }
+        .follow-toggle-slider.active {
+            background: #0095f6;
+        }
+        .follow-toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+        .follow-toggle-slider.active::after {
+            left: 22px;
+        }
 
-        .story-card-wrapper { width: 360px; }
-        @media (max-width: 860px) { .story-card-wrapper { width: 100%; max-width: 380px; } }
-        .story-outer { background-color: #000; border-radius: 28px; padding: 14px; display: inline-block; width: 100%; }
+        .story-card-wrapper {
+            width: 360px;
+        }
+        @media (max-width: 860px) {
+            .story-card-wrapper {
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+        .story-outer {
+            background-color: #000;
+            border-radius: 28px;
+            padding: 14px;
+            display: inline-block;
+            width: 100%;
+        }
         .other-story-card {
             background: #111;
             border-radius: 18px;
@@ -139,33 +455,42 @@
         /* ===== TOP BAR ===== */
         .live-top-bar {
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             padding: 12px 14px 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
         }
-        .live-user-row { display: flex; align-items: center; gap: 8px; }
-        .live-avatar { 
-            width: 36px; 
-            height: 36px; 
-            border-radius: 50%; 
-            border: 2px solid white; 
-            object-fit: cover; 
+        .live-user-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .live-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid white;
+            object-fit: cover;
             background: #0095f6;
         }
-        .live-username { 
-            font-weight: 700; 
-            font-size: 13px; 
-            color: white; 
-            display: inline-flex; 
-            align-items: center; 
+        .live-username {
+            font-weight: 700;
+            font-size: 13px;
+            color: white;
+            display: inline-flex;
+            align-items: center;
             gap: 4px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
-        .verified-icon { color: #0095f6; font-size: 11px; }
+        .verified-icon {
+            color: #0095f6;
+            font-size: 11px;
+        }
 
         /* LIVE badge - ungu atas kiri, pink bawah kanan */
         .live-right-top {
@@ -173,34 +498,37 @@
             align-items: center;
             gap: 8px;
         }
-        .live-badge { 
+        .live-badge {
             background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 40%, #ec4899 70%, #f472b6 100%);
-            color: white; 
-            font-size: 10px; 
-            font-weight: 800; 
-            padding: 3px 10px; 
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 10px;
             border-radius: 4px;
             letter-spacing: 0.5px;
         }
-        .live-viewers-box { 
-            background: rgba(0,0,0,0.5);
+        .live-viewers-box {
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             padding: 2px 10px;
             border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        .live-viewers { 
-            font-size: 11px; 
-            color: white; 
-            display: flex; 
-            align-items: center; 
+        .live-viewers {
+            font-size: 11px;
+            color: white;
+            display: flex;
+            align-items: center;
             gap: 4px;
             font-weight: 500;
         }
-        .live-viewers i { font-size: 9px; opacity: 0.7; }
+        .live-viewers i {
+            font-size: 9px;
+            opacity: 0.7;
+        }
 
         /* ===== KOLOM KOMENTAR DIPENDEKIN ===== */
         .live-comments-area {
@@ -224,8 +552,14 @@
             animation: fadeInUp 0.3s ease;
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .comment-avatar-small {
             width: 22px;
@@ -234,23 +568,23 @@
             object-fit: cover;
             flex-shrink: 0;
             background: #777;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .comment-username { 
-            font-size: 10px; 
-            font-weight: 700; 
-            color: white; 
-            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+        .comment-username {
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
         }
-        .comment-text { 
-            font-size: 11px; 
-            color: white; 
-            line-height: 1.2; 
+        .comment-text {
+            font-size: 11px;
+            color: white;
+            line-height: 1.2;
             word-break: break-word;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
         }
         .comment-wrapper {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(2px);
             padding: 5px 10px 2px 6px;
             border-radius: 14px;
@@ -273,7 +607,7 @@
             position: absolute;
             font-size: 14px;
             opacity: 0.8;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
             transition: opacity 0.3s;
         }
 
@@ -300,7 +634,7 @@
             fill: none;
             stroke: white;
             stroke-width: 2;
-            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
         }
         .live-action-icon.liked svg {
             fill: #ff3040;
@@ -314,7 +648,7 @@
             left: 0;
             right: 0;
             height: 52px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
@@ -332,22 +666,51 @@
         }
         .send-message-pill {
             flex: 1;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(4px);
             border-radius: 24px;
             height: 34px;
             display: flex;
             align-items: center;
             padding: 0 14px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .send-message-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .send-message-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
 
-        .download-group { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
-        .download-single { background: #111; border: none; padding: 11px 26px; border-radius: 100px; font-weight: 600; color: white; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-family: 'Outfit', sans-serif; }
-        .download-single:hover { background: #333; }
+        .download-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .download-single {
+            background: #111;
+            border: none;
+            padding: 11px 26px;
+            border-radius: 100px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            font-family: 'Outfit', sans-serif;
+        }
+        .download-single:hover {
+            background: #333;
+        }
 
-        footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
+        footer {
+            background: #000;
+            color: #ddd;
+            padding: 50px 0 28px;
+            margin-top: 40px;
+        }
         .footer-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr 1fr 1fr;
@@ -358,334 +721,504 @@
             margin-right: auto;
             padding: 0 24px;
         }
-        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
-        .footer-section h3 { font-size: 0.7rem; font-weight: 700; margin-bottom: 14px; color: white; text-transform: uppercase; letter-spacing: 1.2px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0px; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
-        .footer-links a:hover { color: white; }
-        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 200px; margin-bottom: 14px; line-height: 1.6; }
-        .social-links { display: flex; gap: 10px; }
-        .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 60px; color: white; text-decoration: none; font-size: 12px; transition: 0.2s; }
-        .social-link:hover { background: white; color: black; }
-        .footer-bottom { display: flex; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        @media (max-width: 860px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
+        .footer-section h3 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.83rem;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            max-width: 200px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .social-link:hover {
+            background: white;
+            color: black;
+        }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        .copyright {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
 
-        .crop-modal { display: none; position: fixed; inset: 0; background: #000; z-index: 20000; justify-content: center; align-items: center; flex-direction: column; }
-        .crop-modal .crop-container { background: #000; max-width: 90vw; max-height: 85vh; overflow: hidden; border-radius: 20px; }
-        .crop-modal .crop-container img { max-width: 100%; max-height: 70vh; display: block; }
-        .crop-modal-buttons { padding: 18px; display: flex; gap: 14px; justify-content: center; background: #000; }
-        .crop-modal-btn { padding: 11px 30px; border-radius: 100px; border: none; cursor: pointer; font-weight: 700; font-size: 15px; }
-        .crop-modal-btn.cancel { background: #333; color: white; }
-        .crop-modal-btn.save { background: #0095f6; color: white; }
+        .crop-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .crop-modal .crop-container {
+            background: #000;
+            max-width: 90vw;
+            max-height: 85vh;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        .crop-modal .crop-container img {
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+        }
+        .crop-modal-buttons {
+            padding: 18px;
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            background: #000;
+        }
+        .crop-modal-btn {
+            padding: 11px 30px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .crop-modal-btn.cancel {
+            background: #333;
+            color: white;
+        }
+        .crop-modal-btn.save {
+            background: #0095f6;
+            color: white;
+        }
 
-        .toast-msg { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 11px 22px; border-radius: 60px; font-weight: 500; font-size: 13px; z-index: 30000; pointer-events: none; opacity: 0; transition: opacity 0.2s; white-space: nowrap; }
+        .toast-msg {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 13px;
+            z-index: 30000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-        </div>
-        <div class="center-title">
-            <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
-        </div>
-        <div class="desktop-nav-container">
-            <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
-            <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
-                <a href="Profile.html" class="nav-button">Instacho Profile</a>
-                <a href="Story.html" class="nav-button">Instacho Story</a>
+    <header>
+        <div class="header-content">
+            <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
+            <div class="center-title">
+                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+            </div>
+            <div class="desktop-nav-container">
+                <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
+                <div class="desktop-nav-dropdown" id="desktopNavDropdown">
+                    <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
+                    <a href="Profile.html" class="nav-button">Instacho Profile</a>
+                    <a href="Story.html" class="nav-button">Instacho Story</a>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
+        <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+        <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
     </div>
-</header>
 
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-    <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
-    <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-    <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
-</div>
+    <div class="main-content">
+        <div class="container">
+            <div class="story-studio">
+                <div class="form-panel">
+                    <div class="settings-title">Now Live on <span>Instacho!</span></div>
+                    <div class="section-divider"><i class="fas fa-user"></i> Live Streamer Profile</div>
+                    <div class="form-group"><label>Profile Photo</label><input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubAvatarLabel">Upload Avatar</div></div>
+                    <div class="form-group"><label>Username</label><input type="text" id="pubUsername" placeholder="" value=""></div>
+                    <div class="form-group"><label>Viewer Count</label><input type="text" id="pubViewerCount" placeholder="" value=""></div>
+                    <div class="toggle-switch" id="pubVerifiedToggle"><span>Verified Account</span><div class="toggle-slider" id="pubVerifiedSlider"></div></div>
+                    <div class="form-group"><label>Live Background (9:17)</label><input type="file" id="pubBgUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubBgLabel">Upload Background</div></div>
 
-<div class="main-content">
-    <div class="container">
-        <div class="story-studio">
-            <div class="form-panel">
-                <div class="settings-title">Now Live on <span>Instacho!</span></div>
-                <div class="section-divider"><i class="fas fa-user"></i> Live Streamer Profile</div>
-                <div class="form-group"><label>Profile Photo</label><input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubAvatarLabel">Upload Avatar</div></div>
-                <div class="form-group"><label>Username</label><input type="text" id="pubUsername" placeholder="" value=""></div>
-                <div class="form-group"><label>Viewer Count</label><input type="text" id="pubViewerCount" placeholder="" value=""></div>
-                <div class="toggle-switch" id="pubVerifiedToggle"><span>Verified Account</span><div class="toggle-slider" id="pubVerifiedSlider"></div></div>
-                <div class="form-group"><label>Live Background (9:17)</label><input type="file" id="pubBgUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubBgLabel">Upload Background</div></div>
-                
-                <div class="section-divider"><i class="fas fa-comments"></i> 5 Comments</div>
-                <div class="form-group"><label>User 1</label><input type="text" id="comment1User" placeholder="" value=""></div>
-                <div class="form-group"><label>Comment 1</label><input type="text" id="comment1Text" placeholder="" value=""></div>
-                <div class="form-group"><label>User 2</label><input type="text" id="comment2User" placeholder="" value=""></div>
-                <div class="form-group"><label>Comment 2</label><input type="text" id="comment2Text" placeholder="" value=""></div>
-                <div class="form-group"><label>User 3</label><input type="text" id="comment3User" placeholder="" value=""></div>
-                <div class="form-group"><label>Comment 3</label><input type="text" id="comment3Text" placeholder="" value=""></div>
-                <div class="form-group"><label>User 4</label><input type="text" id="comment4User" placeholder="" value=""></div>
-                <div class="form-group"><label>Comment 4</label><input type="text" id="comment4Text" placeholder="" value=""></div>
-                <div class="form-group"><label>User 5</label><input type="text" id="comment5User" placeholder="" value=""></div>
-                <div class="form-group"><label>Comment 5</label><input type="text" id="comment5Text" placeholder="" value=""></div>
-                
-                <div class="section-divider"><i class="fas fa-fill-drip"></i> Outer Frame Color</div>
-                <div class="form-group"><label>Frame Background</label><div class="bg-options-row"><div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div><div class="bg-option bg-white" data-outer-pub="white"></div><div class="bg-option bg-transparent" data-outer-pub="transparent"></div><input type="color" id="pubOuterColor" value="#000000"></div></div>
-                <div class="toggle-follow-control" id="toggleFollowControl"><span>Follow / Following</span><div class="follow-toggle-slider" id="followToggleSlider"></div></div>
-            </div>
+                    <div class="section-divider"><i class="fas fa-comments"></i> 5 Comments</div>
+                    <div class="form-group"><label>User 1</label><input type="text" id="comment1User" placeholder="" value=""></div>
+                    <div class="form-group"><label>Comment 1</label><input type="text" id="comment1Text" placeholder="" value=""></div>
+                    <div class="form-group"><label>User 2</label><input type="text" id="comment2User" placeholder="" value=""></div>
+                    <div class="form-group"><label>Comment 2</label><input type="text" id="comment2Text" placeholder="" value=""></div>
+                    <div class="form-group"><label>User 3</label><input type="text" id="comment3User" placeholder="" value=""></div>
+                    <div class="form-group"><label>Comment 3</label><input type="text" id="comment3Text" placeholder="" value=""></div>
+                    <div class="form-group"><label>User 4</label><input type="text" id="comment4User" placeholder="" value=""></div>
+                    <div class="form-group"><label>Comment 4</label><input type="text" id="comment4Text" placeholder="" value=""></div>
+                    <div class="form-group"><label>User 5</label><input type="text" id="comment5User" placeholder="" value=""></div>
+                    <div class="form-group"><label>Comment 5</label><input type="text" id="comment5Text" placeholder="" value=""></div>
 
-            <div class="story-card-wrapper">
-                <div id="pubOuterFrame" class="story-outer">
-                    <div class="other-story-card" id="publicStoryCard">
-                        <!-- Top Bar -->
-                        <div class="live-top-bar">
-                            <div class="live-user-row">
-                                <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
-                                <span class="live-username"><span id="pubUsernameLabel">Username</span><i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i></span>
+                    <div class="section-divider"><i class="fas fa-fill-drip"></i> Outer Frame Color</div>
+                    <div class="form-group"><label>Frame Background</label><div class="bg-options-row"><div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div><div class="bg-option bg-white" data-outer-pub="white"></div><div class="bg-option bg-transparent" data-outer-pub="transparent"></div><input type="color" id="pubOuterColor" value="#000000"></div></div>
+                    <div class="toggle-follow-control" id="toggleFollowControl"><span>Follow / Following</span><div class="follow-toggle-slider" id="followToggleSlider"></div></div>
+                </div>
+
+                <div class="story-card-wrapper">
+                    <div id="pubOuterFrame" class="story-outer">
+                        <div class="other-story-card" id="publicStoryCard">
+                            <!-- Top Bar -->
+                            <div class="live-top-bar">
+                                <div class="live-user-row">
+                                    <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
+                                    <span class="live-username"><span id="pubUsernameLabel">Username</span></span>
+                                </div>
+                                <div class="live-right-top">
+                                    <span class="live-badge">LIVE</span>
+                                    <div class="live-viewers-box">
+                                        <span class="live-viewers"><i class="fas fa-eye"></i> <span id="pubViewerLabel">0</span></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="live-right-top">
-                                <span class="live-badge">LIVE</span>
-                                <div class="live-viewers-box">
-                                    <span class="live-viewers"><i class="fas fa-eye"></i> <span id="pubViewerLabel">0</span></span>
+
+                            <!-- KOLOM KOMENTAR DIPENDEKIN -->
+                            <div class="live-comments-area" id="commentsArea"></div>
+
+                            <!-- LOVE WARNA-WARNI STATIS - POSISI ACAK KE ATAS -->
+                            <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
+
+                            <!-- TOMBOL SHARE & LOVE - TANPA JUMLAH LIKES -->
+                            <div class="live-bottom-actions">
+                                <div class="live-action-icon">
+                                    <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                </div>
+                                <div class="live-action-icon" id="pubLikeBtn">
+                                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                </div>
+                            </div>
+
+                            <!-- Send Message Bar -->
+                            <div class="send-message-bg"></div>
+                            <div class="send-message-bar">
+                                <div class="send-message-pill">
+                                    <span class="send-message-label">Comment</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- KOLOM KOMENTAR DIPENDEKIN -->
-                        <div class="live-comments-area" id="commentsArea"></div>
-
-                        <!-- LOVE WARNA-WARNI STATIS - POSISI ACAK KE ATAS -->
-                        <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
-
-                        <!-- TOMBOL SHARE & LOVE - TANPA JUMLAH LIKES -->
-                        <div class="live-bottom-actions">
-                            <div class="live-action-icon">
-                                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            </div>
-                            <div class="live-action-icon" id="pubLikeBtn">
-                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            </div>
-                        </div>
-
-                        <!-- Send Message Bar -->
-                        <div class="send-message-bg"></div>
-                        <div class="send-message-bar">
-                            <div class="send-message-pill">
-                                <span class="send-message-label">Comment</span>
-                            </div>
-                        </div>
                     </div>
+                    <div class="download-group"><button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> Download Story</button></div>
                 </div>
-                <div class="download-group"><button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> Download Story</button></div>
             </div>
         </div>
     </div>
-</div>
 
-<footer>
-    <div class="footer-grid">
-        <div class="footer-section footer-brand">
-            <h3>CHODATE</h3>
-            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
-            <div class="social-links">
-                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-brand">
+                <h3>CHODATE</h3>
+                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <div class="social-links">
+                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                    <li><a href="#">Kadio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meet Us</h3>
+                <ul class="footer-links">
+                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+                </ul>
             </div>
         </div>
-        <div class="footer-section">
-            <h3>Explore</h3>
-            <ul class="footer-links">
-                <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
-                <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
-                <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
-                <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
-                <li><a href="#">Kadio</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
         </div>
-        <div class="footer-section">
-            <h3>More</h3>
-            <ul class="footer-links">
-                <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
-                <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-                <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
-                <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Meet Us</h3>
-            <ul class="footer-links">
-                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
-                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
-    </div>
-</footer>
+    </footer>
 
-<div class="crop-modal" id="cropModal"><div class="crop-container"><img id="cropImage"></div><div class="crop-modal-buttons"><button class="crop-modal-btn cancel" id="cancelCrop">Cancel</button><button class="crop-modal-btn save" id="saveCrop">Save</button></div></div>
-<div class="toast-msg" id="toastMsg"></div>
+    <div class="crop-modal" id="cropModal"><div class="crop-container"><img id="cropImage"></div><div class="crop-modal-buttons"><button class="crop-modal-btn cancel" id="cancelCrop">Cancel</button><button class="crop-modal-btn save" id="saveCrop">Save</button></div></div>
+    <div class="toast-msg" id="toastMsg"></div>
 
-<script>
-    let pubBgUrl = null, pubAvatarUrl = null;
-    let pubVerified = false, pubFollowActive = false, pubLiked = false;
-    let pubOuterBg = '#000000';
+    <script>
+        let pubBgUrl = null,
+            pubAvatarUrl = null;
+        let pubVerified = false,
+            pubFollowActive = false,
+            pubLiked = false;
+        let pubOuterBg = '#000000';
 
-    function showToast(msg) { let t=document.getElementById('toastMsg'); t.innerText=msg; t.style.opacity='1'; setTimeout(()=>t.style.opacity='0',2000); }
-    
-    function cropImageRatio(file, ratio) { 
-        return new Promise(resolve=>{ 
-            const modal=document.getElementById('cropModal'); 
-            const img=document.getElementById('cropImage'); 
-            if(!img){resolve(null);return;} 
-            img.src=URL.createObjectURL(file); 
-            modal.style.display='flex'; 
-            setTimeout(()=>{ 
-                if(window.activeCropper) window.activeCropper.destroy(); 
-                window.activeCropper=new Cropper(img,{aspectRatio:ratio,viewMode:1,autoCropArea:1}); 
-            },100); 
-            document.getElementById('cancelCrop').onclick=()=>{ modal.style.display='none'; if(window.activeCropper){window.activeCropper.destroy();window.activeCropper=null;} resolve(null); }; 
-            document.getElementById('saveCrop').onclick=()=>{ if(window.activeCropper){ window.activeCropper.getCroppedCanvas().toBlob(blob=>{ const url=URL.createObjectURL(blob); modal.style.display='none'; window.activeCropper.destroy(); window.activeCropper=null; resolve(url); },'image/png'); } }; 
-        }); 
-    }
+        function showToast(msg) { let t = document.getElementById('toastMsg');
+            t.innerText = msg;
+            t.style.opacity = '1';
+            setTimeout(() => t.style.opacity = '0', 2000); }
 
-    function generateRandomHearts() {
-        const container = document.getElementById('floatingHeartsContainer');
-        if (!container) return;
-        container.innerHTML = '';
-        
-        const colors = [
-            '#ff6b6b', '#ff9ff3', '#f368e0', '#ff9f43', '#00d2d3', 
-            '#54a0ff', '#5f27cd', '#ff4757', '#e056a0', '#f8a5c2',
-            '#f19066', '#e15f41', '#c44569', '#6c5ce7', '#fd79a8'
-        ];
-        
-        const count = 8 + Math.floor(Math.random() * 5);
-        
-        for (let i = 0; i < count; i++) {
-            const heart = document.createElement('i');
-            heart.className = 'fas fa-heart static-heart';
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const size = 10 + Math.random() * 10;
-            const left = Math.random() * 50;
-            const bottom = Math.random() * 140;
-            const opacity = 0.15 + Math.random() * 0.75;
-            const rotate = (Math.random() - 0.5) * 40;
-            
-            heart.style.cssText = `
-                left: ${left}%;
-                bottom: ${bottom}px;
-                font-size: ${size}px;
-                color: ${color};
-                opacity: ${opacity};
-                transform: rotate(${rotate}deg);
-                filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-            `;
-            container.appendChild(heart);
+        function cropImageRatio(file, ratio) {
+            return new Promise(resolve => {
+                const modal = document.getElementById('cropModal');
+                const img = document.getElementById('cropImage');
+                if (!img) { resolve(null); return; }
+                img.src = URL.createObjectURL(file);
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    if (window.activeCropper) window.activeCropper.destroy();
+                    window.activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1,
+                        autoCropArea: 1 });
+                }, 100);
+                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none'; if (
+                        window.activeCropper) { window.activeCropper.destroy();
+                        window.activeCropper = null; }
+                    resolve(null); };
+                document.getElementById('saveCrop').onclick = () => { if (window.activeCropper) { window
+                        .activeCropper.getCroppedCanvas().toBlob(blob => { const url = URL
+                            .createObjectURL(blob);
+                            modal.style.display = 'none';
+                            window.activeCropper.destroy();
+                            window.activeCropper = null;
+                            resolve(url);
+                        }, 'image/png'); } };
+            });
         }
-    }
 
-    function updatePublicView() {
-        const uname = document.getElementById('pubUsername').value.trim() || 'Username';
-        document.getElementById('pubUsernameLabel').innerHTML = uname + (pubVerified ? ' <i class="fas fa-check-circle verified-icon"></i>' : '');
-        document.getElementById('pubVerifiedIcon').style.display = pubVerified ? 'inline' : 'none';
-        
-        const viewers = document.getElementById('pubViewerCount').value.trim() || '0';
-        document.getElementById('pubViewerLabel').innerText = viewers;
-        
-        document.getElementById('pubLikeBtn').classList.toggle('liked', pubLiked);
-        if(pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
-        
-        const commentArea = document.getElementById('commentsArea');
-        commentArea.innerHTML = '';
-        
-        const users = [];
-        const texts = [];
-        for(let i = 1; i <= 5; i++) {
-            const userVal = document.getElementById(`comment${i}User`).value.trim();
-            const textVal = document.getElementById(`comment${i}Text`).value.trim();
-            if(userVal || textVal) {
-                users.push(userVal || 'User');
-                texts.push(textVal || '');
+        function generateRandomHearts() {
+            const container = document.getElementById('floatingHeartsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const colors = [
+                '#ff6b6b', '#ff9ff3', '#f368e0', '#ff9f43', '#00d2d3',
+                '#54a0ff', '#5f27cd', '#ff4757', '#e056a0', '#f8a5c2',
+                '#f19066', '#e15f41', '#c44569', '#6c5ce7', '#fd79a8'
+            ];
+
+            const count = 8 + Math.floor(Math.random() * 5);
+
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart static-heart';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = 10 + Math.random() * 10;
+                const left = Math.random() * 50;
+                const bottom = Math.random() * 140;
+                const opacity = 0.15 + Math.random() * 0.75;
+                const rotate = (Math.random() - 0.5) * 40;
+
+                heart.style.cssText = `
+                        left: ${left}%;
+                        bottom: ${bottom}px;
+                        font-size: ${size}px;
+                        color: ${color};
+                        opacity: ${opacity};
+                        transform: rotate(${rotate}deg);
+                        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+                    `;
+                container.appendChild(heart);
             }
         }
-        
-        users.forEach((user, idx) => {
-            const div = document.createElement('div');
-            div.className = 'live-comment';
-            
-            const avatar = document.createElement('img');
-            avatar.className = 'comment-avatar-small';
-            const initial = (user.charAt(0) || 'U').toUpperCase();
-            avatar.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='11' fill='%23${Math.floor(Math.random()*16777215).toString(16)}'/%3E%3Ctext x='11' y='15' text-anchor='middle' fill='white' font-size='10'%3E${initial}%3C/text%3E%3C/svg%3E`;
-            div.appendChild(avatar);
-            
-            const wrapper = document.createElement('div');
-            wrapper.className = 'comment-wrapper';
-            
-            const usernameSpan = document.createElement('span');
-            usernameSpan.className = 'comment-username';
-            usernameSpan.innerText = user;
-            wrapper.appendChild(usernameSpan);
-            
-            if(texts[idx]) {
-                const textSpan = document.createElement('span');
-                textSpan.className = 'comment-text';
-                textSpan.innerText = texts[idx];
-                wrapper.appendChild(textSpan);
+
+        function updatePublicView() {
+            const uname = document.getElementById('pubUsername').value.trim() || 'Username';
+            document.getElementById('pubUsernameLabel').innerHTML = uname + (pubVerified ? ' <i class="fas fa-check-circle verified-icon"></i>' : '');
+
+            const viewers = document.getElementById('pubViewerCount').value.trim() || '0';
+            document.getElementById('pubViewerLabel').innerText = viewers;
+
+            document.getElementById('pubLikeBtn').classList.toggle('liked', pubLiked);
+            if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
+
+            const commentArea = document.getElementById('commentsArea');
+            commentArea.innerHTML = '';
+
+            const users = [];
+            const texts = [];
+            for (let i = 1; i <= 5; i++) {
+                const userVal = document.getElementById(`comment${i}User`).value.trim();
+                const textVal = document.getElementById(`comment${i}Text`).value.trim();
+                if (userVal || textVal) {
+                    users.push(userVal || 'User');
+                    texts.push(textVal || '');
+                }
             }
-            
-            div.appendChild(wrapper);
-            commentArea.appendChild(div);
+
+            users.forEach((user, idx) => {
+                const div = document.createElement('div');
+                div.className = 'live-comment';
+
+                const avatar = document.createElement('img');
+                avatar.className = 'comment-avatar-small';
+                const initial = (user.charAt(0) || 'U').toUpperCase();
+                avatar.src =
+                    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='11' fill='%23${Math.floor(Math.random()*16777215).toString(16)}'/%3E%3Ctext x='11' y='15' text-anchor='middle' fill='white' font-size='10'%3E${initial}%3C/text%3E%3C/svg%3E`;
+                div.appendChild(avatar);
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'comment-wrapper';
+
+                const usernameSpan = document.createElement('span');
+                usernameSpan.className = 'comment-username';
+                usernameSpan.innerText = user;
+                wrapper.appendChild(usernameSpan);
+
+                if (texts[idx]) {
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'comment-text';
+                    textSpan.innerText = texts[idx];
+                    wrapper.appendChild(textSpan);
+                }
+
+                div.appendChild(wrapper);
+                commentArea.appendChild(div);
+            });
+
+            const card = document.getElementById('publicStoryCard');
+            card.style.backgroundImage = pubBgUrl ? `url(${pubBgUrl})` : 'none';
+            card.style.backgroundColor = pubBgUrl ? 'transparent' : '#111';
+            if (pubBgUrl) { card.style.backgroundSize = 'cover';
+                card.style.backgroundPosition = 'center'; }
+            document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
+
+            generateRandomHearts();
+        }
+
+        document.getElementById('pubLikeBtn').addEventListener('click', () => {
+            pubLiked = !pubLiked;
+            updatePublicView();
         });
-        
-        const card = document.getElementById('publicStoryCard');
-        card.style.backgroundImage = pubBgUrl ? `url(${pubBgUrl})` : 'none';
-        card.style.backgroundColor = pubBgUrl ? 'transparent' : '#111';
-        if(pubBgUrl) { card.style.backgroundSize = 'cover'; card.style.backgroundPosition = 'center'; }
-        document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
-        
-        generateRandomHearts();
-    }
 
-    document.getElementById('pubLikeBtn').addEventListener('click', () => {
-        pubLiked = !pubLiked;
+        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload')
+            .click());
+        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const
+                    url = await cropImageRatio(e.target.files[0], 1); if (url) { pubAvatarUrl = url;
+                    updatePublicView(); } } });
+        document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload')
+        .click());
+        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const url =
+                    await cropImageRatio(e.target.files[0], 9 / 17); if (url) { pubBgUrl = url;
+                    updatePublicView(); } } });
+
+        document.getElementById('pubVerifiedSlider').addEventListener('click', () => {
+            pubVerified = !pubVerified;
+            document.getElementById('pubVerifiedSlider').classList.toggle('active');
+            updatePublicView();
+        });
+        document.getElementById('toggleFollowControl').addEventListener('click', () => {
+            pubFollowActive = !pubFollowActive;
+            document.getElementById('followToggleSlider').classList.toggle('active');
+            updatePublicView();
+        });
+        document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg = e.target.value;
+            updatePublicView(); });
+        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el
+                .getAttribute('data-outer-pub');
+            pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
+            updatePublicView(); }));
+
+        const inputIds = ['pubUsername', 'pubViewerCount', 'comment1User', 'comment1Text', 'comment2User', 'comment2Text',
+            'comment3User', 'comment3Text', 'comment4User', 'comment4Text', 'comment5User', 'comment5Text'
+        ];
+        inputIds.forEach(id => document.getElementById(id).addEventListener('input', () => updatePublicView()));
+
+        async function downloadEl(el, name) { try { const c = await html2canvas(el, { scale: 2.5, backgroundColor: null,
+                    useCORS: true, allowTaint: true }); const a = document.createElement('a');
+                a.download = name;
+                a.href = c.toDataURL('image/png');
+                a.click();
+                showToast('Downloaded!'); } catch (e) { showToast('Failed'); } }
+        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'),
+            `live_viewer_${Date.now()}.png`);
+
         updatePublicView();
-    });
 
-    document.getElementById('pubAvatarLabel').addEventListener('click',()=>document.getElementById('pubAvatarUpload').click());
-    document.getElementById('pubAvatarUpload').addEventListener('change',async e=>{if(e.target.files[0]){ const url=await cropImageRatio(e.target.files[0],1); if(url){pubAvatarUrl=url; updatePublicView();}}});
-    document.getElementById('pubBgLabel').addEventListener('click',()=>document.getElementById('pubBgUpload').click());
-    document.getElementById('pubBgUpload').addEventListener('change',async e=>{if(e.target.files[0]){ const url=await cropImageRatio(e.target.files[0],9/17); if(url){pubBgUrl=url; updatePublicView();}}});
-    
-    document.getElementById('pubVerifiedSlider').addEventListener('click',()=>{ pubVerified=!pubVerified; document.getElementById('pubVerifiedSlider').classList.toggle('active'); updatePublicView(); });
-    document.getElementById('toggleFollowControl').addEventListener('click',()=>{ pubFollowActive=!pubFollowActive; document.getElementById('followToggleSlider').classList.toggle('active'); updatePublicView(); });
-    document.getElementById('pubOuterColor').addEventListener('input',e=>{pubOuterBg=e.target.value; updatePublicView();});
-    document.querySelectorAll('[data-outer-pub]').forEach(el=>el.addEventListener('click',()=>{ const v=el.getAttribute('data-outer-pub'); pubOuterBg=v==='black'?'#000000':v==='white'?'#ffffff':'transparent'; updatePublicView();}));
-    
-    const inputIds = ['pubUsername','pubViewerCount','comment1User','comment1Text','comment2User','comment2Text','comment3User','comment3Text','comment4User','comment4Text','comment5User','comment5Text'];
-    inputIds.forEach(id=> document.getElementById(id).addEventListener('input',()=>updatePublicView()));
-    
-    async function downloadEl(el,name){ try{ const c=await html2canvas(el,{scale:2.5,backgroundColor:null,useCORS:true,allowTaint:true}); const a=document.createElement('a'); a.download=name; a.href=c.toDataURL('image/png'); a.click(); showToast('Downloaded!'); }catch(e){ showToast('Failed'); } }
-    document.getElementById('downloadPublicBtn').onclick = ()=> downloadEl(document.getElementById('pubOuterFrame'), `live_viewer_${Date.now()}.png`);
-    
-    updatePublicView();
+        const deskTrigger = document.getElementById('desktopNavTrigger');
+        const deskDrop = document.getElementById('desktopNavDropdown');
+        if (deskTrigger) { deskTrigger.addEventListener('click', e => { e.stopPropagation();
+                deskDrop.classList.toggle('active'); });
+            document.addEventListener('click', () => deskDrop.classList.remove('active')); }
 
-    const deskTrigger = document.getElementById('desktopNavTrigger');
-    const deskDrop = document.getElementById('desktopNavDropdown');
-    if(deskTrigger){ deskTrigger.addEventListener('click',e=>{e.stopPropagation(); deskDrop.classList.toggle('active');}); document.addEventListener('click',()=>deskDrop.classList.remove('active'));}
-    
-    const mobBtn=document.getElementById('mobileMenuBtn'), mobMenu=document.getElementById('mobileMenu'), mobOverlay=document.getElementById('mobileMenuOverlay');
-    if(mobBtn){ mobBtn.addEventListener('click', ()=>{ mobMenu.classList.toggle('active'); mobOverlay.classList.toggle('active'); document.body.style.overflow = mobMenu.classList.contains('active') ? 'hidden' : ''; }); }
-    if(mobOverlay){ mobOverlay.addEventListener('click', ()=>{ mobMenu.classList.remove('active'); mobOverlay.classList.remove('active'); document.body.style.overflow = ''; }); }
-</script>
+        const mobBtn = document.getElementById('mobileMenuBtn'),
+            mobMenu = document.getElementById('mobileMenu'),
+            mobOverlay = document.getElementById('mobileMenuOverlay');
+        if (mobBtn) { mobBtn.addEventListener('click', () => { mobMenu.classList.toggle('active');
+                mobOverlay.classList.toggle('active');
+                document.body.style.overflow = mobMenu.classList.contains('active') ? 'hidden' : ''; }); }
+        if (mobOverlay) { mobOverlay.addEventListener('click', () => { mobMenu.classList.remove('active');
+                mobOverlay.classList.remove('active');
+                document.body.style.overflow = ''; }); }
+    </script>
 </body>
-                                                                                                                                                     </html>
+    </html>
