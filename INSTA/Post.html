@@ -154,11 +154,10 @@
         .media-container img { width: 100%; height: auto; display: block; }
 
         .action-buttons { padding: 5px 13px 7px; display: flex; gap: 14px; align-items: center; }
-        .action-icons { padding: 0px 0px 0px; /*increased top padding */; display: flex; gap: 14px; align-items: center; }
-        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; transform: translateY(4px); /*lowers icons */}
+        .action-icons { padding: 0px 0px 0px; display: flex; gap: 14px; align-items: center; }
+        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; transform: translateY(4px); }
         .action-icon svg { width: 100%; height: 100%; }
         .action-icon img { width: 100%; height: 100%; object-fit: contain; }
-        /* Ukuran icon comment, repost, share diperbesar */
         .action-icons .action-icon:nth-child(2) img,
         .action-icons .action-icon:nth-child(3) img,
         .action-icons .action-icon:nth-child(4) img {
@@ -168,15 +167,31 @@
         .save-icon { margin-left: auto; }
 
         .like-count { font-weight: 600; font-size: 13px; padding: 3px 13px 2px; color: #262626; }
-        /* FIX 4: caption block only in v1 */
         .caption-text { padding: 0 13px 4px; font-size: 13px; line-height: 1.2; }
         .caption-username { font-weight: 700; margin-right: 2px; }
         .timestamp { padding: 0 13px 11px; font-size: 10px; color: #8e8e8e; }
         .post-footer-spacer { height: 6px; }
 
-        .download-area { text-align: center; }
+        .download-area { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .download-btn { background: #111; color: white; border: none; padding: 13px 40px; border-radius: 100px; font-weight: 600; cursor: pointer; font-size: 15px; transition: 0.2s; }
         .download-btn:hover { background: #333; }
+
+        /* ===== EDIT BACKGROUND BUTTON ===== */
+        .edit-bg-btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+            display: none;
+            text-decoration: none;
+        }
+        .edit-bg-btn:hover { background: #333; }
+        .edit-bg-btn.visible { display: inline-block; }
 
         /* ===== FOOTER ===== */
         footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
@@ -303,7 +318,6 @@
                 <textarea id="caption" placeholder="Write something..."></textarea>
             </div>
 
-            <!-- FIX 2: Like count + liked-by username -->
             <div class="form-group">
                 <label id="labelLikes">Jumlah Like</label>
                 <input type="text" id="likeCount" placeholder="cth: 1.234" value="0" oninput="handleLikeInput('count')">
@@ -362,7 +376,6 @@
                                 <span id="usernameText">thekachoo</span>
                                 <span id="verifBadge" style="display:none;"><i class="fas fa-check-circle" style="color:#0095f6; font-size:11px;"></i></span>
                             </div>
-                            <!-- sub-info: either location or music -->
                             <div class="sub-info" id="subInfoDisplay"></div>
                         </div>
                         <div class="menu-dot">•••</div>
@@ -390,10 +403,8 @@
                         </div>
                     </div>
 
-                    <!-- Like count / liked by -->
                     <div class="like-count" id="displayLikes">0 suka</div>
 
-                    <!-- Caption & Timestamp -->
                     <div class="caption-text" id="captionWrapper">
                         <span id="captionUsername" class="caption-username" style="font-weight: 700; font-family: Arial, sans-serif;"></span>
                         <span class="caption-message" id="displayCaption"></span>
@@ -404,6 +415,7 @@
             </div>
             <div class="download-area">
                 <button class="download-btn" id="downloadBtn">Unduh</button>
+                <a href="Edit.html" class="edit-bg-btn" id="editBgBtn">Background</a>
             </div>
         </div>
     </div>
@@ -414,8 +426,7 @@
     <div class="footer-grid">
         <div class="footer-section footer-brand">
             <h3>CHODATE</h3>
-            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.
-</p>
+            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
             <div class="social-links">
                 <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -501,7 +512,8 @@
     const likeIcon        = document.getElementById('likeIcon');
     let likeSvg = likeIcon.querySelector('svg');
 
-    // ---- FIX 2: Mutual exclusion for like count vs liked-by ----
+    const editBgBtn       = document.getElementById('editBgBtn');
+
     function handleLikeInput(type) {
         const countVal = likeCountInput.value.trim();
         const userVal  = likedByInput.value.trim();
@@ -521,7 +533,6 @@
         updatePreviewContent();
     }
 
-    // ---- FIX 3: Location & music ----
     function handleLocMusicInput(type) {
         const locVal   = locationInput.value.trim();
         const musicVal = musicInput.value.trim();
@@ -535,13 +546,11 @@
         updatePreviewContent();
     }
 
-    // ---- PreviewContent (DENGAN TAMBAHAN USERNAME DI CAPTION untuk VERSI 1) ----
     function updatePreviewContent() {
         const uname = usernameInput.value.trim() || 'thekachoo';
         usernameText.innerText = uname;
         verifBadge.style.display = isVerified ? 'inline-flex' : 'none';
 
-        // Sub-info: location or music (not both) — v1
         const locVal   = locationInput.value.trim();
         const musicVal = musicInput.value.trim();
 
@@ -559,7 +568,6 @@
             subInfoDisplay.style.display = 'none';
         }
 
-        // FIX 2: Like display
         const countVal  = likeCountInput.value.trim();
         const likedUser = likedByInput.value.trim();
         const likesSuffix = currentLang === 'id' ? 'suka' : 'likes';
@@ -573,7 +581,6 @@
             displayLikes.innerText = `${val} ${likesSuffix}`;
         }
 
-        // Caption dengan username di samping untuk V1
         if (currentVersion === 1) {
             captionWrapper.style.display = 'block';
             const currentCaption = captionInput.value || '';
@@ -586,7 +593,6 @@
             displayTimestamp.innerText = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' : 'Just now');
             displayTimestamp.style.display = 'block';
         } else {
-            // Versi 2: Sembunyikan semua elemen caption
             captionWrapper.style.display = 'none';
             displayTimestamp.style.display = 'none';
         }
@@ -647,7 +653,6 @@
         applyVersion();
     });
 
-    // Like icon click
     likeIcon.addEventListener('click', () => {
         let num = parseInt((likeCountInput.value || '0').replace(/[^0-9]/g, '')) || 0;
         if (!liked) { num++; liked = true; likeSvg.innerHTML = '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#ed4956" stroke="#ed4956" stroke-width="1"/>'; }
@@ -656,11 +661,9 @@
         updatePreviewContent();
     });
 
-    // Color buttons
     document.getElementById('loveBlack').addEventListener('click', () => { loveColor = 'black'; document.getElementById('loveBlack').classList.add('active'); document.getElementById('loveRed').classList.remove('active'); updateLoveColor(); });
     document.getElementById('loveRed').addEventListener('click', () => { loveColor = 'red'; document.getElementById('loveRed').classList.add('active'); document.getElementById('loveBlack').classList.remove('active'); updateLoveColor(); });
 
-    // BG buttons
     document.querySelectorAll('.bg-option-btn').forEach(btn => btn.addEventListener('click', () => {
         document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active'); currentBg = btn.getAttribute('data-bg'); updateBackground();
@@ -670,13 +673,11 @@
         currentBg = e.target.value; updateBackground();
     });
 
-    // Ratio buttons
     document.querySelectorAll('#ratioOptionsPre .ratio-btn').forEach(btn => btn.addEventListener('click', () => {
         document.querySelectorAll('#ratioOptionsPre .ratio-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active'); currentCropRatio = btn.getAttribute('data-ratio');
     }));
 
-    // Input listeners
     usernameInput.addEventListener('input', updatePreviewContent);
     captionInput.addEventListener('input', updatePreviewContent);
     timestampInput.addEventListener('input', updatePreviewContent);
@@ -728,7 +729,15 @@
     // Download
     document.getElementById('downloadBtn').addEventListener('click', () => {
         html2canvas(document.getElementById('previewOuter'), { scale:3, backgroundColor:null, useCORS:true })
-            .then(canvas => { const a=document.createElement('a'); a.download=`instapost_${Date.now()}.png`; a.href=canvas.toDataURL('image/png'); a.click(); showToast('Gambar berhasil diunduh!'); })
+            .then(canvas => { 
+                const a=document.createElement('a'); 
+                a.download=`instapost_${Date.now()}.png`; 
+                a.href=canvas.toDataURL('image/png'); 
+                a.click(); 
+                showToast('Gambar berhasil diunduh!');
+                // Tampilkan tombol Edit Background setelah download
+                editBgBtn.classList.add('visible');
+            })
             .catch(() => showToast('Gagal mengunduh'));
     });
 
