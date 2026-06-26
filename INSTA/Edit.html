@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>INSTACHO | Background Editor</title>
+    <title>INSTACHO | Background</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -363,7 +363,7 @@
 
 <!-- ===== MAIN CONTENT ===== -->
 <div class="main-content">
-    <h1 class="page-title">Background Editor</h1>
+    <h1 class="page-title">Background</h1>
     <div class="editor-wrapper">
 
         <!-- Panel Kontrol -->
@@ -433,7 +433,7 @@
                 <div class="frame-container" id="frameContainer">
                     <img id="centerImage" class="center-image" src="https://placehold.co/400x400/EFEFEF/999999?text=Upload+Foto" alt="Foto Tengah">
                 </div>
-                <div class="frame-info" id="frameInfo">1:1 · 400×400</div>
+                <div class="frame-info" id="frameInfo">Preview</div>
             </div>
             <button class="download-btn" id="downloadBtn">Unduh HD</button>
         </div>
@@ -524,7 +524,7 @@
 
         // Background preview-outer
         if (currentBg === 'transparent') {
-            previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.04), rgba(0,0,0,0.01))';
+            previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
         } else if (currentBg === 'white') {
             previewOuter.style.background = 'white';
         } else if (currentBg === 'black') {
