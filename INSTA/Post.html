@@ -154,7 +154,7 @@
         .media-container img { width: 100%; height: auto; display: block; }
 
         .action-buttons { padding: 8px 13px 4px; display: flex; gap: 14px; align-items: center; }
-        .action-icons { padding: 10px 11 px 4px; /*increased top padding */; display: flex; gap: 14px; align-items: center; }
+        .action-icons { padding: 10px 11px 4px; /*increased top padding */; display: flex; gap: 14px; align-items: center; }
         .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; transform: translateY(4px); /*lowers icons */}
         .action-icon svg { width: 100%; height: 100%; }
         .action-icon img { width: 100%; height: 100%; object-fit: contain; }
@@ -168,7 +168,7 @@
         .save-icon { margin-left: auto; }
 
         .like-count { font-weight: 600; font-size: 13px; padding: 3px 13px 2px; color: #262626; }
-        /* FIX 4: caption block only in v1 — JS handles display */
+        /* FIX 4: caption block only in v1 */
         .caption-text { padding: 0 13px 4px; font-size: 13px; line-height: 1.2; }
         .caption-username { font-weight: 700; margin-right: 2px; }
         .timestamp { padding: 0 13px 11px; font-size: 10px; color: #8e8e8e; }
@@ -273,7 +273,7 @@
                 <input type="text" id="username" placeholder="thekachoo">
             </div>
 
-            <!-- Location & Music (mutual exclusion) -->
+            <!-- Location & Music -->
             <div class="form-group">
                 <label id="labelLocMusic">Lokasi / Musik</label>
                 <div class="loc-music-group">
@@ -373,7 +373,7 @@
                         <img src="https://placehold.co/360x360/EFEFEF/999999?text=Upload" style="width:100%;">
                     </div>
 
-                    <!-- Actions - Icon komentar diganti, ditambah icon repost, icon share diganti -->
+                    <!-- Actions -->
                     <div class="action-buttons">
                         <div class="action-icons">
                             <div class="action-icon" id="likeIcon">
@@ -393,7 +393,7 @@
                     <!-- Like count / liked by -->
                     <div class="like-count" id="displayLikes">0 suka</div>
 
-                    <!-- FIX 4 & PERMINTAAN BARU: caption block v1 dengan username disamping caption (bold, arial) -->
+                    <!-- Caption & Timestamp -->
                     <div class="caption-text" id="captionWrapper">
                         <span id="captionUsername" class="caption-username" style="font-weight: 700; font-family: Arial, sans-serif;"></span>
                         <span class="caption-message" id="displayCaption"></span>
@@ -406,9 +406,8 @@
                 <button class="download-btn" id="downloadBtn">Unduh</button>
             </div>
         </div>
-
-    </div><!-- end insta-wrapper -->
-</div><!-- end main-content -->
+    </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -437,7 +436,7 @@
             <ul class="footer-links">
                 <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
                 <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-                <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                <li><a href="https://thekachoo.github.io/CHOSONG/">Chosong</a></li>
                 <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
             </ul>
         </div>
@@ -522,7 +521,7 @@
         updatePreviewContent();
     }
 
-    // ---- FIX 3: Mutual exclusion for location vs music ----
+    // ---- FIX 3: Location & music ----
     function handleLocMusicInput(type) {
         const locVal   = locationInput.value.trim();
         const musicVal = musicInput.value.trim();
@@ -536,13 +535,13 @@
         updatePreviewContent();
     }
 
-    // ---- updatePreviewContent (DENGAN TAMBAHAN USERNAME DI CAPTION untuk VERSI 1) ----
+    // ---- PreviewContent (DENGAN TAMBAHAN USERNAME DI CAPTION untuk VERSI 1) ----
     function updatePreviewContent() {
         const uname = usernameInput.value.trim() || 'thekachoo';
         usernameText.innerText = uname;
         verifBadge.style.display = isVerified ? 'inline-flex' : 'none';
 
-        // Sub-info: location or music (not both) — only show in v1
+        // Sub-info: location or music (not both) — v1
         const locVal   = locationInput.value.trim();
         const musicVal = musicInput.value.trim();
 
@@ -574,12 +573,11 @@
             displayLikes.innerText = `${val} ${likesSuffix}`;
         }
 
-        // PERUBAHAN UTAMA: Caption dengan username di samping (BOLD, Arial) hanya untuk Versi 1
+        // Caption dengan username di samping untuk V1
         if (currentVersion === 1) {
             captionWrapper.style.display = 'block';
             const currentCaption = captionInput.value || '';
             const currentUsername = uname;
-            // Menampilkan username dengan style bold dan font Arial
             captionUsernameSpan.innerText = currentUsername + ' ';
             captionUsernameSpan.style.fontWeight = '700';
             captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
