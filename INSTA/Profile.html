@@ -583,6 +583,13 @@
             display: flex;
             gap: 18px;
             z-index: 2;
+            align-items: center;
+        }
+        .top-right-icons img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            cursor: pointer;
         }
         .top-right-icons i {
             font-size: 20px;
@@ -609,7 +616,7 @@
         }
 
         .profile-header-section {
-            padding: 16px 16px 8px;
+            padding: 12px 16px 8px;
             display: flex;
             gap: 20px;
             align-items: center;
@@ -631,6 +638,11 @@
         .profile-stats-preview {
             flex: 1;
             display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .profile-stats-numbers {
+            display: flex;
             justify-content: space-around;
             text-align: center;
         }
@@ -650,6 +662,21 @@
             font-size: 12px;
             color: #8e8e8e;
         }
+        .profile-name-in-stats {
+            font-weight: 600;
+            font-size: 15px;
+            color: #262626;
+            padding: 0 4px 4px 16px;
+            text-align: left;
+            display: none;
+        }
+        .profile-name-in-stats.visible {
+            display: block;
+        }
+        .dark-theme .profile-name-in-stats {
+            color: #f5f5f5;
+        }
+
         .profile-bio {
             padding: 0 16px 12px;
             background: inherit;
@@ -1112,6 +1139,7 @@
                     <div class="version-buttons"><button class="version-btn active" id="version1Btn">Versi 1:1</button><button class="version-btn" id="version2Btn">Versi 4:5</button></div>
                     <div class="form-group"><label id="labelAvatar">Foto Profil</label><div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div><input type="file" id="avatarUpload" accept="image/*" style="display: none;"></div>
                     <div class="form-group"><label id="labelUsername">Username</label><input type="text" id="username" placeholder="thekachoo" value=""></div>
+                    <div class="form-group"><label id="labelName">Nama</label><input type="text" id="nameInput" placeholder="Masukkan nama (opsional)" value=""></div>
                     <div class="form-group verif-section">
                         <button class="verif-btn-custom" id="verificationBtn"><i class="fas fa-check-circle"></i> <span id="verifText">Verifikasi</span></button>
                         <button class="private-btn-custom" id="privateBtn"><i class="fas fa-lock"></i> <span id="privateText">Private</span></button>
@@ -1141,11 +1169,22 @@
                             <div class="preview-top-bar">
                                 <div class="top-left-icon"><i class="fas fa-plus"></i></div>
                                 <div class="top-center-username" id="previewTopUsername">thekachoo<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span><span id="previewTopLockBadge" style="display:none;"><i class="fas fa-lock top-lock-badge"></i></span></div>
-                                <div class="top-right-icons"><i class="fas fa-at"></i><i class="fas fa-bars"></i></div>
+                                <div class="top-right-icons">
+                                    <img src="Thread.png" alt="thread" id="threadIcon" onerror="this.style.display='none'">
+                                    <i class="fas fa-bars"></i>
+                                </div>
                             </div>
+
                             <div class="profile-header-section">
                                 <div class="profile-avatar-preview" id="previewAvatar"><img id="previewAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' fill='%230095f6'/%3E%3Ctext x='42' y='52' font-size='32' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E"></div>
-                                <div class="profile-stats-preview"><div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">Posts</span></div><div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">Followers</span></div><div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">Following</span></div></div>
+                                <div class="profile-stats-preview">
+                                    <div class="profile-name-in-stats" id="previewNameInStats"></div>
+                                    <div class="profile-stats-numbers">
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">Posts</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">Followers</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">Following</span></div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="profile-bio">
                                 <div class="bio-text" id="previewBio">Content Creator | Jakarta</div>
@@ -1211,8 +1250,8 @@
             profileCropper = null;
 
         const translations = {
-            id: { postsLabel: "Postingan", followersLabel: "Pengikut", followingLabel: "Mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!" },
-            en: { postsLabel: "Posts", followersLabel: "Followers", followingLabel: "Following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!" }
+            id: { postsLabel: "Postingan", followersLabel: "Pengikut", followingLabel: "Mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!", labelName: "Nama" },
+            en: { postsLabel: "Posts", followersLabel: "Followers", followingLabel: "Following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!", labelName: "Name" }
         };
 
         function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
@@ -1249,6 +1288,18 @@
             }
 
             document.getElementById('bottomNavAvatar').src = document.getElementById('previewAvatarImg').src;
+
+            // update name di atas angka stat
+            const nameInput = document.getElementById('nameInput');
+            const nameValue = nameInput.value.trim();
+            const nameDisplay = document.getElementById('previewNameInStats');
+            if (nameValue) {
+                nameDisplay.classList.add('visible');
+                nameDisplay.innerText = nameValue;
+            } else {
+                nameDisplay.classList.remove('visible');
+                nameDisplay.innerText = '';
+            }
         }
 
         function updateVersion() {
@@ -1278,6 +1329,7 @@
             const homeIcon = document.getElementById('homeIconImg');
             const searchIcon = document.getElementById('searchIconImg');
             const contactIcon = document.getElementById('contactIconImg');
+            const threadIcon = document.getElementById('threadIcon');
 
             if (currentTheme === 'dark') {
                 mediaIcon.src = 'icon-media2.png';
@@ -1289,6 +1341,7 @@
                 homeIcon.src = 'Icon-home2.png';
                 searchIcon.src = 'Icon-search2.png';
                 contactIcon.src = 'Icon-contact2.png';
+                if (threadIcon) threadIcon.src = 'Thread.png';
             } else {
                 mediaIcon.src = 'icon-media1.png';
                 repostIcon.src = 'icon-repost1.png';
@@ -1299,6 +1352,7 @@
                 homeIcon.src = 'Icon-home1.png';
                 searchIcon.src = 'Icon-search1.png';
                 contactIcon.src = 'Icon-contact1.png';
+                if (threadIcon) threadIcon.src = 'Thread.png';
             }
         }
 
@@ -1463,6 +1517,7 @@
         });
 
         document.getElementById('username').addEventListener('input', updatePreview);
+        document.getElementById('nameInput').addEventListener('input', updatePreview);
         document.getElementById('postsCount').addEventListener('input', updatePreview);
         document.getElementById('followersCount').addEventListener('input', updatePreview);
         document.getElementById('followingCount').addEventListener('input', updatePreview);
@@ -1473,6 +1528,7 @@
             document.getElementById('labelAvatar').innerText = t.labelAvatar; 
             document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel; 
             document.getElementById('labelUsername').innerText = t.labelUsername; 
+            document.getElementById('labelName').innerText = t.labelName;
             document.getElementById('labelBio').innerText = t.labelBio; 
             document.getElementById('labelPostsGrid').innerText = t.labelPostsGrid; 
             document.getElementById('labelPosts').innerText = t.postsLabel; 
@@ -1536,7 +1592,6 @@
         document.getElementById('downloadBtn').addEventListener('click', async () => { 
             const element = document.getElementById('previewOuter'); 
             try { 
-                // Ambil ukuran asli elemen
                 const rect = element.getBoundingClientRect();
                 const canvas = await html2canvas(element, { 
                     scale: 3, 
