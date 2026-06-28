@@ -346,6 +346,21 @@
             gap: 16px;
         }
 
+        /* Mobile: 3 grid, 2 atas 1 bawah, yang bawah di kiri */
+        @media (max-width: 640px) {
+            .instacho-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .app-card:nth-child(3) {
+                grid-column: 1 / 2;
+                justify-self: start;
+                width: 100%;
+            }
+        }
+
         .app-card {
             aspect-ratio: 1 / 1;
             background: #fafafa;
@@ -419,7 +434,6 @@
         .app-card:nth-child(1) { animation-delay: 0.05s; }
         .app-card:nth-child(2) { animation-delay: 0.1s; }
         .app-card:nth-child(3) { animation-delay: 0.15s; }
-        .app-card:nth-child(4) { animation-delay: 0.2s; }
         
         @keyframes cardFloatUp {
             to {
@@ -644,10 +658,6 @@
                         <div class="app-card-icon"><i class="fas fa-camera"></i></div>
                         <div class="app-card-name">Post</div>
                     </div>
-                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Live.html'">
-                        <div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div>
-                        <div class="app-card-name">Live</div>
-                    </div>
                     <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">
                         <div class="app-card-icon"><i class="fas fa-play-circle"></i></div>
                         <div class="app-card-name">Story</div>
@@ -707,4 +717,4 @@
         });
     </script>
 </body>
-    </html>
+                </html>
