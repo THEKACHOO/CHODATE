@@ -587,7 +587,7 @@
         }
 
         .action-buttons {
-            padding: 5px 13px 7px;
+            padding: 10px 13px 7px;
             display: flex;
             gap: 14px;
             align-items: center;
@@ -613,6 +613,7 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
         }
         .action-icon img {
             width: 100%;
@@ -623,6 +624,21 @@
         .action-icon .heart-png {
             width: 24px;
             height: 24px;
+        }
+        .action-icon .heart-icon-red {
+            color: #ed4956;
+            font-size: 24px;
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .action-icon .heart-png.hidden {
+            display: none;
+        }
+        .action-icon .heart-icon-red.visible {
+            display: block;
         }
         .action-icon .comment-png {
             width: 24px;
@@ -1082,6 +1098,7 @@
                                 <div class="action-item">
                                     <div class="action-icon" id="likeIcon">
                                         <img src="Heart.png" alt="love" class="heart-png" id="heartImage">
+                                        <i class="fas fa-heart heart-icon-red" id="heartIconRed"></i>
                                     </div>
                                     <span class="action-count" id="displayLikeCount"></span>
                                 </div>
@@ -1221,6 +1238,7 @@
         const captionWrapper = document.getElementById('captionWrapper');
         const captionUsernameSpan = document.getElementById('captionUsername');
         const heartImage = document.getElementById('heartImage');
+        const heartIconRed = document.getElementById('heartIconRed');
 
         const displayLikeCount = document.getElementById('displayLikeCount');
         const displayCommentCount = document.getElementById('displayCommentCount');
@@ -1232,9 +1250,9 @@
         // ---- Helper: format number with suffix ----
         function formatNumberWithSuffix(input, lang) {
             if (!input || input.trim() === '') return '';
-            
+
             let val = input.trim().toLowerCase();
-            
+
             // Check for suffix in Indonesian
             const idSuffixes = {
                 'rb': 1000,
@@ -1243,7 +1261,7 @@
                 'b': 1000000000,
                 't': 1000000000000
             };
-            
+
             // Check for suffix in English
             const enSuffixes = {
                 'k': 1000,
@@ -1251,13 +1269,13 @@
                 'b': 1000000000,
                 't': 1000000000000
             };
-            
+
             let number = 0;
             let suffix = '';
-            
+
             // Try to parse with suffix
             let matched = false;
-            
+
             // Check Indonesian suffixes
             if (lang === 'id') {
                 for (let key in idSuffixes) {
@@ -1273,7 +1291,7 @@
                     }
                 }
             }
-            
+
             // Check English suffixes
             if (!matched && lang === 'en') {
                 for (let key in enSuffixes) {
@@ -1289,7 +1307,7 @@
                     }
                 }
             }
-            
+
             // If no suffix matched, try to parse as plain number
             if (!matched) {
                 let num = parseFloat(val.replace(',', '.'));
@@ -1299,11 +1317,11 @@
                     return '';
                 }
             }
-            
+
             // Format the number with appropriate suffix for display
             let displayNum = number;
             let displaySuffix = '';
-            
+
             if (lang === 'id') {
                 if (number >= 1000000000000) {
                     displayNum = number / 1000000000000;
@@ -1339,7 +1357,7 @@
                     displaySuffix = '';
                 }
             }
-            
+
             // Format number with 1 decimal if needed
             let formattedNum;
             if (displayNum % 1 === 0) {
@@ -1351,7 +1369,7 @@
                     formattedNum = formattedNum.slice(0, -2);
                 }
             }
-            
+
             return formattedNum + displaySuffix;
         }
 
@@ -1387,6 +1405,28 @@
             updatePreviewContent();
         }
 
+        function updateLoveDisplay() {
+            // Jika liked = true, tampilkan icon merah (Font Awesome), sembunyikan PNG
+            // Jika liked = false, cek warna yang dipilih
+            if (liked) {
+                heartImage.style.display = 'none';
+                heartIconRed.style.display = 'block';
+                heartIconRed.className = 'fas fa-heart heart-icon-red visible';
+            } else {
+                // Jika warna yang dipilih adalah merah, tampilkan icon merah
+                if (loveColor === 'red') {
+                    heartImage.style.display = 'none';
+                    heartIconRed.style.display = 'block';
+                    heartIconRed.className = 'fas fa-heart heart-icon-red visible';
+                } else {
+                    // Hitam: tampilkan PNG
+                    heartImage.style.display = 'block';
+                    heartIconRed.style.display = 'none';
+                    heartIconRed.className = 'fas fa-heart heart-icon-red';
+                }
+            }
+        }
+
         function updatePreviewContent() {
             const uname = usernameInput.value.trim() || 'thekachoo';
             usernameText.innerText = uname;
@@ -1417,18 +1457,9 @@
 
             const lang = currentLang;
 
-            // Like count - special handling for "liked by"
-            const likedUser = likedByInput.value.trim();
-            if (likedUser) {
-                const likesSuffix = lang === 'id' ? 'suka' : 'likes';
-                const likedByLabel = lang === 'id' ? 'Disukai oleh' : 'Liked by';
-                const andOthers = lang === 'id' ? 'dan lainnya' : 'and others';
-                const formatted = formatNumberWithSuffix(likeVal, lang);
-                displayLikeCount.textContent = formatted || '0';
-            } else {
-                const formatted = formatNumberWithSuffix(likeVal, lang);
-                displayLikeCount.textContent = formatted || '';
-            }
+            // Like count
+            const likeFormatted = formatNumberWithSuffix(likeVal, lang);
+            displayLikeCount.textContent = likeFormatted || '';
 
             // Comment count
             const commentFormatted = formatNumberWithSuffix(commentVal, lang);
@@ -1441,6 +1472,9 @@
             // Share count
             const shareFormatted = formatNumberWithSuffix(shareVal, lang);
             displayShareCount.textContent = shareFormatted || '';
+
+            // Update love display
+            updateLoveDisplay();
 
             if (currentVersion === 1) {
                 captionWrapper.style.display = 'block';
@@ -1471,16 +1505,13 @@
         }
 
         function updateLoveColor() {
-            if (liked) {
-                heartImage.src = 'Heart-Red.png';
-            } else {
-                heartImage.src = 'Heart.png';
-            }
+            updateLoveDisplay();
         }
 
         function updateBackground() {
             const po = document.getElementById('previewOuter');
-            if (currentBg === 'transparent') po.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
+            if (currentBg === 'transparent') po.style.background =
+                'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
             else if (currentBg === 'white') po.style.background = 'white';
             else if (currentBg === 'black') po.style.background = 'black';
             else po.style.background = currentBg;
@@ -1497,7 +1528,9 @@
         document.getElementById('verificationBtn').addEventListener('click', () => {
             isVerified = !isVerified;
             verifStatusDiv.style.display = isVerified ? 'block' : 'none';
-            showToast(isVerified ? 'Akun terverifikasi ✓' : 'Verifikasi dihapus');
+            const msg = currentLang === 'id' ? 'Akun terverifikasi ✓' : 'Account verified ✓';
+            const msg2 = currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed';
+            showToast(isVerified ? msg : msg2);
             updatePreviewContent();
         });
 
@@ -1532,17 +1565,13 @@
             loveColor = 'black';
             document.getElementById('loveBlack').classList.add('active');
             document.getElementById('loveRed').classList.remove('active');
-            if (!liked) {
-                heartImage.src = 'Heart.png';
-            }
+            updateLoveDisplay();
         });
         document.getElementById('loveRed').addEventListener('click', () => {
             loveColor = 'red';
             document.getElementById('loveRed').classList.add('active');
             document.getElementById('loveBlack').classList.remove('active');
-            if (!liked) {
-                heartImage.src = 'Heart.png';
-            }
+            updateLoveDisplay();
         });
 
         document.querySelectorAll('.bg-option-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -1582,7 +1611,6 @@
                 labelLikes: "Jumlah Like",
                 labelLikedBy: "Disukai oleh (username)",
                 labelTimestamp: "Waktu posting",
-                likesSuffix: "suka",
                 defaultTimestamp: "Baru saja",
                 labelLoveColor: "Warna Hati",
                 loveSelectText: "Pilih:",
@@ -1590,7 +1618,20 @@
                 bgTransparent: "Transparan",
                 bgWhite: "Putih",
                 bgBlack: "Hitam",
-                labelActionNumbers: "Angka Interaksi"
+                labelActionNumbers: "Angka Interaksi",
+                likePlaceholder: "1.2rb",
+                commentPlaceholder: "500rb",
+                repostPlaceholder: "200rb",
+                sharePlaceholder: "100rb",
+                locationPlaceholder: "Jakarta Selatan, Indonesia",
+                musicPlaceholder: "Judul lagu — Artis",
+                timestampPlaceholder: "Baru saja",
+                verifStatus: "Akun Terverifikasi",
+                downloadBtn: "Unduh",
+                uploadPlaceholder: "Upload foto profil",
+                mediaPlaceholder: "Klik untuk pilih file",
+                captionPlaceholder: "Tulis sesuatu...",
+                likeCountPlaceholder: "cth: 1.234"
             },
             en: {
                 labelAvatar: "Profile Photo",
@@ -1603,7 +1644,6 @@
                 labelLikes: "Number of Likes",
                 labelLikedBy: "Liked by (username)",
                 labelTimestamp: "Post time",
-                likesSuffix: "likes",
                 defaultTimestamp: "Just now",
                 labelLoveColor: "Heart Color",
                 loveSelectText: "Choose:",
@@ -1611,7 +1651,20 @@
                 bgTransparent: "Transparent",
                 bgWhite: "White",
                 bgBlack: "Black",
-                labelActionNumbers: "Interaction Numbers"
+                labelActionNumbers: "Interaction Numbers",
+                likePlaceholder: "1.2K",
+                commentPlaceholder: "500K",
+                repostPlaceholder: "200K",
+                sharePlaceholder: "100K",
+                locationPlaceholder: "South Jakarta, Indonesia",
+                musicPlaceholder: "Song title — Artist",
+                timestampPlaceholder: "Just now",
+                verifStatus: "Verified Account",
+                downloadBtn: "Download",
+                uploadPlaceholder: "Upload profile photo",
+                mediaPlaceholder: "Click to select file",
+                captionPlaceholder: "Write something...",
+                likeCountPlaceholder: "ex: 1.234"
             }
         };
 
@@ -1634,11 +1687,31 @@
             document.getElementById('bgWhite').innerText = t.bgWhite;
             document.getElementById('bgBlack').innerText = t.bgBlack;
             document.getElementById('labelActionNumbers').innerText = t.labelActionNumbers;
-            timestampInput.placeholder = t.defaultTimestamp;
-            locationInput.placeholder = currentLang === 'id' ? 'Jakarta Selatan, Indonesia' : 'South Jakarta, Indonesia';
-            musicInput.placeholder = currentLang === 'id' ? 'Judul lagu — Artis' : 'Song title — Artist';
+            document.getElementById('downloadBtn').innerText = t.downloadBtn;
+
+            // Update placeholders
+            timestampInput.placeholder = t.timestampPlaceholder;
+            locationInput.placeholder = t.locationPlaceholder;
+            musicInput.placeholder = t.musicPlaceholder;
+            likeCountInput.placeholder = t.likePlaceholder;
+            commentCountInput.placeholder = t.commentPlaceholder;
+            repostCountInput.placeholder = t.repostPlaceholder;
+            shareCountInput.placeholder = t.sharePlaceholder;
+            captionInput.placeholder = t.captionPlaceholder;
+            likedByInput.placeholder = t.likeCountPlaceholder;
+
+            // Update verif status
+            const verifStatusEl = document.getElementById('verifStatus');
+            if (isVerified) {
+                verifStatusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${t.verifStatus}`;
+                verifStatusEl.style.display = 'block';
+            } else {
+                verifStatusEl.style.display = 'none';
+            }
+
             updatePreviewContent();
         }
+
         document.getElementById('btnIndonesia').addEventListener('click', () => {
             currentLang = 'id';
             document.getElementById('btnIndonesia').classList.add('active');
@@ -1732,10 +1805,14 @@
                     a.download = `instapost_${Date.now()}.png`;
                     a.href = canvas.toDataURL('image/png');
                     a.click();
-                    showToast('Gambar berhasil diunduh!');
+                    const msg = currentLang === 'id' ? 'Gambar berhasil diunduh!' : 'Image downloaded successfully!';
+                    showToast(msg);
                     editBgBtn.classList.add('visible');
                 })
-                .catch(() => showToast('Gagal mengunduh'));
+                .catch(() => {
+                    const msg = currentLang === 'id' ? 'Gagal mengunduh' : 'Download failed';
+                    showToast(msg);
+                });
         });
 
         // Mobile menu
