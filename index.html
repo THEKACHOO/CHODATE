@@ -434,6 +434,7 @@
         .app-card:nth-child(1) { animation-delay: 0.05s; }
         .app-card:nth-child(2) { animation-delay: 0.1s; }
         .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
         
         @keyframes cardFloatUp {
             to {
@@ -581,6 +582,70 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* ========== COMING SOON OVERLAY ========== */
+        .coming-soon-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .coming-soon-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .coming-soon-box {
+            background: white;
+            padding: 48px 56px;
+            border-radius: 32px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 40px 60px rgba(0,0,0,0.3);
+            transform: scale(0.94) translateY(10px);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .coming-soon-overlay.active .coming-soon-box {
+            transform: scale(1) translateY(0);
+        }
+        .coming-soon-box i {
+            font-size: 3rem;
+            color: #000;
+            margin-bottom: 16px;
+        }
+        .coming-soon-box h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .coming-soon-box p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 24px;
+        }
+        .coming-soon-box .close-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 10px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .coming-soon-box .close-btn:hover {
+            background: #222;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -662,6 +727,11 @@
                         <div class="app-card-icon"><i class="fas fa-play-circle"></i></div>
                         <div class="app-card-name">Story</div>
                     </div>
+                    <!-- NEW LIVE CARD -->
+                    <div class="app-card" id="liveCard">
+                        <div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div>
+                        <div class="app-card-name">Live</div>
+                    </div>
                 </div>
             </div>
             
@@ -671,6 +741,16 @@
             </div>
         </div>
     </section>
+
+    <!-- COMING SOON OVERLAY (popup) -->
+    <div class="coming-soon-overlay" id="comingSoonOverlay">
+        <div class="coming-soon-box">
+            <i class="fas fa-clock"></i>
+            <h2>Coming Soon</h2>
+            <p>Live feature is under development. Stay tuned!</p>
+            <button class="close-btn" id="closeComingSoon">Okay</button>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-grid">
@@ -715,6 +795,41 @@
             card.addEventListener('mouseenter', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1.08)'; });
             card.addEventListener('mouseleave', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1)'; });
         });
+
+        // ========== COMING SOON POPUP ==========
+        const liveCard = document.getElementById('liveCard');
+        const comingSoonOverlay = document.getElementById('comingSoonOverlay');
+        const closeComingSoon = document.getElementById('closeComingSoon');
+
+        function showComingSoon() {
+            comingSoonOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideComingSoon() {
+            comingSoonOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (liveCard) {
+            liveCard.addEventListener('click', showComingSoon);
+        }
+
+        if (closeComingSoon) {
+            closeComingSoon.addEventListener('click', hideComingSoon);
+        }
+
+        // Click outside box to close
+        comingSoonOverlay.addEventListener('click', function(e) {
+            if (e.target === this) hideComingSoon();
+        });
+
+        // close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && comingSoonOverlay.classList.contains('active')) {
+                hideComingSoon();
+            }
+        });
     </script>
 </body>
-                </html>
+</html>
