@@ -300,48 +300,67 @@
             }
         }
 
-        .lang-buttons {
+        /* ===== REVISI: Tombol Setting Circle di Tengah ===== */
+        .setting-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 18px;
+            justify-content: center;
         }
-        .lang-btn {
-            flex: 1;
-            padding: 8px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 100px;
+        .toggle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #d0d0d0;
+            background: #f5f5f5;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: all 0.2s;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            flex-shrink: 0;
+            position: relative;
         }
-        .lang-btn.active {
+        .toggle-btn i {
+            font-size: 18px;
+        }
+        .toggle-btn.active {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+            color: white;
+        }
+        .toggle-btn.active i {
+            color: white;
+        }
+        .toggle-btn.active .btn-text {
+            color: white;
+        }
+        .toggle-btn .btn-label {
+            display: none;
+        }
+        .toggle-btn .btn-text {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        /* tooltip hover */
+        .toggle-btn:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
             background: #1a1a1a;
             color: white;
-            border-color: #1a1a1a;
-        }
-
-        .theme-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .theme-btn {
-            flex: 1;
-            padding: 8px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 100px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-        .theme-btn.active {
-            background: #1a1a1a;
-            color: white;
-            border-color: #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            z-index: 10;
         }
 
         .form-group {
@@ -581,13 +600,13 @@
         }
         .top-right-icons {
             display: flex;
-            gap: 18px;
+            gap: 15px;
             z-index: 2;
             align-items: center;
         }
         .top-right-icons img {
-            width: 26px;
-            height: 26px;
+            width: 27px;
+            height: 27px;
             object-fit: contain;
             cursor: pointer;
         }
@@ -889,28 +908,6 @@
             transition: 0.2s;
         }
 
-        .version-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .version-btn {
-            flex: 1;
-            padding: 8px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 100px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-        .version-btn.active {
-            background: #1a1a1a;
-            color: white;
-            border-color: #1a1a1a;
-        }
-
         /* FOOTER */
         footer {
             background: #000;
@@ -1134,9 +1131,22 @@
             <h1 class="page-title" id="pageTitle">Create your profile!</h1>
             <div class="insta-wrapper">
                 <div class="form-panel">
-                    <div class="lang-buttons"><button class="lang-btn active" id="btnIndonesia">Bahasa Indonesia</button><button class="lang-btn" id="btnInggris">English</button></div>
-                    <div class="theme-buttons"><button class="theme-btn active" id="themeLightBtn">Light Mode</button><button class="theme-btn" id="themeDarkBtn">Dark Mode</button></div>
-                    <div class="version-buttons"><button class="version-btn active" id="version1Btn">Versi 1:1</button><button class="version-btn" id="version2Btn">Versi 4:5</button></div>
+                    <!-- REVISI: 3 Tombol Circle di Tengah -->
+                    <div class="setting-row">
+                        <!-- Theme Toggle: Light (🌙) / Dark (☀️) -->
+                        <button class="toggle-btn active" id="themeToggle" data-tooltip="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <!-- Version Toggle: V2 (active) / V1 -->
+                        <button class="toggle-btn active" id="versionToggle" data-tooltip="Toggle Version">
+                            <i class="fas fa-square"></i>
+                        </button>
+                        <!-- Language Toggle: ENG (active) / IND -->
+                        <button class="toggle-btn active" id="langToggle" data-tooltip="Toggle Language">
+                            <span class="btn-text">ENG</span>
+                        </button>
+                    </div>
+
                     <div class="form-group"><label id="labelAvatar">Foto Profil</label><div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div><input type="file" id="avatarUpload" accept="image/*" style="display: none;"></div>
                     <div class="form-group"><label id="labelUsername">Username</label><input type="text" id="username" placeholder="thekachoo" value=""></div>
                     <div class="form-group"><label id="labelName">Nama</label><input type="text" id="nameInput" placeholder="Masukkan nama (opsional)" value=""></div>
@@ -1242,8 +1252,8 @@
         let isVerified = false;
         let isPrivate = false;
         let currentTheme = 'light';
-        let currentLang = 'id';
-        let currentVersion = '1';
+        let currentLang = 'en'; // DEFAULT ENGLISH
+        let currentVersion = '2'; // DEFAULT V2
         let postImages = new Array(6).fill(null);
         let currentPostIndex = 0;
         let postCropper = null,
@@ -1545,48 +1555,66 @@
             updatePreview(); 
         }
 
-        document.getElementById('btnIndonesia').addEventListener('click', () => { 
-            currentLang = 'id'; 
-            document.getElementById('btnIndonesia').classList.add('active'); 
-            document.getElementById('btnInggris').classList.remove('active'); 
-            updateFormLanguage(); 
+        // ===== THEME TOGGLE =====
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.classList.add('active');
+        themeToggle.addEventListener('click', () => {
+            if (currentTheme === 'light') {
+                currentTheme = 'dark';
+                themeToggle.classList.remove('active');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                updateTheme();
+                showToast('Dark Mode');
+            } else {
+                currentTheme = 'light';
+                themeToggle.classList.add('active');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                updateTheme();
+                showToast('Light Mode');
+            }
         });
 
-        document.getElementById('btnInggris').addEventListener('click', () => { 
-            currentLang = 'en'; 
-            document.getElementById('btnInggris').classList.add('active'); 
-            document.getElementById('btnIndonesia').classList.remove('active'); 
-            updateFormLanguage(); 
+        // ===== VERSION TOGGLE =====
+        // Default: V2 (active, bg hitam) = preview V2 (4:5)
+        const versionToggle = document.getElementById('versionToggle');
+        versionToggle.classList.add('active');
+        
+        versionToggle.addEventListener('click', () => {
+            if (currentVersion === '2') {
+                // V2 aktif -> klik -> jadi V1 (1:1)
+                currentVersion = '1';
+                versionToggle.classList.remove('active');
+                updateVersion();
+            } else {
+                // V1 aktif -> klik -> jadi V2 (4:5)
+                currentVersion = '2';
+                versionToggle.classList.add('active');
+                updateVersion();
+            }
         });
 
-        document.getElementById('themeLightBtn').addEventListener('click', () => { 
-            currentTheme = 'light'; 
-            document.getElementById('themeLightBtn').classList.add('active'); 
-            document.getElementById('themeDarkBtn').classList.remove('active'); 
-            updateTheme(); 
-        });
-
-        document.getElementById('themeDarkBtn').addEventListener('click', () => { 
-            currentTheme = 'dark'; 
-            document.getElementById('themeDarkBtn').classList.add('active'); 
-            document.getElementById('themeLightBtn').classList.remove('active'); 
-            updateTheme(); 
-        });
-
-        document.getElementById('version1Btn').addEventListener('click', () => { 
-            currentVersion = '1'; 
-            document.getElementById('version1Btn').classList.add('active'); 
-            document.getElementById('version2Btn').classList.remove('active'); 
-            updateVersion(); 
-            showToast('Versi 1:1'); 
-        });
-
-        document.getElementById('version2Btn').addEventListener('click', () => { 
-            currentVersion = '2'; 
-            document.getElementById('version2Btn').classList.add('active'); 
-            document.getElementById('version1Btn').classList.remove('active'); 
-            updateVersion(); 
-            showToast('Versi 4:5'); 
+        // ===== LANGUAGE TOGGLE =====
+        // Default: ENG (active, bg hitam) = preview English
+        const langToggle = document.getElementById('langToggle');
+        langToggle.classList.add('active');
+        langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+        
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'en') {
+                // ENG aktif -> klik -> jadi IND
+                currentLang = 'id';
+                langToggle.classList.remove('active');
+                langToggle.innerHTML = '<span class="btn-text">IND</span>';
+                updateFormLanguage();
+                showToast('Bahasa Indonesia');
+            } else {
+                // IND aktif -> klik -> jadi ENG
+                currentLang = 'en';
+                langToggle.classList.add('active');
+                langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+                updateFormLanguage();
+                showToast('English');
+            }
         });
 
         document.getElementById('downloadBtn').addEventListener('click', async () => { 
@@ -1675,6 +1703,9 @@
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         mobileOverlay.addEventListener('click', closeMobileMenu);
 
+        // SET DEFAULT: V2 + English
+        currentVersion = '2';
+        currentLang = 'en';
         updateFormLanguage();
         updateTheme();
         renderPostGrids();
