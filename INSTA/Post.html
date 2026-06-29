@@ -1097,7 +1097,7 @@
                                 <!-- LOVE -->
                                 <div class="action-item">
                                     <div class="action-icon" id="likeIcon">
-                                        <img src="Heart.png" alt="love" class="heart-png" id="heartImage">
+                                        <img src="Heart1.png" alt="love" class="heart-png" id="heartImage">
                                         <i class="fas fa-heart heart-icon-red" id="heartIconRed"></i>
                                     </div>
                                     <span class="action-count" id="displayLikeCount"></span>
@@ -1105,28 +1105,28 @@
                                 <!-- COMMENT -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Comment.png" alt="comment" class="comment-png">
+                                        <img src="Comment1.png" alt="comment" class="comment-png">
                                     </div>
                                     <span class="action-count" id="displayCommentCount"></span>
                                 </div>
                                 <!-- REPOST -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Repost.png" alt="repost" class="repost-png">
+                                        <img src="Repost1.png" alt="repost" class="repost-png">
                                     </div>
                                     <span class="action-count" id="displayRepostCount"></span>
                                 </div>
                                 <!-- SHARE -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Share.png" alt="share" class="share-png">
+                                        <img src="Share1.png" alt="share" class="share-png">
                                     </div>
                                     <span class="action-count" id="displayShareCount"></span>
                                 </div>
                             </div>
                             <div class="save-icon">
                                 <div class="action-icon">
-                                    <img src="Bookmark.png" alt="bookmark" style="width:22px;height:22px;">
+                                    <img src="Bookmark1.png" alt="bookmark" style="width:22px;height:22px;">
                                 </div>
                             </div>
                         </div>
@@ -1406,20 +1406,16 @@
         }
 
         function updateLoveDisplay() {
-            // Jika liked = true, tampilkan icon merah (Font Awesome), sembunyikan PNG
-            // Jika liked = false, cek warna yang dipilih
             if (liked) {
                 heartImage.style.display = 'none';
                 heartIconRed.style.display = 'block';
                 heartIconRed.className = 'fas fa-heart heart-icon-red visible';
             } else {
-                // Jika warna yang dipilih adalah merah, tampilkan icon merah
                 if (loveColor === 'red') {
                     heartImage.style.display = 'none';
                     heartIconRed.style.display = 'block';
                     heartIconRed.className = 'fas fa-heart heart-icon-red visible';
                 } else {
-                    // Hitam: tampilkan PNG
                     heartImage.style.display = 'block';
                     heartIconRed.style.display = 'none';
                     heartIconRed.className = 'fas fa-heart heart-icon-red';
