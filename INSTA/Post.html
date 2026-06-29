@@ -92,7 +92,7 @@
         }
         @media (max-width: 640px) {
             .center-logo-img {
-                height: 100px;
+                height: 80px;
             }
             .logo-img {
                 height: 30px;
@@ -276,48 +276,37 @@
             }
         }
 
-        .lang-buttons {
+        /* Tombol toggle icon lingkaran di dalam form panel */
+        .toggle-buttons {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 18px;
+            justify-content: center;
         }
-        .lang-btn {
-            flex: 1;
-            padding: 8px;
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 100px;
+            border: 2px solid #ddd;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
+            font-size: 16px;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
         }
-        .lang-btn.active {
+        .toggle-btn i {
+            font-size: 16px;
+        }
+        .toggle-btn.active {
             background: #111;
             color: white;
             border-color: #111;
         }
-
-        .version-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-        .version-btn {
-            flex: 1;
-            padding: 9px;
-            border-radius: 100px;
-            border: 1px solid #ddd;
-            background: #f2f2f2;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .version-btn.active {
-            background: #111;
-            color: white;
-            border-color: #111;
+        .toggle-btn:hover {
+            transform: scale(1.05);
         }
 
         .form-group {
@@ -947,18 +936,19 @@
     </div>
 
     <div class="main-content">
-        <h1 class="page-title">Create your post!</h1>
+        <h1 class="page-title" id="pageTitle">Create your post!</h1>
         <div class="insta-wrapper">
 
             <!-- ===== FORM PANEL ===== -->
             <div class="form-panel">
-                <div class="lang-buttons">
-                    <button class="lang-btn active" id="btnIndonesia">Bahasa Indonesia</button>
-                    <button class="lang-btn" id="btnInggris">English</button>
-                </div>
-                <div class="version-buttons">
-                    <button class="version-btn active" id="version1Btn">Insta 1</button>
-                    <button class="version-btn" id="version2Btn">Insta 2</button>
+                <!-- Tombol toggle icon lingkaran di dalam form panel -->
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" id="toggleLangBtn" title="Toggle Language">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <button class="toggle-btn active" id="toggleVersionBtn" title="Toggle Version">
+                        <i class="fas fa-layer-group"></i>
+                    </button>
                 </div>
 
                 <!-- Avatar -->
@@ -1001,7 +991,7 @@
                 <!-- Caption -->
                 <div class="form-group">
                     <label id="labelCaption">Caption</label>
-                    <textarea id="caption" placeholder="Write something..."></textarea>
+                    <textarea id="caption" placeholder="Tulis sesuatu..."></textarea>
                 </div>
 
                 <!-- Numbers for actions -->
@@ -1009,19 +999,19 @@
                     <label id="labelActionNumbers">Angka Interaksi</label>
                     <div class="number-input-group">
                         <div class="form-group">
-                            <label>Like</label>
-                            <input type="text" id="likeCount" placeholder="1.2rb" oninput="updatePreviewContent()">
+                            <label id="labelLike">Like</label>
+                            <input type="text" id="likeCount" placeholder="1.2rb" oninput="handleLikeInput('count')">
                         </div>
                         <div class="form-group">
-                            <label>Comment</label>
+                            <label id="labelComment">Comment</label>
                             <input type="text" id="commentCount" placeholder="500rb" oninput="updatePreviewContent()">
                         </div>
                         <div class="form-group">
-                            <label>Repost</label>
+                            <label id="labelRepost">Repost</label>
                             <input type="text" id="repostCount" placeholder="200rb" oninput="updatePreviewContent()">
                         </div>
                         <div class="form-group">
-                            <label>Share</label>
+                            <label id="labelShare">Share</label>
                             <input type="text" id="shareCount" placeholder="100rb" oninput="updatePreviewContent()">
                         </div>
                     </div>
@@ -1062,7 +1052,7 @@
                 <!-- Verification -->
                 <div class="setting-verif">
                     <button class="verif-btn" id="verificationBtn">Verification (Official Account)</button>
-                    <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> Akun Terverifikasi</div>
+                    <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> <span id="verifStatusText">Akun Terverifikasi</span></div>
                 </div>
             </div>
 
@@ -1152,14 +1142,14 @@
         <div class="footer-grid">
             <div class="footer-section footer-brand">
                 <h3>CHODATE</h3>
-                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <p id="footerDesc">CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
                 <div class="social-links">
                     <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                     <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Explore</h3>
+                <h3 id="footerExplore">Explore</h3>
                 <ul class="footer-links">
                     <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
                     <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
@@ -1169,7 +1159,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>More</h3>
+                <h3 id="footerMore">More</h3>
                 <ul class="footer-links">
                     <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
                     <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
@@ -1178,7 +1168,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Meet Us</h3>
+                <h3 id="footerMeet">Meet Us</h3>
                 <ul class="footer-links">
                     <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
                     <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
@@ -1186,7 +1176,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+            <div class="copyright" id="footerCopyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
         </div>
     </footer>
 
@@ -1481,8 +1471,8 @@
                 captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
                 displayCaption.innerText = currentCaption;
 
-                displayTimestamp.innerText = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' :
-                    'Just now');
+                const ts = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' : 'Just now');
+                displayTimestamp.innerText = ts;
                 displayTimestamp.style.display = 'block';
             } else {
                 captionWrapper.style.display = 'none';
@@ -1520,27 +1510,203 @@
             setTimeout(() => t.style.opacity = '0', 2000);
         }
 
+        // ---- Translations ----
+        const translations = {
+            id: {
+                pageTitle: "Create your post!",
+                labelAvatar: "Foto Profil",
+                uploadAvatarLabel: "Upload foto profil",
+                labelUsername: "Username",
+                labelLocMusic: "Lokasi / Musik",
+                labelMedia: "Upload Foto",
+                uploadMediaLabel: "Klik untuk pilih file",
+                labelCaption: "Caption",
+                labelLikes: "Jumlah Like",
+                labelLikedBy: "Disukai oleh (username)",
+                labelTimestamp: "Waktu posting",
+                defaultTimestamp: "Baru saja",
+                labelLoveColor: "Warna Hati",
+                loveSelectText: "Pilih:",
+                labelBgPreview: "Background Preview",
+                bgTransparent: "Transparan",
+                bgWhite: "Putih",
+                bgBlack: "Hitam",
+                labelActionNumbers: "Angka Interaksi",
+                labelLike: "Like",
+                labelComment: "Comment",
+                labelRepost: "Repost",
+                labelShare: "Share",
+                likePlaceholder: "1.2rb",
+                commentPlaceholder: "500rb",
+                repostPlaceholder: "200rb",
+                sharePlaceholder: "100rb",
+                locationPlaceholder: "Jakarta Selatan, Indonesia",
+                musicPlaceholder: "Judul lagu — Artis",
+                timestampPlaceholder: "Baru saja",
+                verifStatus: "Akun Terverifikasi",
+                downloadBtn: "Unduh",
+                uploadPlaceholder: "Upload foto profil",
+                mediaPlaceholder: "Klik untuk pilih file",
+                captionPlaceholder: "Tulis sesuatu...",
+                likeCountPlaceholder: "thebestfriend",
+                verificationBtn: "Verification (Official Account)",
+                footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
+                footerExplore: "Explore",
+                footerMore: "More",
+                footerMeet: "Meet Us",
+                footerCopyright: "© 2026 CHODATE by The Kachoo. All rights reserved.",
+                toastVerified: "Akun terverifikasi ✓",
+                toastUnverified: "Verifikasi dihapus",
+                toastDownloadSuccess: "Gambar berhasil diunduh!",
+                toastDownloadFailed: "Gagal mengunduh",
+                cropCancel: "Batal",
+                cropSave: "Simpan",
+                usernamePlaceholder: "thekachoo",
+                likedByPlaceholder: "thebestfriend"
+            },
+            en: {
+                pageTitle: "Create your post!",
+                labelAvatar: "Profile Photo",
+                uploadAvatarLabel: "Upload profile photo",
+                labelUsername: "Username",
+                labelLocMusic: "Location / Music",
+                labelMedia: "Upload Photo",
+                uploadMediaLabel: "Click to select file",
+                labelCaption: "Caption",
+                labelLikes: "Number of Likes",
+                labelLikedBy: "Liked by (username)",
+                labelTimestamp: "Post time",
+                defaultTimestamp: "Just now",
+                labelLoveColor: "Heart Color",
+                loveSelectText: "Choose:",
+                labelBgPreview: "Background Preview",
+                bgTransparent: "Transparent",
+                bgWhite: "White",
+                bgBlack: "Black",
+                labelActionNumbers: "Interaction Numbers",
+                labelLike: "Like",
+                labelComment: "Comment",
+                labelRepost: "Repost",
+                labelShare: "Share",
+                likePlaceholder: "1.2K",
+                commentPlaceholder: "500K",
+                repostPlaceholder: "200K",
+                sharePlaceholder: "100K",
+                locationPlaceholder: "South Jakarta, Indonesia",
+                musicPlaceholder: "Song title — Artist",
+                timestampPlaceholder: "Just now",
+                verifStatus: "Verified Account",
+                downloadBtn: "Download",
+                uploadPlaceholder: "Upload profile photo",
+                mediaPlaceholder: "Click to select file",
+                captionPlaceholder: "Write something...",
+                likeCountPlaceholder: "thebestfriend",
+                verificationBtn: "Verification (Official Account)",
+                footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
+                footerExplore: "Explore",
+                footerMore: "More",
+                footerMeet: "Meet Us",
+                footerCopyright: "© 2026 CHODATE by The Kachoo. All rights reserved.",
+                toastVerified: "Account verified ✓",
+                toastUnverified: "Verification removed",
+                toastDownloadSuccess: "Image downloaded successfully!",
+                toastDownloadFailed: "Download failed",
+                cropCancel: "Cancel",
+                cropSave: "Save",
+                usernamePlaceholder: "thekachoo",
+                likedByPlaceholder: "thebestfriend"
+            }
+        };
+
+        function updateLanguage() {
+            const t = translations[currentLang];
+            document.getElementById('pageTitle').innerText = t.pageTitle;
+            document.getElementById('labelAvatar').innerText = t.labelAvatar;
+            document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel;
+            document.getElementById('labelUsername').innerText = t.labelUsername;
+            document.getElementById('labelLocMusic').innerText = t.labelLocMusic;
+            document.getElementById('labelMedia').innerText = t.labelMedia;
+            document.getElementById('uploadMediaLabel').innerText = t.uploadMediaLabel;
+            document.getElementById('labelCaption').innerText = t.labelCaption;
+            document.getElementById('labelLikedBy').innerText = t.labelLikedBy;
+            document.getElementById('labelTimestamp').innerText = t.labelTimestamp;
+            document.getElementById('labelLoveColor').innerText = t.labelLoveColor;
+            document.getElementById('loveSelectText').innerText = t.loveSelectText;
+            document.getElementById('labelBgPreview').innerText = t.labelBgPreview;
+            document.getElementById('bgTransparent').innerText = t.bgTransparent;
+            document.getElementById('bgWhite').innerText = t.bgWhite;
+            document.getElementById('bgBlack').innerText = t.bgBlack;
+            document.getElementById('labelActionNumbers').innerText = t.labelActionNumbers;
+            document.getElementById('labelLike').innerText = t.labelLike;
+            document.getElementById('labelComment').innerText = t.labelComment;
+            document.getElementById('labelRepost').innerText = t.labelRepost;
+            document.getElementById('labelShare').innerText = t.labelShare;
+            document.getElementById('downloadBtn').innerText = t.downloadBtn;
+            document.getElementById('verificationBtn').innerText = t.verificationBtn;
+            document.getElementById('footerDesc').innerText = t.footerDesc;
+            document.getElementById('footerExplore').innerText = t.footerExplore;
+            document.getElementById('footerMore').innerText = t.footerMore;
+            document.getElementById('footerMeet').innerText = t.footerMeet;
+            document.getElementById('footerCopyright').innerText = t.footerCopyright;
+            document.getElementById('cancelProfileCrop').innerText = t.cropCancel;
+            document.getElementById('saveProfileCrop').innerText = t.cropSave;
+            document.getElementById('cancelPostCrop').innerText = t.cropCancel;
+            document.getElementById('savePostCrop').innerText = t.cropSave;
+
+            // Update placeholders
+            timestampInput.placeholder = t.timestampPlaceholder;
+            locationInput.placeholder = t.locationPlaceholder;
+            musicInput.placeholder = t.musicPlaceholder;
+            likeCountInput.placeholder = t.likePlaceholder;
+            commentCountInput.placeholder = t.commentPlaceholder;
+            repostCountInput.placeholder = t.repostPlaceholder;
+            shareCountInput.placeholder = t.sharePlaceholder;
+            captionInput.placeholder = t.captionPlaceholder;
+            likedByInput.placeholder = t.likedByPlaceholder;
+            usernameInput.placeholder = t.usernamePlaceholder;
+
+            // Update verif status
+            const verifStatusEl = document.getElementById('verifStatus');
+            const verifStatusText = document.getElementById('verifStatusText');
+            if (isVerified) {
+                verifStatusText.innerText = t.verifStatus;
+                verifStatusEl.style.display = 'block';
+            } else {
+                verifStatusEl.style.display = 'none';
+            }
+
+            updatePreviewContent();
+        }
+
+        // ---- Toggle Lang ----
+        document.getElementById('toggleLangBtn').addEventListener('click', function() {
+            currentLang = (currentLang === 'id') ? 'en' : 'id';
+            this.classList.toggle('active');
+            updateLanguage();
+            const msg = currentLang === 'id' ? 'Bahasa diubah ke Indonesia' : 'Language changed to English';
+            showToast(msg);
+        });
+
+        // ---- Toggle Version ----
+        document.getElementById('toggleVersionBtn').addEventListener('click', function() {
+            currentVersion = (currentVersion === 1) ? 2 : 1;
+            this.classList.toggle('active');
+            applyVersion();
+            const msg = currentLang === 'id' ? 'Versi diubah ke Insta ' + currentVersion : 'Version changed to Insta ' +
+                currentVersion;
+            showToast(msg);
+        });
+
         // ---- Events ----
         document.getElementById('verificationBtn').addEventListener('click', () => {
             isVerified = !isVerified;
+            const t = translations[currentLang];
             verifStatusDiv.style.display = isVerified ? 'block' : 'none';
-            const msg = currentLang === 'id' ? 'Akun terverifikasi ✓' : 'Account verified ✓';
-            const msg2 = currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed';
-            showToast(isVerified ? msg : msg2);
+            if (isVerified) {
+                document.getElementById('verifStatusText').innerText = t.verifStatus;
+            }
+            showToast(isVerified ? t.toastVerified : t.toastUnverified);
             updatePreviewContent();
-        });
-
-        document.getElementById('version1Btn').addEventListener('click', () => {
-            currentVersion = 1;
-            document.getElementById('version1Btn').classList.add('active');
-            document.getElementById('version2Btn').classList.remove('active');
-            applyVersion();
-        });
-        document.getElementById('version2Btn').addEventListener('click', () => {
-            currentVersion = 2;
-            document.getElementById('version2Btn').classList.add('active');
-            document.getElementById('version1Btn').classList.remove('active');
-            applyVersion();
         });
 
         document.getElementById('likeIcon').addEventListener('click', () => {
@@ -1593,133 +1759,6 @@
         timestampInput.addEventListener('input', updatePreviewContent);
         likeCountInput.addEventListener('input', () => handleLikeInput('count'));
         likedByInput.addEventListener('input', () => handleLikeInput('user'));
-
-        // Language
-        const translations = {
-            id: {
-                labelAvatar: "Foto Profil",
-                uploadAvatarLabel: "Upload foto profil",
-                labelUsername: "Username",
-                labelLocMusic: "Lokasi / Musik",
-                labelMedia: "Upload Foto",
-                uploadMediaLabel: "Klik untuk pilih file",
-                labelCaption: "Caption",
-                labelLikes: "Jumlah Like",
-                labelLikedBy: "Disukai oleh (username)",
-                labelTimestamp: "Waktu posting",
-                defaultTimestamp: "Baru saja",
-                labelLoveColor: "Warna Hati",
-                loveSelectText: "Pilih:",
-                labelBgPreview: "Background Preview",
-                bgTransparent: "Transparan",
-                bgWhite: "Putih",
-                bgBlack: "Hitam",
-                labelActionNumbers: "Angka Interaksi",
-                likePlaceholder: "1.2rb",
-                commentPlaceholder: "500rb",
-                repostPlaceholder: "200rb",
-                sharePlaceholder: "100rb",
-                locationPlaceholder: "Jakarta Selatan, Indonesia",
-                musicPlaceholder: "Judul lagu — Artis",
-                timestampPlaceholder: "Baru saja",
-                verifStatus: "Akun Terverifikasi",
-                downloadBtn: "Unduh",
-                uploadPlaceholder: "Upload foto profil",
-                mediaPlaceholder: "Klik untuk pilih file",
-                captionPlaceholder: "Tulis sesuatu...",
-                likeCountPlaceholder: "cth: 1.234"
-            },
-            en: {
-                labelAvatar: "Profile Photo",
-                uploadAvatarLabel: "Upload profile photo",
-                labelUsername: "Username",
-                labelLocMusic: "Location / Music",
-                labelMedia: "Upload Photo",
-                uploadMediaLabel: "Click to select file",
-                labelCaption: "Caption",
-                labelLikes: "Number of Likes",
-                labelLikedBy: "Liked by (username)",
-                labelTimestamp: "Post time",
-                defaultTimestamp: "Just now",
-                labelLoveColor: "Heart Color",
-                loveSelectText: "Choose:",
-                labelBgPreview: "Background Preview",
-                bgTransparent: "Transparent",
-                bgWhite: "White",
-                bgBlack: "Black",
-                labelActionNumbers: "Interaction Numbers",
-                likePlaceholder: "1.2K",
-                commentPlaceholder: "500K",
-                repostPlaceholder: "200K",
-                sharePlaceholder: "100K",
-                locationPlaceholder: "South Jakarta, Indonesia",
-                musicPlaceholder: "Song title — Artist",
-                timestampPlaceholder: "Just now",
-                verifStatus: "Verified Account",
-                downloadBtn: "Download",
-                uploadPlaceholder: "Upload profile photo",
-                mediaPlaceholder: "Click to select file",
-                captionPlaceholder: "Write something...",
-                likeCountPlaceholder: "ex: 1.234"
-            }
-        };
-
-        function updateLanguage() {
-            const t = translations[currentLang];
-            document.getElementById('labelAvatar').innerText = t.labelAvatar;
-            document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel;
-            document.getElementById('labelUsername').innerText = t.labelUsername;
-            document.getElementById('labelLocMusic').innerText = t.labelLocMusic;
-            document.getElementById('labelMedia').innerText = t.labelMedia;
-            document.getElementById('uploadMediaLabel').innerText = t.uploadMediaLabel;
-            document.getElementById('labelCaption').innerText = t.labelCaption;
-            document.getElementById('labelLikes').innerText = t.labelLikes;
-            document.getElementById('labelLikedBy').innerText = t.labelLikedBy;
-            document.getElementById('labelTimestamp').innerText = t.labelTimestamp;
-            document.getElementById('labelLoveColor').innerText = t.labelLoveColor;
-            document.getElementById('loveSelectText').innerText = t.loveSelectText;
-            document.getElementById('labelBgPreview').innerText = t.labelBgPreview;
-            document.getElementById('bgTransparent').innerText = t.bgTransparent;
-            document.getElementById('bgWhite').innerText = t.bgWhite;
-            document.getElementById('bgBlack').innerText = t.bgBlack;
-            document.getElementById('labelActionNumbers').innerText = t.labelActionNumbers;
-            document.getElementById('downloadBtn').innerText = t.downloadBtn;
-
-            // Update placeholders
-            timestampInput.placeholder = t.timestampPlaceholder;
-            locationInput.placeholder = t.locationPlaceholder;
-            musicInput.placeholder = t.musicPlaceholder;
-            likeCountInput.placeholder = t.likePlaceholder;
-            commentCountInput.placeholder = t.commentPlaceholder;
-            repostCountInput.placeholder = t.repostPlaceholder;
-            shareCountInput.placeholder = t.sharePlaceholder;
-            captionInput.placeholder = t.captionPlaceholder;
-            likedByInput.placeholder = t.likeCountPlaceholder;
-
-            // Update verif status
-            const verifStatusEl = document.getElementById('verifStatus');
-            if (isVerified) {
-                verifStatusEl.innerHTML = `<i class="fas fa-check-circle"></i> ${t.verifStatus}`;
-                verifStatusEl.style.display = 'block';
-            } else {
-                verifStatusEl.style.display = 'none';
-            }
-
-            updatePreviewContent();
-        }
-
-        document.getElementById('btnIndonesia').addEventListener('click', () => {
-            currentLang = 'id';
-            document.getElementById('btnIndonesia').classList.add('active');
-            document.getElementById('btnInggris').classList.remove('active');
-            updateLanguage();
-        });
-        document.getElementById('btnInggris').addEventListener('click', () => {
-            currentLang = 'en';
-            document.getElementById('btnInggris').classList.add('active');
-            document.getElementById('btnIndonesia').classList.remove('active');
-            updateLanguage();
-        });
 
         // Crop
         let profileCropper, postCropper;
@@ -1801,13 +1840,11 @@
                     a.download = `instapost_${Date.now()}.png`;
                     a.href = canvas.toDataURL('image/png');
                     a.click();
-                    const msg = currentLang === 'id' ? 'Gambar berhasil diunduh!' : 'Image downloaded successfully!';
-                    showToast(msg);
+                    showToast(translations[currentLang].toastDownloadSuccess);
                     editBgBtn.classList.add('visible');
                 })
                 .catch(() => {
-                    const msg = currentLang === 'id' ? 'Gagal mengunduh' : 'Download failed';
-                    showToast(msg);
+                    showToast(translations[currentLang].toastDownloadFailed);
                 });
         });
 
@@ -1844,4 +1881,4 @@
         applyVersion();
     </script>
 </body>
-    </html>
+</html>
