@@ -1131,19 +1131,15 @@
             <h1 class="page-title" id="pageTitle">Create your profile!</h1>
             <div class="insta-wrapper">
                 <div class="form-panel">
-                    <!-- REVISI: 3 Tombol Circle di Tengah -->
                     <div class="setting-row">
-                        <!-- Theme Toggle: Light (🌙) / Dark (☀️) -->
                         <button class="toggle-btn active" id="themeToggle" data-tooltip="Toggle Theme">
                             <i class="fas fa-moon"></i>
                         </button>
-                        <!-- Version Toggle: V2 (active) / V1 -->
                         <button class="toggle-btn active" id="versionToggle" data-tooltip="Toggle Version">
                             <i class="fas fa-square"></i>
                         </button>
-                        <!-- Language Toggle: ENG (active) / IND -->
                         <button class="toggle-btn active" id="langToggle" data-tooltip="Toggle Language">
-                            <span class="btn-text">ENG</span>
+                            <span class="btn-text">IND</span>
                         </button>
                     </div>
 
@@ -1252,8 +1248,8 @@
         let isVerified = false;
         let isPrivate = false;
         let currentTheme = 'light';
-        let currentLang = 'en'; // DEFAULT ENGLISH
-        let currentVersion = '2'; // DEFAULT V2
+        let currentLang = 'en';
+        let currentVersion = '2';
         let postImages = new Array(6).fill(null);
         let currentPostIndex = 0;
         let postCropper = null,
@@ -1574,19 +1570,15 @@
             }
         });
 
-        // ===== VERSION TOGGLE =====
-        // Default: V2 (active, bg hitam) = preview V2 (4:5)
         const versionToggle = document.getElementById('versionToggle');
         versionToggle.classList.add('active');
         
         versionToggle.addEventListener('click', () => {
             if (currentVersion === '2') {
-                // V2 aktif -> klik -> jadi V1 (1:1)
                 currentVersion = '1';
                 versionToggle.classList.remove('active');
                 updateVersion();
             } else {
-                // V1 aktif -> klik -> jadi V2 (4:5)
                 currentVersion = '2';
                 versionToggle.classList.add('active');
                 updateVersion();
@@ -1594,24 +1586,21 @@
         });
 
         // ===== LANGUAGE TOGGLE =====
-        // Default: ENG (active, bg hitam) = preview English
         const langToggle = document.getElementById('langToggle');
         langToggle.classList.add('active');
-        langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+        langToggle.innerHTML = '<span class="btn-text">IND</span>';
         
         langToggle.addEventListener('click', () => {
             if (currentLang === 'en') {
-                // ENG aktif -> klik -> jadi IND
                 currentLang = 'id';
                 langToggle.classList.remove('active');
-                langToggle.innerHTML = '<span class="btn-text">IND</span>';
+                langToggle.innerHTML = '<span class="btn-text">ENG</span>';
                 updateFormLanguage();
                 showToast('Bahasa Indonesia');
             } else {
-                // IND aktif -> klik -> jadi ENG
                 currentLang = 'en';
                 langToggle.classList.add('active');
-                langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+                langToggle.innerHTML = '<span class="btn-text">IND</span>';
                 updateFormLanguage();
                 showToast('English');
             }
