@@ -584,7 +584,7 @@
         }
         .action-icons {
             display: flex;
-            gap: 12px;
+            gap: 6px;
             align-items: center;
             flex-wrap: wrap;
             flex: 1;
@@ -592,7 +592,7 @@
         .action-item {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 0px;
         }
         .action-icon {
             width: 24px;
@@ -601,7 +601,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            flex-shrink: 1;
             position: relative;
         }
         .action-icon img {
@@ -645,9 +645,11 @@
             font-size: 13px;
             font-weight: 500;
             color: #262626;
-            min-width: 8px;
+            min-width: 0;
             line-height: 1;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            white-space: nowrap;
+            transition: all 0.15s ease;
         }
         .save-icon {
             margin-left: auto;
