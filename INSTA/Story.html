@@ -464,52 +464,6 @@
         .toggle-slider.active::after {
             left: 22px;
         }
-        .toggle-follow-control {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f5f5f5;
-            padding: 9px 14px;
-            border-radius: 60px;
-            cursor: pointer;
-            margin-bottom: 9px;
-        }
-        .toggle-follow-control span {
-            font-size: 12px;
-            font-weight: 500;
-            color: #333;
-        }
-        .follow-toggle-slider {
-            width: 42px;
-            height: 22px;
-            background: #ccc;
-            border-radius: 30px;
-            position: relative;
-            transition: 0.2s;
-            flex-shrink: 0;
-        }
-        .follow-toggle-slider.active {
-            background: #0095f6;
-        }
-        .follow-toggle-slider::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: 0.2s;
-        }
-        .follow-toggle-slider.active::after {
-            left: 22px;
-        }
-
-        /* Hapus tema teks dark, hanya white */
-        .theme-selector {
-            display: none;
-        }
 
         /* ===== STORY CARD WRAPPER ===== */
         .story-card-wrapper {
@@ -606,30 +560,29 @@
             font-size: 12px;
             color: white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin-top: -8px;
         }
         .story-time {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.75);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin-top: -2px;
         }
         .cf-badge-header {
-            display: inline-flex;
+            display: none;
             align-items: center;
-            gap: 3px;
-            background: #2e9b4c;
-            border-radius: 20px;
-            padding: 2px 7px;
-            font-size: 9px;
-            font-weight: 700;
-            color: white;
-            margin-top: 3px;
-            width: fit-content;
+            justify-content: center;
+        }
+        .cf-badge-header img,
+        .header-right-icons .cf-badge-header img {
+            width: 36px !important;
+            height: 36px !important;
+            object-fit: contain;
+        }
+        .cf-badge-header.show {
+            display: inline-flex;
         }
         .verified-icon {
             color: #0095f6;
-            font-size: 11px;
+            font-size: 18px;
             margin-left: 3px;
             vertical-align: middle;
         }
@@ -637,13 +590,13 @@
             display: flex;
             gap: 14px;
             align-items: center;
-            margin-top: -28px;
         }
         .header-right i {
             font-size: 16px;
             color: white;
             cursor: default;
         }
+
         .plus-badge {
             position: absolute;
             bottom: 5px;
@@ -658,24 +611,6 @@
             justify-content: center;
             font-size: 8px;
             color: white;
-        }
-
-        .follow-btn-story {
-            padding: 5px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            border: 1.5px solid rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            background: transparent;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            letter-spacing: 0.2px;
-        }
-        .follow-btn-story.following {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
-            color: rgba(255, 255, 255, 0.7);
         }
 
         .my-bottom-bar {
@@ -695,7 +630,6 @@
             align-items: center;
             gap: 1px;
             transform: translateY(-6px);
-            /*move up*/
         }
         .activity-circle {
             background: rgba(0, 0, 0, 0.3);
@@ -726,7 +660,6 @@
             gap: 7px;
             align-items: flex-end;
             transform: translateY(-6px);
-            /*move up*/
         }
         .action-item {
             display: flex;
@@ -759,14 +692,13 @@
             line-height: 1;
         }
 
-        /* Send message bar dengan background hitam */
         .send-message-bg {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             height: 65px;
-            background: #000000;
+            background: transparent;
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
             z-index: 3;
@@ -784,31 +716,19 @@
         }
         .send-message-pill {
             flex: 1;
-            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
             border-radius: 22px;
             height: 36px;
             display: flex;
             align-items: center;
             padding: 0 14px;
+            background: transparent;
         }
         .send-message-label {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.65);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             pointer-events: none;
-        }
-        .send-message-input {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 12px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            outline: none;
-            flex: 1;
-            width: 100%;
-        }
-        .send-message-input: {
-            color: rgba(255, 255, 255, 0.65);
         }
         .story-action-icons {
             display: flex;
@@ -838,12 +758,22 @@
             fill: #ff3040;
             stroke: #ff3040;
         }
+        .story-icon-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
 
-        /* Three dots menu beside follow button */
         .header-right-social {
             display: flex;
             gap: 12px;
             align-items: center;
+        }
+        .header-right-social i {
+            font-size: 16px;
+            color: white;
+            cursor: default;
         }
         .three-dots {
             color: white;
@@ -1106,7 +1036,19 @@
             white-space: nowrap;
         }
 
-        /* Placeholder tenggelam/isian form */
+        .name-time-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .name-time-wrapper .story-username {
+            margin: 0;
+        }
+        .name-time-wrapper .story-time {
+            margin: 0;
+        }
+
         input::placeholder,
         textarea::placeholder {
             color: #bbb;
@@ -1118,6 +1060,34 @@
         select option:first-child {
             color: #666;
         }
+
+        .header-right-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .header-right-icons i {
+            font-size: 22px;
+            color: white;
+            cursor: default;
+        }
+        .header-right-icons .three-dots {
+            font-size: 22px;
+            cursor: pointer;
+        }
+        .header-right-icons .cf-badge-header {
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-right-icons .cf-badge-header.show {
+            display: inline-flex;
+        }
+        .header-right-icons .cf-badge-header img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -1125,17 +1095,17 @@
     <header>
         <div class="header-content">
             <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-                <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                <img src="https://thekachoo.github.io/CHODATE/INSTA/Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
             <div class="center-title">
-                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+                <img src="https://thekachoo.github.io/CHODATE/INSTA/Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
             </div>
             <div class="desktop-nav-container">
                 <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
                 <div class="desktop-nav-dropdown" id="desktopNavDropdown">
                     <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
-                    <a href="Post.html" class="nav-button">Instacho Post</a>
-                    <a href="Profile.html" class="nav-button">Instacho Profile</a>
+                    <a href="https://thekachoo.github.io/CHODATE/Post.html" class="nav-button">Instacho Post</a>
+                    <a href="https://thekachoo.github.io/CHODATE/Profile.html" class="nav-button">Instacho Profile</a>
                 </div>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -1146,8 +1116,8 @@
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
         <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
-        <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
-        <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
+        <a href="https://thekachoo.github.io/CHODATE/Post.html" class="mobile-menu-link">Instacho Post</a>
+        <a href="https://thekachoo.github.io/CHODATE/Profile.html" class="mobile-menu-link">Instacho Profile</a>
     </div>
 
     <div class="main-content">
@@ -1248,39 +1218,40 @@
                                             <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                         </div>
                                         <div>
-                                            <div class="story-username" id="yourStoryText">Story Anda</div>
-                                            <div class="story-time" id="myViewTime">Baru saja</div>
-                                            <div id="myViewCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeText">Teman Dekat</span></div>
+                                            <div class="name-time-wrapper">
+                                                <span class="story-username" id="yourStoryText">Story Anda</span>
+                                                <span class="story-time" id="myViewTime">Baru saja</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="header-right">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                        <i class="fas fa-times"></i>
+                                    <div class="header-right-icons">
+                                        <span class="cf-badge-header" id="myViewCfBadge"><img src="https://thekachoo.github.io/CHODATE/INSTA/CF.png" alt="CF"></span>
+                                        <i class="fas fa-times" style="font-size:24px;"></i>
                                     </div>
                                 </div>
                                 <div class="my-bottom-bar">
                                     <div class="activity-left">
                                         <div class="activity-circle">
-                                            <img src="Activity-icon.png" alt="Activity" id="activityIconMy">
+                                            <img src="https://thekachoo.github.io/CHODATE/INSTA/Activity-icon.png" alt="Activity" id="activityIconMy">
                                         </div>
                                         <span class="activity-label" id="activityText">Aktivitas</span>
                                     </div>
                                     <div class="actions-right">
                                         <div class="action-item">
                                             <div class="action-circle">
-                                                <img src="Boost-icon.png" alt="Boost" id="boostIconMy">
+                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Boost-icon.png" alt="Boost" id="boostIconMy">
                                             </div>
                                             <span class="action-label" id="boostText">Bagikan</span>
                                         </div>
                                         <div class="action-item">
                                             <div class="action-circle">
-                                                <img src="Highlight-icon.png" alt="Highlight" id="highlightIconMy">
+                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Highlight-icon.png" alt="Highlight" id="highlightIconMy">
                                             </div>
                                             <span class="action-label" id="highlightText">Sorotan</span>
                                         </div>
                                         <div class="action-item">
                                             <div class="action-circle">
-                                                <img src="Mention-icon.png" alt="Mention" id="mentionIconMy">
+                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Mention-icon.png" alt="Mention" id="mentionIconMy">
                                             </div>
                                             <span class="action-label" id="mentionText">Sebut</span>
                                         </div>
@@ -1349,10 +1320,6 @@
                             <span id="cfTextPub">Teman Dekat</span>
                             <div class="toggle-slider" id="pubCfSlider"></div>
                         </div>
-                        <div class="toggle-follow-control" id="toggleFollowControl">
-                            <span id="followText">Ikuti / Mengikuti</span>
-                            <div class="follow-toggle-slider" id="followToggleSlider"></div>
-                        </div>
 
                         <!-- ===== TEKS OPSIONAL SOCIAL VIEW ===== -->
                         <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
@@ -1393,17 +1360,19 @@
                                     <div class="header-left">
                                         <img class="story-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%23e4405f'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EK%3C/text%3E%3C/svg%3E">
                                         <div>
-                                            <div class="story-username">
-                                                <span id="pubUsernameLabel">thekachoo</span>
-                                                <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
+                                            <div class="name-time-wrapper">
+                                                <span class="story-username">
+                                                    <span id="pubUsernameLabel">thekachoo</span>
+                                                    <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
+                                                </span>
+                                                <span class="story-time" id="pubTimeLabel">Baru saja</span>
                                             </div>
-                                            <div class="story-time" id="pubTimeLabel">Baru saja</div>
-                                            <div id="pubCfBadge" class="cf-badge-header" style="display:none;"><i class="fas fa-star" style="font-size:8px;"></i> <span id="closeFriendsBadgeTextPub">Teman dekat</span></div>
                                         </div>
                                     </div>
-                                    <div class="header-right-social">
-                                        <button class="follow-btn-story" id="pubFollowAction">Ikuti</button>
+                                    <div class="header-right-icons">
+                                        <span class="cf-badge-header" id="pubCfBadge"><img src="https://thekachoo.github.io/CHODATE/INSTA/CF.png" alt="CF"></span>
                                         <i class="fas fa-ellipsis-h three-dots"></i>
+                                        <i class="fas fa-times"></i>
                                     </div>
                                 </div>
                                 <div class="send-message-bg"></div>
@@ -1416,6 +1385,9 @@
                                             <svg viewBox="0 0 24 24">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
+                                        </div>
+                                        <div class="story-icon-btn">
+                                            <img src="https://thekachoo.github.io/CHODATE/INSTA/Comment2.png" alt="Comment">
                                         </div>
                                         <div class="story-icon-btn">
                                             <svg viewBox="0 0 24 24">
@@ -1497,7 +1469,6 @@
         let myCfActive = false,
             pubCfActive = false,
             pubVerified = false,
-            pubFollowActive = false,
             pubLiked = false;
         let currentMyLang = 'id',
             currentPubLang = 'id';
@@ -1529,7 +1500,6 @@
                 mention: "Sebut",
                 more: "Lainnya",
                 download: "Unduh",
-                closeFriendsBadge: "Teman Dekat",
                 profileLabelPub: "Profil & Interaksi",
                 avatarLabelPub: "Foto Profil",
                 uploadAvatarPub: "Upload avatar",
@@ -1540,10 +1510,7 @@
                 outerLabelPub: "Background Luar",
                 outerColorLabelPub: "Warna Luar Frame",
                 cfTextPub: "Teman Dekat",
-                followText: "Ikuti / Mengikuti",
-                sendMessagePlaceholder: "Kirim pesan...",
-                follow: "Ikuti",
-                following: "Mengikuti"
+                sendMessagePlaceholder: "Kirim pesan..."
             },
             en: {
                 backToMode: "Back to Mode",
@@ -1566,7 +1533,6 @@
                 mention: "Mention",
                 more: "More",
                 download: "Download",
-                closeFriendsBadge: "Close Friends",
                 profileLabelPub: "Profile & Interaction",
                 avatarLabelPub: "Profile Photo",
                 uploadAvatarPub: "Upload avatar",
@@ -1577,10 +1543,7 @@
                 outerLabelPub: "Outer Background",
                 outerColorLabelPub: "Outer Frame Color",
                 cfTextPub: "Close Friends",
-                followText: "Follow / Following",
-                sendMessagePlaceholder: "Send message...",
-                follow: "Follow",
-                following: "Following"
+                sendMessagePlaceholder: "Send message..."
             }
         };
 
@@ -1608,7 +1571,6 @@
                 document.getElementById('mentionText') && (document.getElementById('mentionText').innerText = t.mention);
                 document.getElementById('moreText') && (document.getElementById('moreText').innerText = t.more);
                 document.getElementById('downloadText') && (document.getElementById('downloadText').innerText = t.download);
-                document.getElementById('closeFriendsBadgeText') && (document.getElementById('closeFriendsBadgeText').innerText = t.closeFriendsBadge);
 
                 let timeVal = document.getElementById('myTimeSelect').value;
                 if (timeVal === 'Just now') {
@@ -1629,16 +1591,8 @@
                 document.getElementById('outerLabelPub') && (document.getElementById('outerLabelPub').innerText = t.outerBgLabel);
                 document.getElementById('outerColorLabelPub') && (document.getElementById('outerColorLabelPub').innerText = t.outerColorLabel);
                 document.getElementById('cfTextPub') && (document.getElementById('cfTextPub').innerText = t.closeFriends);
-                document.getElementById('followText') && (document.getElementById('followText').innerText = t.followText);
                 document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
-                document.getElementById('closeFriendsBadgeTextPub') && (document.getElementById('closeFriendsBadgeTextPub').innerText = t.closeFriendsBadge);
                 document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').innerText = t.sendMessagePlaceholder);
-
-                if (pubFollowActive) {
-                    document.getElementById('pubFollowAction').innerText = t.following;
-                } else {
-                    document.getElementById('pubFollowAction').innerText = t.follow;
-                }
 
                 let timeVal = document.getElementById('pubTimeSelect').value;
                 if (timeVal === 'Just now') {
@@ -1679,8 +1633,6 @@
         function applyTextTheme(cardEl, theme) {
             const color = theme === 'white' ? '#fff' : '#000';
             cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style.color = color);
-            const followBtn = cardEl.querySelector('.follow-btn-story');
-            if (followBtn) followBtn.style.color = color;
             const msgInput = cardEl.querySelector('.send-message-input');
             if (msgInput) msgInput.style.color = color;
             const threeDots = cardEl.querySelector('.three-dots');
@@ -1692,9 +1644,19 @@
             if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
             const t = translations[currentMyLang];
             const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-            document.getElementById('myViewTime').style.display = myCfActive ? 'none' : 'block';
-            if (!myCfActive) document.getElementById('myViewTime').innerText = displayTime;
-            document.getElementById('myViewCfBadge').style.display = myCfActive ? 'flex' : 'none';
+            
+            const cfBadge = document.getElementById('myViewCfBadge');
+            if (myCfActive) {
+                cfBadge.classList.add('show');
+                // Waktu tetap ditampilkan
+                document.getElementById('myViewTime').style.display = 'inline';
+                document.getElementById('myViewTime').innerText = displayTime;
+            } else {
+                cfBadge.classList.remove('show');
+                document.getElementById('myViewTime').style.display = 'inline';
+                document.getElementById('myViewTime').innerText = displayTime;
+            }
+            
             if (myAvatarUrl) document.getElementById('myViewAvatar').src = myAvatarUrl;
             const card = document.getElementById('myViewStoryCard');
             card.style.backgroundImage = myBgUrl ? `url(${myBgUrl})` : 'none';
@@ -1713,16 +1675,19 @@
             if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
             const t = translations[currentPubLang];
             const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-            document.getElementById('pubTimeLabel').style.display = pubCfActive ? 'none' : 'block';
-            if (!pubCfActive) document.getElementById('pubTimeLabel').innerText = displayTime;
-            document.getElementById('pubCfBadge').style.display = pubCfActive ? 'flex' : 'none';
-            const followBtn = document.getElementById('pubFollowAction');
-            if (t) {
-                followBtn.innerText = pubFollowActive ? t.following : t.follow;
+            
+            const cfBadge = document.getElementById('pubCfBadge');
+            if (pubCfActive) {
+                cfBadge.classList.add('show');
+                // Waktu tetap ditampilkan
+                document.getElementById('pubTimeLabel').style.display = 'inline';
+                document.getElementById('pubTimeLabel').innerText = displayTime;
             } else {
-                followBtn.innerText = pubFollowActive ? 'Following' : 'Follow';
+                cfBadge.classList.remove('show');
+                document.getElementById('pubTimeLabel').style.display = 'inline';
+                document.getElementById('pubTimeLabel').innerText = displayTime;
             }
-            followBtn.classList.toggle('following', pubFollowActive);
+            
             const likeBtn = document.getElementById('pubLikeBtn');
             likeBtn.classList.toggle('liked', pubLiked);
             if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
@@ -1890,7 +1855,6 @@
         // ========== DOWNLOAD ==========
         async function downloadEl(el, name) {
             try {
-                // Sembunyikan tombol X pada semua teks sebelum download
                 const allTexts = el.querySelectorAll('.draggable-text');
                 allTexts.forEach(t => t.classList.add('hide-actions'));
 
@@ -1901,7 +1865,6 @@
                     allowTaint: true,
                     logging: false,
                     onclone: function(clonedDoc, clonedEl) {
-                        // Temporarily remove overflow:hidden from story cards so send bar is not clipped
                         clonedEl.querySelectorAll('.my-story-card, .other-story-card').forEach(function(card) {
                             card.style.overflow = 'visible';
                             card.style.borderRadius = '18px';
@@ -1909,7 +1872,6 @@
                     }
                 });
 
-                // Tampilkan kembali tombol X
                 allTexts.forEach(t => t.classList.remove('hide-actions'));
 
                 const a = document.createElement('a');
@@ -1919,7 +1881,6 @@
                 showToast('Berhasil diunduh');
             } catch (e) {
                 console.error(e);
-                // Tampilkan kembali tombol X jika terjadi error
                 const allTexts = el.querySelectorAll('.draggable-text');
                 allTexts.forEach(t => t.classList.remove('hide-actions'));
                 showToast('Gagal');
@@ -1964,9 +1925,6 @@
             updatePublicView(); });
         document.getElementById('pubCfSlider').addEventListener('click', () => { pubCfActive = !pubCfActive;
             document.getElementById('pubCfSlider').classList.toggle('active');
-            updatePublicView(); });
-        document.getElementById('toggleFollowControl').addEventListener('click', () => { pubFollowActive = !pubFollowActive;
-            document.getElementById('followToggleSlider').classList.toggle('active');
             updatePublicView(); });
         document.getElementById('pubLikeBtn').addEventListener('click', () => { pubLiked = !pubLiked;
             updatePublicView(); });
