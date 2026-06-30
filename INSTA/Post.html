@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
@@ -994,8 +994,8 @@
 
                 <!-- Avatar -->
                 <div class="form-group">
-                    <label id="labelAvatar">Foto Profil</label>
-                    <div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div>
+                    <label id="labelAvatar">Profile Photo</label>
+                    <div class="file-input-label" id="uploadAvatarLabel">Upload profile photo</div>
                     <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
                 </div>
 
@@ -1007,59 +1007,59 @@
 
                 <!-- Location & Music -->
                 <div class="form-group">
-                    <label id="labelLocMusic">Lokasi / Musik</label>
+                    <label id="labelLocMusic">Location / Music</label>
                     <div class="loc-music-group">
                         <div class="loc-music-row">
-                            <input type="text" id="location" placeholder="Jakarta Selatan, Indonesia" oninput="handleLocMusicInput('loc')">
+                            <input type="text" id="location" placeholder="South Jakarta, Indonesia" oninput="handleLocMusicInput('loc')">
                         </div>
                         <div class="loc-music-row">
-                            <input type="text" id="musicName" placeholder="Judul lagu — Artis" oninput="handleLocMusicInput('music')">
+                            <input type="text" id="musicName" placeholder="Song title — Artist" oninput="handleLocMusicInput('music')">
                         </div>
                     </div>
                 </div>
 
                 <!-- Crop ratio -->
                 <div class="form-group">
-                    <label id="labelMedia">Upload Foto</label>
+                    <label id="labelMedia">Upload Photo</label>
                     <div class="ratio-options" id="ratioOptionsPre">
                         <button class="ratio-btn active" data-ratio="1:1">1:1</button>
                         <button class="ratio-btn" data-ratio="4:5">4:5</button>
                     </div>
-                    <div class="file-input-label" id="uploadMediaLabel">Klik untuk pilih file</div>
+                    <div class="file-input-label" id="uploadMediaLabel">Click to select file</div>
                     <input type="file" id="mediaUpload" accept="image/*" style="display:none;">
                 </div>
 
                 <!-- Caption -->
                 <div class="form-group">
                     <label id="labelCaption">Caption</label>
-                    <textarea id="caption" placeholder="Tulis sesuatu..."></textarea>
+                    <textarea id="caption" placeholder="Write something..."></textarea>
                 </div>
 
                 <!-- Numbers for actions -->
                 <div class="form-group">
-                    <label id="labelActionNumbers">Angka Interaksi</label>
+                    <label id="labelActionNumbers">Interaction Numbers</label>
                     <div class="number-input-group">
                         <div class="form-group">
                             <label id="labelLike">Like</label>
-                            <input type="text" id="likeCount" placeholder="1.2rb" oninput="handleLikeInput('count')">
+                            <input type="text" id="likeCount" placeholder="1.2K" oninput="handleLikeInput('count')">
                         </div>
                         <div class="form-group">
                             <label id="labelComment">Comment</label>
-                            <input type="text" id="commentCount" placeholder="500rb" oninput="updatePreviewContent()">
+                            <input type="text" id="commentCount" placeholder="500K" oninput="updatePreviewContent()">
                         </div>
                         <div class="form-group">
                             <label id="labelRepost">Repost</label>
-                            <input type="text" id="repostCount" placeholder="200rb" oninput="updatePreviewContent()">
+                            <input type="text" id="repostCount" placeholder="200K" oninput="updatePreviewContent()">
                         </div>
                         <div class="form-group">
                             <label id="labelShare">Share</label>
-                            <input type="text" id="shareCount" placeholder="100rb" oninput="updatePreviewContent()">
+                            <input type="text" id="shareCount" placeholder="100K" oninput="updatePreviewContent()">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group" id="likedByGroup">
-                    <label id="labelLikedBy">Disukai oleh</label>
+                    <label id="labelLikedBy">Liked by</label>
                     <div class="liked-by-input-group">
                         <div class="liked-by-input-row">
                             <label>User1</label>
@@ -1074,15 +1074,15 @@
 
                 <!-- Timestamp -->
                 <div class="form-group">
-                    <label id="labelTimestamp">Waktu posting</label>
-                    <input type="text" id="timestamp" placeholder="Baru saja">
+                    <label id="labelTimestamp">Post time</label>
+                    <input type="text" id="timestamp" placeholder="Just now">
                 </div>
 
                 <!-- Like color -->
                 <div class="form-group">
-                    <label id="labelLoveColor">Warna Hati</label>
+                    <label id="labelLoveColor">Heart Color</label>
                     <div class="love-option">
-                        <span id="loveSelectText">Pilih:</span>
+                        <span id="loveSelectText">Choose:</span>
                         <div class="love-color-btn black active" id="loveBlack"></div>
                         <div class="love-color-btn red" id="loveRed"></div>
                     </div>
@@ -1092,9 +1092,9 @@
                 <div class="form-group">
                     <label id="labelBgPreview">Background Preview</label>
                     <div class="bg-options">
-                        <button class="bg-option-btn" data-bg="transparent" id="bgTransparent">Transparan</button>
-                        <button class="bg-option-btn" data-bg="white" id="bgWhite">Putih</button>
-                        <button class="bg-option-btn" data-bg="black" id="bgBlack">Hitam</button>
+                        <button class="bg-option-btn" data-bg="transparent" id="bgTransparent">Transparent</button>
+                        <button class="bg-option-btn" data-bg="white" id="bgWhite">White</button>
+                        <button class="bg-option-btn" data-bg="black" id="bgBlack">Black</button>
                         <input type="color" id="customColorPicker" class="color-picker-input" value="#f5f5f5">
                     </div>
                 </div>
@@ -1102,7 +1102,7 @@
                 <!-- Verification -->
                 <div class="setting-verif">
                     <button class="verif-btn" id="verificationBtn">Verification (Official Account)</button>
-                    <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> <span id="verifStatusText">Akun Terverifikasi</span></div>
+                    <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> <span id="verifStatusText">Verified Account</span></div>
                 </div>
             </div>
 
@@ -1173,7 +1173,7 @@
 
                         <!-- Liked by section -->
                         <div class="liked-by-text" id="likedByText" style="display:none;">
-                            Disukai oleh <span class="liked-by-username" id="likedByDisplay1">User1</span>, <span class="liked-by-username" id="likedByDisplay2">User2</span>, dan <span class="liked-by-others" id="likedByOthers" style="font-weight: bold;">lainnya</span>
+                            Liked by <span class="liked-by-username" id="likedByDisplay1">User1</span>, <span class="liked-by-username" id="likedByDisplay2">User2</span>, and <span class="liked-by-others" id="likedByOthers" style="font-weight: bold;">others</span>
                         </div>
 
                         <div class="caption-text" id="captionWrapper">
@@ -1185,7 +1185,7 @@
                     </div>
                 </div>
                 <div class="download-area">
-                    <button class="download-btn" id="downloadBtn">Unduh</button>
+                    <button class="download-btn" id="downloadBtn">Download</button>
                     <a href="Edit.html" class="edit-bg-btn" id="editBgBtn">Background</a>
                 </div>
             </div>
@@ -1239,15 +1239,15 @@
     <div class="crop-modal" id="profileCropModal">
         <div class="crop-container"><img id="profileCropImage" src=""></div>
         <div class="crop-modal-buttons">
-            <button class="crop-modal-btn cancel" id="cancelProfileCrop">Batal</button>
-            <button class="crop-modal-btn save" id="saveProfileCrop">Simpan</button>
+            <button class="crop-modal-btn cancel" id="cancelProfileCrop">Cancel</button>
+            <button class="crop-modal-btn save" id="saveProfileCrop">Save</button>
         </div>
     </div>
     <div class="crop-modal" id="postCropModal">
         <div class="crop-container"><img id="postCropImage" src=""></div>
         <div class="crop-modal-buttons">
-            <button class="crop-modal-btn cancel" id="cancelPostCrop">Batal</button>
-            <button class="crop-modal-btn save" id="savePostCrop">Simpan</button>
+            <button class="crop-modal-btn cancel" id="cancelPostCrop">Cancel</button>
+            <button class="crop-modal-btn save" id="savePostCrop">Save</button>
         </div>
     </div>
 
@@ -1259,7 +1259,7 @@
         let loveColor = 'black';
         let liked = false;
         let isVerified = false;
-        let currentLang = 'id';
+        let currentLang = 'en';
         let currentBg = 'transparent';
         let currentCropRatio = '1:1';
 
@@ -1542,7 +1542,7 @@
                 captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
                 displayCaption.innerText = currentCaption;
 
-                const ts = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' : 'Just now');
+                const ts = timestampInput.value.trim() || 'Just now';
                 displayTimestamp.innerText = ts;
                 displayTimestamp.style.display = 'block';
             } else {
@@ -1942,6 +1942,7 @@
         });
 
         // Init
+        currentLang = 'en';
         updateLanguage();
         updateLoveColor();
         updateBackground();
