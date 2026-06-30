@@ -592,8 +592,7 @@
         .action-item {
             display: flex;
             align-items: center;
-            gap: 3px;
-            margin-right: 2px;
+            gap: 2px;
         }
         .action-icon {
             width: 24px;
@@ -612,8 +611,8 @@
             display: block;
         }
         .action-icon .heart-png {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
         }
         .action-icon .heart-icon-red {
             color: #ed4956;
@@ -631,19 +630,19 @@
             display: block;
         }
         .action-icon .comment-png {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
         }
         .action-icon .repost-png {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
         }
         .action-icon .share-png {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
         }
         .action-count {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             color: #262626;
             min-width: 0;
@@ -680,6 +679,20 @@
         }
         .post-footer-spacer {
             height: 6px;
+        }
+
+        /* New style for liked by section */
+        .liked-by-text {
+            padding: 0 13px 2px;
+            font-size: 13px;
+            color: #262626;
+            font-weight: 400;
+        }
+        .liked-by-text .liked-by-username {
+            font-weight: 700;
+        }
+        .liked-by-text .liked-by-others {
+            font-weight: 700;
         }
 
         .download-area {
@@ -907,6 +920,30 @@
             margin-top: 2px;
             font-style: italic;
         }
+
+        /* Liked by input group */
+        .liked-by-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .liked-by-input-row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .liked-by-input-row label {
+            font-size: 10px;
+            min-width: 45px;
+            text-transform: none;
+            color: #666;
+            margin-bottom: 0;
+        }
+        .liked-by-input-row input {
+            flex: 1;
+            padding: 8px 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -914,10 +951,10 @@
     <header>
         <div class="header-content">
             <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-                <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                <img src="https://thekachoo.github.io/CHODATE/INSTA/Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             </div>
             <div class="center-title">
-                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+                <img src="https://thekachoo.github.io/CHODATE/INSTA/Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
             </div>
             <div class="desktop-nav-container">
                 <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
@@ -1021,8 +1058,17 @@
                 </div>
 
                 <div class="form-group" id="likedByGroup">
-                    <label id="labelLikedBy">Disukai oleh (username)</label>
-                    <input type="text" id="likedByUser" placeholder="thebestfriend" oninput="handleLikeInput('user')">
+                    <label id="labelLikedBy">Disukai oleh</label>
+                    <div class="liked-by-input-group">
+                        <div class="liked-by-input-row">
+                            <label>User1</label>
+                            <input type="text" id="likedByUser1" placeholder="User1" oninput="updatePreviewContent()">
+                        </div>
+                        <div class="liked-by-input-row">
+                            <label>User2</label>
+                            <input type="text" id="likedByUser2" placeholder="User2" oninput="updatePreviewContent()">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Timestamp -->
@@ -1090,7 +1136,7 @@
                                 <!-- LOVE -->
                                 <div class="action-item">
                                     <div class="action-icon" id="likeIcon">
-                                        <img src="Heart1.png" alt="love" class="heart-png" id="heartImage">
+                                        <img src="https://thekachoo.github.io/CHODATE/INSTA/Heart1.png" alt="love" class="heart-png" id="heartImage">
                                         <i class="fas fa-heart heart-icon-red" id="heartIconRed"></i>
                                     </div>
                                     <span class="action-count" id="displayLikeCount"></span>
@@ -1098,30 +1144,35 @@
                                 <!-- COMMENT -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Comment1.png" alt="comment" class="comment-png">
+                                        <img src="https://thekachoo.github.io/CHODATE/INSTA/Comment1.png" alt="comment" class="comment-png">
                                     </div>
                                     <span class="action-count" id="displayCommentCount"></span>
                                 </div>
                                 <!-- REPOST -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Repost1.png" alt="repost" class="repost-png">
+                                        <img src="https://thekachoo.github.io/CHODATE/INSTA/Repost1.png" alt="repost" class="repost-png">
                                     </div>
                                     <span class="action-count" id="displayRepostCount"></span>
                                 </div>
                                 <!-- SHARE -->
                                 <div class="action-item">
                                     <div class="action-icon">
-                                        <img src="Share1.png" alt="share" class="share-png">
+                                        <img src="https://thekachoo.github.io/CHODATE/INSTA/Share1.png" alt="share" class="share-png">
                                     </div>
                                     <span class="action-count" id="displayShareCount"></span>
                                 </div>
                             </div>
                             <div class="save-icon">
                                 <div class="action-icon">
-                                    <img src="Bookmark1.png" alt="bookmark" style="width:22px;height:22px;">
+                                    <img src="https://thekachoo.github.io/CHODATE/INSTA/Bookmark1.png" alt="bookmark" style="width:22px;height:22px;">
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Liked by section -->
+                        <div class="liked-by-text" id="likedByText" style="display:none;">
+                            Disukai oleh <span class="liked-by-username" id="likedByDisplay1">User1</span>, <span class="liked-by-username" id="likedByDisplay2">User2</span>, dan <span class="liked-by-others" id="likedByOthers" style="font-weight: bold;">lainnya</span>
                         </div>
 
                         <div class="caption-text" id="captionWrapper">
@@ -1219,7 +1270,8 @@
         const commentCountInput = document.getElementById('commentCount');
         const repostCountInput = document.getElementById('repostCount');
         const shareCountInput = document.getElementById('shareCount');
-        const likedByInput = document.getElementById('likedByUser');
+        const likedByUser1Input = document.getElementById('likedByUser1');
+        const likedByUser2Input = document.getElementById('likedByUser2');
         const timestampInput = document.getElementById('timestamp');
 
         const usernameText = document.getElementById('usernameText');
@@ -1239,6 +1291,12 @@
         const displayShareCount = document.getElementById('displayShareCount');
 
         const editBgBtn = document.getElementById('editBgBtn');
+
+        // Liked by elements
+        const likedByText = document.getElementById('likedByText');
+        const likedByDisplay1 = document.getElementById('likedByDisplay1');
+        const likedByDisplay2 = document.getElementById('likedByDisplay2');
+        const likedByOthers = document.getElementById('likedByOthers');
 
         // ---- Helper: format number with suffix ----
         function formatNumberWithSuffix(input, lang) {
@@ -1368,19 +1426,14 @@
 
         function handleLikeInput(type) {
             const countVal = likeCountInput.value.trim();
-            const userVal = likedByInput.value.trim();
             if (type === 'count' && countVal !== '' && countVal !== '0') {
-                likedByInput.disabled = true;
-                likedByInput.value = '';
-            } else if (type === 'user' && userVal !== '') {
-                likeCountInput.disabled = true;
-                likeCountInput.value = '';
-            }
-            if (type === 'count' && (countVal === '' || countVal === '0')) {
-                likedByInput.disabled = false;
-            }
-            if (type === 'user' && userVal === '') {
-                likeCountInput.disabled = false;
+                likedByUser1Input.disabled = true;
+                likedByUser2Input.disabled = true;
+                likedByUser1Input.value = '';
+                likedByUser2Input.value = '';
+            } else if (type === 'count' && (countVal === '' || countVal === '0')) {
+                likedByUser1Input.disabled = false;
+                likedByUser2Input.disabled = false;
             }
             updatePreviewContent();
         }
@@ -1465,6 +1518,20 @@
             // Update love display
             updateLoveDisplay();
 
+            // Update liked by section - HIDE if User1 and User2 are empty
+            const user1 = likedByUser1Input.value.trim();
+            const user2 = likedByUser2Input.value.trim();
+
+            if (likeVal !== '' && likeVal !== '0') {
+                likedByText.style.display = 'none';
+            } else if (user1 === '' && user2 === '') {
+                likedByText.style.display = 'none';
+            } else {
+                likedByDisplay1.textContent = user1 || 'User1';
+                likedByDisplay2.textContent = user2 || 'User2';
+                likedByText.style.display = 'block';
+            }
+
             if (currentVersion === 1) {
                 captionWrapper.style.display = 'block';
                 const currentCaption = captionInput.value || '';
@@ -1525,7 +1592,7 @@
                 uploadMediaLabel: "Klik untuk pilih file",
                 labelCaption: "Caption",
                 labelLikes: "Jumlah Like",
-                labelLikedBy: "Disukai oleh (username)",
+                labelLikedBy: "Disukai oleh",
                 labelTimestamp: "Waktu posting",
                 defaultTimestamp: "Baru saja",
                 labelLoveColor: "Warna Hati",
@@ -1551,7 +1618,6 @@
                 uploadPlaceholder: "Upload foto profil",
                 mediaPlaceholder: "Klik untuk pilih file",
                 captionPlaceholder: "Tulis sesuatu...",
-                likeCountPlaceholder: "thebestfriend",
                 verificationBtn: "Verification (Official Account)",
                 footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
                 footerExplore: "Explore",
@@ -1564,8 +1630,7 @@
                 toastDownloadFailed: "Gagal mengunduh",
                 cropCancel: "Batal",
                 cropSave: "Simpan",
-                usernamePlaceholder: "thekachoo",
-                likedByPlaceholder: "thebestfriend"
+                usernamePlaceholder: "thekachoo"
             },
             en: {
                 pageTitle: "Create your post!",
@@ -1577,7 +1642,7 @@
                 uploadMediaLabel: "Click to select file",
                 labelCaption: "Caption",
                 labelLikes: "Number of Likes",
-                labelLikedBy: "Liked by (username)",
+                labelLikedBy: "Liked by",
                 labelTimestamp: "Post time",
                 defaultTimestamp: "Just now",
                 labelLoveColor: "Heart Color",
@@ -1603,7 +1668,6 @@
                 uploadPlaceholder: "Upload profile photo",
                 mediaPlaceholder: "Click to select file",
                 captionPlaceholder: "Write something...",
-                likeCountPlaceholder: "thebestfriend",
                 verificationBtn: "Verification (Official Account)",
                 footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
                 footerExplore: "Explore",
@@ -1616,8 +1680,7 @@
                 toastDownloadFailed: "Download failed",
                 cropCancel: "Cancel",
                 cropSave: "Save",
-                usernamePlaceholder: "thekachoo",
-                likedByPlaceholder: "thebestfriend"
+                usernamePlaceholder: "thekachoo"
             }
         };
 
@@ -1665,7 +1728,6 @@
             repostCountInput.placeholder = t.repostPlaceholder;
             shareCountInput.placeholder = t.sharePlaceholder;
             captionInput.placeholder = t.captionPlaceholder;
-            likedByInput.placeholder = t.likedByPlaceholder;
             usernameInput.placeholder = t.usernamePlaceholder;
 
             // Update verif status
@@ -1761,7 +1823,8 @@
         captionInput.addEventListener('input', updatePreviewContent);
         timestampInput.addEventListener('input', updatePreviewContent);
         likeCountInput.addEventListener('input', () => handleLikeInput('count'));
-        likedByInput.addEventListener('input', () => handleLikeInput('user'));
+        likedByUser1Input.addEventListener('input', updatePreviewContent);
+        likedByUser2Input.addEventListener('input', updatePreviewContent);
 
         // Crop
         let profileCropper, postCropper;
@@ -1884,4 +1947,4 @@
         applyVersion();
     </script>
 </body>
-</html>
+    </html>
