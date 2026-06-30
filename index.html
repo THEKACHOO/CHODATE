@@ -37,6 +37,31 @@
             .container { padding: 0 20px; }
         }
 
+        /* ========== SPLASH SCREEN ========== */
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
+        }
+        #splash.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splash img {
+            max-width: 150px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* ========== HEADER ========== */
         header {
             background: rgba(255,255,255,0.98);
@@ -656,6 +681,11 @@
 </head>
 <body>
 
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div id="splash">
+        <img src="https://thekachoo.github.io/CHODATE/Chodate.png" alt="Chodate" onerror="this.src='https://placehold.co/150x150?text=CHODATE'">
+    </div>
+
     <header>
         <div class="container header-content">
             <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -771,6 +801,13 @@
     </footer>
 
     <script>
+        // ========== SPLASH SCREEN ==========
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('splash').classList.add('hide');
+            }, 2000); // 2 detik
+        });
+
         // Mobile menu logic
         const mobileBtn = document.getElementById('mobileMenuBtn');
         const mobileMenuDiv = document.getElementById('mobileMenu');
@@ -840,4 +877,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
