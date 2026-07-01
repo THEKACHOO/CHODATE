@@ -526,6 +526,7 @@
             width: 60%;
         }
 
+        /* ===== SELF VIEW HEADER - PERBAIKAN ALIGNMENT ===== */
         .story-header-row {
             position: absolute;
             top: 24px;
@@ -588,16 +589,97 @@
             position: relative;
             top: -1px;
         }
+        
+        /* ===== PERBAIKAN SELF VIEW - HEADER RIGHT ===== */
         .header-right {
             display: flex;
             gap: 14px;
             align-items: center;
             transform: translateY(7px);
         }
-        .header-right i {
-            font-size: 16px;
+        
+        /* ===== SELF VIEW: HEADER RIGHT ICONS - SEJAJAR DENGAN AVATAR ===== */
+        .header-right-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            position: relative;
+        }
+        .header-right-icons i {
+            font-size: 22px;
             color: white;
             cursor: default;
+            display: flex;
+            align-items: center;
+        }
+        .header-right-icons .three-dots {
+            font-size: 22px;
+            cursor: pointer;
+        }
+        .header-right-icons .cf-badge-header {
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-right-icons .cf-badge-header.show {
+            display: inline-flex;
+        }
+        .header-right-icons .cf-badge-header img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        /* ===== SELF VIEW: NAME-TIME WRAPPER SEJAJAR ===== */
+        .name-time-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .name-time-wrapper .story-username {
+            margin: 0;
+            line-height: 1.2;
+        }
+        .name-time-wrapper .story-time {
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* ===== SELF VIEW: BAGIAN KIRI HEADER (AVATAR + TEXT) SEJAJAR VERTIKAL ===== */
+        .header-left-self {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-left-self .self-avatar-container {
+            display: flex;
+            align-items: center;
+        }
+        .header-left-self .header-text-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.2;
+        }
+        .header-left-self .header-text-group .name-time-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .header-left-self .header-text-group .story-username {
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.2;
+        }
+        .header-left-self .header-text-group .story-time {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.75);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.2;
         }
 
         .plus-badge {
@@ -1039,22 +1121,6 @@
             white-space: nowrap;
         }
 
-        .name-time-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-            transform: translateY(-3px);
-        }
-        .name-time-wrapper .story-username {
-            margin: 0;
-            transform: translateY(3px);
-        }
-        .name-time-wrapper .story-time {
-            margin: 0;
-            transform: translateY(3.5px);
-        }
-
         input::placeholder,
         textarea::placeholder {
             color: #bbb;
@@ -1065,40 +1131,6 @@
         }
         select option:first-child {
             color: #666;
-        }
-
-        .header-right-icons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            transform: translateY(3.5px);
-            position: relative;
-        }
-        .header-right-icons i {
-            font-size: 22px;
-            color: white;
-            cursor: default;
-            transform: translateY(-5px);
-            display: flex;
-            align-items: center;
-        }
-        .header-right-icons .three-dots {
-            font-size: 22px;
-            cursor: pointer;
-        }
-        .header-right-icons .cf-badge-header {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transform: translateY(-5px);
-        }
-        .header-right-icons .cf-badge-header.show {
-            display: inline-flex;
-        }
-        .header-right-icons .cf-badge-header img {
-            width: 38px;
-            height: 38px;
-            object-fit: contain;
         }
     </style>
 </head>
@@ -1223,13 +1255,14 @@
                                     <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
                                     <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
                                 </div>
+                                <!-- ===== SELF VIEW HEADER - PERBAIKAN ALIGNMENT ===== -->
                                 <div class="story-header-row">
-                                    <div class="header-left">
+                                    <div class="header-left-self">
                                         <div class="self-avatar-container">
                                             <img class="story-avatar" id="myViewAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%230095f6'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EY%3C/text%3E%3C/svg%3E">
                                             <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
                                         </div>
-                                        <div>
+                                        <div class="header-text-group">
                                             <div class="name-time-wrapper">
                                                 <span class="story-username" id="yourStoryText">Story Anda</span>
                                                 <span class="story-time" id="myViewTime">Baru saja</span>
@@ -1238,7 +1271,7 @@
                                     </div>
                                     <div class="header-right-icons">
                                         <span class="cf-badge-header" id="myViewCfBadge"><img src="https://thekachoo.github.io/CHODATE/INSTA/CF.png" alt="CF"></span>
-                                        <i class="fas fa-times" style="font-size:24px;"></i>
+                                        <i class="fas fa-times"></i>
                                     </div>
                                 </div>
                                 <div class="my-bottom-bar">
@@ -1282,7 +1315,7 @@
                 </div>
             </div>
 
-            <!-- ===== SOCIAL VIEW STUDIO ===== -->
+            <!-- ===== SOCIAL VIEW STUDIO - TIDAK DIUBAH ===== -->
             <div id="studioPublicView" class="studio-wrapper">
                 <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Kembali ke Mode</span></button>
                 <div class="story-studio">
@@ -1660,7 +1693,6 @@
             const cfBadge = document.getElementById('myViewCfBadge');
             if (myCfActive) {
                 cfBadge.classList.add('show');
-                // Waktu tetap ditampilkan
                 document.getElementById('myViewTime').style.display = 'inline';
                 document.getElementById('myViewTime').innerText = displayTime;
             } else {
@@ -1691,7 +1723,6 @@
             const cfBadge = document.getElementById('pubCfBadge');
             if (pubCfActive) {
                 cfBadge.classList.add('show');
-                // Waktu tetap ditampilkan
                 document.getElementById('pubTimeLabel').style.display = 'inline';
                 document.getElementById('pubTimeLabel').innerText = displayTime;
             } else {
@@ -1716,7 +1747,9 @@
         myTextTheme = 'white';
         pubTextTheme = 'white';
 
-        // ========== DRAGGABLE TEXT ==========
+        // ========== DRAGGABLE TEXT UNTUK SELF VIEW ==========
+        let myTextContainer = document.getElementById('myViewStoryCard');
+
         function makeDraggable(el, container) {
             let isDragging = false;
             let startX, startY, startLeft, startTop;
@@ -1791,13 +1824,47 @@
             el.style.fontFamily = font || "'Outfit', sans-serif";
             el.style.left = (x || 20) + '%';
             el.style.top = (y || 20) + '%';
+            el.style.position = 'absolute';
+            el.style.zIndex = '10';
+            el.style.pointerEvents = 'auto';
+            el.style.cursor = 'grab';
+            el.style.textShadow = '0 1px 4px rgba(0,0,0,0.5)';
+            el.style.userSelect = 'none';
+            el.style.webkitUserSelect = 'none';
 
             const actions = document.createElement('div');
             actions.className = 'text-actions';
+            actions.style.position = 'absolute';
+            actions.style.top = '-14px';
+            actions.style.right = '-14px';
+            actions.style.display = 'flex';
+            actions.style.gap = '3px';
+            actions.style.background = 'rgba(0,0,0,0.7)';
+            actions.style.backdropFilter = 'blur(4px)';
+            actions.style.borderRadius = '50%';
+            actions.style.padding = '2px';
+            actions.style.zIndex = '30';
+            actions.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
 
             const deleteBtn = document.createElement('button');
             deleteBtn.innerHTML = '✕';
             deleteBtn.title = 'Hapus teks';
+            deleteBtn.style.width = '24px';
+            deleteBtn.style.height = '24px';
+            deleteBtn.style.border = 'none';
+            deleteBtn.style.borderRadius = '50%';
+            deleteBtn.style.fontSize = '14px';
+            deleteBtn.style.fontWeight = '700';
+            deleteBtn.style.cursor = 'pointer';
+            deleteBtn.style.display = 'flex';
+            deleteBtn.style.alignItems = 'center';
+            deleteBtn.style.justifyContent = 'center';
+            deleteBtn.style.transition = '0.15s';
+            deleteBtn.style.color = 'white';
+            deleteBtn.style.lineHeight = '1';
+            deleteBtn.style.background = '#ff3040';
+            deleteBtn.style.pointerEvents = 'auto';
+            deleteBtn.style.touchAction = 'manipulation';
 
             function deleteHandler(e) {
                 e.stopPropagation();
@@ -1824,8 +1891,7 @@
             return el;
         }
 
-        // ========== INIT DRAGGABLE TEXT FOR SELF VIEW ==========
-        let myTextContainer = document.getElementById('myViewStoryCard');
+        // ========== INIT DRAGGABLE TEXT SELF VIEW ==========
         let myTexts = [];
 
         document.getElementById('myAddTextBtn').addEventListener('click', function() {
@@ -1844,8 +1910,85 @@
             document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
         });
 
-        // ========== INIT DRAGGABLE TEXT FOR PUBLIC VIEW ==========
+        // ========== DRAGGABLE TEXT UNTUK PUBLIC VIEW ==========
         let pubTextContainer = document.getElementById('publicStoryCard');
+
+        function addDraggableTextPublic(container, text, color, size, font, x, y) {
+            const el = document.createElement('div');
+            el.className = 'draggable-text';
+            el.textContent = text;
+            el.style.color = color || '#ffffff';
+            el.style.fontSize = (size || 24) + 'px';
+            el.style.fontFamily = font || "'Outfit', sans-serif";
+            el.style.left = (x || 20) + '%';
+            el.style.top = (y || 20) + '%';
+            el.style.position = 'absolute';
+            el.style.zIndex = '10';
+            el.style.pointerEvents = 'auto';
+            el.style.cursor = 'grab';
+            el.style.textShadow = '0 1px 4px rgba(0,0,0,0.5)';
+            el.style.userSelect = 'none';
+            el.style.webkitUserSelect = 'none';
+
+            const actions = document.createElement('div');
+            actions.className = 'text-actions';
+            actions.style.position = 'absolute';
+            actions.style.top = '-14px';
+            actions.style.right = '-14px';
+            actions.style.display = 'flex';
+            actions.style.gap = '3px';
+            actions.style.background = 'rgba(0,0,0,0.7)';
+            actions.style.backdropFilter = 'blur(4px)';
+            actions.style.borderRadius = '50%';
+            actions.style.padding = '2px';
+            actions.style.zIndex = '30';
+            actions.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '✕';
+            deleteBtn.title = 'Hapus teks';
+            deleteBtn.style.width = '24px';
+            deleteBtn.style.height = '24px';
+            deleteBtn.style.border = 'none';
+            deleteBtn.style.borderRadius = '50%';
+            deleteBtn.style.fontSize = '14px';
+            deleteBtn.style.fontWeight = '700';
+            deleteBtn.style.cursor = 'pointer';
+            deleteBtn.style.display = 'flex';
+            deleteBtn.style.alignItems = 'center';
+            deleteBtn.style.justifyContent = 'center';
+            deleteBtn.style.transition = '0.15s';
+            deleteBtn.style.color = 'white';
+            deleteBtn.style.lineHeight = '1';
+            deleteBtn.style.background = '#ff3040';
+            deleteBtn.style.pointerEvents = 'auto';
+            deleteBtn.style.touchAction = 'manipulation';
+
+            function deleteHandler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                el.remove();
+                showToast('Teks dihapus');
+            }
+
+            deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
+            deleteBtn.addEventListener('click', deleteHandler);
+
+            actions.appendChild(deleteBtn);
+            el.appendChild(actions);
+
+            container.appendChild(el);
+            makeDraggable(el, container);
+
+            el.addEventListener('click', function(e) {
+                if (e.target.closest('.text-actions button')) return;
+                document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
+                this.classList.add('selected-text');
+            });
+
+            return el;
+        }
+
         let pubTexts = [];
 
         document.getElementById('pubAddTextBtn').addEventListener('click', function() {
@@ -1855,7 +1998,7 @@
             const font = document.getElementById('pubTextFont').value;
             const x = 15 + Math.random() * 50;
             const y = 15 + Math.random() * 50;
-            const el = addDraggableText(pubTextContainer, text, color, size, font, x, y);
+            const el = addDraggableTextPublic(pubTextContainer, text, color, size, font, x, y);
             pubTexts.push(el);
             showToast('Teks ditambahkan!');
         });
