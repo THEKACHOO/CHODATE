@@ -1339,10 +1339,8 @@
             let username = document.getElementById('username').value.trim() || 'thekachoo';
             const topUsernameSpan = document.getElementById('previewTopUsername');
 
-            // Clear and rebuild
             topUsernameSpan.innerHTML = '';
-
-            // Gembok (lock) HARUS di kiri username, jadi di-append SEBELUM teks username
+            
             const lockSpan = document.createElement('span');
             lockSpan.className = 'lock-badge-before';
             lockSpan.id = 'topLockBadge';
@@ -1368,12 +1366,6 @@
             const lockBadge = lockSpan;
             const verifBadge = verifSpan;
             const arrowBadge = arrowSpan;
-
-            // Aturan:
-            // - Keduanya aktif (private + verified): Gembok - Username - Centang
-            // - Hanya private: Gembok - Username - Panah bawah
-            // - Hanya verified: Username - Centang (tanpa gembok)
-            // - Tidak ada: tidak ada icon
 
             if (isPrivate && isVerified) {
                 lockBadge.classList.add('show');
