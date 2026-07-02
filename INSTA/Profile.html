@@ -633,6 +633,55 @@
         .dark-theme .top-lock-badge {
             color: #f5f5f5;
         }
+        .top-arrow-badge {
+            color: #262626;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .dark-theme .top-arrow-badge {
+            color: #f5f5f5;
+        }
+
+        /* ===== REVISI: Avatar dengan plus di kanan bawah ===== */
+        .profile-avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 84px;
+            height: 84px;
+        }
+        .profile-avatar-preview {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ddd;
+        }
+        .profile-avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-plus-circle {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            border: 2px solid white;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .avatar-plus-circle i {
+            font-size: 12px;
+        }
 
         .profile-header-section {
             padding: 12px 16px 8px;
@@ -640,19 +689,6 @@
             gap: 20px;
             align-items: center;
             background: inherit;
-        }
-        .profile-avatar-preview {
-            width: 84px;
-            height: 84px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            background: #ddd;
-        }
-        .profile-avatar-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
         .profile-stats-preview {
             flex: 1;
@@ -1070,6 +1106,17 @@
         .link-input-group input:focus {
             border-color: #0095f6;
         }
+        .lock-badge-before,
+        .verif-badge-after,
+        .arrow-badge-after {
+            display: none;
+        }
+        .lock-badge-before.show,
+        .verif-badge-after.show,
+        .arrow-badge-after.show {
+            display: inline-flex;
+        }
+
         .link-input-group button {
             padding: 8px 16px;
             background: #0095f6;
@@ -1174,7 +1221,12 @@
                         <div class="instagram-profile-preview" id="profilePreviewCard">
                             <div class="preview-top-bar">
                                 <div class="top-left-icon"><i class="fas fa-plus"></i></div>
-                                <div class="top-center-username" id="previewTopUsername">thekachoo<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span><span id="previewTopLockBadge" style="display:none;"><i class="fas fa-lock top-lock-badge"></i></span></div>
+                                <div class="top-center-username" id="previewTopUsername">
+                                    thekachoo
+                                    <span class="lock-badge-before" id="topLockBadge"><i class="fas fa-lock top-lock-badge"></i></span>
+                                    <span class="verif-badge-after" id="topVerifBadge"><i class="fas fa-check-circle top-verif-badge"></i></span>
+                                    <span class="arrow-badge-after" id="topArrowBadge"><i class="fas fa-chevron-down top-arrow-badge"></i></span>
+                                </div>
                                 <div class="top-right-icons">
                                     <img src="Thread.png" alt="thread" id="threadIcon" onerror="this.style.display='none'">
                                     <i class="fas fa-bars"></i>
@@ -1182,7 +1234,14 @@
                             </div>
 
                             <div class="profile-header-section">
-                                <div class="profile-avatar-preview" id="previewAvatar"><img id="previewAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' fill='%230095f6'/%3E%3Ctext x='42' y='52' font-size='32' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E"></div>
+                                <div class="profile-avatar-wrapper">
+                                    <div class="profile-avatar-preview" id="previewAvatar">
+                                        <img id="previewAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' fill='%230095f6'/%3E%3Ctext x='42' y='52' font-size='32' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
+                                    </div>
+                                    <div class="avatar-plus-circle" id="avatarPlusCircle">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                </div>
                                 <div class="profile-stats-preview">
                                     <div class="profile-name-in-stats" id="previewNameInStats"></div>
                                     <div class="profile-stats-numbers">
@@ -1262,40 +1321,90 @@
 
         function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
 
+        function updateAvatarPlus() {
+            const plusCircle = document.getElementById('avatarPlusCircle');
+            const icon = plusCircle.querySelector('i');
+            if (currentTheme === 'dark') {
+                plusCircle.style.background = 'white';
+                plusCircle.style.color = 'black';
+                icon.style.color = 'black';
+            } else {
+                plusCircle.style.background = 'black';
+                plusCircle.style.color = 'white';
+                icon.style.color = 'white';
+            }
+        }
+
         function updatePreview() {
             let username = document.getElementById('username').value.trim() || 'thekachoo';
             const topUsernameSpan = document.getElementById('previewTopUsername');
-            topUsernameSpan.innerHTML = username + 
-                '<span id="previewTopVerifBadge" style="display:none;"><i class="fas fa-check-circle top-verif-badge"></i></span>' +
-                '<span id="previewTopLockBadge" style="display:none;"><i class="fas fa-lock top-lock-badge"></i></span>';
-            
+
+            // Clear and rebuild
+            topUsernameSpan.innerHTML = '';
+
+            // Gembok (lock) HARUS di kiri username, jadi di-append SEBELUM teks username
+            const lockSpan = document.createElement('span');
+            lockSpan.className = 'lock-badge-before';
+            lockSpan.id = 'topLockBadge';
+            lockSpan.innerHTML = '<i class="fas fa-lock top-lock-badge"></i>';
+            topUsernameSpan.appendChild(lockSpan);
+
+            const textNode = document.createTextNode(username);
+            topUsernameSpan.appendChild(textNode);
+
+            // Centang (verif) dan panah bawah (arrow) tetap di KANAN username
+            const verifSpan = document.createElement('span');
+            verifSpan.className = 'verif-badge-after';
+            verifSpan.id = 'topVerifBadge';
+            verifSpan.innerHTML = '<i class="fas fa-check-circle top-verif-badge"></i>';
+            topUsernameSpan.appendChild(verifSpan);
+
+            const arrowSpan = document.createElement('span');
+            arrowSpan.className = 'arrow-badge-after';
+            arrowSpan.id = 'topArrowBadge';
+            arrowSpan.innerHTML = '<i class="fas fa-chevron-down top-arrow-badge"></i>';
+            topUsernameSpan.appendChild(arrowSpan);
+
+            const lockBadge = lockSpan;
+            const verifBadge = verifSpan;
+            const arrowBadge = arrowSpan;
+
+            // Aturan:
+            // - Keduanya aktif (private + verified): Gembok - Username - Centang
+            // - Hanya private: Gembok - Username - Panah bawah
+            // - Hanya verified: Username - Centang (tanpa gembok)
+            // - Tidak ada: tidak ada icon
+
+            if (isPrivate && isVerified) {
+                lockBadge.classList.add('show');
+                verifBadge.classList.add('show');
+                arrowBadge.classList.remove('show');
+            } else if (isPrivate && !isVerified) {
+                lockBadge.classList.add('show');
+                verifBadge.classList.remove('show');
+                arrowBadge.classList.add('show');
+            } else if (!isPrivate && isVerified) {
+                lockBadge.classList.remove('show');
+                verifBadge.classList.add('show');
+                arrowBadge.classList.remove('show');
+            } else {
+                lockBadge.classList.remove('show');
+                verifBadge.classList.remove('show');
+                arrowBadge.classList.remove('show');
+            }
+
             document.getElementById('previewPosts').innerText = document.getElementById('postsCount').value.trim() || '0';
             document.getElementById('previewFollowers').innerText = document.getElementById('followersCount').value.trim() || '0';
             document.getElementById('previewFollowing').innerText = document.getElementById('followingCount').value.trim() || '0';
             document.getElementById('previewBio').innerText = document.getElementById('bioText').value || '';
 
-            const topBadge = document.getElementById('previewTopVerifBadge');
-            const lockBadge = document.getElementById('previewTopLockBadge');
-            
-            if (topBadge) topBadge.style.display = (isVerified && !isPrivate) ? 'inline-flex' : 'none';
-            if (lockBadge) lockBadge.style.display = isPrivate ? 'inline-flex' : 'none';
-
             const verifBtn = document.getElementById('verificationBtn');
-            if (isPrivate) {
-                verifBtn.classList.add('disabled');
-                verifBtn.style.opacity = '0.5';
-                verifBtn.style.cursor = 'not-allowed';
-            } else {
-                verifBtn.classList.remove('disabled');
-                verifBtn.style.opacity = '1';
-                verifBtn.style.cursor = 'pointer';
-                if (isVerified) verifBtn.classList.add('active');
-                else verifBtn.classList.remove('active');
-            }
+            // Tombol verifikasi tetap bisa diklik, tidak dinonaktifkan
+            if (isVerified) verifBtn.classList.add('active');
+            else verifBtn.classList.remove('active');
 
             document.getElementById('bottomNavAvatar').src = document.getElementById('previewAvatarImg').src;
 
-            // update name di atas angka stat
             const nameInput = document.getElementById('nameInput');
             const nameValue = nameInput.value.trim();
             const nameDisplay = document.getElementById('previewNameInStats');
@@ -1306,6 +1415,8 @@
                 nameDisplay.classList.remove('visible');
                 nameDisplay.innerText = '';
             }
+
+            updateAvatarPlus();
         }
 
         function updateVersion() {
@@ -1360,6 +1471,8 @@
                 contactIcon.src = 'Icon-contact1.png';
                 if (threadIcon) threadIcon.src = 'Thread.png';
             }
+
+            updateAvatarPlus();
         }
 
         function renderPostGrids() {
@@ -1500,21 +1613,17 @@
         });
 
         document.getElementById('verificationBtn').addEventListener('click', () => {
-            if (isPrivate) {
-                showToast('Nonaktifkan Private dulu untuk verifikasi');
-                return;
-            }
-            isVerified = !isVerified; 
-            updatePreview(); 
-            showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed')); 
+            // Toggle verifikasi (bisa diklik kapan saja)
+            isVerified = !isVerified;
+            updatePreview();
+            showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed'));
         });
 
         document.getElementById('privateBtn').addEventListener('click', () => {
+            // Toggle private (bisa diklik kapan saja)
             isPrivate = !isPrivate;
             if (isPrivate) {
-                isVerified = false;
                 document.getElementById('privateBtn').classList.add('active');
-                document.getElementById('verificationBtn').classList.remove('active');
             } else {
                 document.getElementById('privateBtn').classList.remove('active');
             }
