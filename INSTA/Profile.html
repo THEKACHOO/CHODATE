@@ -1725,7 +1725,6 @@
         });
 
         document.getElementById('privateBtn').addEventListener('click', () => {
-            // Toggle private (bisa diklik kapan saja)
             isPrivate = !isPrivate;
             if (isPrivate) {
                 document.getElementById('privateBtn').classList.add('active');
@@ -1854,12 +1853,11 @@
         });
 
         // ===== EDIT BACKGROUND BUTTON =====
-        document.getElementById('editBgBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            showToast('Opening background editor...');
-            // Di sini kamu bisa redirect ke halaman edit atau buka modal
-            // window.location.href = 'Edit.html';
-        });
+document.getElementById('editBgBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Arahkan ke halaman Edit.html
+    window.location.href = 'Edit.html';
+});
 
         // ===== BACKGROUND OPTIONS EVENTS =====
         document.querySelectorAll('.bg-option-btn').forEach(btn => {
