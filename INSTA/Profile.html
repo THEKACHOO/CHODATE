@@ -12,6 +12,7 @@
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
+        /* ========== GLOBAL RESET & BASE ========== */
         * {
             margin: 0;
             padding: 0;
@@ -300,7 +301,7 @@
             }
         }
 
-        /* ===== REVISI: Tombol Setting Circle di Tengah ===== */
+        /* ===== SETTING ROW ===== */
         .setting-row {
             display: flex;
             gap: 12px;
@@ -346,7 +347,6 @@
             font-weight: 700;
             letter-spacing: 0.3px;
         }
-        /* tooltip hover */
         .toggle-btn:hover::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -432,7 +432,7 @@
             gap: 20px;
             margin: 15px 0;
             justify-content: space-around;
-            text-align: left;
+            text-align: center;
         }
         .stat-item {
             flex: 1;
@@ -448,7 +448,7 @@
         }
         .stat-input {
             font-weight: 700;
-            font-size: 11px;
+            font-size: 16px;
             background: transparent;
             border: none;
             text-align: center;
@@ -542,13 +542,12 @@
             border-color: #1a1a1a;
         }
 
-        /* PREVIEW STYLE */
+        /* ===== PREVIEW STYLE ===== */
         .preview-outer {
-            padding: 20px;
-            transition: background 0.2s;
+            padding: 24px 20px;
+            border-radius: 40px;
             display: inline-block;
-            background: transparent;
-            border-radius: 28px;
+            transition: background 0.3s ease;
         }
         .instagram-profile-preview {
             width: 380px;
@@ -575,10 +574,10 @@
             border-bottom-color: rgba(255, 255, 255, 0.1);
         }
         .top-left-icon {
-            font-size: 22px;
+            font-size: 24px;
             color: #262626;
             cursor: pointer;
-            z-index: 8;
+            z-index: 2;
         }
         .dark-theme .top-left-icon {
             color: #f5f5f5;
@@ -587,13 +586,13 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 18px;
             color: #262626;
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         .dark-theme .top-center-username {
             color: white;
@@ -601,12 +600,12 @@
         .top-right-icons {
             display: flex;
             gap: 15px;
-            z-index: 4;
+            z-index: 2;
             align-items: center;
         }
         .top-right-icons img {
-            width: 22px;
-            height: 2px;
+            width: 27px;
+            height: 27px;
             object-fit: contain;
             cursor: pointer;
         }
@@ -620,14 +619,13 @@
         }
         .top-verif-badge {
             color: #0095f6;
-            font-size: 12px;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
-            transform: translateY(0.5px);
         }
         .top-lock-badge {
             color: #262626;
-            font-size: 12px;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
         }
@@ -644,7 +642,7 @@
             color: #f5f5f5;
         }
 
-        /* ===== REVISI: Avatar dengan plus di kanan bawah ===== */
+        /* ===== AVATAR WITH PLUS ===== */
         .profile-avatar-wrapper {
             position: relative;
             flex-shrink: 0;
@@ -657,8 +655,6 @@
             border-radius: 50%;
             overflow: hidden;
             background: #ddd;
-            position: relative;
-            margin-top: 5px;
         }
         .profile-avatar-preview img {
             width: 100%;
@@ -687,9 +683,9 @@
         }
 
         .profile-header-section {
-            padding: 7px 16px 8px;
+            padding: 12px 16px 8px;
             display: flex;
-            gap: px;
+            gap: 20px;
             align-items: center;
             background: inherit;
         }
@@ -697,37 +693,34 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 0px;
+            gap: 2px;
         }
         .profile-stats-numbers {
             display: flex;
             justify-content: space-around;
-            text-align: left;
+            text-align: center;
         }
         .stat-col-preview {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
         }
         .stat-number {
-            font-weight: 750;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 16px;
             color: #262626;
         }
         .dark-theme .stat-number {
             color: white;
         }
         .stat-label-preview {
-            font-size: 11px;
+            font-size: 12px;
             color: #8e8e8e;
-            margin-top: -4px;
-            white-space: nowrap;
         }
         .profile-name-in-stats {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 15px;
             color: #262626;
-            padding: 4px 4px 4px 24px;
+            padding: 0 4px 4px 16px;
             text-align: left;
             display: none;
         }
@@ -739,13 +732,12 @@
         }
 
         .profile-bio {
-            padding: 5px 16px 4px;
+            padding: 0 16px 12px;
             background: inherit;
-            transform: translateX(2px);
         }
         .bio-text {
-            font-size: 12px;
-            line-height: 1.2;
+            font-size: 13px;
+            line-height: 1.4;
             color: #262626;
         }
         .dark-theme .bio-text {
@@ -753,7 +745,7 @@
         }
 
         .profile-link-row {
-            padding: 1px 8px 2px 1px;
+            padding: 0 16px 8px 16px;
             background: inherit;
             display: none;
         }
@@ -767,9 +759,8 @@
             color: #0095f6;
             text-decoration: none;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
-            transform: translateX(3px);
         }
         .profile-link-wrapper i {
             font-size: 16px;
@@ -801,8 +792,8 @@
             border: none;
             padding: 8px 0;
             border-radius: 10px;
-            font-weight: 550;
-            font-size: 12px;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
             text-align: center;
             color: #262626;
@@ -936,23 +927,87 @@
             background: #ddd;
         }
 
+        /* ===== DOWNLOAD AREA & BUTTON SYSTEM ===== */
         .download-area {
             text-align: center;
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         .download-btn {
-            background: #1a1a1a;
+            background: #111;
             color: white;
             border: none;
-            padding: 14px 40px;
+            padding: 13px 40px;
             border-radius: 100px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             transition: 0.2s;
         }
+        .download-btn:hover {
+            background: #333;
+        }
 
-        /* FOOTER */
+        .edit-bg-btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+            display: none;
+            text-decoration: none;
+        }
+        .edit-bg-btn:hover {
+            background: #333;
+        }
+        .edit-bg-btn.visible {
+            display: inline-block;
+        }
+
+        /* Background options inside form panel */
+        .bg-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-option-btn {
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .bg-option-btn.active {
+            background: #111;
+            color: white;
+        }
+        .color-picker-input {
+            width: 42px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            padding: 2px;
+        }
+        .bg-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-right: 4px;
+        }
+
+        /* ===== FOOTER ===== */
         footer {
             background: #000;
             color: #ddd;
@@ -1042,6 +1097,7 @@
             text-align: center;
         }
 
+        /* ===== MODALS ===== */
         .crop-modal {
             display: none;
             position: fixed;
@@ -1080,6 +1136,8 @@
             background: #0095f6;
             color: white;
         }
+
+        /* ===== TOAST ===== */
         .toast-msg {
             position: fixed;
             bottom: 28px;
@@ -1092,9 +1150,9 @@
             font-weight: 500;
             font-size: 13px;
             z-index: 30000;
-            opacity: 0;
-            transition: 0.2s;
             pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
             white-space: nowrap;
         }
 
@@ -1222,6 +1280,17 @@
                     </div>
 
                     <div class="form-group"><label id="labelPostsGrid">6 Foto Postingan</label><div class="posts-grid" id="postsGridForm"><div class="post-grid-item" data-index="0"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="1"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="2"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="3"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="4"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="5"><div class="post-grid-placeholder">+</div></div></div><input type="file" id="postImageUpload" accept="image/*" style="display: none;"><div class="file-input-label" id="uploadPostLabel" style="margin-top: 10px;">Upload / Ganti Foto Postingan</div></div>
+
+                    <!-- ===== BACKGROUND OPTIONS (dalam form panel) ===== -->
+                    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee;">
+                        <div class="bg-label">Background Preview</div>
+                        <div class="bg-options">
+                            <button class="bg-option-btn active" data-bg="transparent" id="bgTransparent">Transparent</button>
+                            <button class="bg-option-btn" data-bg="white" id="bgWhite">White</button>
+                            <button class="bg-option-btn" data-bg="black" id="bgBlack">Black</button>
+                            <input type="color" id="customColorPicker" class="color-picker-input" value="#f5f5f5">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="preview-container">
@@ -1253,9 +1322,9 @@
                                 <div class="profile-stats-preview">
                                     <div class="profile-name-in-stats" id="previewNameInStats"></div>
                                     <div class="profile-stats-numbers">
-                                        <div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">posts</span></div>
-                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">followers</span></div>
-                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">following</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">Posts</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">Followers</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">Following</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -1291,7 +1360,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="download-area"><button class="download-btn" id="downloadBtn">Unduh Profil</button></div>
+
+                    <!-- ===== DOWNLOAD AREA ===== -->
+                    <div class="download-area">
+                        <button class="download-btn" id="downloadBtn">Unduh Profil</button>
+                        <a href="#" class="edit-bg-btn" id="editBgBtn">Background</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1312,6 +1386,7 @@
     <div class="toast-msg" id="toastMsg"></div>
 
     <script>
+        // ===== STATE =====
         let isVerified = false;
         let isPrivate = false;
         let currentTheme = 'light';
@@ -1322,13 +1397,38 @@
         let postCropper = null,
             profileCropper = null;
 
+        // ===== BACKGROUND STATE =====
+        let currentBg = 'transparent';
+
         const translations = {
-            id: { postsLabel: "postingan", followersLabel: "pengikut", followingLabel: "mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!", labelName: "Nama" },
-            en: { postsLabel: "posts", followersLabel: "followers", followingLabel: "following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!", labelName: "Name" }
+            id: { postsLabel: "Postingan", followersLabel: "Pengikut", followingLabel: "Mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!", labelName: "Nama" },
+            en: { postsLabel: "Posts", followersLabel: "Followers", followingLabel: "Following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!", labelName: "Name" }
         };
 
-        function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
+        // ===== TOAST =====
+        function showToast(msg) {
+            const t = document.getElementById('toastMsg');
+            t.innerText = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.style.opacity = '0', 2000);
+        }
 
+        // ===== BACKGROUND UPDATE =====
+        function updateBackground() {
+            const previewOuter = document.getElementById('previewOuter');
+            if (currentBg === 'transparent') {
+                previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
+            } else if (currentBg === 'white') {
+                previewOuter.style.background = 'white';
+            } else if (currentBg === 'black') {
+                previewOuter.style.background = 'black';
+            } else {
+                previewOuter.style.background = currentBg;
+            }
+        }
+
+        // ===== AVATAR PLUS =====
         function updateAvatarPlus() {
             const plusCircle = document.getElementById('avatarPlusCircle');
             const icon = plusCircle.querySelector('i');
@@ -1343,6 +1443,7 @@
             }
         }
 
+        // ===== UPDATE PREVIEW =====
         function updatePreview() {
             let username = document.getElementById('username').value.trim() || 'thekachoo';
             const topUsernameSpan = document.getElementById('previewTopUsername');
@@ -1358,7 +1459,6 @@
             const textNode = document.createTextNode(username);
             topUsernameSpan.appendChild(textNode);
 
-            // Centang (verif) dan panah bawah (arrow) tetap di KANAN username
             const verifSpan = document.createElement('span');
             verifSpan.className = 'verif-badge-after';
             verifSpan.id = 'topVerifBadge';
@@ -1399,7 +1499,6 @@
             document.getElementById('previewBio').innerText = document.getElementById('bioText').value || '';
 
             const verifBtn = document.getElementById('verificationBtn');
-            // Tombol verifikasi tetap bisa diklik, tidak dinonaktifkan
             if (isVerified) verifBtn.classList.add('active');
             else verifBtn.classList.remove('active');
 
@@ -1419,6 +1518,7 @@
             updateAvatarPlus();
         }
 
+        // ===== VERSION =====
         function updateVersion() {
             const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
             const previewGrid = document.getElementById('previewGridPosts');
@@ -1432,6 +1532,7 @@
             }
         }
 
+        // ===== THEME =====
         function updateTheme() {
             const card = document.getElementById('profilePreviewCard');
             if (currentTheme === 'dark') card.classList.add('dark-theme');
@@ -1475,6 +1576,7 @@
             updateAvatarPlus();
         }
 
+        // ===== POST GRIDS =====
         function renderPostGrids() {
             const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
             formItems.forEach((item, idx) => { 
@@ -1520,6 +1622,7 @@
             return currentVersion === '2' ? 4/5 : 1;
         }
 
+        // ===== CROP MODALS =====
         function showPostCropModal(file) { 
             const modal = document.getElementById('postGridCropModal'); 
             const img = document.getElementById('postGridCropImage'); 
@@ -1612,15 +1715,14 @@
             if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); 
         });
 
+        // ===== VERIFICATION & PRIVATE =====
         document.getElementById('verificationBtn').addEventListener('click', () => {
-            // Toggle verifikasi (bisa diklik kapan saja)
             isVerified = !isVerified;
             updatePreview();
             showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed'));
         });
 
         document.getElementById('privateBtn').addEventListener('click', () => {
-            // Toggle private (bisa diklik kapan saja)
             isPrivate = !isPrivate;
             if (isPrivate) {
                 document.getElementById('privateBtn').classList.add('active');
@@ -1631,6 +1733,7 @@
             showToast(isPrivate ? (currentLang === 'id' ? 'Akun diprivat' : 'Account privatized') : (currentLang === 'id' ? 'Akun dipublik' : 'Account public'));
         });
 
+        // ===== INPUT LISTENERS =====
         document.getElementById('username').addEventListener('input', updatePreview);
         document.getElementById('nameInput').addEventListener('input', updatePreview);
         document.getElementById('postsCount').addEventListener('input', updatePreview);
@@ -1638,6 +1741,7 @@
         document.getElementById('followingCount').addEventListener('input', updatePreview);
         document.getElementById('bioText').addEventListener('input', updatePreview);
 
+        // ===== LANGUAGE =====
         function updateFormLanguage() { 
             const t = translations[currentLang]; 
             document.getElementById('labelAvatar').innerText = t.labelAvatar; 
@@ -1679,9 +1783,9 @@
             }
         });
 
+        // ===== VERSION TOGGLE =====
         const versionToggle = document.getElementById('versionToggle');
         versionToggle.classList.add('active');
-        
         versionToggle.addEventListener('click', () => {
             if (currentVersion === '2') {
                 currentVersion = '1';
@@ -1698,7 +1802,6 @@
         const langToggle = document.getElementById('langToggle');
         langToggle.classList.add('active');
         langToggle.innerHTML = '<span class="btn-text">IND</span>';
-        
         langToggle.addEventListener('click', () => {
             if (currentLang === 'en') {
                 currentLang = 'id';
@@ -1715,33 +1818,66 @@
             }
         });
 
-        document.getElementById('downloadBtn').addEventListener('click', async () => { 
-            const element = document.getElementById('previewOuter'); 
-            try { 
+        // ===== DOWNLOAD =====
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const element = document.getElementById('previewOuter');
+            try {
                 const rect = element.getBoundingClientRect();
-                const canvas = await html2canvas(element, { 
-                    scale: 3, 
-                    backgroundColor: null, 
+                const canvas = await html2canvas(element, {
+                    scale: 3,
+                    backgroundColor: null,
                     useCORS: true,
                     allowTaint: true,
                     logging: false,
                     width: rect.width,
                     height: rect.height
-                }); 
-                const link = document.createElement('a'); 
-                link.download = `instaprofile_${Date.now()}.png`; 
-                link.href = canvas.toDataURL('image/png'); 
-                link.click(); 
-                showToast(translations[currentLang].downloadToast); 
-            } catch (e) { 
+                });
+                const link = document.createElement('a');
+                link.download = `instaprofile_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast(translations[currentLang].downloadToast);
+                
+                // Munculkan tombol Background setelah download
+                const editBgBtn = document.getElementById('editBgBtn');
+                editBgBtn.classList.add('visible');
+                editBgBtn.style.transform = 'scale(0.8)';
+                setTimeout(() => editBgBtn.style.transform = 'scale(1)', 200);
+            } catch (e) {
                 console.error(e);
-                showToast(translations[currentLang].errorToast); 
-            } 
+                showToast(translations[currentLang].errorToast);
+            }
         });
 
+        // ===== EDIT BACKGROUND BUTTON =====
+        document.getElementById('editBgBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('Opening background editor...');
+            // Di sini kamu bisa redirect ke halaman edit atau buka modal
+            // window.location.href = 'Edit.html';
+        });
+
+        // ===== BACKGROUND OPTIONS EVENTS =====
+        document.querySelectorAll('.bg-option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentBg = this.getAttribute('data-bg');
+                updateBackground();
+            });
+        });
+
+        document.getElementById('customColorPicker').addEventListener('input', function(e) {
+            document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+            currentBg = e.target.value;
+            updateBackground();
+        });
+
+        // ===== EDIT PROFILE & SHARE =====
         document.getElementById('editProfileBtn').addEventListener('click', () => showToast('Edit profil akan segera hadir'));
         document.getElementById('shareProfileBtn').addEventListener('click', () => showToast('Bagikan profil akan segera hadir'));
 
+        // ===== PROFILE LINK =====
         function updateProfileLink() {
             const input = document.getElementById('profileLinkInput');
             let url = input.value.trim();
@@ -1770,6 +1906,7 @@
             if (e.key === 'Enter') updateProfileLink();
         });
 
+        // ===== NAV DROPDOWN =====
         const desktopNavTrigger = document.getElementById('desktopNavTrigger'),
             desktopNavDropdown = document.getElementById('desktopNavDropdown');
         if (desktopNavTrigger && desktopNavDropdown) { 
@@ -1783,6 +1920,7 @@
             }); 
         }
 
+        // ===== MOBILE MENU =====
         const mobileMenuBtn = document.getElementById('mobileMenuBtn'),
             mobileMenu = document.getElementById('mobileMenu'),
             mobileOverlay = document.getElementById('mobileMenuOverlay');
@@ -1801,7 +1939,7 @@
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         mobileOverlay.addEventListener('click', closeMobileMenu);
 
-        // SET DEFAULT: V2 + English
+        // ===== INIT =====
         currentVersion = '2';
         currentLang = 'en';
         updateFormLanguage();
@@ -1809,6 +1947,7 @@
         renderPostGrids();
         updatePreview();
         updateVersion();
+        updateBackground();
 
         document.getElementById('profileLinkRow').classList.remove('visible');
         document.getElementById('profileLinkInput').value = '';
