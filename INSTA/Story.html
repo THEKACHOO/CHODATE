@@ -2046,7 +2046,6 @@
                 a.click();
                 showToast('Berhasil diunduh');
 
-                // Munculkan tombol Background setelah download
                 const bgBtn = document.getElementById(bgBtnId);
                 if (bgBtn) {
                     bgBtn.classList.add('visible');
@@ -2064,17 +2063,11 @@
         document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`, 'editBgBtnMy');
         document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`, 'editBgBtnPub');
 
-        // ===== EDIT BACKGROUND BUTTONS =====
-        document.getElementById('editBgBtnMy').addEventListener('click', function(e) {
-            e.preventDefault();
-            showToast('Opening background editor...');
-        });
-
-        document.getElementById('editBgBtnPub').addEventListener('click', function(e) {
-            e.preventDefault();
-            showToast('Opening background editor...');
-        });
-
+        // ===== EDIT BACKGROUND BUTTON =====
+document.getElementById('editBgBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'Edit.html';
+});
         // Avatar & Background uploads
         document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
         document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
