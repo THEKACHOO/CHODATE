@@ -12,6 +12,7 @@
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
+        /* ========== GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +44,6 @@
             }
         }
 
-        /* Title Center */
         .page-title {
             text-align: center;
             font-size: 2.2rem;
@@ -241,7 +241,6 @@
             justify-content: center;
         }
 
-        /* ===== MAIN ===== */
         .main-content {
             padding: 28px 0 60px;
         }
@@ -298,7 +297,6 @@
             }
         }
 
-        /* ===== FORM PANEL ===== */
         .form-panel {
             background: white;
             border-radius: 24px;
@@ -465,7 +463,6 @@
             left: 22px;
         }
 
-        /* ===== STORY CARD ===== */
         .story-card-wrapper {
             width: 360px;
         }
@@ -482,6 +479,7 @@
             padding: 14px;
             display: inline-block;
             width: 100%;
+            transition: background 0.3s ease;
         }
 
         .my-story-card,
@@ -588,14 +586,14 @@
             position: relative;
             top: -0.8px;
         }
-        
+
         .header-right {
             display: flex;
             gap: 14px;
             align-items: center;
             transform: translateY(7px);
         }
-        
+
         .header-right-icons {
             display: flex;
             gap: 12px;
@@ -775,7 +773,7 @@
             line-height: 1;
         }
 
-      /*===== PUBLIC VIEW =====*/
+        /* PUBLIC VIEW */
         .send-message-bg {
             position: absolute;
             bottom: 0;
@@ -865,11 +863,13 @@
             cursor: pointer;
         }
 
+        /* ===== DOWNLOAD AREA & BUTTON SYSTEM ===== */
         .download-group {
             display: flex;
             gap: 10px;
             justify-content: center;
             margin-top: 16px;
+            flex-wrap: wrap;
         }
         .download-single {
             background: #111;
@@ -889,6 +889,30 @@
         .download-single:hover {
             background: #333;
         }
+
+        .edit-bg-btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 11px 26px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            display: none;
+        }
+        .edit-bg-btn:hover {
+            background: #333;
+        }
+        .edit-bg-btn.visible {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .back-btn {
             background: #1e1e1e;
             border: 1px solid #333;
@@ -1218,7 +1242,6 @@
                             <div class="toggle-slider" id="myCfSlider"></div>
                         </div>
 
-                        <!-- ===== TEKS OPSIONAL SELF VIEW ===== -->
                         <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
                         <div class="form-group">
                             <label>Isi Teks</label>
@@ -1255,7 +1278,6 @@
                                     <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
                                     <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
                                 </div>
-                                <!-- ===== SELF VIEW HEADER - PERBAIKAN ALIGNMENT ===== -->
                                 <div class="story-header-row">
                                     <div class="header-left-self">
                                         <div class="self-avatar-container">
@@ -1310,12 +1332,13 @@
                         </div>
                         <div class="download-group">
                             <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span id="downloadText">Unduh</span></button>
+                            <a href="#" class="edit-bg-btn" id="editBgBtnMy">Background</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== SOCIAL VIEW STUDIO - TIDAK DIUBAH ===== -->
+            <!-- ===== SOCIAL VIEW STUDIO ===== -->
             <div id="studioPublicView" class="studio-wrapper">
                 <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Kembali ke Mode</span></button>
                 <div class="story-studio">
@@ -1366,7 +1389,6 @@
                             <div class="toggle-slider" id="pubCfSlider"></div>
                         </div>
 
-                        <!-- ===== TEKS OPSIONAL SOCIAL VIEW ===== -->
                         <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
                         <div class="form-group">
                             <label>Isi Teks</label>
@@ -1447,6 +1469,7 @@
                         </div>
                         <div class="download-group">
                             <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span id="downloadTextPub">Unduh</span></button>
+                            <a href="#" class="edit-bg-btn" id="editBgBtnPub">Background</a>
                         </div>
                     </div>
                 </div>
@@ -1593,6 +1616,14 @@
             }
         };
 
+        function showToast(msg) {
+            const t = document.getElementById('toastMsg');
+            t.innerText = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.style.opacity = '0', 2000);
+        }
+
         function applyLanguage(lang, isMyView) {
             const t = translations[lang];
             if (!t) return;
@@ -1647,13 +1678,6 @@
             }
         }
 
-        function showToast(msg) {
-            const t = document.getElementById('toastMsg');
-            t.innerText = msg;
-            t.style.opacity = '1';
-            setTimeout(() => t.style.opacity = '0', 2000);
-        }
-
         function cropImageRatio(file, ratio) {
             return new Promise(resolve => {
                 const modal = document.getElementById('cropModal');
@@ -1690,7 +1714,7 @@
             if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
             const t = translations[currentMyLang];
             const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-            
+
             const cfBadge = document.getElementById('myViewCfBadge');
             if (myCfActive) {
                 cfBadge.classList.add('show');
@@ -1701,7 +1725,7 @@
                 document.getElementById('myViewTime').style.display = 'inline';
                 document.getElementById('myViewTime').innerText = displayTime;
             }
-            
+
             if (myAvatarUrl) document.getElementById('myViewAvatar').src = myAvatarUrl;
             const card = document.getElementById('myViewStoryCard');
             card.style.backgroundImage = myBgUrl ? `url(${myBgUrl})` : 'none';
@@ -1720,7 +1744,7 @@
             if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
             const t = translations[currentPubLang];
             const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-            
+
             const cfBadge = document.getElementById('pubCfBadge');
             if (pubCfActive) {
                 cfBadge.classList.add('show');
@@ -1731,7 +1755,7 @@
                 document.getElementById('pubTimeLabel').style.display = 'inline';
                 document.getElementById('pubTimeLabel').innerText = displayTime;
             }
-            
+
             const likeBtn = document.getElementById('pubLikeBtn');
             likeBtn.classList.toggle('liked', pubLiked);
             if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
@@ -1744,11 +1768,10 @@
             applyTextTheme(card, pubTextTheme);
         }
 
-        // Theme hanya white
         myTextTheme = 'white';
         pubTextTheme = 'white';
 
-        // ========== DRAGGABLE TEXT UNTUK SELF VIEW ==========
+        // ========== DRAGGABLE TEXT SELF VIEW ==========
         let myTextContainer = document.getElementById('myViewStoryCard');
 
         function makeDraggable(el, container) {
@@ -1757,19 +1780,15 @@
 
             function onStart(e) {
                 if (e.target.closest('.text-actions button')) return;
-
                 e.preventDefault();
                 const touch = e.touches ? e.touches[0] : e;
                 isDragging = true;
                 el.classList.add('dragging');
                 el.classList.add('selected-text');
-
                 const rect = container.getBoundingClientRect();
                 const elRect = el.getBoundingClientRect();
-
                 startX = touch.clientX - rect.left;
                 startY = touch.clientY - rect.top;
-
                 const leftPx = (parseFloat(el.style.left) / 100) * rect.width;
                 const topPx = (parseFloat(el.style.top) / 100) * rect.height;
                 startLeft = leftPx || 0;
@@ -1781,21 +1800,16 @@
                 e.preventDefault();
                 const touch = e.touches ? e.touches[0] : e;
                 const rect = container.getBoundingClientRect();
-
                 let deltaX = (touch.clientX - rect.left) - startX;
                 let deltaY = (touch.clientY - rect.top) - startY;
-
                 let newLeftPx = startLeft + deltaX;
                 let newTopPx = startTop + deltaY;
-
                 const elW = el.offsetWidth;
                 const elH = el.offsetHeight;
                 newLeftPx = Math.max(0, Math.min(rect.width - elW, newLeftPx));
                 newTopPx = Math.max(0, Math.min(rect.height - elH, newTopPx));
-
                 const leftPercent = (newLeftPx / rect.width) * 100;
                 const topPercent = (newTopPx / rect.height) * 100;
-
                 el.style.left = leftPercent + '%';
                 el.style.top = topPercent + '%';
             }
@@ -1810,7 +1824,6 @@
             el.addEventListener('mousedown', onStart);
             document.addEventListener('mousemove', onMove);
             document.addEventListener('mouseup', onEnd);
-
             el.addEventListener('touchstart', onStart, { passive: false });
             document.addEventListener('touchmove', onMove, { passive: false });
             document.addEventListener('touchend', onEnd);
@@ -1879,7 +1892,6 @@
 
             actions.appendChild(deleteBtn);
             el.appendChild(actions);
-
             container.appendChild(el);
             makeDraggable(el, container);
 
@@ -1892,7 +1904,6 @@
             return el;
         }
 
-        // ========== INIT DRAGGABLE TEXT SELF VIEW ==========
         let myTexts = [];
 
         document.getElementById('myAddTextBtn').addEventListener('click', function() {
@@ -1911,7 +1922,7 @@
             document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
         });
 
-        // ========== DRAGGABLE TEXT UNTUK PUBLIC VIEW ==========
+        // ========== DRAGGABLE TEXT PUBLIC VIEW ==========
         let pubTextContainer = document.getElementById('publicStoryCard');
 
         function addDraggableTextPublic(container, text, color, size, font, x, y) {
@@ -1977,7 +1988,6 @@
 
             actions.appendChild(deleteBtn);
             el.appendChild(actions);
-
             container.appendChild(el);
             makeDraggable(el, container);
 
@@ -2009,7 +2019,7 @@
         });
 
         // ========== DOWNLOAD ==========
-        async function downloadEl(el, name) {
+        async function downloadEl(el, name, bgBtnId) {
             try {
                 const allTexts = el.querySelectorAll('.draggable-text');
                 allTexts.forEach(t => t.classList.add('hide-actions'));
@@ -2035,6 +2045,14 @@
                 a.href = c.toDataURL('image/png');
                 a.click();
                 showToast('Berhasil diunduh');
+
+                // Munculkan tombol Background setelah download
+                const bgBtn = document.getElementById(bgBtnId);
+                if (bgBtn) {
+                    bgBtn.classList.add('visible');
+                    bgBtn.style.transform = 'scale(0.8)';
+                    setTimeout(() => bgBtn.style.transform = 'scale(1)', 200);
+                }
             } catch (e) {
                 console.error(e);
                 const allTexts = el.querySelectorAll('.draggable-text');
@@ -2043,8 +2061,19 @@
             }
         }
 
-        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`);
-        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`);
+        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`, 'editBgBtnMy');
+        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`, 'editBgBtnPub');
+
+        // ===== EDIT BACKGROUND BUTTONS =====
+        document.getElementById('editBgBtnMy').addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('Opening background editor...');
+        });
+
+        document.getElementById('editBgBtnPub').addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('Opening background editor...');
+        });
 
         // Avatar & Background uploads
         document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
@@ -2064,7 +2093,6 @@
                 if (u) { pubBgUrl = u;
                     updatePublicView(); } } });
 
-        // Time selects
         document.getElementById('myTimeSelect').addEventListener('change', function() { document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
             updateMyView(); });
         document.getElementById('myCustomTime').addEventListener('input', updateMyView);
@@ -2072,7 +2100,6 @@
             updatePublicView(); });
         document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
 
-        // Toggles
         document.getElementById('myCfSlider').addEventListener('click', () => { myCfActive = !myCfActive;
             document.getElementById('myCfSlider').classList.toggle('active');
             updateMyView(); });
@@ -2086,7 +2113,6 @@
             updatePublicView(); });
         document.getElementById('pubUsername').addEventListener('input', updatePublicView);
 
-        // Outer background
         document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg = e.target.value;
             updateMyView(); });
         document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer');
@@ -2098,7 +2124,6 @@
             pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updatePublicView(); }));
 
-        // Mode selection
         window.resetToModeSelection = function() { document.getElementById('modeSelection').style.display = 'flex';
             document.getElementById('studioMyView').classList.remove('active-view');
             document.getElementById('studioPublicView').classList.remove('active-view');
@@ -2118,7 +2143,6 @@
             }
         }));
 
-        // Language buttons for Self View
         document.getElementById('btnIndonesiaMy').addEventListener('click', () => {
             currentMyLang = 'id';
             document.getElementById('btnIndonesiaMy').classList.add('active');
@@ -2134,7 +2158,6 @@
             updateMyView();
         });
 
-        // Language buttons for Social View
         document.getElementById('btnIndonesiaPub').addEventListener('click', () => {
             currentPubLang = 'id';
             document.getElementById('btnIndonesiaPub').classList.add('active');
@@ -2150,7 +2173,6 @@
             updatePublicView();
         });
 
-        // Navigation
         const deskTrigger = document.getElementById('desktopNavTrigger');
         const deskDrop = document.getElementById('desktopNavDropdown');
         if (deskTrigger) {
@@ -2173,11 +2195,10 @@
         if (mobClose) mobClose.onclick = closeMob;
         if (mobOverlay) mobOverlay.onclick = closeMob;
 
-        // Initial updates
         updateMyView();
         updatePublicView();
         applyLanguage('id', true);
         applyLanguage('id', false);
     </script>
 </body>
-    </html>
+</html>
