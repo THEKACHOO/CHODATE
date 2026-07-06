@@ -1224,6 +1224,22 @@ margin-left: 3px;
         .preview-outer-inner {
             display: inline-block;
         }
+
+        .icon-fallback {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666;
+        }
+        .dark-theme .icon-fallback {
+            background: #333;
+            color: #aaa;
+        }
     </style>
 
 </head>
@@ -1357,21 +1373,21 @@ margin-left: 3px;
                                 <button class="profile-action-btn" id="editProfileBtn"><span id="editProfileText">Edit profil</span></button>
                                 <button class="profile-action-btn" id="shareProfileBtn"><span id="shareProfileText">Bagikan profil</span></button>
                                 <div class="right-icons-row">
-                                    <img src="Icon-contact1.png" class="contact-icon-img" id="contactIconImg" alt="add contact">
+                                    <img src="Icon-contact1.png" class="contact-icon-img" id="contactIconImg" alt="add contact" onerror="this.style.display='none'">
                                 </div>
                             </div>
                             <div class="story-tab-row">
-                                <img src="Icon-grid1.png" class="grid-icon-img" id="gridIconImg" alt="grid">
-                                <img src="Reels1.png" class="tab-icon-img media-icon" id="mediaIconImg" alt="media">
-                                <img src="Repost1.png" class="tab-icon-img repost-icon" id="repostIconImg" alt="repost">
-                                <img src="icon-tag1.png" class="tab-icon-img tag-icon" id="tagIconImg" alt="user tag">
+                                <img src="Icon-grid1.png" class="grid-icon-img" id="gridIconImg" alt="grid" onerror="this.style.display='none'">
+                                <img src="Reels1.png" class="tab-icon-img media-icon" id="mediaIconImg" alt="media" onerror="this.style.display='none'">
+                                <img src="Repost1.png" class="tab-icon-img repost-icon" id="repostIconImg" alt="repost" onerror="this.style.display='none'">
+                                <img src="icon-tag1.png" class="tab-icon-img tag-icon" id="tagIconImg" alt="user tag" onerror="this.style.display='none'">
                             </div>
                             <div class="posts-grid-preview" id="previewGridPosts"><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div></div>
                             <div class="bottom-nav-bar">
-                                <img src="Icon-home1.png" class="nav-icon-img-custom" id="homeIconImg" alt="home">
-                                <img src="Reels1.png" class="nav-icon-img-custom" id="bottomMediaImg" alt="media">
-                                <img src="Share1.png" class="nav-icon-share-img" id="bottomShareImg" alt="share">
-                                <img src="Icon-search1.png" class="search-icon-img" id="searchIconImg" alt="search">
+                                <img src="Icon-home1.png" class="nav-icon-img-custom" id="homeIconImg" alt="home" onerror="this.style.display='none'">
+                                <img src="Reels1.png" class="nav-icon-img-custom" id="bottomMediaImg" alt="media" onerror="this.style.display='none'">
+                                <img src="Share1.png" class="nav-icon-share-img" id="bottomShareImg" alt="share" onerror="this.style.display='none'">
+                                <img src="Icon-search1.png" class="search-icon-img" id="searchIconImg" alt="search" onerror="this.style.display='none'">
                                 <img class="nav-profile-img" id="bottomNavAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230095f6'/%3E%3Ctext x='12' y='16' font-size='12' text-anchor='middle' fill='white'%3ETK%3C/text%3E%3C/svg%3E">
                             </div>
                         </div>
@@ -1555,26 +1571,26 @@ margin-left: 3px;
             const threadIcon = document.getElementById('threadIcon');
 
             if (currentTheme === 'dark') {
-                mediaIcon.src = 'Reels2.png';
-                repostIcon.src = 'Repost2.png';
-                tagIcon.src = 'icon-tag2.png';
-                bottomMedia.src = 'Reels2.png';
-                bottomShare.src = 'Share2.png';
-                gridIcon.src = 'Icon-grid2.png';
-                homeIcon.src = 'Icon-home2.png';
-                searchIcon.src = 'Icon-search2.png';
-                contactIcon.src = 'Icon-contact2.png';
+                if (mediaIcon) mediaIcon.src = 'Reels2.png';
+                if (repostIcon) repostIcon.src = 'Repost2.png';
+                if (tagIcon) tagIcon.src = 'icon-tag2.png';
+                if (bottomMedia) bottomMedia.src = 'Reels2.png';
+                if (bottomShare) bottomShare.src = 'Share2.png';
+                if (gridIcon) gridIcon.src = 'Icon-grid2.png';
+                if (homeIcon) homeIcon.src = 'Icon-home2.png';
+                if (searchIcon) searchIcon.src = 'Icon-search2.png';
+                if (contactIcon) contactIcon.src = 'Icon-contact2.png';
                 if (threadIcon) threadIcon.src = 'Mention-icon.png';
             } else {
-                mediaIcon.src = 'Reels1.png';
-                repostIcon.src = 'Repost1.png';
-                tagIcon.src = 'icon-tag1.png';
-                bottomMedia.src = 'Reels1.png';
-                bottomShare.src = 'Share1.png';
-                gridIcon.src = 'Icon-grid1.png';
-                homeIcon.src = 'Icon-home1.png';
-                searchIcon.src = 'Icon-search1.png';
-                contactIcon.src = 'Icon-contact1.png';
+                if (mediaIcon) mediaIcon.src = 'Reels1.png';
+                if (repostIcon) repostIcon.src = 'Repost1.png';
+                if (tagIcon) tagIcon.src = 'icon-tag1.png';
+                if (bottomMedia) bottomMedia.src = 'Reels1.png';
+                if (bottomShare) bottomShare.src = 'Share1.png';
+                if (gridIcon) gridIcon.src = 'Icon-grid1.png';
+                if (homeIcon) homeIcon.src = 'Icon-home1.png';
+                if (searchIcon) searchIcon.src = 'Icon-search1.png';
+                if (contactIcon) contactIcon.src = 'Icon-contact1.png';
                 if (threadIcon) threadIcon.src = 'Thread.png';
             }
 
