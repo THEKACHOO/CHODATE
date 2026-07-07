@@ -2024,8 +2024,9 @@
                 const allTexts = el.querySelectorAll('.draggable-text');
                 allTexts.forEach(t => t.classList.add('hide-actions'));
 
+                // Peningkatan kualitas
                 const c = await html2canvas(el, {
-                    scale: 2.5,
+                    scale: 3.0, 
                     backgroundColor: null,
                     useCORS: true,
                     allowTaint: true,
@@ -2040,10 +2041,11 @@
 
                 allTexts.forEach(t => t.classList.remove('hide-actions'));
 
-                const a = document.createElement('a');
-                a.download = name;
-                a.href = c.toDataURL('image/png');
-                a.click();
+                // Konversi ke PNG dengan kualitas maksimal
+                const link = document.createElement('a');
+                link.download = name;
+                link.href = c.toDataURL('image/png');
+                link.click();
                 showToast('Berhasil diunduh');
 
                 const bgBtn = document.getElementById(bgBtnId);
@@ -2064,15 +2066,15 @@
         document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`, 'editBgBtnPub');
 
         // ===== EDIT BACKGROUND BUTTON =====
-document.getElementById('editBgBtnMy').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.href = 'Edit.html';
-});
+        document.getElementById('editBgBtnMy').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'Edit.html';
+        });
 
-document.getElementById('editBgBtnPub').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.href = 'Edit.html';
-});
+        document.getElementById('editBgBtnPub').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'Edit.html';
+        });
         // Avatar & Background uploads
         document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
         document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
