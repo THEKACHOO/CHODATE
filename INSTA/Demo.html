@@ -3,232 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>INSTACHO | Insta Post Editor</title>
+    <title>INSTACHO | Insta Comment</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; overflow-x: hidden; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body, html { width:100%; overflow-x:hidden; }
         body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label {
             font-family: 'Arial', 'Outfit', sans-serif !important;
         }
-        body { background-color: #f5f5f5; line-height: 1.6; }
+        body { background-color:#f5f5f5; line-height:1.6; }
 
         /* ===== HEADER ===== */
         header {
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(16px);
             position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            top:0; left:0; right:0;
+            z-index:1000;
+            border-bottom:1px solid rgba(255,255,255,0.1);
         }
         .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:12px 24px;
+            max-width:1400px;
+            margin:0 auto;
+            position:relative;
         }
-        .logo-container { display: flex; align-items: center; cursor: pointer; }
-        .logo-img { height: 38px; width: auto; }
-        .center-title { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; display: flex; align-items: center; justify-content: center; }
-        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
-        @media (max-width: 640px) { .center-logo-img { height: 100px; } .logo-img { height: 30px; } }
+        .logo-container { display:flex; align-items:center; cursor:pointer; }
+        .logo-img { height:38px; width:auto; }
+        .center-title {
+            position:absolute;
+            left:50%;
+            transform:translateX(-50%);
+            text-align:center;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .center-logo-img { height:100px; width:auto; display:block; object-fit:contain; }
+        @media (max-width:640px) {
+            .center-logo-img { height:80px; }
+            .logo-img { height:30px; }
+        }
+        .desktop-nav-container { position:relative; display:block; }
+        @media (max-width:768px) { .desktop-nav-container { display:none; } }
+        .desktop-nav-trigger {
+            display:flex;
+            align-items:center;
+            gap:8px;
+            background:rgba(255,255,255,0.1);
+            padding:8px 18px;
+            border-radius:100px;
+            font-weight:600;
+            font-size:14px;
+            color:white;
+            cursor:pointer;
+            border:1px solid rgba(255,255,255,0.2);
+        }
+        .desktop-nav-dropdown {
+            position:absolute;
+            top:calc(100% + 12px);
+            right:0;
+            width:200px;
+            background:rgba(10,10,10,0.97);
+            border-radius:18px;
+            padding:8px 0;
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(-8px);
+            transition:all 0.25s;
+            border:1px solid rgba(255,255,255,0.12);
+        }
+        .desktop-nav-dropdown.active { opacity:1; visibility:visible; transform:translateY(0); }
+        .desktop-nav-dropdown .nav-button {
+            display:block;
+            width:100%;
+            padding:11px 20px;
+            font-weight:500;
+            font-size:13px;
+            color:rgba(255,255,255,0.85);
+            text-decoration:none;
+            transition:0.2s;
+        }
+        .desktop-nav-dropdown .nav-button:hover { background:rgba(255,255,255,0.1); }
+        .mobile-menu-btn {
+            display:none;
+            background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.2);
+            font-size:18px;
+            color:white;
+            width:40px;
+            height:40px;
+            border-radius:60px;
+            cursor:pointer;
+            align-items:center;
+            justify-content:center;
+        }
+        @media (max-width:768px) { .mobile-menu-btn { display:flex; } }
+        .mobile-menu {
+            position:fixed;
+            top:0;
+            right:-100%;
+            width:75%;
+            max-width:260px;
+            height:100vh;
+            background:rgba(0,0,0,0.97);
+            padding:90px 20px 40px;
+            transition:right 0.3s ease;
+            z-index:999;
+            border-left:1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-menu.active { right:0; }
+        .mobile-menu-overlay {
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.65);
+            opacity:0;
+            visibility:hidden;
+            transition:all 0.3s;
+            z-index:998;
+        }
+        .mobile-menu-overlay.active { opacity:1; visibility:visible; }
+        .mobile-menu-link {
+            display:block;
+            padding:13px 18px;
+            background:rgba(255,255,255,0.06);
+            border-radius:40px;
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            margin-bottom:10px;
+            text-align:center;
+            font-size:14px;
+        }
 
-        .desktop-nav-container { position: relative; display: block; }
-        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
-        .desktop-nav-trigger { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 14px; color: white; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); }
-        .desktop-nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 200px; background: rgba(10,10,10,0.97); border-radius: 18px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); }
-        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .desktop-nav-dropdown .nav-button { display: block; width: 100%; padding: 11px 20px; font-weight: 500; font-size: 13px; color: rgba(255,255,255,0.85); text-decoration: none; transition: 0.2s; }
-        .desktop-nav-dropdown .nav-button:hover { background: rgba(255,255,255,0.1); }
-
-        .mobile-menu-btn { display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: 18px; color: white; width: 40px; height: 40px; border-radius: 60px; cursor: pointer; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px; height: 100vh; background: rgba(0,0,0,0.97); padding: 90px 20px 40px; transition: right 0.3s ease; z-index: 999; border-left: 1px solid rgba(255,255,255,0.1); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998; }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu-link { display: block; padding: 13px 18px; background: rgba(255,255,255,0.06); border-radius: 40px; text-decoration: none; color: white; font-weight: 500; margin-bottom: 10px; text-align: center; font-size: 14px; }
-
-        /* ===== MAIN LAYOUT ===== */
-        .main-content { padding: 96px 24px 60px; max-width: 1400px; margin: 0 auto; }
-        @media (max-width: 768px) { .main-content { padding: 82px 16px 40px; } }
-
-        .page-title { text-align: center; font-size: 38px; font-weight: 800; margin-bottom: 36px; color: #111; letter-spacing: -0.5px; }
-        @media (max-width: 640px) { .page-title { font-size: 28px; margin-bottom: 22px; } }
-
-        .insta-wrapper { display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-start; gap: 36px; }
-        @media (max-width: 900px) { .insta-wrapper { flex-wrap: wrap; gap: 20px; } }
+        /* ===== MAIN ===== */
+        .main-content { padding:96px 24px 60px; max-width:1400px; margin:0 auto; }
+        @media (max-width:768px) { .main-content { padding:82px 16px 40px; } }
+        .page-title {
+            text-align:center;
+            font-size:38px;
+            font-weight:800;
+            margin-bottom:36px;
+            color:#111;
+            letter-spacing:-0.5px;
+        }
+        @media (max-width:640px) { .page-title { font-size:28px; margin-bottom:22px; } }
+        .comment-wrapper {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:36px;
+            align-items:flex-start;
+        }
 
         /* ===== FORM PANEL ===== */
         .form-panel {
-            background: white;
-            border-radius: 24px;
-            padding: 22px 20px;
-            width: 360px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-            border: 1px solid #e8e8e8;
-            max-height: calc(100vh - 130px);
-            overflow-y: auto;
+            background:white;
+            border-radius:24px;
+            padding:22px 20px;
+            width:380px;
+            flex-shrink:0;
+            box-shadow:0 4px 20px rgba(0,0,0,0.07);
+            border:1px solid #e8e8e8;
+            max-height:calc(100vh - 130px);
+            overflow-y:auto;
         }
-        @media (max-width: 900px) { .form-panel { width: 100%; max-width: 100%; max-height: none; overflow-y: visible; } }
+        @media (max-width:900px) {
+            .form-panel { width:100%; max-width:100%; max-height:none; overflow-y:visible; }
+        }
+        .toggle-buttons {
+            display:flex;
+            gap:10px;
+            margin-bottom:18px;
+            justify-content:center;
+        }
+        .toggle-btn {
+            width:40px;
+            height:40px;
+            border-radius:50%;
+            background:#f2f2f2;
+            border:2px solid #ddd;
+            cursor:pointer;
+            font-size:16px;
+            transition:0.2s;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#555;
+        }
+        .toggle-btn i { font-size:16px; }
+        .toggle-btn.active { background:#111; color:white; border-color:#111; }
+        .toggle-btn:hover { transform:scale(1.05); }
+        .toggle-btn.theme-btn { background:#111; color:white; border-color:#111; }
+        .toggle-btn.theme-btn i { color:white; }
+        .toggle-btn.theme-btn.sun-mode { background:#111; color:white; border-color:#111; }
 
-        .lang-buttons { display: flex; gap: 8px; margin-bottom: 18px; }
-        .lang-btn { flex: 1; padding: 8px; background: #f2f2f2; border: 1px solid #ddd; border-radius: 100px; cursor: pointer; font-weight: 600; font-size: 12px; transition: 0.2s; }
-        .lang-btn.active { background: #111; color: white; border-color: #111; }
+        .form-group { margin-bottom:12px; }
+        label {
+            font-weight:600;
+            font-size:11px;
+            display:block;
+            margin-bottom:4px;
+            color:#666;
+            text-transform:uppercase;
+            letter-spacing:0.4px;
+        }
+        input, textarea {
+            width:100%;
+            padding:8px 12px;
+            border:1px solid #e0e0e0;
+            border-radius:12px;
+            font-size:13px;
+            outline:none;
+            background:white;
+            transition:border-color 0.2s;
+        }
+        input:focus, textarea:focus { border-color:#0095f6; }
+        textarea { resize:vertical; min-height:40px; }
 
-        .version-buttons { display: flex; gap: 8px; margin-bottom: 18px; }
-        .version-btn { flex: 1; padding: 9px; border-radius: 100px; border: 1px solid #ddd; background: #f2f2f2; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; }
-        .version-btn.active { background: #111; color: white; border-color: #111; }
+        .file-input-label {
+            background:#f7f7f7;
+            text-align:center;
+            padding:8px 12px;
+            border-radius:12px;
+            margin-top:4px;
+            cursor:pointer;
+            font-size:12px;
+            border:1px solid #e8e8e8;
+            transition:0.2s;
+        }
+        .file-input-label:hover { background:#efefef; }
 
-        .form-group { margin-bottom: 13px; }
-        label { font-weight: 600; font-size: 11px; display: block; margin-bottom: 5px; color: #666; text-transform: uppercase; letter-spacing: 0.4px; }
-        input, textarea { width: 100%; padding: 10px 13px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 13px; outline: none; background: white; transition: border-color 0.2s; }
-        input:focus, textarea:focus { border-color: #0095f6; }
-        textarea { resize: vertical; min-height: 65px; }
+        .comment-form-item {
+            background:#f9f9f9;
+            padding:10px 12px;
+            border-radius:14px;
+            margin-bottom:10px;
+            border:1px solid #eee;
+        }
+        .comment-form-item .form-group { margin-bottom:6px; }
+        .comment-form-item .form-group:last-child { margin-bottom:0; }
+        .comment-form-item label { font-size:10px; color:#888; }
 
-        .file-input-label { background: #f7f7f7; text-align: center; padding: 9px 12px; border-radius: 12px; margin-top: 5px; cursor: pointer; font-size: 12px; border: 1px solid #e8e8e8; transition: 0.2s; }
-        .file-input-label:hover { background: #efefef; }
+        .update-btn {
+            background:#111;
+            color:white;
+            border:none;
+            padding:10px;
+            border-radius:60px;
+            width:100%;
+            font-weight:600;
+            cursor:pointer;
+            font-size:14px;
+            transition:0.2s;
+            margin-top:4px;
+        }
+        .update-btn:hover { background:#333; }
 
-        /* Location / Music mutual exclusion */
-        .loc-music-group { display: flex; flex-direction: column; gap: 10px; }
-        .loc-music-row { display: flex; flex-direction: column; }
-        .loc-music-row input { transition: opacity 0.2s; }
-        .loc-music-row input:disabled { opacity: 0.35; background: #f5f5f5; cursor: not-allowed; }
+        /* ===== PREVIEW CARD ===== */
+        .preview-container {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:16px;
+            flex-shrink:0;
+            width:420px;
+        }
+        @media (max-width:900px) { .preview-container { width:100%; } }
 
-        /* sub-info music icon black */
-        .sub-info i { font-size: 9px; color: #262626; }
-
-        .love-option { display: flex; gap: 12px; align-items: center; margin-top: 4px; }
-        .love-color-btn { width: 28px; height: 28px; border-radius: 45%; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
-        .love-color-btn.black { background: #262626; }
-        .love-color-btn.red { background: #ed4956; }
-        .love-color-btn.active { border-color: #0095f6; transform: scale(1.15); }
-
-        .bg-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; align-items: center; }
-        .bg-option-btn { padding: 6px 14px; border-radius: 100px; background: #f2f2f2; border: 1px solid #ddd; cursor: pointer; font-size: 12px; transition: 0.2s; }
-        .bg-option-btn.active { background: #111; color: white; }
-        .color-picker-input { width: 42px; height: 34px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; padding: 2px; }
-
-        .ratio-options { display: flex; gap: 8px; margin-bottom: 8px; }
-        .ratio-btn { padding: 6px 14px; border-radius: 100px; background: #f2f2f2; border: 1px solid #ddd; cursor: pointer; font-size: 12px; transition: 0.2s; }
-        .ratio-btn.active { background: #111; color: white; }
-
-        .setting-verif { margin-top: 18px; border-top: 1px solid #f0f0f0; padding-top: 14px; }
-        .verif-btn { background: #f2f2f2; border: 1px solid #ddd; padding: 10px; border-radius: 60px; width: 100%; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; }
-        .verif-btn:hover { background: #e8e8e8; }
-        .form-divider { height: 1px; background: #f0f0f0; margin: 14px 0; }
-
-        /* ===== PREVIEW ===== */
-        .preview-container { display: flex; flex-direction: column; align-items: center; gap: 16px; flex-shrink: 0; }
-        @media (max-width: 900px) { .preview-container { width: 100%; } }
-
-        .preview-outer { padding: 24px 20px; border-radius: 40px; display: inline-block; }
-        .instagram-preview {
-            background: white;
-            width: 360px;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 8px 28px rgba(0,0,0,0.13);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        .instagram-comment-card {
+            background:white;
+            width:100%;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 8px 28px rgba(0,0,0,0.13);
+            padding:16px 14px 10px;
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        .post-header { display: flex; align-items: center; padding: 10px 13px; gap: 9px; background: white; }
-        .avatar { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: #0095f6; flex-shrink: 0; }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .header-meta { flex: 1; min-width: 0; }
-        .username { font-weight: 700; font-size: 13px; color: #262626; display: flex; align-items: center; gap: 4px; }
-        .sub-info { font-size: 10.5px; color: #8e8e8e; margin-top: 1px; display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .sub-info i { font-size: 9px; color: #262626; }
-        .menu-dot { font-size: 14px; font-weight: bold; color: #262626; flex-shrink: 0; padding-left: 6px; }
-
-        .media-container { width: 100%; background: #efefef; display: flex; justify-content: center; align-items: center; }
-        .media-container img { width: 100%; height: auto; display: block; }
-
-        .action-buttons { padding: 5px 13px 7px; display: flex; gap: 14px; align-items: center; }
-        .action-icons { padding: 0px 0px 0px; display: flex; gap: 14px; align-items: center; }
-        .action-icon { width: 23px; height: 23px; cursor: pointer; display: flex; align-items: center; justify-content: center; transform: translateY(4px); }
-        .action-icon svg { width: 100%; height: 100%; }
-        .action-icon img { width: 100%; height: 100%; object-fit: contain; }
-        .action-icons .action-icon:nth-child(2) img,
-        .action-icons .action-icon:nth-child(3) img,
-        .action-icons .action-icon:nth-child(4) img {
-            width: 26px;
-            height: 26px;
+        .comment-item {
+            display:flex;
+            gap:10px;
+            padding:6px 0;
+            border-bottom:1px solid #efefef;
         }
-        .save-icon { margin-left: auto; }
+        .comment-item:last-child { border-bottom:none; }
 
-        .like-count { font-weight: 600; font-size: 13px; padding: 3px 13px 2px; color: #262626; }
-        .caption-text { padding: 0 13px 4px; font-size: 13px; line-height: 1.2; }
-        .caption-username { font-weight: 700; margin-right: 2px; }
-        .timestamp { padding: 0 13px 11px; font-size: 10px; color: #8e8e8e; }
-        .post-footer-spacer { height: 6px; }
-
-        .download-area { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .download-btn { background: #111; color: white; border: none; padding: 13px 40px; border-radius: 100px; font-weight: 600; cursor: pointer; font-size: 15px; transition: 0.2s; }
-        .download-btn:hover { background: #333; }
-
-        /* ===== EDIT BACKGROUND BUTTON ===== */
-        .edit-bg-btn {
-            background: #111;
-            color: white;
-            border: none;
-            padding: 13px 40px;
-            border-radius: 100px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 15px;
-            transition: 0.2s;
-            display: none;
-            text-decoration: none;
+        .comment-avatar {
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            flex-shrink:0;
+            overflow:hidden;
+            background:#0095f6;
         }
-        .edit-bg-btn:hover { background: #333; }
-        .edit-bg-btn.visible { display: inline-block; }
+        .comment-avatar img { width:100%; height:100%; object-fit:cover; }
+
+        .comment-body {
+            flex:1;
+            min-width:0;
+            display:flex;
+            flex-direction:column;
+        }
+        .comment-header {
+            display:flex;
+            align-items:center;
+            gap:6px;
+            flex-wrap:wrap;
+        }
+        .comment-username {
+            font-weight:700;
+            font-size:12px;
+            color:#262626;
+        }
+        .comment-time {
+            font-size:11px;
+            color:#8e8e8e;
+        }
+        .comment-text {
+            font-size:13px;
+            color:#262626;
+            word-break:break-word;
+            margin-top:1px;
+        }
+        .comment-actions {
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-top:2px;
+        }
+        .comment-actions .reply-count {
+            font-size:11px;
+            font-weight:600;
+            color:#262626;
+            cursor:default;
+        }
+        .comment-actions .reply-divider {
+            color:#8e8e8e;
+            font-size:11px;
+        }
+
+        .comment-love {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:0px;
+            flex-shrink:0;
+            margin-left:auto;
+            padding-left:8px;
+            justify-content:center;
+        }
+        .comment-love img {
+            width:18px;
+            height:18px;
+            cursor:pointer;
+            object-fit:contain;
+            display:block;
+        }
+        .comment-love span {
+            font-size:11px;
+            font-weight:600;
+            color:#262626;
+            min-width:12px;
+            text-align:center;
+            line-height:1.2;
+        }
+
+        /* Footer preview - galeri + gif di pojok kanan bawah */
+        .comment-footer-actions {
+            display:flex;
+            align-items:center;
+            gap:4px;
+            padding-top:8px;
+            border-top:1px solid #efefef;
+            margin-top:4px;
+            justify-content:flex-end;
+        }
+        .comment-footer-actions .icon-btn {
+            width:28px;
+            height:28px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+        }
+        .comment-footer-actions .icon-btn img {
+            width:22px;
+            height:22px;
+            object-fit:contain;
+        }
+
+        .comment-form-area {
+            display:flex;
+            gap:10px;
+            align-items:center;
+            padding-top:10px;
+            border-top:1px solid #efefef;
+            margin-top:4px;
+        }
+        .comment-form-area .comment-avatar { width:28px; height:28px; }
+        .comment-form-area input {
+            flex:1;
+            padding:6px 12px;
+            border:1px solid #e0e0e0;
+            border-radius:30px;
+            font-size:13px;
+            outline:none;
+            background:white;
+        }
+        .comment-form-area input:focus { border-color:#0095f6; }
+
+        .download-area {
+            text-align:center;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:10px;
+            width:100%;
+        }
+        .download-btn {
+            background:#111;
+            color:white;
+            border:none;
+            padding:13px 40px;
+            border-radius:100px;
+            font-weight:600;
+            cursor:pointer;
+            font-size:15px;
+            transition:0.2s;
+        }
+        .download-btn:hover { background:#333; }
 
         /* ===== FOOTER ===== */
-        footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 36px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 24px;
+        footer {
+            background:#000;
+            color:#ddd;
+            padding:50px 0 28px;
+            margin-top:40px;
         }
-        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
-        .footer-section h3 { font-size: 0.7rem; font-weight: 700; margin-bottom: 14px; color: white; text-transform: uppercase; letter-spacing: 1.2px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0px; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.83rem; transition: 0.2s; }
-        .footer-links a:hover { color: white; }
-        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.8rem; max-width: 200px; margin-bottom: 14px; line-height: 1.6; }
-        .social-links { display: flex; gap: 10px; }
-        .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 60px; color: white; text-decoration: none; font-size: 12px; transition: 0.2s; }
-        .social-link:hover { background: white; color: black; }
-        .footer-bottom { display: flex; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); max-width: 1400px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-        .copyright { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        .footer-grid {
+            display:grid;
+            grid-template-columns:1.4fr 1fr 1fr 1fr;
+            gap:40px;
+            margin-bottom:36px;
+            max-width:1400px;
+            margin-left:auto;
+            margin-right:auto;
+            padding:0 24px;
+        }
+        @media (max-width:860px) { .footer-grid { grid-template-columns:1fr 1fr; gap:24px; } }
+        @media (max-width:480px) { .footer-grid { grid-template-columns:1fr 1fr; gap:16px; } }
+        .footer-section h3 {
+            font-size:0.7rem;
+            font-weight:700;
+            margin-bottom:14px;
+            color:white;
+            text-transform:uppercase;
+            letter-spacing:1.2px;
+        }
+        .footer-links { list-style:none; }
+        .footer-links li { margin-bottom:0px; }
+        .footer-links a {
+            color:rgba(255,255,255,0.5);
+            text-decoration:none;
+            font-size:0.83rem;
+            transition:0.2s;
+        }
+        .footer-links a:hover { color:white; }
+        .footer-brand p {
+            color:rgba(255,255,255,0.5);
+            font-size:0.8rem;
+            max-width:200px;
+            margin-bottom:14px;
+            line-height:1.6;
+        }
+        .social-links { display:flex; gap:10px; }
+        .social-link {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:32px;
+            height:32px;
+            background:rgba(255,255,255,0.08);
+            border-radius:60px;
+            color:white;
+            text-decoration:none;
+            font-size:12px;
+            transition:0.2s;
+        }
+        .social-link:hover { background:white; color:black; }
+        .footer-bottom {
+            display:flex;
+            align-items:center;
+            padding-top:22px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            max-width:1400px;
+            margin:0 auto;
+            padding-left:24px;
+            padding-right:24px;
+        }
+        .copyright { font-size:0.7rem; color:rgba(255,255,255,0.4); }
 
-        /* Crop modals */
-        .crop-modal { display: none; position: fixed; inset: 0; background: #000; z-index: 20000; justify-content: center; align-items: center; flex-direction: column; }
-        .crop-modal .crop-container { background: #000; max-width: 90vw; max-height: 85vh; overflow: hidden; border-radius: 20px; }
-        .crop-modal .crop-container img { max-width: 100%; max-height: 70vh; display: block; }
-        .crop-modal-buttons { padding: 18px; display: flex; gap: 14px; justify-content: center; background: #000; }
-        .crop-modal-btn { padding: 11px 30px; border-radius: 100px; border: none; cursor: pointer; font-weight: 700; font-size: 15px; }
-        .crop-modal-btn.cancel { background: #333; color: white; }
-        .crop-modal-btn.save { background: #0095f6; color: white; }
-
-        .toast-msg { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 11px 22px; border-radius: 60px; font-weight: 500; font-size: 13px; z-index: 30000; pointer-events: none; opacity: 0; transition: opacity 0.2s; white-space: nowrap; }
+        .toast-msg {
+            position:fixed;
+            bottom:28px;
+            left:50%;
+            transform:translateX(-50%);
+            background:#1a1a1a;
+            color:white;
+            padding:11px 22px;
+            border-radius:60px;
+            font-weight:500;
+            font-size:13px;
+            z-index:30000;
+            pointer-events:none;
+            opacity:0;
+            transition:opacity 0.2s;
+            white-space:nowrap;
+        }
+        .hidden { display:none !important; }
     </style>
 </head>
 <body>
@@ -236,10 +533,10 @@
 <header>
     <div class="header-content">
         <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+            <img src="https://thekachoo.github.io/CHODATE/INSTA/Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         </div>
         <div class="center-title">
-            <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
+            <img src="https://thekachoo.github.io/CHODATE/INSTA/Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
         </div>
         <div class="desktop-nav-container">
             <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
@@ -261,161 +558,58 @@
 </div>
 
 <div class="main-content">
-    <h1 class="page-title">Create your post!</h1>
-    <div class="insta-wrapper">
+    <h1 class="page-title" id="pageTitle">Komentar</h1>
+    <div class="comment-wrapper">
 
-        <!-- ===== FORM PANEL ===== -->
+        <!-- FORM PANEL -->
         <div class="form-panel">
-            <div class="lang-buttons">
-                <button class="lang-btn active" id="btnIndonesia">Bahasa Indonesia</button>
-                <button class="lang-btn" id="btnInggris">English</button>
-            </div>
-            <div class="version-buttons">
-                <button class="version-btn active" id="version1Btn">Insta 1</button>
-                <button class="version-btn" id="version2Btn">Insta 2</button>
+            <div class="toggle-buttons">
+                <button class="toggle-btn theme-btn" id="themeToggleBtn" title="Toggle theme preview">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="toggle-btn active" id="toggleLangBtn" title="Toggle Language">
+                    <i class="fas fa-globe"></i>
+                </button>
             </div>
 
-            <!-- Avatar -->
             <div class="form-group">
                 <label id="labelAvatar">Foto Profil</label>
                 <div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div>
                 <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
             </div>
 
-            <!-- Username -->
-            <div class="form-group">
-                <label id="labelUsername">Username</label>
-                <input type="text" id="username" placeholder="thekachoo">
+            <div id="commentFormsContainer">
+                <!-- 6 comment forms akan di-inject oleh JS -->
             </div>
 
-            <!-- Location & Music -->
-            <div class="form-group">
-                <label id="labelLocMusic">Lokasi / Musik</label>
-                <div class="loc-music-group">
-                    <div class="loc-music-row">
-                        <input type="text" id="location" placeholder="Jakarta Selatan, Indonesia" oninput="handleLocMusicInput('loc')">
-                    </div>
-                    <div class="loc-music-row">
-                        <input type="text" id="musicName" placeholder="Judul lagu — Artis" oninput="handleLocMusicInput('music')">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Crop ratio -->
-            <div class="form-group">
-                <label id="labelMedia">Upload Foto</label>
-                <div class="ratio-options" id="ratioOptionsPre">
-                    <button class="ratio-btn active" data-ratio="1:1">1:1</button>
-                    <button class="ratio-btn" data-ratio="4:5">4:5</button>
-                </div>
-                <div class="file-input-label" id="uploadMediaLabel">Klik untuk pilih file</div>
-                <input type="file" id="mediaUpload" accept="image/*" style="display:none;">
-            </div>
-
-            <!-- Caption -->
-            <div class="form-group">
-                <label id="labelCaption">Caption</label>
-                <textarea id="caption" placeholder="Write something..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label id="labelLikes">Jumlah Like</label>
-                <input type="text" id="likeCount" placeholder="cth: 1.234" value="0" oninput="handleLikeInput('count')">
-            </div>
-            <div class="form-group" id="likedByGroup">
-                <label id="labelLikedBy">Disukai oleh (username)</label>
-                <input type="text" id="likedByUser" placeholder="thebestfriend" oninput="handleLikeInput('user')">
-            </div>
-
-            <!-- Timestamp -->
-            <div class="form-group">
-                <label id="labelTimestamp">Waktu posting</label>
-                <input type="text" id="timestamp" placeholder="Baru saja">
-            </div>
-
-            <!-- Like color -->
-            <div class="form-group">
-                <label id="labelLoveColor">Warna Hati</label>
-                <div class="love-option">
-                    <span id="loveSelectText">Pilih:</span>
-                    <div class="love-color-btn black active" id="loveBlack"></div>
-                    <div class="love-color-btn red" id="loveRed"></div>
-                </div>
-            </div>
-
-            <!-- Background -->
-            <div class="form-group">
-                <label id="labelBgPreview">Background Preview</label>
-                <div class="bg-options">
-                    <button class="bg-option-btn" data-bg="transparent" id="bgTransparent">Transparan</button>
-                    <button class="bg-option-btn" data-bg="white" id="bgWhite">Putih</button>
-                    <button class="bg-option-btn" data-bg="black" id="bgBlack">Hitam</button>
-                    <input type="color" id="customColorPicker" class="color-picker-input" value="#f5f5f5">
-                </div>
-            </div>
-
-            <!-- Verification -->
-            <div class="setting-verif">
-                <button class="verif-btn" id="verificationBtn">Verification (Official Account)</button>
-                <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> Akun Terverifikasi</div>
-            </div>
+            <button class="update-btn" id="updateCommentBtn">Perbarui Komentar</button>
         </div>
 
-        <!-- ===== PREVIEW ===== -->
+        <!-- PREVIEW -->
         <div class="preview-container">
-            <div class="preview-outer" id="previewOuter">
-                <div class="instagram-preview" id="instagramCard">
+            <div class="instagram-comment-card" id="commentCard">
+                <div id="commentList"></div>
 
-                    <!-- Post header -->
-                    <div class="post-header">
-                        <div class="avatar" id="avatarContainer">
-                            <img id="avatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
-                        </div>
-                        <div class="header-meta">
-                            <div class="username">
-                                <span id="usernameText">thekachoo</span>
-                                <span id="verifBadge" style="display:none;"><i class="fas fa-check-circle" style="color:#0095f6; font-size:11px;"></i></span>
-                            </div>
-                            <div class="sub-info" id="subInfoDisplay"></div>
-                        </div>
-                        <div class="menu-dot">•••</div>
+                <!-- Footer actions: galeri + gif di pojok kanan bawah -->
+                <div class="comment-footer-actions" id="commentFooter">
+                    <div class="icon-btn">
+                        <img src="https://thekachoo.github.io/CHODATE/INSTA/galeri1.png" alt="galeri" id="galleryIcon" onerror="this.style.display='none'">
                     </div>
-
-                    <!-- Media -->
-                    <div class="media-container" id="mediaContainer">
-                        <img src="https://placehold.co/360x360/EFEFEF/999999?text=Upload" style="width:100%;">
+                    <div class="icon-btn">
+                        <img src="https://thekachoo.github.io/CHODATE/INSTA/gif1.png" alt="gif" id="gifIcon" onerror="this.style.display='none'">
                     </div>
+                </div>
 
-                    <!-- Actions -->
-                    <div class="action-buttons">
-                        <div class="action-icons">
-                            <div class="action-icon" id="likeIcon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
-                            </div>
-                            <div class="action-icon"><img src="icon-comment.png" alt="comment"></div>
-                            <div class="action-icon"><img src="icon-repost.png" alt="repost"></div>
-                            <div class="action-icon"><img src="icon-share.png" alt="share"></div>
-                        </div>
-                        <div class="save-icon">
-                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
-                        </div>
+                <div class="comment-form-area">
+                    <div class="comment-avatar" id="formAvatar">
+                        <img id="formAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
                     </div>
-
-                    <div class="like-count" id="displayLikes">0 suka</div>
-
-                    <div class="caption-text" id="captionWrapper">
-                        <span id="captionUsername" class="caption-username" style="font-weight: 700; font-family: Arial, sans-serif;"></span>
-                        <span class="caption-message" id="displayCaption"></span>
-                    </div>
-                    <div class="timestamp" id="displayTimestamp"></div>
-                    <div class="post-footer-spacer"></div>
+                    <input type="text" placeholder="Tambahkan komentar untuk pe..." id="commentFormInput">
                 </div>
             </div>
+
             <div class="download-area">
                 <button class="download-btn" id="downloadBtn">Unduh</button>
-                <a href="Edit.html" class="edit-bg-btn" id="editBgBtn">Edit Background</a>
             </div>
         </div>
     </div>
@@ -426,14 +620,14 @@
     <div class="footer-grid">
         <div class="footer-section footer-brand">
             <h3>CHODATE</h3>
-            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+            <p id="footerDesc">CHODATE adalah fitur yang dikembangkan oleh Kachoo untuk pembaruan konten media sosial, ditujukan untuk keperluan roleplay.</p>
             <div class="social-links">
                 <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
         <div class="footer-section">
-            <h3>Explore</h3>
+            <h3 id="footerExplore">Jelajahi</h3>
             <ul class="footer-links">
                 <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
                 <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
@@ -443,7 +637,7 @@
             </ul>
         </div>
         <div class="footer-section">
-            <h3>More</h3>
+            <h3 id="footerMore">Lainnya</h3>
             <ul class="footer-links">
                 <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
                 <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
@@ -452,7 +646,7 @@
             </ul>
         </div>
         <div class="footer-section">
-            <h3>Meet Us</h3>
+            <h3 id="footerMeet">Temui Kami</h3>
             <ul class="footer-links">
                 <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
                 <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
@@ -460,302 +654,351 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+        <div class="copyright" id="footerCopyright">© 2026 CHODATE oleh The Kachoo. Semua hak dilindungi.</div>
     </div>
 </footer>
-
-<!-- Crop modals -->
-<div class="crop-modal" id="profileCropModal">
-    <div class="crop-container"><img id="profileCropImage" src=""></div>
-    <div class="crop-modal-buttons">
-        <button class="crop-modal-btn cancel" id="cancelProfileCrop">Batal</button>
-        <button class="crop-modal-btn save" id="saveProfileCrop">Simpan</button>
-    </div>
-</div>
-<div class="crop-modal" id="postCropModal">
-    <div class="crop-container"><img id="postCropImage" src=""></div>
-    <div class="crop-modal-buttons">
-        <button class="crop-modal-btn cancel" id="cancelPostCrop">Batal</button>
-        <button class="crop-modal-btn save" id="savePostCrop">Simpan</button>
-    </div>
-</div>
 
 <div class="toast-msg" id="toastMsg"></div>
 
 <script>
-    // ---- State ----
-    let currentVersion = 1;
-    let loveColor = 'black';
-    let liked = false;
-    let isVerified = false;
-    let currentLang = 'id';
-    let currentBg = 'transparent';
-    let currentCropRatio = '1:1';
+// ============================================================
+// DATA KOMENTAR (6 komentar) - semua field kosong
+// ============================================================
+const defaultComments = [
+    { id:0, username:'', time:'', text:'', reply:'', likes:'' },
+    { id:1, username:'', time:'', text:'', reply:'', likes:'' },
+    { id:2, username:'', time:'', text:'', reply:'', likes:'' },
+    { id:3, username:'', time:'', text:'', reply:'', likes:'' },
+    { id:4, username:'', time:'', text:'', reply:'', likes:'' },
+    { id:5, username:'', time:'', text:'', reply:'', likes:'' }
+];
 
-    const usernameInput   = document.getElementById('username');
-    const locationInput   = document.getElementById('location');
-    const musicInput      = document.getElementById('musicName');
-    const captionInput    = document.getElementById('caption');
-    const likeCountInput  = document.getElementById('likeCount');
-    const likedByInput    = document.getElementById('likedByUser');
-    const timestampInput  = document.getElementById('timestamp');
+// ============================================================
+// STATE
+// ============================================================
+let commentData = JSON.parse(JSON.stringify(defaultComments));
+let isDarkMode = false;
+let currentLang = 'id';
+let profileAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E";
 
-    const usernameText    = document.getElementById('usernameText');
-    const verifBadge      = document.getElementById('verifBadge');
-    const verifStatusDiv  = document.getElementById('verifStatus');
-    const subInfoDisplay  = document.getElementById('subInfoDisplay');
-    const displayLikes    = document.getElementById('displayLikes');
-    const displayCaption  = document.getElementById('displayCaption');
-    const displayTimestamp= document.getElementById('displayTimestamp');
-    const captionWrapper  = document.getElementById('captionWrapper');
-    const captionUsernameSpan = document.getElementById('captionUsername');
-    const likeIcon        = document.getElementById('likeIcon');
-    let likeSvg = likeIcon.querySelector('svg');
+// DOM refs
+const commentList = document.getElementById('commentList');
+const commentFormsContainer = document.getElementById('commentFormsContainer');
+const formAvatarImg = document.getElementById('formAvatarImg');
 
-    const editBgBtn       = document.getElementById('editBgBtn');
-
-    function handleLikeInput(type) {
-        const countVal = likeCountInput.value.trim();
-        const userVal  = likedByInput.value.trim();
-        if (type === 'count' && countVal !== '' && countVal !== '0') {
-            likedByInput.disabled = true;
-            likedByInput.value = '';
-        } else if (type === 'user' && userVal !== '') {
-            likeCountInput.disabled = true;
-            likeCountInput.value = '';
-        }
-        if (type === 'count' && (countVal === '' || countVal === '0')) {
-            likedByInput.disabled = false;
-        }
-        if (type === 'user' && userVal === '') {
-            likeCountInput.disabled = false;
-        }
-        updatePreviewContent();
-    }
-
-    function handleLocMusicInput(type) {
-        const locVal   = locationInput.value.trim();
-        const musicVal = musicInput.value.trim();
-        if (type === 'loc' && locVal !== '') {
-            musicInput.disabled = true;
-        } else if (type === 'music' && musicVal !== '') {
-            locationInput.disabled = true;
-        }
-        if (type === 'loc' && locVal === '') musicInput.disabled = false;
-        if (type === 'music' && musicVal === '') locationInput.disabled = false;
-        updatePreviewContent();
-    }
-
-    function updatePreviewContent() {
-        const uname = usernameInput.value.trim() || 'thekachoo';
-        usernameText.innerText = uname;
-        verifBadge.style.display = isVerified ? 'inline-flex' : 'none';
-
-        const locVal   = locationInput.value.trim();
-        const musicVal = musicInput.value.trim();
-
-        if (currentVersion === 1) {
-            if (locVal) {
-                subInfoDisplay.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${locVal}`;
-                subInfoDisplay.style.display = 'flex';
-            } else if (musicVal) {
-                subInfoDisplay.innerHTML = `<i class="fas fa-music"></i> ${musicVal}`;
-                subInfoDisplay.style.display = 'flex';
-            } else {
-                subInfoDisplay.style.display = 'none';
-            }
-        } else {
-            subInfoDisplay.style.display = 'none';
-        }
-
-        const countVal  = likeCountInput.value.trim();
-        const likedUser = likedByInput.value.trim();
-        const likesSuffix = currentLang === 'id' ? 'suka' : 'likes';
-        const likedByLabel = currentLang === 'id' ? 'Disukai oleh' : 'Liked by';
-        const andOthers    = currentLang === 'id' ? 'dan lainnya' : 'and others';
-
-        if (likedUser) {
-            displayLikes.innerHTML = `${likedByLabel} <strong>${likedUser}</strong> ${andOthers}`;
-        } else {
-            const val = countVal === '' ? '0' : countVal;
-            displayLikes.innerText = `${val} ${likesSuffix}`;
-        }
-
-        if (currentVersion === 1) {
-            captionWrapper.style.display = 'block';
-            const currentCaption = captionInput.value || '';
-            const currentUsername = uname;
-            captionUsernameSpan.innerText = currentUsername + ' ';
-            captionUsernameSpan.style.fontWeight = '700';
-            captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
-            displayCaption.innerText = currentCaption;
-            
-            displayTimestamp.innerText = timestampInput.value.trim() || (currentLang === 'id' ? 'Baru saja' : 'Just now');
-            displayTimestamp.style.display = 'block';
-        } else {
-            captionWrapper.style.display = 'none';
-            displayTimestamp.style.display = 'none';
-        }
-    }
-
-    function applyVersion() {
-        const likeCountDiv = document.querySelector('.like-count');
-        if (currentVersion === 1) {
-            if (likeCountDiv) likeCountDiv.style.display = 'block';
-        } else {
-            if (likeCountDiv) likeCountDiv.style.display = 'none';
-        }
-        updatePreviewContent();
-    }
-
-    function updateLoveColor() {
-        const stroke = loveColor === 'black' ? '#262626' : '#ed4956';
-        const fill   = loveColor === 'black' ? 'none' : '#ed4956';
-        if (!liked) {
-            likeSvg.innerHTML = `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
-        } else {
-            likeSvg.innerHTML = `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#ed4956" stroke="#ed4956" stroke-width="1"/>`;
-        }
-    }
-
-    function updateBackground() {
-        const po = document.getElementById('previewOuter');
-        if (currentBg === 'transparent') po.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
-        else if (currentBg === 'white') po.style.background = 'white';
-        else if (currentBg === 'black') po.style.background = 'black';
-        else po.style.background = currentBg;
-    }
-
-    function showToast(msg) {
-        const t = document.getElementById('toastMsg');
-        t.innerText = msg; t.style.opacity = '1';
-        setTimeout(() => t.style.opacity = '0', 2000);
-    }
-
-    // ---- Events ----
-    document.getElementById('verificationBtn').addEventListener('click', () => {
-        isVerified = !isVerified;
-        verifStatusDiv.style.display = isVerified ? 'block' : 'none';
-        showToast(isVerified ? 'Akun terverifikasi ✓' : 'Verifikasi dihapus');
-        updatePreviewContent();
+// ============================================================
+// BUILD FORMS (6 komentar) - semua input kosong
+// ============================================================
+function buildForms() {
+    commentFormsContainer.innerHTML = '';
+    commentData.forEach((c, idx) => {
+        const div = document.createElement('div');
+        div.className = 'comment-form-item';
+        div.dataset.idx = idx;
+        div.innerHTML = `
+            <div class="form-group">
+                <label>Username ${idx+1}</label>
+                <input type="text" class="f-username" value="" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label>Waktu</label>
+                <input type="text" class="f-time" value="" placeholder="2 mg">
+            </div>
+            <div class="form-group">
+                <label>Komentar</label>
+                <input type="text" class="f-text" value="" placeholder="Teks komentar">
+            </div>
+            <div class="form-group">
+                <label>Balasan</label>
+                <input type="text" class="f-reply" value="" placeholder="5 balasan">
+            </div>
+            <div class="form-group">
+                <label>Jumlah Suka</label>
+                <input type="text" class="f-likes" value="" placeholder="32">
+            </div>
+        `;
+        commentFormsContainer.appendChild(div);
     });
+}
 
-    document.getElementById('version1Btn').addEventListener('click', () => {
-        currentVersion = 1;
-        document.getElementById('version1Btn').classList.add('active');
-        document.getElementById('version2Btn').classList.remove('active');
-        applyVersion();
-    });
-    document.getElementById('version2Btn').addEventListener('click', () => {
-        currentVersion = 2;
-        document.getElementById('version2Btn').classList.add('active');
-        document.getElementById('version1Btn').classList.remove('active');
-        applyVersion();
-    });
-
-    likeIcon.addEventListener('click', () => {
-        let num = parseInt((likeCountInput.value || '0').replace(/[^0-9]/g, '')) || 0;
-        if (!liked) { num++; liked = true; likeSvg.innerHTML = '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#ed4956" stroke="#ed4956" stroke-width="1"/>'; }
-        else { num = Math.max(0, num - 1); liked = false; updateLoveColor(); }
-        likeCountInput.value = num.toLocaleString();
-        updatePreviewContent();
-    });
-
-    document.getElementById('loveBlack').addEventListener('click', () => { loveColor = 'black'; document.getElementById('loveBlack').classList.add('active'); document.getElementById('loveRed').classList.remove('active'); updateLoveColor(); });
-    document.getElementById('loveRed').addEventListener('click', () => { loveColor = 'red'; document.getElementById('loveRed').classList.add('active'); document.getElementById('loveBlack').classList.remove('active'); updateLoveColor(); });
-
-    document.querySelectorAll('.bg-option-btn').forEach(btn => btn.addEventListener('click', () => {
-        document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active'); currentBg = btn.getAttribute('data-bg'); updateBackground();
-    }));
-    document.getElementById('customColorPicker').addEventListener('input', (e) => {
-        document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
-        currentBg = e.target.value; updateBackground();
-    });
-
-    document.querySelectorAll('#ratioOptionsPre .ratio-btn').forEach(btn => btn.addEventListener('click', () => {
-        document.querySelectorAll('#ratioOptionsPre .ratio-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active'); currentCropRatio = btn.getAttribute('data-ratio');
-    }));
-
-    usernameInput.addEventListener('input', updatePreviewContent);
-    captionInput.addEventListener('input', updatePreviewContent);
-    timestampInput.addEventListener('input', updatePreviewContent);
-
-    // Language
-    const translations = {
-        id: { labelAvatar:"Foto Profil", uploadAvatarLabel:"Upload foto profil", labelUsername:"Username", labelLocMusic:"Lokasi / Musik", labelMedia:"Upload Foto", uploadMediaLabel:"Klik untuk pilih file", labelCaption:"Caption", labelLikes:"Jumlah Like", labelLikedBy:"Disukai oleh (username)", labelTimestamp:"Waktu posting", likesSuffix:"suka", defaultTimestamp:"Baru saja", labelLoveColor:"Warna Hati", loveSelectText:"Pilih:", labelBgPreview:"Background Preview", bgTransparent:"Transparan", bgWhite:"Putih", bgBlack:"Hitam" },
-        en: { labelAvatar:"Profile Photo", uploadAvatarLabel:"Upload profile photo", labelUsername:"Username", labelLocMusic:"Location / Music", labelMedia:"Upload Photo", uploadMediaLabel:"Click to select file", labelCaption:"Caption", labelLikes:"Number of Likes", labelLikedBy:"Liked by (username)", labelTimestamp:"Post time", likesSuffix:"likes", defaultTimestamp:"Just now", labelLoveColor:"Heart Color", loveSelectText:"Choose:", labelBgPreview:"Background Preview", bgTransparent:"Transparent", bgWhite:"White", bgBlack:"Black" }
-    };
-    function updateLanguage() {
-        const t = translations[currentLang];
-        document.getElementById('labelAvatar').innerText = t.labelAvatar;
-        document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel;
-        document.getElementById('labelUsername').innerText = t.labelUsername;
-        document.getElementById('labelLocMusic').innerText = t.labelLocMusic;
-        document.getElementById('labelMedia').innerText = t.labelMedia;
-        document.getElementById('uploadMediaLabel').innerText = t.uploadMediaLabel;
-        document.getElementById('labelCaption').innerText = t.labelCaption;
-        document.getElementById('labelLikes').innerText = t.labelLikes;
-        document.getElementById('labelLikedBy').innerText = t.labelLikedBy;
-        document.getElementById('labelTimestamp').innerText = t.labelTimestamp;
-        document.getElementById('labelLoveColor').innerText = t.labelLoveColor;
-        document.getElementById('loveSelectText').innerText = t.loveSelectText;
-        document.getElementById('labelBgPreview').innerText = t.labelBgPreview;
-        document.getElementById('bgTransparent').innerText = t.bgTransparent;
-        document.getElementById('bgWhite').innerText = t.bgWhite;
-        document.getElementById('bgBlack').innerText = t.bgBlack;
-        timestampInput.placeholder = t.defaultTimestamp;
-        locationInput.placeholder = currentLang === 'id' ? 'Jakarta Selatan, Indonesia' : 'South Jakarta, Indonesia';
-        musicInput.placeholder = currentLang === 'id' ? 'Judul lagu — Artis' : 'Song title — Artist';
-        updatePreviewContent();
+// ============================================================
+// RENDER PREVIEW
+// ============================================================
+function getReplyText(reply, lang) {
+    if (!reply || reply.trim() === '') return '';
+    if (lang === 'id') return reply;
+    // English: ubah "5 balasan" -> "5 replies", "Lihat 2 balasan lainnya" -> "See 2 other replies"
+    if (reply.includes('balasan')) {
+        if (reply.includes('Lihat')) {
+            const num = reply.match(/\d+/);
+            return num ? `See ${num[0]} other replies` : 'See replies';
+        }
+        const num = reply.match(/\d+/);
+        return num ? `${num[0]} replies` : 'replies';
     }
-    document.getElementById('btnIndonesia').addEventListener('click', () => { currentLang = 'id'; document.getElementById('btnIndonesia').classList.add('active'); document.getElementById('btnInggris').classList.remove('active'); updateLanguage(); });
-    document.getElementById('btnInggris').addEventListener('click', () => { currentLang = 'en'; document.getElementById('btnInggris').classList.add('active'); document.getElementById('btnIndonesia').classList.remove('active'); updateLanguage(); });
+    return reply;
+}
 
-    // Crop
-    let profileCropper, postCropper;
-    function showProfileCrop(file) { const modal = document.getElementById('profileCropModal'); document.getElementById('profileCropImage').src = URL.createObjectURL(file); modal.style.display = 'flex'; setTimeout(() => { if(profileCropper) profileCropper.destroy(); profileCropper = new Cropper(document.getElementById('profileCropImage'), { aspectRatio:1, viewMode:1, autoCropArea:1 }); }, 100); }
-    function showPostCrop(file) { const modal = document.getElementById('postCropModal'); document.getElementById('postCropImage').src = URL.createObjectURL(file); modal.style.display = 'flex'; setTimeout(() => { if(postCropper) postCropper.destroy(); postCropper = new Cropper(document.getElementById('postCropImage'), { aspectRatio: currentCropRatio==='1:1'?1:4/5, viewMode:1, autoCropArea:1 }); }, 100); }
-    document.getElementById('cancelProfileCrop').addEventListener('click', () => { document.getElementById('profileCropModal').style.display='none'; if(profileCropper){profileCropper.destroy();profileCropper=null;} });
-    document.getElementById('saveProfileCrop').addEventListener('click', () => { if(profileCropper){ profileCropper.getCroppedCanvas({width:300,height:300}).toBlob(blob => { document.getElementById('avatarImg').src = URL.createObjectURL(blob); document.getElementById('profileCropModal').style.display='none'; profileCropper.destroy(); profileCropper=null; },'image/png'); } });
-    document.getElementById('cancelPostCrop').addEventListener('click', () => { document.getElementById('postCropModal').style.display='none'; if(postCropper){postCropper.destroy();postCropper=null;} });
-    document.getElementById('savePostCrop').addEventListener('click', () => { if(postCropper){ const w=1080, h=currentCropRatio==='4:5'?1350:1080; postCropper.getCroppedCanvas({width:w,height:h}).toBlob(blob => { const img=document.createElement('img'); img.src=URL.createObjectURL(blob); img.style.width='100%'; const mc=document.getElementById('mediaContainer'); mc.innerHTML=''; mc.appendChild(img); document.getElementById('postCropModal').style.display='none'; postCropper.destroy(); postCropper=null; },'image/png'); } });
-    document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload').click());
-    document.getElementById('avatarUpload').addEventListener('change', e => { if(e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); });
-    document.getElementById('uploadMediaLabel').addEventListener('click', () => document.getElementById('mediaUpload').click());
-    document.getElementById('mediaUpload').addEventListener('change', e => { if(e.target.files[0]?.type.startsWith('image/')) showPostCrop(e.target.files[0]); });
+function renderComments() {
+    commentList.innerHTML = '';
+    const lang = currentLang;
+    commentData.forEach((c, idx) => {
+        // Skip jika username dan text kosong
+        if ((!c.username || c.username.trim() === '') && (!c.text || c.text.trim() === '')) return;
 
-    // Download
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-        html2canvas(document.getElementById('previewOuter'), { scale:3, backgroundColor:null, useCORS:true })
-            .then(canvas => { 
-                const a=document.createElement('a'); 
-                a.download=`instapost_${Date.now()}.png`; 
-                a.href=canvas.toDataURL('image/png'); 
-                a.click(); 
-                showToast('Gambar berhasil diunduh!');
-                // Tampilkan tombol Edit Background setelah download
-                editBgBtn.classList.add('visible');
-            })
-            .catch(() => showToast('Gagal mengunduh'));
+        const item = document.createElement('div');
+        item.className = 'comment-item';
+        const avatarSrc = (idx === 0 && profileAvatarSrc) ? profileAvatarSrc : 
+            `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23${['0095f6','e4405f','1da1f2','ff7b00','7b2fbe','2ecc71'][idx%6]}'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3E${(c.username && c.username.length > 0) ? c.username.charAt(0).toUpperCase() : '?'}%3C/text%3E%3C/svg%3E`;
+        
+        const displayName = c.username || 'User';
+        const displayTime = c.time || '';
+        const displayText = c.text || '';
+        const displayReply = (c.reply && c.reply.trim() !== '') ? getReplyText(c.reply, lang) : '';
+        const displayLikes = c.likes || '0';
+
+        item.innerHTML = `
+            <div class="comment-avatar">
+                <img src="${avatarSrc}" alt="avatar" onerror="this.style.display='none'">
+            </div>
+            <div class="comment-body">
+                <div class="comment-header">
+                    <span class="comment-username">${displayName}</span>
+                    ${displayTime ? `<span class="comment-time">${displayTime}</span>` : ''}
+                </div>
+                <div class="comment-text">${displayText}</div>
+                <div class="comment-actions">
+                    ${displayReply ? `<span class="reply-divider">————</span><span class="reply-count">${displayReply}</span>` : ''}
+                </div>
+            </div>
+            <div class="comment-love">
+                <img src="${isDarkMode ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png'}" alt="love" class="love-icon" onclick="toggleLike(${idx})">
+                <span class="love-count" id="loveCount_${idx}">${displayLikes}</span>
+            </div>
+        `;
+        commentList.appendChild(item);
     });
+}
 
-    // Mobile menu
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu    = document.getElementById('mobileMenu');
-    const mobileOverlay = document.getElementById('mobileMenuOverlay');
-    mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('active'); mobileOverlay.classList.toggle('active'); document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : ''; });
-    mobileOverlay.addEventListener('click', () => { mobileMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; });
+// ============================================================
+// TOGGLE LIKE (per komentar)
+// ============================================================
+function toggleLike(idx) {
+    const c = commentData[idx];
+    const current = parseInt(c.likes) || 0;
+    c.likes = (current + 1).toString();
+    // update form
+    const forms = document.querySelectorAll('.comment-form-item');
+    if (forms[idx]) {
+        const inp = forms[idx].querySelector('.f-likes');
+        if (inp) inp.value = c.likes;
+    }
+    renderComments();
+    if (isDarkMode) applyDarkMode();
+}
 
-    // Desktop nav dropdown
-    const trigger  = document.getElementById('desktopNavTrigger');
-    const dropdown = document.getElementById('desktopNavDropdown');
-    trigger.addEventListener('click', e => { e.stopPropagation(); dropdown.classList.toggle('active'); });
-    document.addEventListener('click', e => { if(!trigger.contains(e.target)&&!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
+// ============================================================
+// READ FORMS -> UPDATE DATA
+// ============================================================
+function updateDataFromForms() {
+    const forms = document.querySelectorAll('.comment-form-item');
+    forms.forEach((div, idx) => {
+        if (idx < commentData.length) {
+            const uname = div.querySelector('.f-username')?.value || '';
+            const time = div.querySelector('.f-time')?.value || '';
+            const text = div.querySelector('.f-text')?.value || '';
+            const reply = div.querySelector('.f-reply')?.value || '';
+            const likes = div.querySelector('.f-likes')?.value || '';
+            commentData[idx] = { ...commentData[idx], username: uname, time, text, reply, likes };
+        }
+    });
+    renderComments();
+    if (isDarkMode) applyDarkMode();
+}
 
-    // Init
-    updateLanguage(); updateLoveColor(); updateBackground(); applyVersion();
+// ============================================================
+// DARK / LIGHT MODE
+// ============================================================
+function applyDarkMode() {
+    const card = document.getElementById('commentCard');
+    const isDark = isDarkMode;
+    if (isDark) {
+        card.style.background = '#1e1e1e';
+        card.style.color = '#f5f5f5';
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider')
+            .forEach(el => el.style.color = '#f5f5f5');
+        document.querySelectorAll('.comment-item').forEach(el => el.style.borderBottomColor = '#333');
+        document.querySelectorAll('.comment-form-area, .comment-footer-actions').forEach(el => el.style.borderTopColor = '#333');
+        document.querySelector('.comment-form-area input').style.background = '#333';
+        document.querySelector('.comment-form-area input').style.color = '#f5f5f5';
+        // Footer icons
+        const gallery = document.getElementById('galleryIcon');
+        const gif = document.getElementById('gifIcon');
+        if (gallery) gallery.src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri2.png';
+        if (gif) gif.src = 'https://thekachoo.github.io/CHODATE/INSTA/gif2.png';
+        // love icons in comments
+        document.querySelectorAll('.love-icon').forEach(el => {
+            el.src = 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png';
+        });
+    } else {
+        card.style.background = 'white';
+        card.style.color = '';
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider')
+            .forEach(el => el.style.color = '');
+        document.querySelectorAll('.comment-item').forEach(el => el.style.borderBottomColor = '');
+        document.querySelectorAll('.comment-form-area, .comment-footer-actions').forEach(el => el.style.borderTopColor = '');
+        document.querySelector('.comment-form-area input').style.background = 'white';
+        document.querySelector('.comment-form-area input').style.color = '';
+        const gallery = document.getElementById('galleryIcon');
+        const gif = document.getElementById('gifIcon');
+        if (gallery) gallery.src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri1.png';
+        if (gif) gif.src = 'https://thekachoo.github.io/CHODATE/INSTA/gif1.png';
+        document.querySelectorAll('.love-icon').forEach(el => {
+            el.src = 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png';
+        });
+    }
+}
+
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+document.getElementById('themeToggleBtn').addEventListener('click', function() {
+    isDarkMode = !isDarkMode;
+    const icon = document.getElementById('themeIcon');
+    if (isDarkMode) {
+        icon.className = 'fas fa-sun';
+        this.classList.add('sun-mode');
+    } else {
+        icon.className = 'fas fa-moon';
+        this.classList.remove('sun-mode');
+    }
+    applyDarkMode();
+});
+
+// ============================================================
+// LANG TOGGLE (semua bahasa)
+// ============================================================
+document.getElementById('toggleLangBtn').addEventListener('click', function() {
+    currentLang = (currentLang === 'id') ? 'en' : 'id';
+    this.classList.toggle('active');
+    const t = currentLang === 'id' ? 'Bahasa diubah ke Indonesia' : 'Language changed to English';
+    showToast(t);
+    // Update ALL texts
+    document.getElementById('labelAvatar').textContent = currentLang === 'id' ? 'Foto Profil' : 'Profile Photo';
+    document.getElementById('pageTitle').textContent = currentLang === 'id' ? 'Komentar' : 'Comments';
+    document.getElementById('footerDesc').textContent = currentLang === 'id' 
+        ? 'CHODATE adalah fitur yang dikembangkan oleh Kachoo untuk pembaruan konten media sosial, ditujukan untuk keperluan roleplay.'
+        : 'CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.';
+    document.getElementById('footerExplore').textContent = currentLang === 'id' ? 'Jelajahi' : 'Explore';
+    document.getElementById('footerMore').textContent = currentLang === 'id' ? 'Lainnya' : 'More';
+    document.getElementById('footerMeet').textContent = currentLang === 'id' ? 'Temui Kami' : 'Meet Us';
+    document.getElementById('footerCopyright').textContent = currentLang === 'id' 
+        ? '© 2026 CHODATE oleh The Kachoo. Semua hak dilindungi.'
+        : '© 2026 CHODATE by The Kachoo. All rights reserved.';
+    document.getElementById('updateCommentBtn').textContent = currentLang === 'id' ? 'Perbarui Komentar' : 'Update Comments';
+    document.querySelector('.comment-form-area input').placeholder = currentLang === 'id' 
+        ? 'Tambahkan komentar untuk pe...' 
+        : 'Add a comment for pe...';
+    // Update form labels
+    document.querySelectorAll('.comment-form-item').forEach((div, idx) => {
+        const labels = div.querySelectorAll('label');
+        if (labels.length >= 5) {
+            labels[0].textContent = currentLang === 'id' ? `Username ${idx+1}` : `Username ${idx+1}`;
+            labels[1].textContent = currentLang === 'id' ? 'Waktu' : 'Time';
+            labels[2].textContent = currentLang === 'id' ? 'Komentar' : 'Comment';
+            labels[3].textContent = currentLang === 'id' ? 'Balasan' : 'Replies';
+            labels[4].textContent = currentLang === 'id' ? 'Jumlah Suka' : 'Likes';
+        }
+    });
+    // re-render untuk update reply text
+    renderComments();
+    if (isDarkMode) applyDarkMode();
+});
+
+// ============================================================
+// AVATAR UPLOAD
+// ============================================================
+document.getElementById('uploadAvatarLabel').addEventListener('click', () => {
+    document.getElementById('avatarUpload').click();
+});
+document.getElementById('avatarUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            profileAvatarSrc = ev.target.result;
+            // Update avatar di komentar pertama
+            const allAvatars = document.querySelectorAll('.comment-avatar img');
+            if (allAvatars.length > 0) allAvatars[0].src = profileAvatarSrc;
+            formAvatarImg.src = profileAvatarSrc;
+            renderComments();
+            if (isDarkMode) applyDarkMode();
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// ============================================================
+// UPDATE BUTTON
+// ============================================================
+document.getElementById('updateCommentBtn').addEventListener('click', updateDataFromForms);
+
+// ============================================================
+// DOWNLOAD (dummy)
+// ============================================================
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    showToast(currentLang === 'id' ? 'Fitur download sedang dalam pengembangan' : 'Download feature under development');
+});
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+    const t = document.getElementById('toastMsg');
+    t.innerText = msg;
+    t.style.opacity = '1';
+    setTimeout(() => t.style.opacity = '0', 2000);
+}
+
+// ============================================================
+// MOBILE MENU
+// ============================================================
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileOverlay = document.getElementById('mobileMenuOverlay');
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+});
+mobileOverlay.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// ============================================================
+// DESKTOP NAV DROPDOWN
+// ============================================================
+const trigger = document.getElementById('desktopNavTrigger');
+const dropdown = document.getElementById('desktopNavDropdown');
+trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+});
+document.addEventListener('click', e => {
+    if (!trigger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
+});
+
+// ============================================================
+// INIT
+// ============================================================
+buildForms();
+renderComments();
+formAvatarImg.src = profileAvatarSrc;
+// Set footer icons default light
+document.getElementById('galleryIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri1.png';
+document.getElementById('gifIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/gif1.png';
 </script>
 </body>
-  </html>
+    </html>
