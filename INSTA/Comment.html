@@ -230,6 +230,45 @@
         }
         .file-input-label:hover { background:#efefef; }
 
+        /* Upload avatar profil utama (untuk kolom input) */
+        .main-avatar-upload {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            background:#f9f9f9;
+            padding:8px 12px;
+            border-radius:14px;
+            border:1px solid #eee;
+            margin-bottom:14px;
+        }
+        .main-avatar-upload .preview-avatar {
+            width:40px;
+            height:40px;
+            border-radius:50%;
+            overflow:hidden;
+            flex-shrink:0;
+            background:#ddd;
+            border:2px solid #ccc;
+        }
+        .main-avatar-upload .preview-avatar img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .main-avatar-upload .main-avatar-btn {
+            font-size:11px;
+            background:#eee;
+            border:1px solid #ddd;
+            border-radius:30px;
+            padding:5px 14px;
+            cursor:pointer;
+            transition:0.2s;
+            color:#333;
+            font-weight:600;
+        }
+        .main-avatar-upload .main-avatar-btn:hover { background:#ddd; }
+        .main-avatar-upload .main-avatar-file-input { display:none; }
+
         .comment-form-item {
             background:#f9f9f9;
             padding:10px 12px;
@@ -384,8 +423,9 @@
         }
         .comment-actions .reply-divider {
             color:#8e8e8e;
-            font-size:14px;
+            font-size:16px;
             font-weight:300;
+            letter-spacing:-1px;
         }
         .comment-actions .reply-count {
             font-size:11px;
@@ -420,11 +460,11 @@
             line-height:1.2;
         }
 
-        /* EMOTICON ROW - jarak dirapetin */
+        /* EMOTICON ROW */
         .emoticon-row {
             display:flex;
             justify-content:center;
-            gap:5px;
+            gap:14px;
             padding:4px 0 2px;
             flex-wrap:wrap;
             border-top:1px solid #efefef;
@@ -436,9 +476,9 @@
             transition:0.15s;
             line-height:1;
         }
-        .emoticon-row span:hover { transform:scale(1.15); }
+        .emoticon-row span:hover { transform:scale(1.2); }
 
-        /* ===== COMMENT FORM AREA - sejajar: avatar + input + icon galeri + icon gif ===== */
+        /* ===== COMMENT FORM AREA ===== */
         .comment-form-area {
             display:flex;
             gap:8px;
@@ -645,6 +685,16 @@
                 </button>
             </div>
 
+            <!-- ===== UPLOAD AVATAR PROFIL UTAMA (untuk kolom input) ===== -->
+            <div class="main-avatar-upload">
+                <div class="preview-avatar" id="mainAvatarPreview">
+                    <img id="mainAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%230095f6'/%3E%3Ctext x='20' y='26' font-size='16' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E" alt="avatar">
+                </div>
+                <span style="font-size:11px;color:#888;font-weight:600;">Avatar Profil</span>
+                <button class="main-avatar-btn" id="mainAvatarBtn">Upload</button>
+                <input type="file" class="main-avatar-file-input" id="mainAvatarInput" accept="image/*">
+            </div>
+
             <div id="commentFormsContainer">
                 <!-- 6 comment forms akan di-inject oleh JS -->
             </div>
@@ -655,7 +705,6 @@
         <!-- PREVIEW -->
         <div class="preview-container">
             <div class="instagram-comment-card" id="commentCard">
-                <!-- ===== PREVIEW TITLE: GARIS DI ATAS, KOMENTAR ===== -->
                 <div class="preview-title-wrapper" id="previewTitleWrapper">
                     <hr class="preview-title-line" id="previewTitleLine">
                     <span class="preview-title-text" id="previewTitleText">Komentar</span>
@@ -665,16 +714,17 @@
 
                 <!-- EMOTICON ROW -->
                 <div class="emoticon-row" id="emoticonRow">
-                    <span>😃</span>
+                    <span>❤️</span>
+                    <span>🙌</span>
+                    <span>🔥</span>
+                    <span>👏</span>
+                    <span>😢</span>
+                    <span>😍</span>
+                    <span>😮</span>
                     <span>😂</span>
-                    <span>😝</span>
-                    <span>😭</span>
-                    <span>🥺</span>
-                    <span>😱</span>
-                    <span>😘</span>
                 </div>
 
-                <!-- COMMENT FORM AREA: avatar + input + icon galeri + icon gif (sejajar) -->
+                <!-- COMMENT FORM AREA: avatar utama + input + icon galeri + icon gif -->
                 <div class="comment-form-area">
                     <div class="comment-avatar" id="formAvatar">
                         <img id="formAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
@@ -764,13 +814,14 @@ let isDarkMode = false;
 let currentLang = 'id';
 let defaultAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3E?%3C/text%3E%3C/svg%3E";
 
+// Avatar utama (untuk kolom input)
+let mainAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E";
+
 // DOM refs
 const commentList = document.getElementById('commentList');
 const commentFormsContainer = document.getElementById('commentFormsContainer');
 const formAvatarImg = document.getElementById('formAvatarImg');
-
-// Warna background avatar random
-const avatarColors = ['#0095f6','#e4405f','#1da1f2','#ff7b00','#7b2fbe','#2ecc71','#f1c40f','#e67e22','#1abc9c','#e74c3c'];
+const mainAvatarImg = document.getElementById('mainAvatarImg');
 
 // ============================================================
 // BUILD FORMS (6 komentar) - dengan upload avatar per komentar
@@ -859,9 +910,7 @@ function renderComments() {
         const item = document.createElement('div');
         item.className = 'comment-item';
         
-        // Avatar per komentar: pake yg diupload atau default
         const avatarSrc = c.avatar || defaultAvatarSrc;
-        
         const displayName = c.username || 'User';
         const displayTime = c.time || '';
         const displayText = c.text || '';
@@ -879,7 +928,7 @@ function renderComments() {
                 </div>
                 <div class="comment-text">${displayText}</div>
                 <div class="comment-actions">
-                    ${displayReply ? `<span class="reply-divider">—</span><span class="reply-count">${displayReply}</span>` : ''}
+                    ${displayReply ? `<span class="reply-divider">———</span><span class="reply-count">${displayReply}</span>` : ''}
                 </div>
             </div>
             <div class="comment-love">
@@ -892,7 +941,7 @@ function renderComments() {
 }
 
 // ============================================================
-// TOGGLE LIKE (per komentar)
+// TOGGLE LIKE
 // ============================================================
 function toggleLike(idx) {
     const c = commentData[idx];
@@ -919,7 +968,6 @@ function updateDataFromForms() {
             const text = div.querySelector('.f-text')?.value || '';
             const reply = div.querySelector('.f-reply')?.value || '';
             const likes = div.querySelector('.f-likes')?.value || '';
-            // avatar udah ke-update via event upload
             commentData[idx] = { ...commentData[idx], username: uname, time, text, reply, likes };
         }
     });
@@ -942,7 +990,6 @@ function applyDarkMode() {
             .forEach(el => el.style.borderColor = '#333');
         document.querySelector('.form-input-wrapper').style.background = '#333';
         document.querySelector('.form-input-wrapper input').style.color = '#f5f5f5';
-        // icons
         const gallery = document.getElementById('galleryIcon');
         const gif = document.getElementById('gifIcon');
         if (gallery) gallery.src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri2.png';
@@ -985,6 +1032,27 @@ document.getElementById('themeToggleBtn').addEventListener('click', function() {
         this.classList.remove('sun-mode');
     }
     applyDarkMode();
+});
+
+// ============================================================
+// UPLOAD AVATAR UTAMA (untuk kolom input)
+// ============================================================
+document.getElementById('mainAvatarBtn').addEventListener('click', () => {
+    document.getElementById('mainAvatarInput').click();
+});
+document.getElementById('mainAvatarInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const dataUrl = ev.target.result;
+            mainAvatarSrc = dataUrl;
+            mainAvatarImg.src = dataUrl;
+            formAvatarImg.src = dataUrl;
+            if (isDarkMode) applyDarkMode();
+        };
+        reader.readAsDataURL(file);
+    }
 });
 
 // ============================================================
@@ -1080,10 +1148,12 @@ document.addEventListener('click', e => {
 // ============================================================
 buildForms();
 renderComments();
-formAvatarImg.src = defaultAvatarSrc;
+// Set main avatar default
+formAvatarImg.src = mainAvatarSrc;
+mainAvatarImg.src = mainAvatarSrc;
 // Set icons default
 document.getElementById('galleryIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri1.png';
 document.getElementById('gifIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/gif1.png';
 </script>
 </body>
-</html>
+            </html>
