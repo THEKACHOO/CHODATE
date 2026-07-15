@@ -269,6 +269,26 @@
         .main-avatar-upload .main-avatar-btn:hover { background:#ddd; }
         .main-avatar-upload .main-avatar-file-input { display:none; }
 
+        /* ===== TOMBOL TAMBAH KOMENTAR ===== */
+        .add-comment-btn {
+            background:#0095f6;
+            color:white;
+            border:none;
+            padding:10px;
+            border-radius:60px;
+            width:100%;
+            font-weight:600;
+            cursor:pointer;
+            font-size:14px;
+            transition:0.2s;
+            margin-bottom:8px;
+        }
+        .add-comment-btn:hover { background:#0077cc; }
+        .add-comment-btn:disabled {
+            background:#ccc;
+            cursor:not-allowed;
+        }
+
         .comment-form-item {
             background:#f9f9f9;
             padding:10px 12px;
@@ -348,6 +368,10 @@
             box-shadow:0 8px 28px rgba(0,0,0,0.13);
             padding:16px 14px 10px;
             font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height:520px;
+            height:auto;
+            display:flex;
+            flex-direction:column;
         }
 
         /* ===== PREVIEW TITLE ===== */
@@ -356,6 +380,7 @@
             margin-bottom:12px;
             padding-bottom:10px;
             border-bottom:1px solid #efefef;
+            flex-shrink:0;
         }
         .preview-title-line {
             border: none;
@@ -368,6 +393,12 @@
             font-weight:700;
             color:#262626;
             letter-spacing:0.5px;
+        }
+
+        /* ===== COMMENT LIST ===== */
+        #commentList {
+            flex:1;
+            min-height:260px;
         }
 
         .comment-item {
@@ -417,21 +448,34 @@
         }
         .comment-actions {
             display:flex;
-            align-items:center;
-            gap:4px;
+            flex-direction:column;
+            align-items:flex-start;
+            gap:0px;
             margin-top:2px;
+        }
+        .comment-actions .reply-label {
+            font-size:11px;
+            font-weight:600;
+            color:#262626;
         }
         .comment-actions .reply-divider {
             color:#8e8e8e;
             font-size:16px;
-            font-weight:300;
-            letter-spacing:-1px;
+            font-weight:100;
+            letter-spacing:0px;
+            font-family: 'Arial', sans-serif;
+            line-height:1;
         }
         .comment-actions .reply-count {
             font-size:11px;
             font-weight:600;
             color:#262626;
             cursor:default;
+        }
+        .comment-actions .reply-row {
+            display:flex;
+            align-items:center;
+            gap:4px;
         }
 
         .comment-love {
@@ -443,6 +487,8 @@
             margin-left:auto;
             padding-left:8px;
             justify-content:center;
+            padding-top:0px;
+            align-self:center;
         }
         .comment-love img {
             width:18px;
@@ -469,6 +515,7 @@
             flex-wrap:wrap;
             border-top:1px solid #efefef;
             margin-top:2px;
+            flex-shrink:0;
         }
         .emoticon-row span {
             font-size:20px;
@@ -486,6 +533,7 @@
             padding-top:5px;
             border-top:1px solid #efefef;
             margin-top:1px;
+            flex-shrink:0;
         }
         .comment-form-area .comment-avatar {
             width:28px;
@@ -685,7 +733,7 @@
                 </button>
             </div>
 
-            <!-- ===== UPLOAD AVATAR PROFIL UTAMA (untuk kolom input) ===== -->
+            <!-- ===== UPLOAD AVATAR PROFIL UTAMA ===== -->
             <div class="main-avatar-upload">
                 <div class="preview-avatar" id="mainAvatarPreview">
                     <img id="mainAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%230095f6'/%3E%3Ctext x='20' y='26' font-size='16' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E" alt="avatar">
@@ -694,6 +742,9 @@
                 <button class="main-avatar-btn" id="mainAvatarBtn">Upload</button>
                 <input type="file" class="main-avatar-file-input" id="mainAvatarInput" accept="image/*">
             </div>
+
+            <!-- ===== TOMBOL TAMBAH KOMENTAR ===== -->
+            <button class="add-comment-btn" id="addCommentBtn">Tambah Komentar</button>
 
             <div id="commentFormsContainer">
                 <!-- 6 comment forms akan di-inject oleh JS -->
@@ -724,7 +775,7 @@
                     <span>😂</span>
                 </div>
 
-                <!-- COMMENT FORM AREA: avatar utama + input + icon galeri + icon gif -->
+                <!-- COMMENT FORM AREA -->
                 <div class="comment-form-area">
                     <div class="comment-avatar" id="formAvatar">
                         <img id="formAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
@@ -795,7 +846,7 @@
 
 <script>
 // ============================================================
-// DATA KOMENTAR (6 komentar) - avatar per komentar beda
+// DATA KOMENTAR (6 komentar)
 // ============================================================
 const defaultComments = [
     { id:0, username:'', time:'', text:'', reply:'', likes:'', avatar:'' },
@@ -813,18 +864,20 @@ let commentData = JSON.parse(JSON.stringify(defaultComments));
 let isDarkMode = false;
 let currentLang = 'id';
 let defaultAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3E?%3C/text%3E%3C/svg%3E";
-
-// Avatar utama (untuk kolom input)
 let mainAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E";
+
+// Berapa komentar yang tampil di preview (default cuma 1)
+let visibleCommentCount = 1;
 
 // DOM refs
 const commentList = document.getElementById('commentList');
 const commentFormsContainer = document.getElementById('commentFormsContainer');
 const formAvatarImg = document.getElementById('formAvatarImg');
 const mainAvatarImg = document.getElementById('mainAvatarImg');
+const addBtn = document.getElementById('addCommentBtn');
 
 // ============================================================
-// BUILD FORMS (6 komentar) - dengan upload avatar per komentar
+// BUILD FORMS (6 komentar)
 // ============================================================
 function buildForms() {
     commentFormsContainer.innerHTML = '';
@@ -832,6 +885,10 @@ function buildForms() {
         const div = document.createElement('div');
         div.className = 'comment-form-item';
         div.dataset.idx = idx;
+        // Sembunyikan form komentar 2-6 (indeks 1-5)
+        if (idx >= 1) {
+            div.style.display = 'none';
+        }
         div.innerHTML = `
             <div class="avatar-upload-row">
                 <div class="mini-avatar" id="miniAvatar_${idx}">
@@ -885,38 +942,97 @@ function buildForms() {
             }
         });
     });
+
+    updateAddButtonState();
 }
+
+// ============================================================
+// UPDATE TOMBOL TAMBAH KOMENTAR
+// ============================================================
+function updateAddButtonState() {
+    const lang = currentLang;
+    if (visibleCommentCount >= 6) {
+        addBtn.disabled = true;
+        addBtn.textContent = lang === 'id' ? 'Maksimal 6 Komentar' : 'Max 6 Comments';
+    } else {
+        addBtn.disabled = false;
+        addBtn.textContent = lang === 'id' ? 'Tambah Komentar' : 'Add Comment';
+    }
+}
+
+// ============================================================
+// TAMBAH KOMENTAR (munculin satu per satu)
+// ============================================================
+addBtn.addEventListener('click', function() {
+    if (visibleCommentCount < 6) {
+        // Tampilkan form komentar berikutnya
+        const formItems = document.querySelectorAll('.comment-form-item');
+        if (formItems[visibleCommentCount]) {
+            formItems[visibleCommentCount].style.display = 'block';
+        }
+        visibleCommentCount++;
+        renderComments();
+        if (isDarkMode) applyDarkMode();
+        updateAddButtonState();
+    }
+});
 
 // ============================================================
 // RENDER PREVIEW
 // ============================================================
 function getReplyText(reply, lang) {
-    if (!reply || reply.trim() ───── '') return '';
+    if (!reply || reply.trim() === '') return '';
     const num = reply.match(/\d+/);
     if (num) {
-        if (lang ───── 'id') return `Lihat ${num[0]} balasan lainnya`;
+        if (lang === 'id') return `Lihat ${num[0]} balasan lainnya`;
         return `See ${num[0]} other replies`;
     }
-    if (lang ───── 'id') return 'Lihat balasan lainnya';
+    if (lang === 'id') return 'Lihat balasan lainnya';
     return 'See other replies';
 }
 
 function renderComments() {
     commentList.innerHTML = '';
     const lang = currentLang;
+    let rendered = 0;
     commentData.forEach((c, idx) => {
-        if ((!c.username || c.username.trim() ───── '') && (!c.text || c.text.trim() ───── '')) return;
+        // Hanya tampilkan sebanyak visibleCommentCount
+        if (idx >= visibleCommentCount) return;
+        if ((!c.username || c.username.trim() === '') && (!c.text || c.text.trim() === '')) {
+            // Tetap tampilkan placeholder kosong biar ukuran card tetap
+            const item = document.createElement('div');
+            item.className = 'comment-item';
+            item.style.opacity = '0.3';
+            item.innerHTML = `
+                <div class="comment-avatar">
+                    <img src="${defaultAvatarSrc}" alt="avatar">
+                </div>
+                <div class="comment-body">
+                    <div class="comment-header">
+                        <span class="comment-username" style="color:#ccc;">Kosong</span>
+                    </div>
+                    <div class="comment-text" style="color:#ccc;">Belum diisi</div>
+                </div>
+                <div class="comment-love">
+                    <img src="${isDarkMode ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png'}" alt="love" style="width:18px;height:18px;object-fit:contain;display:block;opacity:0.3;">
+                    <span style="font-size:11px;font-weight:600;color:#ccc;">0</span>
+                </div>
+            `;
+            commentList.appendChild(item);
+            rendered++;
+            return;
+        }
 
-        const item = document.createElement('div');
-        item.className = 'comment-item';
-        
         const avatarSrc = c.avatar || defaultAvatarSrc;
         const displayName = c.username || 'User';
         const displayTime = c.time || '';
         const displayText = c.text || '';
         const displayReply = (c.reply && c.reply.trim() !== '') ? getReplyText(c.reply, lang) : '';
         const displayLikes = c.likes || '0';
+        const replyLabel = lang === 'id' ? 'Balas' : 'Reply';
 
+        const item = document.createElement('div');
+        item.className = 'comment-item';
         item.innerHTML = `
             <div class="comment-avatar">
                 <img src="${avatarSrc}" alt="avatar" onerror="this.src='${defaultAvatarSrc}'">
@@ -928,7 +1044,13 @@ function renderComments() {
                 </div>
                 <div class="comment-text">${displayText}</div>
                 <div class="comment-actions">
-                    ${displayReply ? `<span class="reply-divider">———</span><span class="reply-count">${displayReply}</span>` : ''}
+                    ${displayReply ? `
+                        <span class="reply-label">${replyLabel}</span>
+                        <div class="reply-row">
+                            <span class="reply-divider">────</span>
+                            <span class="reply-count">${displayReply}</span>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
             <div class="comment-love">
@@ -937,13 +1059,39 @@ function renderComments() {
             </div>
         `;
         commentList.appendChild(item);
+        rendered++;
     });
+
+    // Isi sisa slot dengan placeholder kosong biar ukuran tetap
+    while (rendered < 6) {
+        const item = document.createElement('div');
+        item.className = 'comment-item';
+        item.style.opacity = '0.15';
+        item.innerHTML = `
+            <div class="comment-avatar">
+                <img src="${defaultAvatarSrc}" alt="avatar">
+            </div>
+            <div class="comment-body">
+                <div class="comment-header">
+                    <span class="comment-username" style="color:#ddd;">Kosong</span>
+                </div>
+                <div class="comment-text" style="color:#ddd;">—</div>
+            </div>
+            <div class="comment-love">
+                <img src="${isDarkMode ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png'}" alt="love" style="width:18px;height:18px;object-fit:contain;display:block;opacity:0.2;">
+                <span style="font-size:11px;font-weight:600;color:#ddd;">0</span>
+            </div>
+        `;
+        commentList.appendChild(item);
+        rendered++;
+    }
 }
 
 // ============================================================
 // TOGGLE LIKE
 // ============================================================
 function toggleLike(idx) {
+    if (idx >= visibleCommentCount) return;
     const c = commentData[idx];
     const current = parseInt(c.likes) || 0;
     c.likes = (current + 1).toString();
@@ -984,7 +1132,7 @@ function applyDarkMode() {
     if (isDark) {
         card.style.background = '#1e1e1e';
         card.style.color = '#f5f5f5';
-        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text')
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label')
             .forEach(el => el.style.color = '#f5f5f5');
         document.querySelectorAll('.comment-item, .preview-title-wrapper, .emoticon-row, .comment-form-area, .form-input-wrapper')
             .forEach(el => el.style.borderColor = '#333');
@@ -1001,7 +1149,7 @@ function applyDarkMode() {
     } else {
         card.style.background = 'white';
         card.style.color = '';
-        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text')
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label')
             .forEach(el => el.style.color = '');
         document.querySelectorAll('.comment-item, .preview-title-wrapper, .emoticon-row, .comment-form-area, .form-input-wrapper')
             .forEach(el => el.style.borderColor = '');
@@ -1035,7 +1183,7 @@ document.getElementById('themeToggleBtn').addEventListener('click', function() {
 });
 
 // ============================================================
-// UPLOAD AVATAR UTAMA (untuk kolom input)
+// UPLOAD AVATAR UTAMA
 // ============================================================
 document.getElementById('mainAvatarBtn').addEventListener('click', () => {
     document.getElementById('mainAvatarInput').click();
@@ -1087,6 +1235,7 @@ document.getElementById('toggleLangBtn').addEventListener('click', function() {
             labels[4].textContent = currentLang === 'id' ? 'Jumlah Suka' : 'Likes';
         }
     });
+    updateAddButtonState();
     renderComments();
     if (isDarkMode) applyDarkMode();
 });
@@ -1097,7 +1246,7 @@ document.getElementById('toggleLangBtn').addEventListener('click', function() {
 document.getElementById('updateCommentBtn').addEventListener('click', updateDataFromForms);
 
 // ============================================================
-// DOWNLOAD (dummy)
+// DOWNLOAD
 // ============================================================
 document.getElementById('downloadBtn').addEventListener('click', function() {
     showToast(currentLang === 'id' ? 'Fitur download sedang dalam pengembangan' : 'Download feature under development');
@@ -1148,12 +1297,10 @@ document.addEventListener('click', e => {
 // ============================================================
 buildForms();
 renderComments();
-// Set main avatar default
 formAvatarImg.src = mainAvatarSrc;
 mainAvatarImg.src = mainAvatarSrc;
-// Set icons default
 document.getElementById('galleryIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri1.png';
 document.getElementById('gifIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/gif1.png';
 </script>
 </body>
-            </html>
+    </html>
