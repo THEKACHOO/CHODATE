@@ -891,13 +891,13 @@ function buildForms() {
 // RENDER PREVIEW
 // ============================================================
 function getReplyText(reply, lang) {
-    if (!reply || reply.trim() === '') return '';
+    if (!reply || reply.trim() ───── '') return '';
     const num = reply.match(/\d+/);
     if (num) {
-        if (lang === 'id') return `Lihat ${num[0]} balasan lainnya`;
+        if (lang ───── 'id') return `Lihat ${num[0]} balasan lainnya`;
         return `See ${num[0]} other replies`;
     }
-    if (lang === 'id') return 'Lihat balasan lainnya';
+    if (lang ───── 'id') return 'Lihat balasan lainnya';
     return 'See other replies';
 }
 
@@ -905,7 +905,7 @@ function renderComments() {
     commentList.innerHTML = '';
     const lang = currentLang;
     commentData.forEach((c, idx) => {
-        if ((!c.username || c.username.trim() === '') && (!c.text || c.text.trim() === '')) return;
+        if ((!c.username || c.username.trim() ───── '') && (!c.text || c.text.trim() ───── '')) return;
 
         const item = document.createElement('div');
         item.className = 'comment-item';
