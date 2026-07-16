@@ -271,7 +271,7 @@
 
         /* ===== TOMBOL TAMBAH KOMENTAR ===== */
         .add-comment-btn {
-            background:#0095f6;
+            background:#222;
             color:white;
             border:none;
             padding:10px;
@@ -283,7 +283,7 @@
             transition:0.2s;
             margin-bottom:8px;
         }
-        .add-comment-btn:hover { background:#0077cc; }
+        .add-comment-btn:hover { background:#444; }
         .add-comment-btn:disabled {
             background:#ccc;
             cursor:not-allowed;
@@ -415,7 +415,7 @@
             border-radius:50%;
             flex-shrink:0;
             overflow:hidden;
-            background:#0095f6;
+            background:#111;
         }
         .comment-avatar img { width:100%; height:100%; object-fit:cover; }
 
@@ -504,6 +504,18 @@
             min-width:12px;
             text-align:center;
             line-height:1.2;
+        }
+
+        /* EMPTY STATE - buat jaga ukuran frame tetap */
+        .empty-comment-placeholder {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100%;
+            min-height:260px;
+            color:#bbb;
+            font-size:13px;
+            font-weight:500;
         }
 
         /* EMOTICON ROW */
@@ -706,6 +718,7 @@
                 <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
                 <a href="Profile.html" class="nav-button">Instacho Profile</a>
                 <a href="Story.html" class="nav-button">Instacho Story</a>
+                <a href="Post.html" class="nav-button">Insta Post</a>
             </div>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -717,6 +730,7 @@
     <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
     <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
     <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
+    <a href="Post.html" class="mobile-menu-link">Insta Post</a>
 </div>
 
 <div class="main-content">
@@ -736,7 +750,7 @@
             <!-- ===== UPLOAD AVATAR PROFIL UTAMA ===== -->
             <div class="main-avatar-upload">
                 <div class="preview-avatar" id="mainAvatarPreview">
-                    <img id="mainAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%230095f6'/%3E%3Ctext x='20' y='26' font-size='16' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E" alt="avatar">
+                    <img id="mainAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23111'/%3E%3Ctext x='20' y='26' font-size='16' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E" alt="avatar">
                 </div>
                 <span style="font-size:11px;color:#888;font-weight:600;">Avatar Profil</span>
                 <button class="main-avatar-btn" id="mainAvatarBtn">Upload</button>
@@ -747,7 +761,7 @@
                 <!-- 6 comment forms akan di-inject oleh JS -->
             </div>
 
-                        <!-- ===== TOMBOL TAMBAH KOMENTAR ===== -->
+            <!-- ===== TOMBOL TAMBAH KOMENTAR ===== -->
             <button class="add-comment-btn" id="addCommentBtn">Tambah Komentar</button>
             <button class="update-btn" id="updateCommentBtn">Perbarui Komentar</button>
         </div>
@@ -760,7 +774,12 @@
                     <span class="preview-title-text" id="previewTitleText">Komentar</span>
                 </div>
 
-                <div id="commentList"></div>
+                <div id="commentList">
+                    <!-- Empty state placeholder -->
+                    <div class="empty-comment-placeholder" id="emptyPlaceholder">
+                        Belum ada komentar
+                    </div>
+                </div>
 
                 <!-- EMOTICON ROW -->
                 <div class="emoticon-row" id="emoticonRow">
@@ -777,7 +796,7 @@
                 <!-- COMMENT FORM AREA -->
                 <div class="comment-form-area">
                     <div class="comment-avatar" id="formAvatar">
-                        <img id="formAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
+                        <img id="formAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%23111'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
                     </div>
                     <div class="form-input-wrapper">
                         <input type="text" placeholder="Tambahkan komentar untuk postingan" id="commentFormInput">
@@ -862,8 +881,8 @@ const defaultComments = [
 let commentData = JSON.parse(JSON.stringify(defaultComments));
 let isDarkMode = false;
 let currentLang = 'id';
-let defaultAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3E?%3C/text%3E%3C/svg%3E";
-let mainAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%230095f6'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E";
+let defaultAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3E?%3C/text%3E%3C/svg%3E";
+let mainAvatarSrc = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' fill='%23111'/%3E%3Ctext x='14' y='19' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E";
 
 // Berapa komentar yang tampil di preview (default cuma 1)
 let visibleCommentCount = 1;
@@ -874,6 +893,14 @@ const commentFormsContainer = document.getElementById('commentFormsContainer');
 const formAvatarImg = document.getElementById('formAvatarImg');
 const mainAvatarImg = document.getElementById('mainAvatarImg');
 const addBtn = document.getElementById('addCommentBtn');
+const emptyPlaceholder = document.getElementById('emptyPlaceholder');
+
+// ============================================================
+// CEK APAKAH KOMENTAR KOSONG
+// ============================================================
+function isCommentEmpty(c) {
+    return (!c.username || c.username.trim() === '') && (!c.text || c.text.trim() === '');
+}
 
 // ============================================================
 // BUILD FORMS (6 komentar)
@@ -991,36 +1018,19 @@ function getReplyText(reply, lang) {
 }
 
 function renderComments() {
+    // Kosongkan dulu
     commentList.innerHTML = '';
     const lang = currentLang;
-    let rendered = 0;
+    let hasAnyComment = false;
+
     commentData.forEach((c, idx) => {
         // Hanya tampilkan sebanyak visibleCommentCount
         if (idx >= visibleCommentCount) return;
-        if ((!c.username || c.username.trim() === '') && (!c.text || c.text.trim() === '')) {
-            // Tetap tampilkan placeholder kosong biar ukuran card tetap
-            const item = document.createElement('div');
-            item.className = 'comment-item';
-            item.style.opacity = '0.3';
-            item.innerHTML = `
-                <div class="comment-avatar">
-                    <img src="${defaultAvatarSrc}" alt="avatar">
-                </div>
-                <div class="comment-body">
-                    <div class="comment-header">
-                        <span class="comment-username" style="color:#ccc;">Kosong</span>
-                    </div>
-                    <div class="comment-text" style="color:#ccc;">Belum diisi</div>
-                </div>
-                <div class="comment-love">
-                    <img src="${isDarkMode ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png'}" alt="love" style="width:18px;height:18px;object-fit:contain;display:block;opacity:0.3;">
-                    <span style="font-size:11px;font-weight:600;color:#ccc;">0</span>
-                </div>
-            `;
-            commentList.appendChild(item);
-            rendered++;
-            return;
-        }
+        
+        // Skip komentar kosong - TIDAK DITAMPILKAN SAMA SEKALI
+        if (isCommentEmpty(c)) return;
+
+        hasAnyComment = true;
 
         const avatarSrc = c.avatar || defaultAvatarSrc;
         const displayName = c.username || 'User';
@@ -1058,31 +1068,15 @@ function renderComments() {
             </div>
         `;
         commentList.appendChild(item);
-        rendered++;
     });
 
-    // Isi sisa slot dengan placeholder kosong biar ukuran tetap
-    while (rendered < 6) {
-        const item = document.createElement('div');
-        item.className = 'comment-item';
-        item.style.opacity = '0.15';
-        item.innerHTML = `
-            <div class="comment-avatar">
-                <img src="${defaultAvatarSrc}" alt="avatar">
-            </div>
-            <div class="comment-body">
-                <div class="comment-header">
-                    <span class="comment-username" style="color:#ddd;">Kosong</span>
-                </div>
-                <div class="comment-text" style="color:#ddd;">—</div>
-            </div>
-            <div class="comment-love">
-                <img src="${isDarkMode ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png'}" alt="love" style="width:18px;height:18px;object-fit:contain;display:block;opacity:0.2;">
-                <span style="font-size:11px;font-weight:600;color:#ddd;">0</span>
-            </div>
-        `;
-        commentList.appendChild(item);
-        rendered++;
+    // Tampilkan placeholder jika tidak ada komentar sama sekali
+    if (!hasAnyComment) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'empty-comment-placeholder';
+        placeholder.id = 'emptyPlaceholder';
+        placeholder.textContent = lang === 'id' ? 'Belum ada komentar' : 'No comments yet';
+        commentList.appendChild(placeholder);
     }
 }
 
@@ -1092,6 +1086,9 @@ function renderComments() {
 function toggleLike(idx) {
     if (idx >= visibleCommentCount) return;
     const c = commentData[idx];
+    // Cek apakah komentar kosong, jika kosong tidak bisa di-like
+    if (isCommentEmpty(c)) return;
+    
     const current = parseInt(c.likes) || 0;
     c.likes = (current + 1).toString();
     const forms = document.querySelectorAll('.comment-form-item');
@@ -1131,7 +1128,7 @@ function applyDarkMode() {
     if (isDark) {
         card.style.background = '#1e1e1e';
         card.style.color = '#f5f5f5';
-        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label')
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label, .empty-comment-placeholder')
             .forEach(el => el.style.color = '#f5f5f5');
         document.querySelectorAll('.comment-item, .preview-title-wrapper, .emoticon-row, .comment-form-area, .form-input-wrapper')
             .forEach(el => el.style.borderColor = '#333');
@@ -1148,7 +1145,7 @@ function applyDarkMode() {
     } else {
         card.style.background = 'white';
         card.style.color = '';
-        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label')
+        document.querySelectorAll('.comment-username, .comment-text, .comment-actions span, .reply-count, .comment-love span, .comment-time, .comment-form-area input, .reply-divider, .preview-title-text, .reply-label, .empty-comment-placeholder')
             .forEach(el => el.style.color = '');
         document.querySelectorAll('.comment-item, .preview-title-wrapper, .emoticon-row, .comment-form-area, .form-input-wrapper')
             .forEach(el => el.style.borderColor = '');
@@ -1240,16 +1237,48 @@ document.getElementById('toggleLangBtn').addEventListener('click', function() {
 });
 
 // ============================================================
-// UPDATE BUTTON
+// UPDATE BUTTON (Perbarui Komentar)
 // ============================================================
-document.getElementById('updateCommentBtn').addEventListener('click', updateDataFromForms);
+document.getElementById('updateCommentBtn').addEventListener('click', function() {
+    updateDataFromForms();
+    showToast(currentLang === 'id' ? 'Komentar diperbarui' : 'Comments updated');
+});
 
 // ============================================================
-// DOWNLOAD
+// DOWNLOAD (Screenshot area preview)
 // ============================================================
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    showToast(currentLang === 'id' ? 'Fitur download sedang dalam pengembangan' : 'Download feature under development');
+    if (typeof html2canvas === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        script.onload = function() {
+            captureAndDownload();
+        };
+        document.head.appendChild(script);
+    } else {
+        captureAndDownload();
+    }
 });
+
+function captureAndDownload() {
+    const card = document.getElementById('commentCard');
+    html2canvas(card, {
+        scale: 1.8,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: isDarkMode ? '#1e1e1e' : '#ffffff',
+        logging: false
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'instacho-comment.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast(currentLang === 'id' ? 'Gambar berhasil diunduh' : 'Image downloaded successfully');
+    }).catch(err => {
+        console.error('Download error:', err);
+        showToast(currentLang === 'id' ? 'Gagal mengunduh gambar' : 'Failed to download image');
+    });
+}
 
 // ============================================================
 // TOAST
@@ -1298,8 +1327,8 @@ buildForms();
 renderComments();
 formAvatarImg.src = mainAvatarSrc;
 mainAvatarImg.src = mainAvatarSrc;
-document.getElementById('galleryIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/galeri1.png';
-document.getElementById('gifIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/gif1.png';
+document.getElementById('galleryIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/Galeri1.png';
+document.getElementById('gifIcon').src = 'https://thekachoo.github.io/CHODATE/INSTA/Gif1.png';
 </script>
 </body>
     </html>
