@@ -628,7 +628,7 @@ let currentSender = 'me';
 let pendingImage = '';
 let wallpaperDataUrl = '';
 
-let contact = { name: '', status: 'online', avatar: '' };
+let contact = { name: 'Kachoo', status: 'online', avatar: '' };
 
 let messages = [
   { id: 1, sender: 'them', text: 'Example 1', time: '09:12', image:'', status:'read' },
@@ -899,15 +899,15 @@ function render(){
 }
 
 function resetAll(){
-  document.getElementById('contactName').value = 'Nadia';
+  document.getElementById('contactName').value = 'Kachoo';
   document.getElementById('contactStatus').value = 'online';
   contact.avatar = '';
   removeWallpaper(true);
   messages = [
-    { id: nextId++, sender: 'them', text: 'Woy udah sampe mana?', time: '09:12', image:'', status:'read' },
-    { id: nextId++, sender: 'me', text: 'Otw, 10 menit lagi nyampe', time: '09:13', image:'', status:'delivered' },
-    { id: nextId++, sender: 'them', text: 'Oke buruan, laper 😩', time: '09:13', image:'', status:'read' },
-    { id: nextId++, sender: 'me', text: 'Iya iya sabar dikit', time: '09:14', image:'', status:'read' },
+    { id: nextId++, sender: 'them', text: 'Example 1', time: '09:12', image:'', status:'read' },
+    { id: nextId++, sender: 'me', text: 'Example 2', time: '09:13', image:'', status:'delivered' },
+    { id: nextId++, sender: 'them', text: 'Example 3', time: '09:13', image:'', status:'read' },
+    { id: nextId++, sender: 'me', text: 'Example 4', time: '09:14', image:'', status:'read' },
   ];
   render();
   showToast(t('toastReset'));
