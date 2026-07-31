@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-<title>ICHO | Chat Mockup Generator</title>
+<title>CHATCHO</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -15,8 +15,8 @@ body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li
 }
 body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 
-/* ===== HEADER (persis Post.html, jangan diubah) ===== */
-header{
+/* === INI NAMANYA HEADER WKWKWKKWKK === */
+    header{
     background: rgba(0,0,0,0.95);
     backdrop-filter: blur(16px);
     position: fixed; top:0; left:0; right:0; z-index:1000;
@@ -205,7 +205,7 @@ input[type=file]{ display:none; }
 .download-btn:hover{ background:#333; }
 .download-btn:disabled{ opacity:.5; cursor:wait; }
 
-/* ===== PHONE MOCKUP (replika, tetap tampil di preview) ===== */
+/* ===== PHONE MOCKUP ===== */
 .phone{
     width:340px; height:700px; background:#000; border-radius:48px; padding:12px;
     box-shadow: 0 30px 80px rgba(0,0,0,.25), 0 0 0 1px #1a1a1a; position:relative;
@@ -215,7 +215,7 @@ input[type=file]{ display:none; }
 .statusbar{ height:44px; flex-shrink:0; display:flex; align-items:flex-end; justify-content:space-between; padding:0 22px 6px; font-size:13px; font-weight:600; color:#000; z-index:10; }
 .statusbar .icons{ display:flex; align-items:center; gap:6px; font-size:13px; }
 
-/* ---- iMessage light ---- */
+/* ---- ICHO light ---- */
 .imessage .statusbar{ background:#f7f7f7; color:#000; }
 .imessage .chat-header{ background:#f7f7f7; display:flex; flex-direction:column; align-items:center; padding:2px 12px 10px; border-bottom:1px solid #e2e2e2; position:relative; }
 .imessage .chat-header .back{ position:absolute; left:12px; top:8px; color:#0a84ff; font-size:19px; }
@@ -239,7 +239,7 @@ input[type=file]{ display:none; }
 .imessage .input-bar .mic{ color:#8e8e93; font-size:15px; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
 .imessage .input-bar .mic img{ width:100%; height:100%; object-fit:contain; }
 
-/* ---- iMessage dark ---- */
+/* ---- ICHO dark ---- */
 #screen.dark.imessage .statusbar{ background:#000; color:#fff; }
 #screen.dark.imessage .chat-header{ background:#000; border-bottom-color:#232323; }
 #screen.dark.imessage .chat-header .cname{ color:#d0d0d0; }
@@ -249,7 +249,7 @@ input[type=file]{ display:none; }
 #screen.dark.imessage .input-bar .field{ background:#1c1c1e; border-color:#333; color:#8a8a8e; }
 #screen.dark.imessage .input-bar .plus{ border-color:#4a4a4a; color:#9a9a9a; }
 
-/* ---- WhatsApp light ---- */
+/* ---- WHATSCHO light ---- */
 .whatsapp .statusbar{ background:#075e54; color:#fff; }
 .whatsapp .chat-header{ background:#075e54; color:#fff; display:flex; align-items:center; gap:10px; padding:8px 10px 10px; }
 .whatsapp .chat-header .back{ font-size:17px; }
@@ -284,7 +284,7 @@ input[type=file]{ display:none; }
 .whatsapp .input-bar .round{ width:38px;height:38px;border-radius:50%; background:#075e54; color:#fff; display:flex;align-items:center;justify-content:center; flex-shrink:0; font-size:15px; }
 .whatsapp .input-bar .round img{ width:18px; height:18px; object-fit:contain; filter:brightness(0) invert(1); }
 
-/* ---- WhatsApp dark ---- */
+/* ---- WHATCHO dark ---- */
 #screen.dark.whatsapp .statusbar{ background:#1f2c34; }
 #screen.dark.whatsapp .chat-header{ background:#1f2c34; }
 #screen.dark.whatsapp .messages:not(.has-custom-wallpaper){ background-color:#0b141a; background-image:none; }
@@ -389,15 +389,13 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
             <button id="lang-en" onclick="setLang('en')">EN</button>
         </div>
     </div>
-    <h1 class="page-title" data-i18n="pageTitle">Bikin Mockup Chat</h1>
-    <p class="page-subtitle" data-i18n="pageSubtitle">Isi profil kontak & bubble chat di panel, langsung tampil di preview gaya iCho (iMessage) atau WhatsApp — bisa diunduh jadi PNG.</p>
-
+    <h1 class="page-title" data-i18n="pageTitle">Create your chat!</h1>
     <div class="chat-wrapper">
         <!-- ===== FORM PANEL ===== -->
         <div class="form-panel">
             <div class="pill-toggles">
                 <button class="pill-btn active" id="btn-imessage" onclick="setPlatform('imessage')">iCho</button>
-                <button class="pill-btn" id="btn-whatsapp" onclick="setPlatform('whatsapp')">WhatsApp</button>
+                <button class="pill-btn" id="btn-whatsapp" onclick="setPlatform('whatsapp')">Whatscho</button>
             </div>
 
             <div class="form-group first">
@@ -419,7 +417,7 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
                     <button id="sender-me" class="active" onclick="setSender('me')" data-i18n="senderMe">Kamu</button>
                     <button id="sender-them" onclick="setSender('them')" data-i18n="senderThem">Lawan Chat</button>
                 </div>
-                <label data-i18n="labelMsgText">Isi Pesan (opsional kalau kirim gambar)</label>
+                <label data-i18n="labelMsgText">Isi Pesan</label>
                 <textarea id="newMsgText" data-i18n-placeholder="placeholderMsgText" placeholder="Tulis pesan di sini..." style="margin-bottom:10px;"></textarea>
 
                 <label data-i18n="labelAttachImage">Lampirkan Gambar (opsional)</label>
@@ -459,14 +457,12 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
             </div>
 
             <div class="form-group" id="wallpaperSection">
-                <h2><i class="fas fa-panorama"></i> <span data-i18n="sectionWallpaper">Wallpaper Chat (khusus WhatsApp)</span></h2>
+                <h2><i class="fas fa-panorama"></i> <span data-i18n="sectionWallpaper">Wallpaper Chat</span></h2>
                 <div class="wallpaper-row">
                     <div class="wallpaper-thumb" id="wallpaperThumb"><i class="fas fa-image"></i></div>
                     <label class="file-input-label" for="wallpaperInput"><i class="fas fa-upload"></i> <span data-i18n="btnUploadWallpaper">Upload Wallpaper</span></label>
                     <input type="file" id="wallpaperInput" accept="image/*" onchange="handleWallpaperUpload(event)">
                     <button type="button" onclick="removeWallpaper()" style="background:none;border:1px solid #e0e0e0;color:#767676;padding:8px 12px;border-radius:100px;font-size:11px;cursor:pointer;" data-i18n="btnRemoveWallpaper">Hapus Wallpaper</button>
-                </div>
-                <p class="hint-text" data-i18n="wallpaperHint">Setelah upload, kamu bisa geser & zoom gambarnya supaya pas di layar sebelum diterapkan.</p>
             </div>
 
             <button class="reset-btn" onclick="resetAll()"><i class="fas fa-rotate-left"></i> <span data-i18n="btnReset">Reset ke contoh awal</span></button>
@@ -560,8 +556,7 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
 <script>
 /* ============ I18N ============ */
 const DICT = {
-  pageTitle:{id:'Bikin Mockup Chat', en:'Create a Chat Mockup'},
-  pageSubtitle:{id:'Isi profil kontak & bubble chat di panel, langsung tampil di preview gaya iCho (iMessage) atau WhatsApp — bisa diunduh jadi PNG.', en:'Fill in the contact profile & chat bubbles in the panel — see it live in iCho (iMessage) or WhatsApp style, and download it as a PNG.'},
+  pageTitle:{id:'Create your chat!', en:'Create your chat!'},
   sectionProfile:{id:'Profil Kontak', en:'Contact Profile'},
   labelUploadPhoto:{id:'Upload Foto', en:'Upload Photo'},
   labelContactName:{id:'Nama Kontak', en:'Contact Name'},
@@ -569,7 +564,7 @@ const DICT = {
   sectionAddMessage:{id:'Tambah Pesan', en:'Add Message'},
   senderMe:{id:'Kamu', en:'You'},
   senderThem:{id:'Lawan Chat', en:'Recipient'},
-  labelMsgText:{id:'Isi Pesan (opsional kalau kirim gambar)', en:'Message Text (optional if sending an image)'},
+  labelMsgText:{id:'Isi Pesan', en:'Message Text'},
   placeholderMsgText:{id:'Tulis pesan di sini...', en:'Type a message here...'},
   labelAttachImage:{id:'Lampirkan Gambar (opsional)', en:'Attach Image (optional)'},
   noImage:{id:'tanpa gambar', en:'no image'},
@@ -587,7 +582,7 @@ const DICT = {
   sectionAppearance:{id:'Tampilan Layar', en:'Screen Appearance'},
   modeLight:{id:'Terang', en:'Light'},
   modeDark:{id:'Gelap', en:'Dark'},
-  sectionWallpaper:{id:'Wallpaper Chat (khusus WhatsApp)', en:'Chat Wallpaper (WhatsApp only)'},
+  sectionWallpaper:{id:'Wallpaper Chat', en:'Chat Wallpaper (WhatsApp only)'},
   btnUploadWallpaper:{id:'Upload Wallpaper', en:'Upload Wallpaper'},
   btnRemoveWallpaper:{id:'Hapus Wallpaper', en:'Remove Wallpaper'},
   wallpaperHint:{id:'Setelah upload, kamu bisa geser & zoom gambarnya supaya pas di layar sebelum diterapkan.', en:'After uploading, you can drag & zoom the image so it fits the screen before applying it.'},
@@ -598,7 +593,7 @@ const DICT = {
   previewLabelPrefix:{id:'Preview —', en:'Preview —'},
   btnDownload:{id:'Unduh PNG', en:'Download PNG'},
   toastReset:{id:'Direset ke contoh awal', en:'Reset to default example'},
-  toastDownloaded:{id:'PNG berhasil diunduh!', en:'PNG downloaded successfully!'},
+  toastDownloaded:{id:'Chat berhasil diunduh!', en:'Chat downloaded successfully!'},
   toastDownloadFail:{id:'Gagal membuat gambar, coba lagi.', en:'Failed to generate the image, try again.'},
   toastWallpaperApplied:{id:'Wallpaper diterapkan', en:'Wallpaper applied'},
   toastWallpaperRemoved:{id:'Wallpaper dihapus', en:'Wallpaper removed'},
@@ -633,13 +628,13 @@ let currentSender = 'me';
 let pendingImage = '';
 let wallpaperDataUrl = '';
 
-let contact = { name: 'Nadia', status: 'online', avatar: '' };
+let contact = { name: '', status: 'online', avatar: '' };
 
 let messages = [
-  { id: 1, sender: 'them', text: 'Woy udah sampe mana?', time: '09:12', image:'', status:'read' },
-  { id: 2, sender: 'me', text: 'Otw, 10 menit lagi nyampe', time: '09:13', image:'', status:'delivered' },
-  { id: 3, sender: 'them', text: 'Oke buruan, laper 😩', time: '09:13', image:'', status:'read' },
-  { id: 4, sender: 'me', text: 'Iya iya sabar dikit', time: '09:14', image:'', status:'read' },
+  { id: 1, sender: 'them', text: 'Example 1', time: '09:12', image:'', status:'read' },
+  { id: 2, sender: 'me', text: 'Example 2', time: '09:13', image:'', status:'delivered' },
+  { id: 3, sender: 'them', text: 'Example 3', time: '09:13', image:'', status:'read' },
+  { id: 4, sender: 'me', text: 'Example 4', time: '09:14', image:'', status:'read' },
 ];
 let nextId = 5;
 
