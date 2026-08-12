@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-<title>CHATCHO</title>
+<title>ICHO | by Kachoo</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body, html { width:100%; overflow-x:hidden; }
-body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label, select {
+body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label {
     font-family: 'Outfit', Arial, sans-serif !important;
 }
 body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 
-/* === INI NAMANYA HEADER WKWKWKKWKK === */
-    header{
+/* ===== HEADER ===== */
+header{
     background: rgba(0,0,0,0.95);
     backdrop-filter: blur(16px);
     position: fixed; top:0; left:0; right:0; z-index:1000;
@@ -24,15 +24,21 @@ body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 }
 .header-content{
     display:flex; justify-content:space-between; align-items:center;
-    padding:14px 24px; max-width:1400px; margin:0 auto; position:relative;
+    padding:12px 24px; max-width:1400px; margin:0 auto; position:relative;
 }
-.logo-container{ display:flex; align-items:center; cursor:pointer; }
-.logo-img{ height:38px; width:auto; }
+.logo-container{
+    display:flex; align-items:center; cursor:pointer;
+}
+.logo-img{
+    height:38px; width:auto;
+}
 .center-title{
-    position:absolute; left:50%; transform:translateX(-50%); text-align:center;
-    display:flex; align-items:center; justify-content:center;
+    position:absolute; left:50%; transform:translateX(-50%);
+    text-align:center; display:flex; align-items:center; justify-content:center;
 }
-.center-logo-img{ height:100px; width:auto; display:block; object-fit:contain; }
+.center-logo-img{
+    height:100px; width:auto; display:block; object-fit:contain;
+}
 @media (max-width:640px){
     .center-logo-img{ height:80px; }
     .logo-img{ height:30px; }
@@ -46,7 +52,7 @@ body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
     cursor:pointer; border:1px solid rgba(255,255,255,0.2);
 }
 .desktop-nav-dropdown{
-    position:absolute; top:calc(100% + 12px); right:0; width:210px;
+    position:absolute; top:calc(100% + 12px); right:0; width:200px;
     background:rgba(10,10,10,0.97); border-radius:18px; padding:8px 0;
     opacity:0; visibility:hidden; transform:translateY(-8px); transition:all .25s;
     border:1px solid rgba(255,255,255,0.12);
@@ -54,7 +60,7 @@ body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 .desktop-nav-dropdown.active{ opacity:1; visibility:visible; transform:translateY(0); }
 .desktop-nav-dropdown .nav-button{
     display:block; width:100%; padding:11px 20px; font-weight:500; font-size:13px;
-    color:rgba(255,255,255,0.85); text-decoration:none; transition:.2s; background:none; border:none; text-align:left; cursor:pointer;
+    color:rgba(255,255,255,0.85); text-decoration:none; transition:.2s;
 }
 .desktop-nav-dropdown .nav-button:hover{ background:rgba(255,255,255,0.1); }
 
@@ -76,22 +82,20 @@ body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 }
 .mobile-menu-overlay.active{ opacity:1; visibility:visible; }
 .mobile-menu-link{
-    display:block; width:100%; padding:13px 18px; background:rgba(255,255,255,0.06);
+    display:block; padding:13px 18px; background:rgba(255,255,255,0.06);
     border-radius:40px; text-decoration:none; color:white; font-weight:500; margin-bottom:10px;
-    text-align:center; font-size:14px; border:none; cursor:pointer;
+    text-align:center; font-size:14px; border:none; cursor:pointer; width:100%;
 }
+.mobile-menu-link:hover{ background:rgba(255,255,255,0.12); }
 
 /* ===== MAIN LAYOUT ===== */
 .main-content{ padding:100px 24px 60px; max-width:1400px; margin:0 auto; }
-@media (max-width:768px){ .main-content{ padding:86px 16px 40px; } }
-.top-bar{ display:flex; justify-content:flex-end; margin-bottom:6px; }
-.lang-toggle{ display:flex; background:#f2f2f2; border:1px solid #ddd; border-radius:100px; overflow:hidden; }
-.lang-toggle button{ padding:7px 16px; background:transparent; border:none; color:#666; font-size:12px; font-weight:700; cursor:pointer; }
-.lang-toggle button.active{ background:#111; color:#fff; }
-
-.page-title{ text-align:center; font-size:36px; font-weight:800; margin-bottom:8px; color:#111; letter-spacing:-0.5px; }
-.page-subtitle{ text-align:center; font-size:14px; color:#767676; margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto; }
-@media (max-width:640px){ .page-title{ font-size:26px; } .page-subtitle{ margin-bottom:20px; } }
+@media (max-width:768px){ .main-content{ padding:82px 16px 40px; } }
+.page-title{
+    text-align:center; font-size:38px; font-weight:800; margin-bottom:36px;
+    color:#111; letter-spacing:-0.5px;
+}
+@media (max-width:640px){ .page-title{ font-size:28px; margin-bottom:22px; } }
 
 .chat-wrapper{ display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-start; gap:36px; }
 @media (max-width:900px){ .chat-wrapper{ flex-wrap:wrap; gap:20px; } }
@@ -115,25 +119,23 @@ body{ background-color:#f5f5f5; line-height:1.6; color:#111; }
 .form-group h2{
     font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#767676;
     font-weight:700; margin:18px 0 10px; padding-top:14px; border-top:1px solid #f0f0f0;
-    display:flex; align-items:center; gap:6px;
 }
 .form-group.first h2{ border-top:none; padding-top:0; margin-top:0; }
 label{
     font-weight:600; font-size:11px; display:block; margin-bottom:5px; color:#666;
     text-transform:uppercase; letter-spacing:.4px;
 }
-input, textarea, select{
+input, textarea{
     width:100%; padding:10px 13px; border:1px solid #e0e0e0; border-radius:12px;
     font-size:13px; outline:none; background:white; transition:border-color .2s;
 }
-input:focus, textarea:focus, select:focus{ border-color:#111; }
+input:focus, textarea:focus{ border-color:#111; }
 textarea{ resize:vertical; min-height:56px; }
 .row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 
 .file-input-label{
     background:#f7f7f7; text-align:center; padding:9px 12px; border-radius:12px; margin-top:5px;
-    cursor:pointer; font-size:12px; border:1px solid #e8e8e8; transition:.2s; display:inline-flex;
-    align-items:center; justify-content:center; gap:6px;
+    cursor:pointer; font-size:12px; border:1px solid #e8e8e8; transition:.2s; display:inline-block;
 }
 .file-input-label:hover{ background:#efefef; }
 input[type=file]{ display:none; }
@@ -148,11 +150,11 @@ input[type=file]{ display:none; }
 .sender-toggle button{ flex:1; padding:9px 0; background:transparent; border:none; color:#666; font-size:12.5px; font-weight:600; cursor:pointer; }
 .sender-toggle button.active{ background:#111; color:#fff; border-radius:100px; }
 
-.img-attach-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.img-attach-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
 .img-thumb{
     width:42px; height:42px; border-radius:10px; background:#f2f2f2 center/cover no-repeat;
     border:1px dashed #ccc; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-    color:#999; font-size:9px; text-align:center; line-height:1.1;
+    color:#999; font-size:9px; text-align:center; line-height:1.1; overflow:hidden;
 }
 
 .add-btn{
@@ -167,28 +169,25 @@ input[type=file]{ display:none; }
 .msg-item .who{ font-size:10px; text-transform:uppercase; letter-spacing:.05em; font-weight:700; color:#999; }
 .msg-item .who.me{ color:#0095f6; }
 .msg-item textarea{ margin-bottom:6px; min-height:38px; font-size:12.5px; }
-.msg-item select{ margin-bottom:6px; padding:8px 10px; font-size:12px; }
 .msg-item .row-actions{ display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
 .msg-item .time-input{ width:auto; flex:1; margin:0; padding:7px 9px; font-size:11.5px; }
-.msg-item .img-line{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.msg-item .img-line{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
 .msg-item .del-btn{ background:none; border:1px solid #f0c4c0; color:#c0392b; padding:6px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; }
 .msg-item .del-img-btn{ background:none; border:1px solid #e0e0e0; color:#767676; padding:6px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; }
 
-.appearance-toggle{ display:flex; background:#f2f2f2; border:1px solid #ddd; border-radius:100px; overflow:hidden; margin-bottom:6px; }
-.appearance-toggle button{ flex:1; padding:9px 0; background:transparent; border:none; color:#666; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; }
-.appearance-toggle button.active{ background:#111; color:#fff; }
-
-.wallpaper-row{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
-.wallpaper-thumb{
-    width:42px; height:42px; border-radius:10px; background:#f2f2f2 center/cover no-repeat;
-    border:1px solid #e0e0e0; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; color:#999;
+.icon-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.icon-row .label-col{ flex:1; }
+.icon-row .label-col .t{ font-size:12px; color:#111; font-weight:600; }
+.icon-row .label-col .s{ font-size:10.5px; color:#999; }
+.icon-thumb{
+    width:32px; height:32px; border-radius:10px; background:#f2f2f2 center/cover no-repeat;
+    border:1px solid #e0e0e0; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; overflow:hidden;
 }
-.hint-text{ font-size:10.5px; color:#999; margin:-4px 0 10px; line-height:1.5; }
+.icon-clear-btn{ background:none; border:1px solid #e0e0e0; color:#767676; width:26px; height:26px; border-radius:50%; cursor:pointer; font-size:11px; }
 
 .reset-btn{
     background:#f2f2f2; border:1px solid #ddd; padding:11px; border-radius:100px; width:100%;
     font-weight:600; font-size:13px; cursor:pointer; transition:.2s; color:#333; margin-top:16px;
-    display:flex; align-items:center; justify-content:center; gap:8px;
 }
 .reset-btn:hover{ background:#e8e8e8; }
 
@@ -200,7 +199,7 @@ input[type=file]{ display:none; }
 
 .download-btn{
     background:#111; color:white; border:none; padding:13px 40px; border-radius:100px;
-    font-weight:600; cursor:pointer; font-size:15px; transition:.2s; display:flex; align-items:center; gap:8px;
+    font-weight:600; cursor:pointer; font-size:15px; transition:.2s;
 }
 .download-btn:hover{ background:#333; }
 .download-btn:disabled{ opacity:.5; cursor:wait; }
@@ -210,18 +209,17 @@ input[type=file]{ display:none; }
     width:340px; height:700px; background:#000; border-radius:48px; padding:12px;
     box-shadow: 0 30px 80px rgba(0,0,0,.25), 0 0 0 1px #1a1a1a; position:relative;
 }
-.screen{ width:100%; height:100%; background:#fff; border-radius:36px; overflow:hidden; display:flex; flex-direction:column; position:relative; transition:background-color .2s; }
+.screen{ width:100%; height:100%; background:#fff; border-radius:36px; overflow:hidden; display:flex; flex-direction:column; position:relative; }
 .notch{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:22px; background:#000; border-radius:0 0 16px 16px; z-index:20; }
-.statusbar{ height:44px; flex-shrink:0; display:flex; align-items:flex-end; justify-content:space-between; padding:0 22px 6px; font-size:13px; font-weight:600; color:#000; z-index:10; }
-.statusbar .icons{ display:flex; align-items:center; gap:6px; font-size:13px; }
+.statusbar{ height:44px; flex-shrink:0; display:flex; align-items:flex-end; justify-content:space-between; padding:0 22px 4px; font-size:14px; font-weight:600; color:#000; z-index:10; }
+.statusbar .icons{ display:flex; align-items:center; gap:4px; }
 
-/* ---- ICHO light ---- */
 .imessage .statusbar{ background:#f7f7f7; color:#000; }
 .imessage .chat-header{ background:#f7f7f7; display:flex; flex-direction:column; align-items:center; padding:2px 12px 10px; border-bottom:1px solid #e2e2e2; position:relative; }
-.imessage .chat-header .back{ position:absolute; left:12px; top:8px; color:#0a84ff; font-size:19px; }
+.imessage .chat-header .back{ position:absolute; left:12px; top:6px; color:#0a84ff; font-size:22px; font-weight:400; }
 .imessage .chat-header .avatar{ width:56px;height:56px;border-radius:50%; background:#b6b6b6 center/cover no-repeat; display:flex;align-items:center;justify-content:center; color:#fff; font-weight:600; font-size:20px; margin-bottom:4px; overflow:hidden; }
-.imessage .chat-header .cname{ font-size:12px; color:#3a3a3a; display:flex; align-items:center; gap:3px; }
-.imessage .chat-header .cname .chev{ font-size:9px; color:#b0b0b0; }
+.imessage .chat-header .cname{ font-size:12px; color:#3a3a3a; display:flex; align-items:center; gap:2px; }
+.imessage .chat-header .cname .chev{ font-size:10px; color:#b0b0b0; }
 .imessage .messages{ flex:1; overflow-y:auto; background:#fff; padding:14px 12px 10px; display:flex; flex-direction:column; gap:3px; }
 .imessage .bubble-row{ display:flex; flex-direction:column; max-width:78%; }
 .imessage .bubble-row.me{ align-self:flex-end; align-items:flex-end; }
@@ -232,70 +230,45 @@ input[type=file]{ display:none; }
 .imessage .bubble.img-only{ background:transparent; padding:0; }
 .imessage .bubble img.msg-img{ max-width:210px; border-radius:16px; display:block; }
 .imessage .bubble .cap{ margin-top:6px; }
-.imessage .status-label{ font-size:10.5px; color:#8e8e93; margin-top:2px; margin-right:2px; }
+.imessage .read-label{ font-size:10.5px; color:#8e8e93; margin-top:2px; margin-right:2px; }
 .imessage .input-bar{ flex-shrink:0; display:flex; align-items:center; gap:8px; padding:8px 10px; border-top:1px solid #e2e2e2; background:#f7f7f7; }
-.imessage .input-bar .plus{ width:28px;height:28px;border-radius:50%;border:1.5px solid #c8c8c8; display:flex;align-items:center;justify-content:center;color:#8e8e93;font-size:14px;flex-shrink:0; }
+.imessage .input-bar .plus{ width:28px;height:28px;border-radius:50%;border:1.5px solid #c8c8c8; display:flex;align-items:center;justify-content:center;color:#8e8e93;font-size:18px;flex-shrink:0; }
 .imessage .input-bar .field{ flex:1; background:#fff; border:1px solid #d6d6d6; border-radius:16px; padding:7px 14px; color:#b3b3b3; font-size:14.5px; }
-.imessage .input-bar .mic{ color:#8e8e93; font-size:15px; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
+.imessage .input-bar .mic{ color:#8e8e93; font-size:18px; width:22px; height:22px; }
 .imessage .input-bar .mic img{ width:100%; height:100%; object-fit:contain; }
 
-/* ---- ICHO dark ---- */
-#screen.dark.imessage .statusbar{ background:#000; color:#fff; }
-#screen.dark.imessage .chat-header{ background:#000; border-bottom-color:#232323; }
-#screen.dark.imessage .chat-header .cname{ color:#d0d0d0; }
-#screen.dark.imessage .messages{ background:#000; }
-#screen.dark.imessage .bubble.them{ background:#26262a; color:#fff; }
-#screen.dark.imessage .input-bar{ background:#000; border-top-color:#232323; }
-#screen.dark.imessage .input-bar .field{ background:#1c1c1e; border-color:#333; color:#8a8a8e; }
-#screen.dark.imessage .input-bar .plus{ border-color:#4a4a4a; color:#9a9a9a; }
-
-/* ---- WHATSCHO light ---- */
 .whatsapp .statusbar{ background:#075e54; color:#fff; }
 .whatsapp .chat-header{ background:#075e54; color:#fff; display:flex; align-items:center; gap:10px; padding:8px 10px 10px; }
-.whatsapp .chat-header .back{ font-size:17px; }
+.whatsapp .chat-header .back{ font-size:20px; }
 .whatsapp .chat-header .avatar{ width:38px;height:38px;border-radius:50%; background:#cfd8dc center/cover no-repeat; display:flex;align-items:center;justify-content:center; color:#075e54; font-weight:700; font-size:15px; overflow:hidden; flex-shrink:0; }
 .whatsapp .chat-header .meta{ flex:1; min-width:0; }
 .whatsapp .chat-header .cname{ font-size:15px; font-weight:600; }
 .whatsapp .chat-header .cstatus{ font-size:11.5px; color:#d8ece9; }
-.whatsapp .chat-header .icons{ display:flex; gap:18px; font-size:15px; align-items:center; }
+.whatsapp .chat-header .icons{ display:flex; gap:16px; font-size:16px; align-items:center; }
+.whatsapp .chat-header .icons .ic{ width:20px; height:20px; display:flex; align-items:center; justify-content:center; }
+.whatsapp .chat-header .icons .ic img{ width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); }
 .whatsapp .messages{
     flex:1; overflow-y:auto; background-color:#e5ddd5;
     background-image: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)), repeating-linear-gradient(45deg, rgba(0,0,0,.015) 0 2px, transparent 2px 40px);
-    background-size:cover; background-position:center;
     padding:12px 10px; display:flex; flex-direction:column; gap:5px;
 }
 .whatsapp .bubble-row{ display:flex; flex-direction:column; max-width:80%; }
 .whatsapp .bubble-row.me{ align-self:flex-end; align-items:flex-end; }
 .whatsapp .bubble-row.them{ align-self:flex-start; align-items:flex-start; }
-.whatsapp .bubble{ padding:6px 9px 5px; border-radius:8px; font-size:14px; line-height:1.3; word-wrap:break-word; white-space:pre-wrap; position:relative; box-shadow:0 1px 1px rgba(0,0,0,.12); overflow:hidden; }
-.whatsapp .bubble::after{ content:""; display:table; clear:both; }
+.whatsapp .bubble{ padding:6px 8px 7px 9px; border-radius:8px; font-size:14.3px; line-height:1.32; word-wrap:break-word; white-space:pre-wrap; position:relative; box-shadow:0 1px 1px rgba(0,0,0,.12); }
 .whatsapp .bubble.me{ background:#dcf8c6; color:#111; border-top-right-radius:0; }
 .whatsapp .bubble.them{ background:#fff; color:#111; border-top-left-radius:0; }
-.whatsapp .bubble p.msgtext{ margin:0; padding:0; }
-.whatsapp .bubble .time-spacer{ display:inline-block; width:50px; height:1px; }
-.whatsapp .bubble .time-float{ float:right; margin-top:-16px; font-size:10.5px; color:rgba(0,0,0,.45); display:inline-flex; align-items:center; gap:3px; white-space:nowrap; }
-.whatsapp .bubble.them .time-float{ color:#8b8b8b; }
+.whatsapp .bubble .txt{ display:block; padding-right:46px; }
 .whatsapp .bubble img.msg-img{ width:100%; max-width:220px; border-radius:6px; display:block; margin-bottom:4px; }
-.whatsapp .bubble .time-onimg{ position:absolute; right:8px; bottom:5px; font-size:10.5px; color:#eee; background:rgba(0,0,0,.35); padding:1px 6px; border-radius:6px; display:flex; align-items:center; gap:3px; }
-.whatsapp .tick-read{ color:#4fc3f7; }
-.whatsapp .tick-grey{ color:rgba(0,0,0,.45); }
+.whatsapp .bubble .time{ position:absolute; right:8px; bottom:5px; font-size:10.5px; color:#8b8b8b; display:flex; align-items:center; gap:3px; }
+.whatsapp .bubble .time.on-img{ position:static; float:right; margin-top:-18px; margin-right:4px; background:rgba(0,0,0,.35); color:#eee; padding:1px 5px; border-radius:6px; }
+.whatsapp .bubble .time .tick{ color:#4fc3f7; font-size:12px; }
 .whatsapp .input-bar{ flex-shrink:0; display:flex; align-items:center; gap:8px; padding:8px 8px; background:#ececec; }
-.whatsapp .input-bar .field{ flex:1; background:#fff; border-radius:22px; padding:9px 14px; color:#8b8b8b; font-size:14px; display:flex; align-items:center; gap:10px; }
-.whatsapp .input-bar .round{ width:38px;height:38px;border-radius:50%; background:#075e54; color:#fff; display:flex;align-items:center;justify-content:center; flex-shrink:0; font-size:15px; }
+.whatsapp .input-bar .field{ flex:1; background:#fff; border-radius:22px; padding:9px 14px; color:#8b8b8b; font-size:14px; display:flex; align-items:center; gap:8px; }
+.whatsapp .input-bar .round{ width:38px;height:38px;border-radius:50%; background:#075e54; color:#fff; display:flex;align-items:center;justify-content:center; flex-shrink:0; font-size:16px; }
 .whatsapp .input-bar .round img{ width:18px; height:18px; object-fit:contain; filter:brightness(0) invert(1); }
 
-/* ---- WHATCHO dark ---- */
-#screen.dark.whatsapp .statusbar{ background:#1f2c34; }
-#screen.dark.whatsapp .chat-header{ background:#1f2c34; }
-#screen.dark.whatsapp .messages:not(.has-custom-wallpaper){ background-color:#0b141a; background-image:none; }
-#screen.dark.whatsapp .bubble.them{ background:#202c33; color:#e9edef; }
-#screen.dark.whatsapp .bubble.me{ background:#005c4b; color:#e9edef; }
-#screen.dark.whatsapp .bubble.them .time-float{ color:#8696a0; }
-#screen.dark.whatsapp .bubble.me .time-float{ color:rgba(233,237,239,.65); }
-#screen.dark.whatsapp .input-bar{ background:#1f2c34; }
-#screen.dark.whatsapp .input-bar .field{ background:#2a3942; color:#8696a0; }
-
-/* ===== FOOTER (persis Post.html, jangan diubah) ===== */
+/* ===== FOOTER ===== */
 footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
 .footer-grid{
     display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:36px;
@@ -305,13 +278,13 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
 @media (max-width:480px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:16px; } }
 .footer-section h3{ font-size:.7rem; font-weight:700; margin-bottom:14px; color:white; text-transform:uppercase; letter-spacing:1.2px; }
 .footer-links{ list-style:none; }
-.footer-links li{ margin-bottom:9px; }
-.footer-links a, .footer-links button{
+.footer-links li{ margin-bottom:0px; }
+.footer-links a{
     color:rgba(255,255,255,0.5); text-decoration:none; font-size:.83rem; transition:.2s;
     background:none; border:none; cursor:pointer; padding:0; font-family:inherit;
 }
-.footer-links a:hover, .footer-links button:hover{ color:white; }
-.footer-brand p{ color:rgba(255,255,255,0.5); font-size:.8rem; max-width:220px; margin-bottom:14px; line-height:1.6; }
+.footer-links a:hover{ color:white; }
+.footer-brand p{ color:rgba(255,255,255,0.5); font-size:.8rem; max-width:200px; margin-bottom:14px; line-height:1.6; }
 .social-links{ display:flex; gap:10px; }
 .social-link{
     display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px;
@@ -329,32 +302,11 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
     padding:11px 22px; border-radius:60px; font-weight:500; font-size:13px; z-index:30000;
     pointer-events:none; opacity:0; transition:opacity .2s; white-space:nowrap;
 }
-
-/* ===== WALLPAPER CROP MODAL ===== */
-.modal-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:5000;
-    display:none; align-items:center; justify-content:center; padding:20px;
-}
-.modal-overlay.active{ display:flex; }
-.modal-box{ background:white; border-radius:24px; padding:22px; max-width:340px; width:100%; text-align:center; }
-.modal-box h3{ font-size:14px; font-weight:700; margin-bottom:14px; }
-.crop-box{
-    width:240px; height:394px; margin:0 auto 16px; border-radius:16px; overflow:hidden;
-    position:relative; background:#eee; border:2px solid #111; cursor:grab; touch-action:none;
-}
-.crop-box:active{ cursor:grabbing; }
-.crop-box img{ position:absolute; top:0; left:0; max-width:none; user-select:none; -webkit-user-drag:none; }
-.zoom-row{ display:flex; align-items:center; gap:10px; margin-bottom:16px; }
-.zoom-row i{ color:#767676; font-size:13px; }
-.zoom-row input[type=range]{ flex:1; }
-.modal-actions{ display:flex; gap:10px; }
-.modal-actions button{ flex:1; padding:11px 0; border-radius:100px; font-weight:700; font-size:13px; cursor:pointer; border:none; }
-.modal-actions .apply-btn{ background:#111; color:#fff; }
-.modal-actions .cancel-btn{ background:#f2f2f2; color:#333; border:1px solid #ddd; }
 </style>
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
     <div class="header-content">
         <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -369,6 +321,7 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
                 <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
                 <a href="Profile.html" class="nav-button">Instacho Profile</a>
                 <a href="Story.html" class="nav-button">Instacho Story</a>
+                <a href="Post.html" class="nav-button">Instacho Post</a>
             </div>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -380,104 +333,99 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
     <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
     <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
     <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
+    <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
 </div>
 
 <div class="main-content">
-    <div class="top-bar">
-        <div class="lang-toggle">
-            <button id="lang-id" class="active" onclick="setLang('id')">ID</button>
-            <button id="lang-en" onclick="setLang('en')">EN</button>
-        </div>
-    </div>
-    <h1 class="page-title" data-i18n="pageTitle">Create your chat!</h1>
+    <h1 class="page-title">Create your chat!</h1>
+
     <div class="chat-wrapper">
         <!-- ===== FORM PANEL ===== -->
         <div class="form-panel">
             <div class="pill-toggles">
                 <button class="pill-btn active" id="btn-imessage" onclick="setPlatform('imessage')">iCho</button>
-                <button class="pill-btn" id="btn-whatsapp" onclick="setPlatform('whatsapp')">Whatscho</button>
+                <button class="pill-btn" id="btn-whatsapp" onclick="setPlatform('whatsapp')">WhatsApp</button>
             </div>
 
             <div class="form-group first">
-                <h2 style="border-top:none;margin-top:0;padding-top:0;"><i class="fas fa-user"></i> <span data-i18n="sectionProfile">Profil Kontak</span></h2>
+                <h2 style="border-top:none;margin-top:0;padding-top:0;">Contact Profile</h2>
                 <div class="avatar-row">
                     <div class="avatar-preview" id="avatarPreview">?</div>
-                    <label class="file-input-label" for="avatarInput"><i class="fas fa-image"></i> <span data-i18n="labelUploadPhoto">Upload Foto</span></label>
+                    <label class="file-input-label" for="avatarInput">Upload photo</label>
                     <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatar(event)">
                 </div>
-                <label data-i18n="labelContactName">Nama Kontak</label>
+                <label>Contact Name</label>
                 <input type="text" id="contactName" value="Nadia" oninput="render()" style="margin-bottom:10px;">
-                <label data-i18n="labelContactStatus">Subjudul (nomor HP / status online)</label>
+                <label>Subtitle (phone / status)</label>
                 <input type="text" id="contactStatus" value="online" oninput="render()">
             </div>
 
             <div class="form-group">
-                <h2><i class="fas fa-comment-dots"></i> <span data-i18n="sectionAddMessage">Tambah Pesan</span></h2>
+                <h2>Add Message</h2>
                 <div class="sender-toggle">
-                    <button id="sender-me" class="active" onclick="setSender('me')" data-i18n="senderMe">Kamu</button>
-                    <button id="sender-them" onclick="setSender('them')" data-i18n="senderThem">Lawan Chat</button>
+                    <button id="sender-me" class="active" onclick="setSender('me')">You</button>
+                    <button id="sender-them" onclick="setSender('them')">Other</button>
                 </div>
-                <label data-i18n="labelMsgText">Isi Pesan</label>
-                <textarea id="newMsgText" data-i18n-placeholder="placeholderMsgText" placeholder="Tulis pesan di sini..." style="margin-bottom:10px;"></textarea>
+                <label>Message (optional if sending image)</label>
+                <textarea id="newMsgText" placeholder="Write your message..." style="margin-bottom:10px;"></textarea>
 
-                <label data-i18n="labelAttachImage">Lampirkan Gambar (opsional)</label>
+                <label>Attach Image (optional)</label>
                 <div class="img-attach-row">
-                    <div class="img-thumb" id="newMsgImgThumb" data-i18n="noImage">tanpa gambar</div>
-                    <label class="file-input-label" for="newMsgImgInput"><i class="fas fa-paperclip"></i> <span data-i18n="btnChooseImage">Pilih Gambar</span></label>
+                    <div class="img-thumb" id="newMsgImgThumb">no<br>image</div>
+                    <label class="file-input-label" for="newMsgImgInput">Choose Image</label>
                     <input type="file" id="newMsgImgInput" accept="image/*" onchange="handleNewMsgImage(event)">
-                    <button type="button" onclick="clearNewMsgImage()" style="background:none;border:1px solid #e0e0e0;color:#767676;padding:8px 12px;border-radius:100px;font-size:11px;cursor:pointer;" data-i18n="btnRemove">Hapus</button>
-                </div>
-
-                <div id="newMsgStatusWrap" style="margin-bottom:10px;">
-                    <label data-i18n="labelStatus">Status Pesan</label>
-                    <select id="newMsgStatus">
-                        <option value="sent" data-i18n="statusSent">Terkirim</option>
-                        <option value="delivered" data-i18n="statusDelivered">Diterima</option>
-                        <option value="read" selected data-i18n="statusRead">Dibaca</option>
-                    </select>
+                    <button class="del-img-btn" type="button" onclick="clearNewMsgImage()" style="background:none;border:1px solid #e0e0e0;color:#767676;padding:8px 12px;border-radius:100px;font-size:11px;cursor:pointer;">Clear</button>
                 </div>
 
                 <div class="row2" style="margin-bottom:10px;">
                     <input type="time" id="newMsgTime">
                 </div>
-                <button class="add-btn" onclick="addMessage()"><i class="fas fa-plus"></i> <span data-i18n="btnAddBubble">Tambah Bubble</span></button>
+                <button class="add-btn" onclick="addMessage()">+ Add Bubble</button>
             </div>
 
             <div class="form-group">
-                <h2><i class="fas fa-list"></i> <span data-i18n="sectionMsgList">Daftar Pesan</span></h2>
+                <h2>Message List</h2>
                 <div class="msg-list" id="msgList"></div>
             </div>
 
             <div class="form-group">
-                <h2><i class="fas fa-circle-half-stroke"></i> <span data-i18n="sectionAppearance">Tampilan Layar</span></h2>
-                <div class="appearance-toggle">
-                    <button id="appearance-light" class="active" onclick="setAppearance('light')"><i class="fas fa-sun"></i> <span data-i18n="modeLight">Terang</span></button>
-                    <button id="appearance-dark" onclick="setAppearance('dark')"><i class="fas fa-moon"></i> <span data-i18n="modeDark">Gelap</span></button>
+                <h2>Custom Icons</h2>
+                <div class="icon-row">
+                    <div class="icon-thumb" id="thumb-mic">🎤</div>
+                    <div class="label-col"><div class="t">Mic Icon</div><div class="s">input bar iCho & WhatsApp</div></div>
+                    <label class="file-input-label" for="iconMicInput" style="margin:0;">Change</label>
+                    <input type="file" id="iconMicInput" accept="image/*" onchange="handleIcon(event,'mic')">
+                    <button class="icon-clear-btn" onclick="clearIcon('mic')">✕</button>
+                </div>
+                <div class="icon-row">
+                    <div class="icon-thumb" id="thumb-video">📹</div>
+                    <div class="label-col"><div class="t">Video Call Icon</div><div class="s">header WhatsApp</div></div>
+                    <label class="file-input-label" for="iconVideoInput" style="margin:0;">Change</label>
+                    <input type="file" id="iconVideoInput" accept="image/*" onchange="handleIcon(event,'video')">
+                    <button class="icon-clear-btn" onclick="clearIcon('video')">✕</button>
+                </div>
+                <div class="icon-row">
+                    <div class="icon-thumb" id="thumb-call">📞</div>
+                    <div class="label-col"><div class="t">Phone Icon</div><div class="s">header WhatsApp</div></div>
+                    <label class="file-input-label" for="iconCallInput" style="margin:0;">Change</label>
+                    <input type="file" id="iconCallInput" accept="image/*" onchange="handleIcon(event,'call')">
+                    <button class="icon-clear-btn" onclick="clearIcon('call')">✕</button>
                 </div>
             </div>
 
-            <div class="form-group" id="wallpaperSection">
-                <h2><i class="fas fa-panorama"></i> <span data-i18n="sectionWallpaper">Wallpaper Chat</span></h2>
-                <div class="wallpaper-row">
-                    <div class="wallpaper-thumb" id="wallpaperThumb"><i class="fas fa-image"></i></div>
-                    <label class="file-input-label" for="wallpaperInput"><i class="fas fa-upload"></i> <span data-i18n="btnUploadWallpaper">Upload Wallpaper</span></label>
-                    <input type="file" id="wallpaperInput" accept="image/*" onchange="handleWallpaperUpload(event)">
-                    <button type="button" onclick="removeWallpaper()" style="background:none;border:1px solid #e0e0e0;color:#767676;padding:8px 12px;border-radius:100px;font-size:11px;cursor:pointer;" data-i18n="btnRemoveWallpaper">Hapus Wallpaper</button>
-            </div>
-
-            <button class="reset-btn" onclick="resetAll()"><i class="fas fa-rotate-left"></i> <span data-i18n="btnReset">Reset ke contoh awal</span></button>
+            <button class="reset-btn" onclick="resetAll()">Reset to default</button>
         </div>
 
         <!-- ===== PREVIEW ===== -->
         <div class="preview-container">
-            <div class="preview-label"><span data-i18n="previewLabelPrefix">Preview —</span> <span id="previewPlatformName">iCho</span></div>
+            <div class="preview-label" id="previewLabel">Preview — iCho</div>
             <div class="preview-outer">
                 <div class="phone" id="phoneFrame">
                     <div class="screen imessage" id="screen">
                         <div class="notch"></div>
                         <div class="statusbar">
                             <span id="clock">9:41</span>
-                            <div class="icons"><i class="fas fa-signal"></i><span>LTE</span><i class="fas fa-battery-full"></i></div>
+                            <div class="icons"><span>●●●●</span><span>LTE</span><span>🔋</span></div>
                         </div>
                         <div class="chat-header" id="chatHeader"></div>
                         <div class="messages" id="messages"></div>
@@ -485,23 +433,24 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
                     </div>
                 </div>
             </div>
-            <button class="download-btn" id="downloadBtn" onclick="downloadPNG()"><i class="fas fa-download"></i> <span data-i18n="btnDownload">Unduh PNG</span></button>
+            <button class="download-btn" id="downloadBtn" onclick="downloadPNG()">Download</button>
         </div>
     </div>
 </div>
 
+<!-- ===== FOOTER ===== -->
 <footer>
     <div class="footer-grid">
         <div class="footer-section footer-brand">
             <h3>CHODATE</h3>
-            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+            <p id="footerDesc">CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
             <div class="social-links">
                 <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
         <div class="footer-section">
-            <h3>Explore</h3>
+            <h3 id="footerExplore">Explore</h3>
             <ul class="footer-links">
                 <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
                 <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
@@ -511,7 +460,7 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
             </ul>
         </div>
         <div class="footer-section">
-            <h3>More</h3>
+            <h3 id="footerMore">More</h3>
             <ul class="footer-links">
                 <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
                 <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
@@ -520,7 +469,7 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
             </ul>
         </div>
         <div class="footer-section">
-            <h3>Meet Us</h3>
+            <h3 id="footerMeet">Meet Us</h3>
             <ul class="footer-links">
                 <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
                 <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
@@ -528,126 +477,36 @@ footer{ background:#000; color:#ddd; padding:50px 0 28px; margin-top:50px; }
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+        <div class="copyright" id="footerCopyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
     </div>
 </footer>
 
 <div class="toast-msg" id="toastMsg"></div>
 
-<!-- ===== WALLPAPER CROP MODAL ===== -->
-<div class="modal-overlay" id="cropModal">
-    <div class="modal-box">
-        <h3 data-i18n="cropTitle">Atur posisi & zoom wallpaper</h3>
-        <div class="crop-box" id="cropBox">
-            <img id="cropImg" src="" alt="">
-        </div>
-        <div class="zoom-row">
-            <i class="fas fa-magnifying-glass-minus"></i>
-            <input type="range" id="zoomSlider" min="1" max="3" step="0.01" value="1">
-            <i class="fas fa-magnifying-glass-plus"></i>
-        </div>
-        <div class="modal-actions">
-            <button class="cancel-btn" onclick="closeCropModal()" data-i18n="btnCancelCrop">Batal</button>
-            <button class="apply-btn" onclick="applyCrop()" data-i18n="btnApplyCrop">Terapkan Wallpaper</button>
-        </div>
-    </div>
-</div>
-
 <script>
-/* ============ I18N ============ */
-const DICT = {
-  pageTitle:{id:'Create your chat!', en:'Create your chat!'},
-  sectionProfile:{id:'Profil Kontak', en:'Contact Profile'},
-  labelUploadPhoto:{id:'Upload Foto', en:'Upload Photo'},
-  labelContactName:{id:'Nama Kontak', en:'Contact Name'},
-  labelContactStatus:{id:'Subjudul (nomor HP / status online)', en:'Subtitle (phone number / online status)'},
-  sectionAddMessage:{id:'Tambah Pesan', en:'Add Message'},
-  senderMe:{id:'Kamu', en:'You'},
-  senderThem:{id:'Lawan Chat', en:'Recipient'},
-  labelMsgText:{id:'Isi Pesan', en:'Message Text'},
-  placeholderMsgText:{id:'Tulis pesan di sini...', en:'Type a message here...'},
-  labelAttachImage:{id:'Lampirkan Gambar (opsional)', en:'Attach Image (optional)'},
-  noImage:{id:'tanpa gambar', en:'no image'},
-  btnChooseImage:{id:'Pilih Gambar', en:'Choose Image'},
-  btnRemove:{id:'Hapus', en:'Remove'},
-  labelStatus:{id:'Status Pesan', en:'Message Status'},
-  statusSent:{id:'Terkirim', en:'Sent'},
-  statusDelivered:{id:'Diterima', en:'Delivered'},
-  statusRead:{id:'Dibaca', en:'Read'},
-  btnAddBubble:{id:'Tambah Bubble', en:'Add Bubble'},
-  sectionMsgList:{id:'Daftar Pesan', en:'Message List'},
-  btnChangeImage:{id:'Ganti Gambar', en:'Change Image'},
-  btnRemoveImage:{id:'Hapus Gambar', en:'Remove Image'},
-  btnDeleteMsg:{id:'Hapus Pesan', en:'Delete Message'},
-  sectionAppearance:{id:'Tampilan Layar', en:'Screen Appearance'},
-  modeLight:{id:'Terang', en:'Light'},
-  modeDark:{id:'Gelap', en:'Dark'},
-  sectionWallpaper:{id:'Wallpaper Chat', en:'Chat Wallpaper (WhatsApp only)'},
-  btnUploadWallpaper:{id:'Upload Wallpaper', en:'Upload Wallpaper'},
-  btnRemoveWallpaper:{id:'Hapus Wallpaper', en:'Remove Wallpaper'},
-  wallpaperHint:{id:'Setelah upload, kamu bisa geser & zoom gambarnya supaya pas di layar sebelum diterapkan.', en:'After uploading, you can drag & zoom the image so it fits the screen before applying it.'},
-  cropTitle:{id:'Atur posisi & zoom wallpaper', en:'Adjust wallpaper position & zoom'},
-  btnApplyCrop:{id:'Terapkan Wallpaper', en:'Apply Wallpaper'},
-  btnCancelCrop:{id:'Batal', en:'Cancel'},
-  btnReset:{id:'Reset ke contoh awal', en:'Reset to default example'},
-  previewLabelPrefix:{id:'Preview —', en:'Preview —'},
-  btnDownload:{id:'Unduh PNG', en:'Download PNG'},
-  toastReset:{id:'Direset ke contoh awal', en:'Reset to default example'},
-  toastDownloaded:{id:'Chat berhasil diunduh!', en:'Chat downloaded successfully!'},
-  toastDownloadFail:{id:'Gagal membuat gambar, coba lagi.', en:'Failed to generate the image, try again.'},
-  toastWallpaperApplied:{id:'Wallpaper diterapkan', en:'Wallpaper applied'},
-  toastWallpaperRemoved:{id:'Wallpaper dihapus', en:'Wallpaper removed'},
-  toastNeedText:{id:'Isi teks atau gambar dulu ya', en:'Add some text or an image first'},
-};
-let lang = 'id';
-function t(key){ return (DICT[key] && DICT[key][lang]) || key; }
-
-function setLang(l){
-  lang = l;
-  document.getElementById('lang-id').classList.toggle('active', l==='id');
-  document.getElementById('lang-en').classList.toggle('active', l==='en');
-  applyStaticTranslations();
-  render();
-}
-
-function applyStaticTranslations(){
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    el.textContent = t(key);
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const key = el.getAttribute('data-i18n-placeholder');
-    el.setAttribute('placeholder', t(key));
-  });
-}
-
-/* ============ STATE ============ */
 let platform = 'imessage';
-let appearance = 'light';
 let currentSender = 'me';
 let pendingImage = '';
-let wallpaperDataUrl = '';
 
-let contact = { name: 'Kachoo', status: 'online', avatar: '' };
+let contact = { name: 'Nadia', status: 'online', avatar: '' };
+let icons = { mic:'', video:'', call:'' };
 
 let messages = [
-  { id: 1, sender: 'them', text: 'Example 1', time: '09:12', image:'', status:'read' },
-  { id: 2, sender: 'me', text: 'Example 2', time: '09:13', image:'', status:'delivered' },
-  { id: 3, sender: 'them', text: 'Example 3', time: '09:13', image:'', status:'read' },
-  { id: 4, sender: 'me', text: 'Example 4', time: '09:14', image:'', status:'read' },
+  { id: 1, sender: 'them', text: 'Woy udah sampe mana?', time: '09:12', image:'' },
+  { id: 2, sender: 'me', text: 'Otw, 10 menit lagi nyampe', time: '09:13', image:'' },
+  { id: 3, sender: 'them', text: 'Oke buruan, laper 😩', time: '09:13', image:'' },
+  { id: 4, sender: 'me', text: 'Iya iya sabar dikit', time: '09:14', image:'' },
 ];
 let nextId = 5;
 
-/* ============ TOAST ============ */
 function showToast(msg){
-  const el = document.getElementById('toastMsg');
-  el.textContent = msg;
-  el.style.opacity = '1';
+  const t = document.getElementById('toastMsg');
+  t.textContent = msg;
+  t.style.opacity = '1';
   clearTimeout(window._toastTimeout);
-  window._toastTimeout = setTimeout(() => { el.style.opacity = '0'; }, 2200);
+  window._toastTimeout = setTimeout(() => { t.style.opacity = '0'; }, 2200);
 }
 
-/* ============ PLATFORM / SENDER / APPEARANCE ============ */
 function setPlatform(p){
   platform = p;
   document.getElementById('btn-imessage').classList.toggle('active', p==='imessage');
@@ -655,31 +514,25 @@ function setPlatform(p){
   const screen = document.getElementById('screen');
   screen.classList.remove('imessage','whatsapp');
   screen.classList.add(p);
-  document.getElementById('previewPlatformName').textContent = p==='imessage' ? 'iCho' : 'WhatsApp';
-  document.getElementById('wallpaperSection').style.display = p==='whatsapp' ? 'block' : 'none';
+  document.getElementById('previewLabel').textContent = 'Preview — ' + (p==='imessage' ? 'iCho' : 'WhatsApp');
+  dropdown.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  mobileOverlay.classList.remove('active');
+  document.body.style.overflow = '';
   render();
-}
-
-function setAppearance(mode){
-  appearance = mode;
-  document.getElementById('appearance-light').classList.toggle('active', mode==='light');
-  document.getElementById('appearance-dark').classList.toggle('active', mode==='dark');
-  document.getElementById('screen').classList.toggle('dark', mode==='dark');
 }
 
 function setSender(s){
   currentSender = s;
   document.getElementById('sender-me').classList.toggle('active', s==='me');
   document.getElementById('sender-them').classList.toggle('active', s==='them');
-  document.getElementById('newMsgStatusWrap').style.display = s==='me' ? 'block' : 'none';
 }
 
-/* ============ AVATAR / IMAGE HANDLERS ============ */
 function handleAvatar(e){
   const file = e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = ev => { contact.avatar = ev.target.result; render(); };
+  reader.onload = function(ev){ contact.avatar = ev.target.result; render(); };
   reader.readAsDataURL(file);
 }
 
@@ -687,7 +540,7 @@ function handleNewMsgImage(e){
   const file = e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = ev => {
+  reader.onload = function(ev){
     pendingImage = ev.target.result;
     const thumb = document.getElementById('newMsgImgThumb');
     thumb.style.backgroundImage = `url('${pendingImage}')`;
@@ -700,27 +553,48 @@ function clearNewMsgImage(){
   pendingImage = '';
   const thumb = document.getElementById('newMsgImgThumb');
   thumb.style.backgroundImage = '';
-  thumb.textContent = t('noImage');
+  thumb.innerHTML = 'no<br>image';
   document.getElementById('newMsgImgInput').value = '';
+}
+
+function handleIcon(e, key){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    icons[key] = ev.target.result;
+    const thumb = document.getElementById('thumb-' + key);
+    thumb.style.backgroundImage = `url('${icons[key]}')`;
+    thumb.textContent = '';
+    render();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearIcon(key){
+  icons[key] = '';
+  const thumb = document.getElementById('thumb-' + key);
+  thumb.style.backgroundImage = '';
+  thumb.textContent = key === 'mic' ? '🎤' : (key === 'video' ? '📹' : '📞');
+  render();
 }
 
 function initials(name){
   return (name || '?').trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
 }
+
 function nowTime(){
   const d = new Date();
   return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
 }
 
-/* ============ MESSAGES CRUD ============ */
 function addMessage(){
   const text = document.getElementById('newMsgText').value.trim();
   const image = pendingImage;
-  if(!text && !image){ showToast(t('toastNeedText')); return; }
+  if(!text && !image) return;
   let time = document.getElementById('newMsgTime').value;
   if(!time) time = nowTime();
-  const status = currentSender === 'me' ? document.getElementById('newMsgStatus').value : 'read';
-  messages.push({ id: nextId++, sender: currentSender, text, time, image, status });
+  messages.push({ id: nextId++, sender: currentSender, text, time, image });
   document.getElementById('newMsgText').value = '';
   document.getElementById('newMsgTime').value = '';
   clearNewMsgImage();
@@ -737,11 +611,16 @@ function handleEditImage(e, id){
   const file = e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = ev => updateMessage(id, 'image', ev.target.result);
+  reader.onload = function(ev){ updateMessage(id, 'image', ev.target.result); };
   reader.readAsDataURL(file);
 }
+
 function removeEditImage(id){ updateMessage(id, 'image', ''); }
-function deleteMessage(id){ messages = messages.filter(m => m.id !== id); render(); }
+
+function deleteMessage(id){
+  messages = messages.filter(m => m.id !== id);
+  render();
+}
 
 function escapeHtml(str){
   const div = document.createElement('div');
@@ -756,73 +635,67 @@ function renderEditorList(){
     const item = document.createElement('div');
     item.className = 'msg-item';
     const imgThumbStyle = m.image ? `background-image:url('${m.image}');` : '';
-    const statusSelectHtml = m.sender === 'me' ? `
-      <select onchange="updateMessage(${m.id}, 'status', this.value)">
-        <option value="sent" ${m.status==='sent'?'selected':''}>${t('statusSent')}</option>
-        <option value="delivered" ${m.status==='delivered'?'selected':''}>${t('statusDelivered')}</option>
-        <option value="read" ${m.status==='read'?'selected':''}>${t('statusRead')}</option>
-      </select>` : '';
     item.innerHTML = `
       <div class="meta">
-        <span class="who ${m.sender==='me'?'me':''}">${m.sender === 'me' ? t('senderMe') : (contact.name || t('senderThem'))}</span>
+        <span class="who ${m.sender==='me'?'me':''}">${m.sender === 'me' ? 'You' : (contact.name || 'Other')}</span>
       </div>
-      <textarea oninput="updateMessage(${m.id}, 'text', this.value)">${escapeHtml(m.text)}</textarea>
+      <textarea placeholder="Can be empty if image attached" oninput="updateMessage(${m.id}, 'text', this.value)">${escapeHtml(m.text)}</textarea>
       <div class="img-line">
-        <div class="img-thumb" style="${imgThumbStyle}">${m.image ? '' : ''}</div>
-        <label class="file-input-label" for="editImg${m.id}" style="margin:0;"><i class="fas fa-paperclip"></i> ${t('btnChangeImage')}</label>
+        <div class="img-thumb" style="${imgThumbStyle}">${m.image ? '' : 'no<br>image'}</div>
+        <label class="file-input-label" for="editImg${m.id}" style="margin:0;">Change Image</label>
         <input type="file" id="editImg${m.id}" accept="image/*" onchange="handleEditImage(event, ${m.id})">
-        <button class="del-img-btn" onclick="removeEditImage(${m.id})">${t('btnRemoveImage')}</button>
+        <button class="del-img-btn" onclick="removeEditImage(${m.id})">Clear Image</button>
       </div>
-      ${statusSelectHtml}
       <div class="row-actions">
         <input type="time" class="time-input" value="${m.time}" onchange="updateMessage(${m.id}, 'time', this.value)">
-        <button class="del-btn" onclick="deleteMessage(${m.id})">${t('btnDeleteMsg')}</button>
+        <button class="del-btn" onclick="deleteMessage(${m.id})">Delete Message</button>
       </div>
     `;
     list.appendChild(item);
   });
 }
 
-/* ============ RENDER HEADER / MESSAGES / INPUT ============ */
+function iconOrEmoji(key, emoji){
+  if(icons[key]) return `<span class="ic"><img src="${icons[key]}"></span>`;
+  return `<span class="ic" style="font-size:16px;">${emoji}</span>`;
+}
+
 function renderHeader(){
-  contact.name = document.getElementById('contactName').value || 'Nama Kontak';
+  contact.name = document.getElementById('contactName').value || 'Contact Name';
   contact.status = document.getElementById('contactStatus').value || '';
 
   const avatarStyle = contact.avatar ? `background-image:url('${contact.avatar}');` : '';
   const avatarPrev = document.getElementById('avatarPreview');
-  if(contact.avatar){ avatarPrev.style.backgroundImage = `url('${contact.avatar}')`; avatarPrev.textContent = ''; }
-  else { avatarPrev.style.backgroundImage = ''; avatarPrev.textContent = initials(contact.name); }
+  if(contact.avatar){
+    avatarPrev.style.backgroundImage = `url('${contact.avatar}')`;
+    avatarPrev.textContent = '';
+  } else {
+    avatarPrev.style.backgroundImage = '';
+    avatarPrev.textContent = initials(contact.name);
+  }
 
   const header = document.getElementById('chatHeader');
   if(platform === 'imessage'){
     header.innerHTML = `
-      <span class="back"><i class="fas fa-chevron-left"></i></span>
+      <span class="back">‹</span>
       <div class="avatar" style="${avatarStyle}">${contact.avatar ? '' : initials(contact.name)}</div>
-      <div class="cname">${escapeHtml(contact.name)} <span class="chev"><i class="fas fa-chevron-right"></i></span></div>
+      <div class="cname">${escapeHtml(contact.name)} <span class="chev">›</span></div>
     `;
   } else {
     header.innerHTML = `
-      <span class="back"><i class="fas fa-arrow-left"></i></span>
+      <span class="back">←</span>
       <div class="avatar" style="${avatarStyle}">${contact.avatar ? '' : initials(contact.name)}</div>
       <div class="meta">
         <div class="cname">${escapeHtml(contact.name)}</div>
         <div class="cstatus">${escapeHtml(contact.status)}</div>
       </div>
       <div class="icons">
-        <!-- Ganti <i class="fas fa-video"></i> dengan <img src="video.png"> kalau mau pakai PNG sendiri -->
-        <i class="fas fa-video"></i>
-        <!-- Ganti <i class="fas fa-phone"></i> dengan <img src="call.png"> kalau mau pakai PNG sendiri -->
-        <i class="fas fa-phone"></i>
-        <i class="fas fa-ellipsis-vertical"></i>
+        ${iconOrEmoji('video','📹')}
+        ${iconOrEmoji('call','📞')}
+        <span class="ic" style="font-size:16px;">⋮</span>
       </div>
     `;
   }
-}
-
-function waTickIcon(status){
-  if(status === 'sent') return `<i class="fas fa-check tick-grey"></i>`;
-  if(status === 'delivered') return `<i class="fas fa-check-double tick-grey"></i>`;
-  return `<i class="fas fa-check-double tick-read"></i>`; // read
 }
 
 function renderMessages(){
@@ -841,51 +714,45 @@ function renderMessages(){
         row.innerHTML = `<div class="bubble ${m.sender}">${escapeHtml(m.text)}</div>`;
       }
       if(m.sender === 'me' && idx === messages.length - 1){
-        const label = document.createElement('div');
-        label.className = 'status-label';
-        if(m.status === 'read') label.textContent = t('statusRead') + ' ' + m.time;
-        else if(m.status === 'delivered') label.textContent = t('statusDelivered');
-        else label.textContent = t('statusSent');
-        row.appendChild(label);
+        const read = document.createElement('div');
+        read.className = 'read-label';
+        read.textContent = 'Read';
+        row.appendChild(read);
       }
     } else {
-      const tick = m.sender === 'me' ? ' ' + waTickIcon(m.status) : '';
+      const tickHtml = m.sender === 'me' ? `<span class="tick">✓✓</span>` : '';
       if(m.image){
         row.innerHTML = `
           <div class="bubble ${m.sender}">
             <img class="msg-img" src="${m.image}">
-            ${m.text ? `<p class="msgtext">${escapeHtml(m.text)}</p>` : ''}
-            <span class="time-onimg">${m.time}${tick}</span>
+            ${m.text ? `<span class="txt">${escapeHtml(m.text)}</span>` : ''}
+            <span class="time ${m.text ? '' : 'on-img'}">${m.time}${tickHtml}</span>
           </div>`;
       } else {
         row.innerHTML = `
           <div class="bubble ${m.sender}">
-            <p class="msgtext">${escapeHtml(m.text)}<span class="time-spacer"></span></p>
-            <span class="time-float">${m.time}${tick}</span>
+            <span class="txt">${escapeHtml(m.text)}</span>
+            <span class="time">${m.time}${tickHtml}</span>
           </div>`;
       }
     }
     box.appendChild(row);
   });
   box.scrollTop = box.scrollHeight;
-
-  const messagesEl = document.getElementById('messages');
-  messagesEl.classList.toggle('has-custom-wallpaper', !!wallpaperDataUrl && platform === 'whatsapp');
 }
 
 function renderInputBar(){
   const bar = document.getElementById('inputBar');
-  /* Ganti <i class="fas fa-microphone"></i> dengan <img src="mic.png"> kalau mau pakai PNG sendiri */
-  const micHtml = `<i class="fas fa-microphone"></i>`;
+  const micHtml = icons.mic ? `<img src="${icons.mic}">` : '🎤';
   if(platform === 'imessage'){
     bar.innerHTML = `
-      <div class="plus"><i class="fas fa-plus"></i></div>
+      <div class="plus">+</div>
       <div class="field">iMessage</div>
       <div class="mic">${micHtml}</div>
     `;
   } else {
     bar.innerHTML = `
-      <div class="field"><i class="far fa-face-smile"></i> Ketik pesan</div>
+      <div class="field">😊&nbsp;&nbsp;Type a message</div>
       <div class="round">${micHtml}</div>
     `;
   }
@@ -899,186 +766,41 @@ function render(){
 }
 
 function resetAll(){
-  document.getElementById('contactName').value = 'Kachoo';
+  document.getElementById('contactName').value = 'Nadia';
   document.getElementById('contactStatus').value = 'online';
   contact.avatar = '';
-  removeWallpaper(true);
+  icons = { mic:'', video:'', call:'' };
+  ['mic','video','call'].forEach(clearIcon);
   messages = [
-    { id: nextId++, sender: 'them', text: 'Example 1', time: '09:12', image:'', status:'read' },
-    { id: nextId++, sender: 'me', text: 'Example 2', time: '09:13', image:'', status:'delivered' },
-    { id: nextId++, sender: 'them', text: 'Example 3', time: '09:13', image:'', status:'read' },
-    { id: nextId++, sender: 'me', text: 'Example 4', time: '09:14', image:'', status:'read' },
+    { id: nextId++, sender: 'them', text: 'Woy udah sampe mana?', time: '09:12', image:'' },
+    { id: nextId++, sender: 'me', text: 'Otw, 10 menit lagi nyampe', time: '09:13', image:'' },
+    { id: nextId++, sender: 'them', text: 'Oke buruan, laper 😩', time: '09:13', image:'' },
+    { id: nextId++, sender: 'me', text: 'Iya iya sabar dikit', time: '09:14', image:'' },
   ];
   render();
-  showToast(t('toastReset'));
+  showToast('Reset to default');
 }
 
-/* ============ WALLPAPER + CROP ============ */
-const WALLPAPER_RATIO = 316/518;
-const EDIT_BOX_W = 240;
-const EDIT_BOX_H = Math.round(EDIT_BOX_W / WALLPAPER_RATIO);
-const OUTPUT_W = 720;
-const OUTPUT_H = Math.round(OUTPUT_W / WALLPAPER_RATIO);
-
-let cropState = { natW:0, natH:0, baseScale:1, zoom:1, left:0, top:0, dragging:false, startX:0, startY:0, startLeft:0, startTop:0 };
-
-function handleWallpaperUpload(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => openCropModal(ev.target.result);
-  reader.readAsDataURL(file);
-  e.target.value = '';
-}
-
-function openCropModal(dataUrl){
-  const img = document.getElementById('cropImg');
-  img.src = dataUrl;
-  img.onload = () => {
-    cropState.natW = img.naturalWidth;
-    cropState.natH = img.naturalHeight;
-    cropState.baseScale = Math.max(EDIT_BOX_W/cropState.natW, EDIT_BOX_H/cropState.natH);
-    cropState.zoom = 1;
-    document.getElementById('zoomSlider').value = 1;
-    applyImgTransform(true);
-    document.getElementById('cropModal').classList.add('active');
-  };
-}
-
-function applyImgTransform(center){
-  const img = document.getElementById('cropImg');
-  const w = cropState.natW * cropState.baseScale * cropState.zoom;
-  const h = cropState.natH * cropState.baseScale * cropState.zoom;
-  img.style.width = w + 'px';
-  img.style.height = h + 'px';
-  if(center){
-    cropState.left = (EDIT_BOX_W - w) / 2;
-    cropState.top = (EDIT_BOX_H - h) / 2;
-  }
-  clampCropPosition(w, h);
-  img.style.left = cropState.left + 'px';
-  img.style.top = cropState.top + 'px';
-}
-
-function clampCropPosition(w, h){
-  const minLeft = Math.min(0, EDIT_BOX_W - w);
-  const minTop = Math.min(0, EDIT_BOX_H - h);
-  cropState.left = Math.max(minLeft, Math.min(0, cropState.left));
-  cropState.top = Math.max(minTop, Math.min(0, cropState.top));
-}
-
-function closeCropModal(){
-  document.getElementById('cropModal').classList.remove('active');
-}
-
-function applyCrop(){
-  const img = document.getElementById('cropImg');
-  const effScale = cropState.baseScale * cropState.zoom;
-  const sx = -cropState.left / effScale;
-  const sy = -cropState.top / effScale;
-  const sW = EDIT_BOX_W / effScale;
-  const sH = EDIT_BOX_H / effScale;
-  const canvas = document.createElement('canvas');
-  canvas.width = OUTPUT_W; canvas.height = OUTPUT_H;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, sx, sy, sW, sH, 0, 0, OUTPUT_W, OUTPUT_H);
-  wallpaperDataUrl = canvas.toDataURL('image/jpeg', 0.92);
-  applyWallpaperToScreen();
-  document.getElementById('wallpaperThumb').style.backgroundImage = `url('${wallpaperDataUrl}')`;
-  document.getElementById('wallpaperThumb').innerHTML = '';
-  closeCropModal();
-  showToast(t('toastWallpaperApplied'));
-}
-
-function applyWallpaperToScreen(){
-  const messagesEl = document.getElementById('messages');
-  if(wallpaperDataUrl){
-    messagesEl.style.backgroundImage = `url('${wallpaperDataUrl}')`;
-    messagesEl.style.backgroundSize = 'cover';
-    messagesEl.style.backgroundPosition = 'center';
-    messagesEl.classList.add('has-custom-wallpaper');
-  } else {
-    messagesEl.style.backgroundImage = '';
-    messagesEl.style.backgroundSize = '';
-    messagesEl.style.backgroundPosition = '';
-    messagesEl.classList.remove('has-custom-wallpaper');
-  }
-}
-
-function removeWallpaper(silent){
-  wallpaperDataUrl = '';
-  applyWallpaperToScreen();
-  const thumb = document.getElementById('wallpaperThumb');
-  thumb.style.backgroundImage = '';
-  thumb.innerHTML = '<i class="fas fa-image"></i>';
-  if(!silent) showToast(t('toastWallpaperRemoved'));
-}
-
-// drag handling for crop box
-const cropBoxEl_init = () => {
-  const cropBox = document.getElementById('cropBox');
-  const img = document.getElementById('cropImg');
-
-  function startDrag(clientX, clientY){
-    cropState.dragging = true;
-    cropState.startX = clientX; cropState.startY = clientY;
-    cropState.startLeft = cropState.left; cropState.startTop = cropState.top;
-  }
-  function moveDrag(clientX, clientY){
-    if(!cropState.dragging) return;
-    const w = cropState.natW * cropState.baseScale * cropState.zoom;
-    const h = cropState.natH * cropState.baseScale * cropState.zoom;
-    cropState.left = cropState.startLeft + (clientX - cropState.startX);
-    cropState.top = cropState.startTop + (clientY - cropState.startY);
-    clampCropPosition(w, h);
-    img.style.left = cropState.left + 'px';
-    img.style.top = cropState.top + 'px';
-  }
-  function endDrag(){ cropState.dragging = false; }
-
-  cropBox.addEventListener('mousedown', e => { startDrag(e.clientX, e.clientY); e.preventDefault(); });
-  window.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
-  window.addEventListener('mouseup', endDrag);
-
-  cropBox.addEventListener('touchstart', e => { const t0=e.touches[0]; startDrag(t0.clientX, t0.clientY); }, {passive:true});
-  cropBox.addEventListener('touchmove', e => { const t0=e.touches[0]; moveDrag(t0.clientX, t0.clientY); }, {passive:true});
-  cropBox.addEventListener('touchend', endDrag);
-
-  document.getElementById('zoomSlider').addEventListener('input', e => {
-    cropState.zoom = parseFloat(e.target.value);
-    applyImgTransform(false);
-  });
-};
-
-/* ============ DOWNLOAD PNG (tanpa bezel ponsel) ============ */
 function downloadPNG(){
   const btn = document.getElementById('downloadBtn');
-  const label = btn.querySelector('span');
   btn.disabled = true;
-  const oldText = label.textContent;
-  label.textContent = lang === 'id' ? 'Memproses...' : 'Processing...';
-
-  const notch = document.querySelector('.notch');
-  notch.style.display = 'none'; // sembunyikan notch, ambil isi layar saja
-
-  html2canvas(document.getElementById('screen'), { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
+  const oldText = btn.textContent;
+  btn.textContent = 'Processing...';
+  html2canvas(document.getElementById('phoneFrame'), { scale: 3, useCORS: true, backgroundColor: null }).then(canvas => {
     const link = document.createElement('a');
     link.download = (platform === 'imessage' ? 'icho-chat' : 'whatsapp-chat') + '.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
-    notch.style.display = '';
     btn.disabled = false;
-    label.textContent = oldText;
-    showToast(t('toastDownloaded'));
+    btn.textContent = oldText;
+    showToast('PNG downloaded successfully!');
   }).catch(() => {
-    notch.style.display = '';
     btn.disabled = false;
-    label.textContent = oldText;
-    showToast(t('toastDownloadFail'));
+    btn.textContent = oldText;
+    showToast('Download failed, please try again.');
   });
 }
 
-/* ============ CLOCK ============ */
 function tickClock(){
   const d = new Date();
   document.getElementById('clock').textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
@@ -1086,7 +808,7 @@ function tickClock(){
 tickClock();
 setInterval(tickClock, 15000);
 
-/* ============ MOBILE MENU / DESKTOP DROPDOWN ============ */
+// Mobile menu
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileOverlay = document.getElementById('mobileMenuOverlay');
@@ -1100,19 +822,19 @@ mobileOverlay.addEventListener('click', () => {
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
 });
+
+// Desktop nav dropdown
 const trigger = document.getElementById('desktopNavTrigger');
 const dropdown = document.getElementById('desktopNavDropdown');
-trigger.addEventListener('click', e => { e.stopPropagation(); dropdown.classList.toggle('active'); });
+trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+});
 document.addEventListener('click', e => {
     if (!trigger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
 });
 
-/* ============ INIT ============ */
-document.getElementById('wallpaperSection').style.display = 'none';
-document.getElementById('newMsgStatusWrap').style.display = 'block';
-cropBoxEl_init();
-applyStaticTranslations();
 render();
 </script>
 </body>
-</html>
+    </html>
