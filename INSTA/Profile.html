@@ -663,8 +663,8 @@
         // =====================================================
         // SUPABASE CONFIG — GANTI DUA BARIS INI
         // =====================================================
-        const SUPABASE_URL = 'https://ckpxngfnueoijygsfggt.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNrcHhuZ2ZudWVvaWp5Z3NmZ2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NDExMjEsImV4cCI6MjEwNTExNzEyMX0.yNKWlKu-rYfIAyVAo3uUfNEU6QWwttLWVduFmEG19tM';
+        const SUPABASE_URL = 'https://xxxxx.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOi...';
 
         let supaClient = null;
         let supabaseEnabled = false;
@@ -1050,4 +1050,336 @@
         function updateFormLanguage() {
             const t = translations[currentLang];
             document.getElementById('labelAvatar').innerText = t.labelAvatar;
-            document.getElementById('upload
+            document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel;
+            document.getElementById('labelUsername').innerText = t.labelUsername;
+            document.getElementById('labelName').innerText = t.labelName;
+            document.getElementById('labelBio').innerText = t.labelBio;
+            document.getElementById('labelPostsGrid').innerText = t.labelPostsGrid;
+            document.getElementById('labelPosts').innerText = t.postsLabel;
+            document.getElementById('labelFollowers').innerText = t.followersLabel;
+            document.getElementById('labelFollowing').innerText = t.followingLabel;
+            document.getElementById('statPostsLabel').innerText = t.postsLabel;
+            document.getElementById('statFollowersLabel').innerText = t.followersLabel;
+            document.getElementById('statFollowingLabel').innerText = t.followingLabel;
+            document.getElementById('editProfileText').innerText = t.editProfile;
+            document.getElementById('shareProfileText').innerText = t.shareProfile;
+            document.getElementById('pageTitle').innerText = t.pageTitle;
+            document.getElementById('verifText').innerText = t.verifBtn;
+            document.getElementById('privateText').innerText = t.privateBtn;
+            updatePreview();
+        }
+
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.classList.add('active');
+        themeToggle.addEventListener('click', () => {
+            if (currentTheme === 'light') {
+                currentTheme = 'dark';
+                themeToggle.classList.remove('active');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                updateTheme();
+                showToast('Dark Mode');
+            } else {
+                currentTheme = 'light';
+                themeToggle.classList.add('active');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                updateTheme();
+                showToast('Light Mode');
+            }
+            scheduleSave();
+        });
+
+        const versionToggle = document.getElementById('versionToggle');
+        versionToggle.classList.add('active');
+        versionToggle.addEventListener('click', () => {
+            if (currentVersion === '2') {
+                currentVersion = '1';
+                versionToggle.classList.remove('active');
+            } else {
+                currentVersion = '2';
+                versionToggle.classList.add('active');
+            }
+            updateVersion();
+            scheduleSave();
+        });
+
+        const langToggle = document.getElementById('langToggle');
+        langToggle.classList.add('active');
+        langToggle.innerHTML = '<span class="btn-text">IND</span>';
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'en') {
+                currentLang = 'id';
+                langToggle.classList.remove('active');
+                langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+                document.getElementById('mainHtml').setAttribute('lang', 'id');
+                updateFormLanguage();
+                showToast('Bahasa Indonesia');
+            } else {
+                currentLang = 'en';
+                langToggle.classList.add('active');
+                langToggle.innerHTML = '<span class="btn-text">IND</span>';
+                document.getElementById('mainHtml').setAttribute('lang', 'en');
+                updateFormLanguage();
+                showToast('English');
+            }
+            scheduleSave();
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const element = document.getElementById('previewOuter');
+            try {
+                const rect = element.getBoundingClientRect();
+                const canvas = await html2canvas(element, {
+                    scale: 3, backgroundColor: null, useCORS: true,
+                    allowTaint: true, logging: false,
+                    width: rect.width, height: rect.height
+                });
+                const link = document.createElement('a');
+                link.download = `instaprofile_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast(translations[currentLang].downloadToast);
+                const editBgBtn = document.getElementById('editBgBtn');
+                editBgBtn.classList.add('visible');
+                editBgBtn.style.transform = 'scale(0.8)';
+                setTimeout(() => editBgBtn.style.transform = 'scale(1)', 200);
+            } catch (e) {
+                console.error(e);
+                showToast(translations[currentLang].errorToast);
+            }
+        });
+
+        document.getElementById('editBgBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'Edit.html';
+        });
+
+        document.querySelectorAll('.bg-option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentBg = this.getAttribute('data-bg');
+                updateBackground();
+                scheduleSave();
+            });
+        });
+
+        document.getElementById('customColorPicker').addEventListener('input', function(e) {
+            document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+            currentBg = e.target.value;
+            updateBackground();
+            scheduleSave();
+        });
+
+        document.getElementById('editProfileBtn').addEventListener('click', () => showToast('Edit profil akan segera hadir'));
+        document.getElementById('shareProfileBtn').addEventListener('click', () => showToast('Bagikan profil akan segera hadir'));
+
+        function updateProfileLink() {
+            const input = document.getElementById('profileLinkInput');
+            let url = input.value.trim();
+            const linkRow = document.getElementById('profileLinkRow');
+            const linkText = document.getElementById('profileLinkText');
+            const linkEl = document.getElementById('profileLink');
+
+            if (!url) {
+                linkRow.classList.remove('visible');
+                linkText.innerText = '';
+                linkEl.href = '#';
+                showToast('Link disembunyikan');
+                scheduleSave();
+                return;
+            }
+            linkRow.classList.add('visible');
+            let displayText = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+            if (displayText.length > 30) displayText = displayText.substring(0, 30) + '...';
+            linkText.innerText = displayText;
+            linkEl.href = url;
+            showToast('Link profil diperbarui');
+            scheduleSave();
+        }
+
+        document.getElementById('updateLinkBtn').addEventListener('click', updateProfileLink);
+        document.getElementById('profileLinkInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') updateProfileLink();
+        });
+
+        const desktopNavTrigger = document.getElementById('desktopNavTrigger'),
+            desktopNavDropdown = document.getElementById('desktopNavDropdown');
+        if (desktopNavTrigger && desktopNavDropdown) {
+            desktopNavTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                desktopNavDropdown.classList.toggle('active');
+            });
+            document.addEventListener('click', (e) => {
+                if (!desktopNavTrigger.contains(e.target) && !desktopNavDropdown.contains(e.target))
+                    desktopNavDropdown.classList.remove('active');
+            });
+        }
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn'),
+            mobileMenu = document.getElementById('mobileMenu'),
+            mobileOverlay = document.getElementById('mobileMenuOverlay');
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // =====================================================
+        // SUPABASE: SAVE & LOAD
+        // =====================================================
+        let saveTimeout = null;
+        function scheduleSave() {
+            if (!supabaseEnabled) return;
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveToSupabase, 800);
+        }
+
+        async function saveToSupabase() {
+            if (!supabaseEnabled) return;
+            try {
+                setSyncStatus('Menyimpan...', 'saving');
+                const data = {
+                    device_id: DEVICE_ID,
+                    username: document.getElementById('username').value.trim(),
+                    name: document.getElementById('nameInput').value.trim(),
+                    bio: document.getElementById('bioText').value,
+                    followers: document.getElementById('followersCount').value.trim(),
+                    following: document.getElementById('followingCount').value.trim(),
+                    posts: document.getElementById('postsCount').value.trim(),
+                    is_verified: isVerified,
+                    is_private: isPrivate,
+                    profile_link: document.getElementById('profileLinkInput').value.trim(),
+                    theme: currentTheme,
+                    version: currentVersion,
+                    lang: currentLang,
+                    background: currentBg,
+                    post_images: postImages.filter(Boolean)
+                };
+
+                const { error } = await supaClient
+                    .from('profiles')
+                    .upsert(data, { onConflict: 'device_id' });
+
+                if (error) throw error;
+                setSyncStatus('Tersimpan ✓', 'saved');
+            } catch (err) {
+                console.error('❌ Save error:', err);
+                setSyncStatus('Gagal menyimpan', 'error');
+            }
+        }
+
+        async function loadFromSupabase() {
+            if (!supabaseEnabled) return;
+            try {
+                const { data, error } = await supaClient
+                    .from('profiles')
+                    .select('*')
+                    .eq('device_id', DEVICE_ID)
+                    .maybeSingle();
+
+                if (error) throw error;
+                if (!data) { console.log('ℹ️ Belum ada data tersimpan'); return; }
+
+                document.getElementById('username').value = data.username || '';
+                document.getElementById('nameInput').value = data.name || '';
+                document.getElementById('bioText').value = data.bio || '';
+                document.getElementById('followersCount').value = data.followers || '';
+                document.getElementById('followingCount').value = data.following || '';
+                document.getElementById('postsCount').value = data.posts || '';
+                document.getElementById('profileLinkInput').value = data.profile_link || '';
+
+                isVerified = !!data.is_verified;
+                isPrivate = !!data.is_private;
+                if (isPrivate) document.getElementById('privateBtn').classList.add('active');
+
+                currentTheme = data.theme || 'light';
+                currentVersion = data.version || '2';
+                currentLang = data.lang || 'en';
+                currentBg = data.background || 'transparent';
+
+                if (currentTheme === 'dark') {
+                    themeToggle.classList.remove('active');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                if (currentVersion === '2') versionToggle.classList.add('active');
+                else versionToggle.classList.remove('active');
+
+                if (currentLang === 'id') {
+                    langToggle.classList.remove('active');
+                    langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+                    document.getElementById('mainHtml').setAttribute('lang', 'id');
+                } else {
+                    langToggle.classList.add('active');
+                    langToggle.innerHTML = '<span class="btn-text">IND</span>';
+                    document.getElementById('mainHtml').setAttribute('lang', 'en');
+                }
+
+                if (data.avatar_url) {
+                    document.getElementById('previewAvatarImg').src = data.avatar_url;
+                    document.getElementById('bottomNavAvatar').src = data.avatar_url;
+                }
+
+                if (Array.isArray(data.post_images)) {
+                    for (let i = 0; i < 6; i++) {
+                        postImages[i] = data.post_images[i] || null;
+                    }
+                }
+
+                if (data.profile_link) {
+                    document.getElementById('profileLinkRow').classList.add('visible');
+                    let displayText = data.profile_link.replace(/^https?:\/\//, '').replace(/\/$/, '');
+                    if (displayText.length > 30) displayText = displayText.substring(0, 30) + '...';
+                    document.getElementById('profileLinkText').innerText = displayText;
+                    document.getElementById('profileLink').href = data.profile_link;
+                }
+
+                // Background
+                document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+                if (currentBg === 'transparent' || currentBg === 'white' || currentBg === 'black') {
+                    const btn = document.querySelector(`.bg-option-btn[data-bg="${currentBg}"]`);
+                    if (btn) btn.classList.add('active');
+                }
+
+                updateFormLanguage();
+                updateTheme();
+                updateVersion();
+                updatePreview();
+                renderPostGrids();
+                updateBackground();
+                setSyncStatus('Data dimuat ✓', 'saved');
+                console.log('✅ Loaded from Supabase');
+            } catch (err) {
+                console.error('❌ Load error:', err);
+                setSyncStatus('Gagal memuat', 'error');
+            }
+        }
+
+        // =====================================================
+        // INIT
+        // =====================================================
+        currentVersion = '2';
+        currentLang = 'en';
+        document.getElementById('mainHtml').setAttribute('lang', 'en');
+        updateFormLanguage();
+        updateTheme();
+        renderPostGrids();
+        updatePreview();
+        updateVersion();
+        updateBackground();
+
+        document.getElementById('profileLinkRow').classList.remove('visible');
+        document.getElementById('profileLinkInput').value = '';
+        document.getElementById('profileLinkText').innerText = '';
+        document.getElementById('profileLink').href = '#';
+
+        window.addEventListener('load', loadFromSupabase);
+    </script>
+</body>
+</html>
