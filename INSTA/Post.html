@@ -6,418 +6,960 @@
     <title>INSTACHO | Insta Post Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; overflow-x: hidden; }
-        body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li, label {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body,
+        html {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        body,
+        html,
+        div,
+        span,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a,
+        button,
+        input,
+        textarea,
+        li,
+        label {
             font-family: 'Arial', 'Outfit', sans-serif !important;
         }
-        body { background-color: #f5f5f5; line-height: 1.6; }
+        body {
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
 
+        /* ===== INI HEADER ===== */
         header {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(16px);
-            position: fixed; top: 0; left: 0; right: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .header-content {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 24px; max-width: 1400px; margin: 0 auto; position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
         }
-        .logo-container { display: flex; align-items: center; cursor: pointer; }
-        .logo-img { height: 38px; width: auto; }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .logo-img {
+            height: 38px;
+            width: auto;
+        }
         .center-title {
-            position: absolute; left: 50%; transform: translateX(-50%);
-            text-align: center; display: flex; align-items: center; justify-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .center-logo-img { height: 100px; width: auto; display: block; object-fit: contain; }
+        .center-logo-img {
+            height: 100px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
         @media (max-width: 640px) {
-            .center-logo-img { height: 80px; }
-            .logo-img { height: 30px; }
+            .center-logo-img {
+                height: 80px;
+            }
+            .logo-img {
+                height: 30px;
+            }
         }
-        .desktop-nav-container { position: relative; display: block; }
-        @media (max-width: 768px) { .desktop-nav-container { display: none; } }
+
+        .desktop-nav-container {
+            position: relative;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav-container {
+                display: none;
+            }
+        }
         .desktop-nav-trigger {
-            display: flex; align-items: center; gap: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 8px 18px; border-radius: 100px;
-            font-weight: 600; font-size: 14px; color: white;
-            cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .desktop-nav-dropdown {
-            position: absolute; top: calc(100% + 12px); right: 0;
-            width: 200px; background: rgba(10, 10, 10, 0.97);
-            border-radius: 18px; padding: 8px 0;
-            opacity: 0; visibility: hidden; transform: translateY(-8px);
-            transition: all 0.25s; border: 1px solid rgba(255, 255, 255, 0.12);
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 200px;
+            background: rgba(10, 10, 10, 0.97);
+            border-radius: 18px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .desktop-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .desktop-nav-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
         .desktop-nav-dropdown .nav-button {
-            display: block; width: 100%; padding: 11px 20px;
-            font-weight: 500; font-size: 13px; color: rgba(255, 255, 255, 0.85);
-            text-decoration: none; transition: 0.2s;
+            display: block;
+            width: 100%;
+            padding: 11px 20px;
+            font-weight: 500;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: 0.2s;
         }
-        .desktop-nav-dropdown .nav-button:hover { background: rgba(255, 255, 255, 0.1); }
+        .desktop-nav-dropdown .nav-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
         .mobile-menu-btn {
-            display: none; background: rgba(255, 255, 255, 0.1);
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 18px; color: white; width: 40px; height: 40px;
-            border-radius: 60px; cursor: pointer;
-            align-items: center; justify-content: center;
+            font-size: 18px;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 60px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
         }
-        @media (max-width: 768px) { .mobile-menu-btn { display: flex; } }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
         .mobile-menu {
-            position: fixed; top: 0; right: -100%; width: 75%; max-width: 260px;
-            height: 100vh; background: rgba(0, 0, 0, 0.97);
-            padding: 90px 20px 40px; transition: right 0.3s ease;
-            z-index: 999; border-left: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 260px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.97);
+            padding: 90px 20px 40px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .mobile-menu.active { right: 0; }
+        .mobile-menu.active {
+            right: 0;
+        }
         .mobile-menu-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65);
-            opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 998;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
         }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
         .mobile-menu-link {
-            display: block; padding: 13px 18px;
+            display: block;
+            padding: 13px 18px;
             background: rgba(255, 255, 255, 0.06);
-            border-radius: 40px; text-decoration: none;
-            color: white; font-weight: 500; margin-bottom: 10px;
-            text-align: center; font-size: 14px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
         }
 
-        .main-content { padding: 96px 24px 60px; max-width: 1400px; margin: 0 auto; }
-        @media (max-width: 768px) { .main-content { padding: 82px 16px 40px; } }
+        /* ===== MAIN LAYOUT ===== */
+        .main-content {
+            padding: 96px 24px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 82px 16px 40px;
+            }
+        }
 
         .page-title {
-            text-align: center; font-size: 38px; font-weight: 800;
-            margin-bottom: 36px; color: #111; letter-spacing: -0.5px;
+            text-align: center;
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 36px;
+            color: #111;
+            letter-spacing: -0.5px;
         }
-        @media (max-width: 640px) { .page-title { font-size: 28px; margin-bottom: 22px; } }
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 28px;
+                margin-bottom: 22px;
+            }
+        }
 
         .insta-wrapper {
-            display: flex; flex-wrap: nowrap;
-            justify-content: center; align-items: flex-start; gap: 36px;
-        }
-        @media (max-width: 900px) { .insta-wrapper { flex-wrap: wrap; gap: 20px; } }
-
-        .form-panel {
-            background: white; border-radius: 24px; padding: 22px 20px;
-            width: 360px; flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-            border: 1px solid #e8e8e8;
-            max-height: calc(100vh - 130px); overflow-y: auto;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 36px;
         }
         @media (max-width: 900px) {
-            .form-panel { width: 100%; max-width: 100%; max-height: none; overflow-y: visible; }
+            .insta-wrapper {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
         }
 
-        .toggle-buttons { display: flex; gap: 10px; margin-bottom: 18px; justify-content: center; }
+        /* ===== FORM PANEL ===== */
+        .form-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 22px 20px;
+            width: 360px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e8e8e8;
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+        }
+        @media (max-width: 900px) {
+            .form-panel {
+                width: 100%;
+                max-width: 100%;
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+
+        /* --- 3 toggle buttons: theme, lang, version --- */
+        .toggle-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            justify-content: center;
+        }
         .toggle-btn {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: #f2f2f2; border: 2px solid #ddd;
-            cursor: pointer; font-size: 16px; transition: 0.2s;
-            display: flex; align-items: center; justify-content: center; color: #555;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f2f2f2;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
         }
-        .toggle-btn i { font-size: 16px; }
-        .toggle-btn.active { background: #111; color: white; border-color: #111; }
-        .toggle-btn:hover { transform: scale(1.05); }
-        .toggle-btn.theme-btn { background: #111; color: white; border-color: #111; }
-        .toggle-btn.theme-btn i { color: white; }
-        .toggle-btn.theme-btn.sun-mode { background: #111; color: white; border-color: #111; }
-        .toggle-btn.theme-btn.sun-mode i { color: white; }
+        .toggle-btn i {
+            font-size: 16px;
+        }
+        .toggle-btn.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+        .toggle-btn:hover {
+            transform: scale(1.05);
+        }
 
-        .form-group { margin-bottom: 13px; }
-        label {
-            font-weight: 600; font-size: 11px; display: block;
-            margin-bottom: 5px; color: #666;
-            text-transform: uppercase; letter-spacing: 0.4px;
+        .toggle-btn.theme-btn {
+            background: #111;
+            color: white;
+            border-color: #111;
         }
-        input, textarea {
-            width: 100%; padding: 10px 13px;
-            border: 1px solid #e0e0e0; border-radius: 12px;
-            font-size: 13px; outline: none; background: white;
+        .toggle-btn.theme-btn i {
+            color: white;
+        }
+        .toggle-btn.theme-btn.sun-mode {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+        .toggle-btn.theme-btn.sun-mode i {
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 13px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 13px;
+            outline: none;
+            background: white;
             transition: border-color 0.2s;
         }
-        input:focus, textarea:focus { border-color: #0095f6; }
-        textarea { resize: vertical; min-height: 65px; }
+        input:focus,
+        textarea:focus {
+            border-color: #0095f6;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 65px;
+        }
 
         .file-input-label {
-            background: #f7f7f7; text-align: center;
-            padding: 9px 12px; border-radius: 12px;
-            margin-top: 5px; cursor: pointer; font-size: 12px;
-            border: 1px solid #e8e8e8; transition: 0.2s;
+            background: #f7f7f7;
+            text-align: center;
+            padding: 9px 12px;
+            border-radius: 12px;
+            margin-top: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid #e8e8e8;
+            transition: 0.2s;
         }
-        .file-input-label:hover { background: #efefef; }
+        .file-input-label:hover {
+            background: #efefef;
+        }
 
-        .loc-music-group { display: flex; flex-direction: column; gap: 10px; }
-        .loc-music-row { display: flex; flex-direction: column; }
-        .loc-music-row input { transition: opacity 0.2s; }
-        .loc-music-row input:disabled { opacity: 0.35; background: #f5f5f5; cursor: not-allowed; }
+        .loc-music-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .loc-music-row {
+            display: flex;
+            flex-direction: column;
+        }
+        .loc-music-row input {
+            transition: opacity 0.2s;
+        }
+        .loc-music-row input:disabled {
+            opacity: 0.35;
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
 
-        .sub-info i { font-size: 9px; color: #262626; }
+        .sub-info i {
+            font-size: 9px;
+            color: #262626;
+        }
 
-        .love-option { display: flex; gap: 12px; align-items: center; margin-top: 4px; }
+        .love-option {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 4px;
+        }
         .love-color-btn {
-            width: 28px; height: 28px; border-radius: 45%;
-            cursor: pointer; border: 2px solid transparent; transition: 0.15s;
+            width: 28px;
+            height: 28px;
+            border-radius: 45%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.15s;
         }
-        .love-color-btn.black { background: #262626; }
-        .love-color-btn.red { background: #ed4956; }
-        .love-color-btn.active { border-color: #0095f6; transform: scale(1.15); }
+        .love-color-btn.black {
+            background: #262626;
+        }
+        .love-color-btn.red {
+            background: #ed4956;
+        }
+        .love-color-btn.active {
+            border-color: #0095f6;
+            transform: scale(1.15);
+        }
 
-        .bg-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; align-items: center; }
+        .bg-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+            align-items: center;
+        }
         .bg-option-btn {
-            padding: 6px 14px; border-radius: 100px;
-            background: #f2f2f2; border: 1px solid #ddd;
-            cursor: pointer; font-size: 12px; transition: 0.2s;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
         }
-        .bg-option-btn.active { background: #111; color: white; }
+        .bg-option-btn.active {
+            background: #111;
+            color: white;
+        }
         .color-picker-input {
-            width: 42px; height: 34px; border-radius: 10px;
-            border: 1px solid #ddd; cursor: pointer; padding: 2px;
+            width: 42px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            padding: 2px;
         }
 
-        .ratio-options { display: flex; gap: 8px; margin-bottom: 8px; }
+        .ratio-options {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
         .ratio-btn {
-            padding: 6px 14px; border-radius: 100px;
-            background: #f2f2f2; border: 1px solid #ddd;
-            cursor: pointer; font-size: 12px; transition: 0.2s;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
         }
-        .ratio-btn.active { background: #111; color: white; }
+        .ratio-btn.active {
+            background: #111;
+            color: white;
+        }
 
-        .setting-verif { margin-top: 18px; border-top: 1px solid #f0f0f0; padding-top: 14px; }
+        .setting-verif {
+            margin-top: 18px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 14px;
+        }
         .verif-btn {
-            background: #f2f2f2; border: 1px solid #ddd;
-            padding: 10px; border-radius: 60px; width: 100%;
-            font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .verif-btn:hover { background: #e8e8e8; }
-        .form-divider { height: 1px; background: #f0f0f0; margin: 14px 0; }
+        .verif-btn:hover {
+            background: #e8e8e8;
+        }
+        .form-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 14px 0;
+        }
 
+        /* ===== PREVIEW ===== */
         .preview-container {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 16px; flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
         }
-        @media (max-width: 900px) { .preview-container { width: 100%; } }
+        @media (max-width: 900px) {
+            .preview-container {
+                width: 100%;
+            }
+        }
 
-        .preview-outer { padding: 24px 20px; border-radius: 40px; display: inline-block; }
+        .preview-outer {
+            padding: 24px 20px;
+            border-radius: 40px;
+            display: inline-block;
+        }
         .instagram-preview {
-            background: white; width: 360px; border-radius: 18px;
-            overflow: hidden; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.13);
+            background: white;
+            width: 360px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.13);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         .post-header {
-            display: flex; align-items: center;
-            padding: 10px 13px; gap: 9px; background: white;
+            display: flex;
+            align-items: center;
+            padding: 10px 13px;
+            gap: 9px;
+            background: white;
         }
         .avatar {
-            width: 32px; height: 32px; border-radius: 50%;
-            overflow: hidden; background: #0095f6; flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #0095f6;
+            flex-shrink: 0;
         }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .header-meta { flex: 1; min-width: 0; }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .header-meta {
+            flex: 1;
+            min-width: 0;
+        }
         .username {
-            font-weight: 700; font-size: 13px; color: #262626;
-            display: flex; align-items: center; gap: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #262626;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .sub-info {
-            font-size: 10.5px; color: #8e8e8e; margin-top: -4px;
-            display: flex; align-items: center; gap: 4px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            font-size: 10.5px;
+            color: #8e8e8e;
+            margin-top: -4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .sub-info i { font-size: 9px; color: #262626; }
+        .sub-info i {
+            font-size: 9px;
+            color: #262626;
+        }
         .menu-dot {
-            font-size: 14px; font-weight: bold; color: #262626;
-            flex-shrink: 0; padding-left: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #262626;
+            flex-shrink: 0;
+            padding-left: 6px;
         }
 
         .media-container {
-            width: 100%; background: #efefef;
-            display: flex; justify-content: center; align-items: center;
+            width: 100%;
+            background: #efefef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .media-container img { width: 100%; height: auto; display: block; }
+        .media-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .action-buttons {
             padding: 10px 13px 7px;
-            display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
         }
         .action-icons {
-            display: flex; gap: 6px; align-items: center;
-            flex-wrap: wrap; flex: 1;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1;
         }
-        .action-item { display: flex; align-items: center; gap: 3px; margin-right: 2px; }
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-right: 2px;
+        }
         .action-icon {
-            width: 24px; height: 24px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 1; position: relative;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 1;
+            position: relative;
         }
         .action-icon img {
-            width: 100%; height: 100%; object-fit: contain; display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
-        .action-icon .heart-png { width: 22px; height: 22px; }
+        .action-icon .heart-png {
+            width: 22px;
+            height: 22px;
+        }
         .action-icon .heart-icon-red {
-            color: #ed4956; font-size: 22px; display: none;
-            position: absolute; top: 50%; left: 50%;
+            color: #ed4956;
+            font-size: 22px;
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
         }
-        .action-icon .heart-png.hidden { display: none; }
-        .action-icon .heart-icon-red.visible { display: block; }
-        .action-icon .comment-png { width: 22px; height: 22px; }
-        .action-icon .repost-png { width: 22px; height: 22px; }
-        .action-icon .share-png { width: 22px; height: 22px; }
+        .action-icon .heart-png.hidden {
+            display: none;
+        }
+        .action-icon .heart-icon-red.visible {
+            display: block;
+        }
+        .action-icon .comment-png {
+            width: 22px;
+            height: 22px;
+        }
+        .action-icon .repost-png {
+            width: 22px;
+            height: 22px;
+        }
+        .action-icon .share-png {
+            width: 22px;
+            height: 22px;
+        }
         .action-count {
-            font-size: 12px; font-weight: 700; color: #262626;
-            min-width: 0; line-height: 1; white-space: nowrap;
+            font-size: 12px;
+            font-weight: 700;
+            color: #262626;
+            min-width: 0;
+            line-height: 1;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, ;
+            white-space: nowrap;
             transition: all 0.15s ease;
         }
-        .save-icon { margin-left: auto; flex-shrink: 0; }
-        .save-icon .action-icon img { width: 22px; height: 22px; }
+        .save-icon {
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .save-icon .action-icon img {
+            width: 22px;
+            height: 22px;
+        }
 
-        .like-count { display: none !important; }
+        .like-count {
+            display: none !important;
+        }
         .caption-text {
-            padding: 0 13px 4px; font-size: 12.5px; line-height: 1.2;
+            padding: 0 13px 4px;
+            font-size: 12.5px;
+            line-height: 1.2;
         }
-        .caption-username { font-weight: 700; margin-right: 2px; }
+        .caption-username {
+            font-weight: 700;
+            margin-right: 2px;
+        }
         .timestamp {
-            padding: 0 13px 11px; font-size: 10px; color: #8e8e8e;
+            padding: 0 13px 11px;
+            font-size: 10px;
+            color: #8e8e8e;
         }
-        .post-footer-spacer { height: 6px; }
+        .post-footer-spacer {
+            height: 6px;
+        }
 
+        /* New style for liked by section */
         .liked-by-text {
-            padding: 0 13px 2px; font-size: 12.5px;
-            color: #262626; font-weight: 400;
+            padding: 0 13px 2px;
+            font-size: 12.5px;
+            color: #262626;
+            font-weight: 400;
         }
-        .liked-by-text .liked-by-username { font-weight: 700; }
-        .liked-by-text .liked-by-others { font-weight: 700; }
+        .liked-by-text .liked-by-username {
+            font-weight: 700;
+        }
+        .liked-by-text .liked-by-others {
+            font-weight: 700;
+        }
 
         .download-area {
-            text-align: center; display: flex; flex-direction: column;
-            align-items: center; gap: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         .download-btn {
-            background: #111; color: white; border: none;
-            padding: 13px 40px; border-radius: 100px;
-            font-weight: 600; cursor: pointer; font-size: 15px; transition: 0.2s;
+            background: #111;
+            color: white;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
         }
-        .download-btn:hover { background: #333; }
+        .download-btn:hover {
+            background: #333;
+        }
 
+        /* ===== EDIT BACKGROUND BUTTON ===== */
         .edit-bg-btn {
-            background: #111; color: white; border: none;
-            padding: 13px 40px; border-radius: 100px;
-            font-weight: 600; cursor: pointer; font-size: 15px;
-            transition: 0.2s; display: none; text-decoration: none;
+            background: #111;
+            color: white;
+            border: none;
+            padding: 13px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+            display: none;
+            text-decoration: none;
         }
-        .edit-bg-btn:hover { background: #333; }
-        .edit-bg-btn.visible { display: inline-block; }
+        .edit-bg-btn:hover {
+            background: #333;
+        }
+        .edit-bg-btn.visible {
+            display: inline-block;
+        }
 
-        footer { background: #000; color: #ddd; padding: 50px 0 28px; margin-top: 40px; }
+        /* ===== FOOTER ===== */
+        footer {
+            background: #000;
+            color: #ddd;
+            padding: 50px 0 28px;
+            margin-top: 40px;
+        }
         .footer-grid {
-            display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 40px; margin-bottom: 36px;
-            max-width: 1400px; margin-left: auto; margin-right: auto;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
             padding: 0 24px;
         }
-        @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+        @media (max-width: 860px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
         .footer-section h3 {
-            font-size: 0.7rem; font-weight: 700; margin-bottom: 14px;
-            color: white; text-transform: uppercase; letter-spacing: 1.2px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
         }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0px; }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0px;
+        }
         .footer-links a {
-            color: rgba(255, 255, 255, 0.5); text-decoration: none;
-            font-size: 0.83rem; transition: 0.2s;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.83rem;
+            transition: 0.2s;
         }
-        .footer-links a:hover { color: white; }
+        .footer-links a:hover {
+            color: white;
+        }
         .footer-brand p {
-            color: rgba(255, 255, 255, 0.5); font-size: 0.8rem;
-            max-width: 200px; margin-bottom: 14px; line-height: 1.6;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            max-width: 200px;
+            margin-bottom: 14px;
+            line-height: 1.6;
         }
-        .social-links { display: flex; gap: 10px; }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
         .social-link {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 32px; height: 32px; background: rgba(255, 255, 255, 0.08);
-            border-radius: 60px; color: white; text-decoration: none;
-            font-size: 12px; transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
         }
-        .social-link:hover { background: white; color: black; }
+        .social-link:hover {
+            background: white;
+            color: black;
+        }
         .footer-bottom {
-            display: flex; align-items: center; padding-top: 22px;
+            display: flex;
+            align-items: center;
+            padding-top: 22px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            max-width: 1400px; margin: 0 auto;
-            padding-left: 24px; padding-right: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
         }
-        .copyright { font-size: 0.7rem; color: rgba(255, 255, 255, 0.4); }
+        .copyright {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
 
+        /* Crop modals */
         .crop-modal {
-            display: none; position: fixed; inset: 0;
-            background: #000; z-index: 20000;
-            justify-content: center; align-items: center; flex-direction: column;
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 20000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
         .crop-modal .crop-container {
-            background: #000; max-width: 90vw; max-height: 85vh;
-            overflow: hidden; border-radius: 20px;
+            background: #000;
+            max-width: 90vw;
+            max-height: 85vh;
+            overflow: hidden;
+            border-radius: 20px;
         }
         .crop-modal .crop-container img {
-            max-width: 100%; max-height: 70vh; display: block;
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
         }
         .crop-modal-buttons {
-            padding: 18px; display: flex; gap: 14px;
-            justify-content: center; background: #000;
+            padding: 18px;
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            background: #000;
         }
         .crop-modal-btn {
-            padding: 11px 30px; border-radius: 100px;
-            border: none; cursor: pointer; font-weight: 700; font-size: 15px;
+            padding: 11px 30px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 15px;
         }
-        .crop-modal-btn.cancel { background: #333; color: white; }
-        .crop-modal-btn.save { background: #0095f6; color: white; }
+        .crop-modal-btn.cancel {
+            background: #333;
+            color: white;
+        }
+        .crop-modal-btn.save {
+            background: #0095f6;
+            color: white;
+        }
 
         .toast-msg {
-            position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-            background: #1a1a1a; color: white; padding: 11px 22px;
-            border-radius: 60px; font-weight: 500; font-size: 13px;
-            z-index: 30000; pointer-events: none; opacity: 0;
-            transition: opacity 0.2s; white-space: nowrap;
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 13px;
+            z-index: 30000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
         }
 
-        .sync-status {
-            position: fixed; bottom: 16px; right: 16px;
-            background: rgba(0,0,0,0.85); color: white;
-            padding: 8px 14px; border-radius: 60px;
-            font-size: 12px; font-weight: 500; z-index: 5000;
-            opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
-        .sync-status.show { opacity: 1; }
-        .sync-status.saving { background: #0095f6; }
-        .sync-status.saved { background: #16a34a; }
-        .sync-status.error { background: #dc2626; }
-
+        /* Number input group */
         .number-input-group {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
-        .number-input-group .form-group { margin-bottom: 0; }
-        .number-input-group input { padding: 8px 10px; font-size: 12px; }
-        .number-input-group label { font-size: 9px; }
+        .number-input-group .form-group {
+            margin-bottom: 0;
+        }
+        .number-input-group input {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+        .number-input-group label {
+            font-size: 9px;
+        }
         .number-input-hint {
-            font-size: 9px; color: #999; margin-top: 2px; font-style: italic;
+            font-size: 9px;
+            color: #999;
+            margin-top: 2px;
+            font-style: italic;
         }
 
-        .liked-by-input-group { display: flex; flex-direction: column; gap: 6px; }
-        .liked-by-input-row { display: flex; gap: 6px; align-items: center; }
-        .liked-by-input-row label {
-            font-size: 10px; min-width: 45px;
-            text-transform: none; color: #666; margin-bottom: 0;
+        /* Liked by input group */
+        .liked-by-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
-        .liked-by-input-row input { flex: 1; padding: 8px 10px; font-size: 12px; }
+        .liked-by-input-row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .liked-by-input-row label {
+            font-size: 10px;
+            min-width: 45px;
+            text-transform: none;
+            color: #666;
+            margin-bottom: 0;
+        }
+        .liked-by-input-row input {
+            flex: 1;
+            padding: 8px 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -453,6 +995,7 @@
         <h1 class="page-title" id="pageTitle">Create your post!</h1>
         <div class="insta-wrapper">
 
+            <!-- ===== FORM PANEL ===== -->
             <div class="form-panel">
                 <div class="toggle-buttons">
                     <button class="toggle-btn theme-btn" id="themeToggleBtn" title="Toggle theme preview">
@@ -466,17 +1009,20 @@
                     </button>
                 </div>
 
+                <!-- Foto Profil -->
                 <div class="form-group">
                     <label id="labelAvatar">Profile Photo</label>
                     <div class="file-input-label" id="uploadAvatarLabel">Upload profile photo</div>
                     <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
                 </div>
 
+                <!-- Username -->
                 <div class="form-group">
                     <label id="labelUsername">Username</label>
                     <input type="text" id="username" placeholder="thekachoo">
                 </div>
 
+                <!-- Location & Music -->
                 <div class="form-group">
                     <label id="labelLocMusic">Location / Music</label>
                     <div class="loc-music-group">
@@ -489,6 +1035,7 @@
                     </div>
                 </div>
 
+                <!-- Crop ratio -->
                 <div class="form-group">
                     <label id="labelMedia">Upload Photo</label>
                     <div class="ratio-options" id="ratioOptionsPre">
@@ -499,11 +1046,13 @@
                     <input type="file" id="mediaUpload" accept="image/*" style="display:none;">
                 </div>
 
+                <!-- Caption -->
                 <div class="form-group">
                     <label id="labelCaption">Caption</label>
                     <textarea id="caption" placeholder="Write something..."></textarea>
                 </div>
 
+                <!-- Like, Comments, Repost -->
                 <div class="form-group">
                     <label id="labelActionNumbers">Interaction Numbers</label>
                     <div class="number-input-group">
@@ -540,11 +1089,13 @@
                     </div>
                 </div>
 
+                <!-- Waktu -->
                 <div class="form-group">
                     <label id="labelTimestamp">Post time</label>
                     <input type="text" id="timestamp" placeholder="Just now">
                 </div>
 
+                <!-- Like color -->
                 <div class="form-group">
                     <label id="labelLoveColor">Heart Color</label>
                     <div class="love-option">
@@ -554,6 +1105,7 @@
                     </div>
                 </div>
 
+                <!-- Background -->
                 <div class="form-group">
                     <label id="labelBgPreview">Background Preview</label>
                     <div class="bg-options">
@@ -564,16 +1116,19 @@
                     </div>
                 </div>
 
+                <!-- Centang verif -->
                 <div class="setting-verif">
                     <button class="verif-btn" id="verificationBtn">Verification (Official Account)</button>
                     <div id="verifStatus" style="font-size:11px; color:#0095f6; text-align:center; margin-top:6px; display:none;"><i class="fas fa-check-circle"></i> <span id="verifStatusText">Verified Account</span></div>
                 </div>
             </div>
 
+            <!-- ===== PREVIEW ===== -->
             <div class="preview-container">
                 <div class="preview-outer" id="previewOuter">
                     <div class="instagram-preview" id="instagramCard">
 
+                        <!-- Post header -->
                         <div class="post-header">
                             <div class="avatar" id="avatarContainer">
                                 <img id="avatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230095f6'/%3E%3Ctext x='16' y='21' font-size='13' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
@@ -588,12 +1143,15 @@
                             <div class="menu-dot">•••</div>
                         </div>
 
+                        <!-- Media -->
                         <div class="media-container" id="mediaContainer">
                             <img src="https://placehold.co/360x360/EFEFEF/999999?text=Upload" style="width:100%;">
                         </div>
 
+                        <!-- Actions -->
                         <div class="action-buttons">
                             <div class="action-icons" id="actionIcons">
+                                <!-- LOVE -->
                                 <div class="action-item">
                                     <div class="action-icon" id="likeIcon">
                                         <img src="https://thekachoo.github.io/CHODATE/INSTA/Heart1.png" alt="love" class="heart-png" id="heartImage">
@@ -601,18 +1159,21 @@
                                     </div>
                                     <span class="action-count" id="displayLikeCount"></span>
                                 </div>
+                                <!-- COMMENT -->
                                 <div class="action-item">
                                     <div class="action-icon">
                                         <img src="https://thekachoo.github.io/CHODATE/INSTA/Comment1.png" alt="comment" class="comment-png">
                                     </div>
                                     <span class="action-count" id="displayCommentCount"></span>
                                 </div>
+                                <!-- REPOST -->
                                 <div class="action-item">
                                     <div class="action-icon">
                                         <img src="https://thekachoo.github.io/CHODATE/INSTA/Repost1.png" alt="repost" class="repost-png">
                                     </div>
                                     <span class="action-count" id="displayRepostCount"></span>
                                 </div>
+                                <!-- SHARE -->
                                 <div class="action-item">
                                     <div class="action-icon">
                                         <img src="https://thekachoo.github.io/CHODATE/INSTA/Share1.png" alt="share" class="share-png">
@@ -627,6 +1188,7 @@
                             </div>
                         </div>
 
+                        <!-- Liked by section -->
                         <div class="liked-by-text" id="likedByText" style="display:none;">
                             Liked by <span class="liked-by-username" id="likedByDisplay1">User1</span>, <span class="liked-by-username" id="likedByDisplay2">User2</span>, and <span class="liked-by-others" id="likedByOthers" style="font-weight: bold;">others</span>
                         </div>
@@ -647,6 +1209,7 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-section footer-brand">
@@ -689,6 +1252,7 @@
         </div>
     </footer>
 
+    <!-- Crop modals -->
     <div class="crop-modal" id="profileCropModal">
         <div class="crop-container"><img id="profileCropImage" src=""></div>
         <div class="crop-modal-buttons">
@@ -707,45 +1271,6 @@
     <div class="toast-msg" id="toastMsg"></div>
 
     <script>
-        // ========== SUPABASE CONFIG ==========
-        const SUPABASE_URL = 'https://ckpxngfnueoijygsfggt.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNrcHhuZ2ZudWVvaWp5Z3NmZ2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NDExMjEsImV4cCI6MjEwNTExNzEyMX0.yNKWlKu-rYfIAyVAo3uUfNEU6QWwttLWVduFmEG19tM';
-
-        let supaClient = null;
-        let supabaseEnabled = false;
-        if (window.supabase) {
-            try {
-                supaClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                supabaseEnabled = true;
-                console.log('✅ Supabase ready');
-            } catch (e) { console.warn('Supabase init failed:', e); }
-        }
-
-        function getDeviceId() {
-            let id = localStorage.getItem('instacho_device_id');
-            if (!id) {
-                id = 'dev_' + (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '_' + Math.random().toString(36).slice(2));
-                localStorage.setItem('instacho_device_id', id);
-            }
-            return id;
-        }
-        const DEVICE_ID = getDeviceId();
-
-        function setSyncStatus(text, type) {
-            let el = document.getElementById('syncStatus');
-            if (!el) {
-                el = document.createElement('div');
-                el.id = 'syncStatus';
-                el.className = 'sync-status';
-                document.body.appendChild(el);
-            }
-            el.innerText = text;
-            el.className = 'sync-status show ' + (type || '');
-            clearTimeout(el._t);
-            el._t = setTimeout(() => el.classList.remove('show'), 1800);
-        }
-
-        // ========== STATE ==========
         let currentVersion = 1;
         let loveColor = 'black';
         let liked = false;
@@ -753,7 +1278,7 @@
         let currentLang = 'en';
         let currentBg = 'transparent';
         let currentCropRatio = '1:1';
-        let isDarkMode = false;
+        let isDarkMode = false; 
 
         const usernameInput = document.getElementById('username');
         const locationInput = document.getElementById('location');
@@ -784,7 +1309,6 @@
         const displayShareCount = document.getElementById('displayShareCount');
 
         const editBgBtn = document.getElementById('editBgBtn');
-
         const likedByText = document.getElementById('likedByText');
         const likedByDisplay1 = document.getElementById('likedByDisplay1');
         const likedByDisplay2 = document.getElementById('likedByDisplay2');
@@ -792,50 +1316,119 @@
 
         function formatNumberWithSuffix(input, lang) {
             if (!input || input.trim() === '') return '';
+
             let val = input.trim().toLowerCase();
-            const idSuffixes = { 'rb': 1000, 'jt': 1000000, 'm': 1000000, 'b': 1000000000, 't': 1000000000000 };
-            const enSuffixes = { 'k': 1000, 'm': 1000000, 'b': 1000000000, 't': 1000000000000 };
-            let number = 0, suffix = '', matched = false;
+
+            const idSuffixes = {
+                'rb': 1000,
+                'jt': 1000000,
+                'm': 1000000,
+                'b': 1000000000,
+                't': 1000000000000
+            };
+
+            const enSuffixes = {
+                'k': 1000,
+                'm': 1000000,
+                'b': 1000000000,
+                't': 1000000000000
+            };
+
+            let number = 0;
+            let suffix = '';
+
+            let matched = false;
+
             if (lang === 'id') {
                 for (let key in idSuffixes) {
                     if (val.endsWith(key)) {
                         let numPart = val.replace(key, '').trim();
                         let num = parseFloat(numPart.replace(',', '.'));
-                        if (!isNaN(num)) { number = num * idSuffixes[key]; suffix = key; matched = true; break; }
+                        if (!isNaN(num)) {
+                            number = num * idSuffixes[key];
+                            suffix = key;
+                            matched = true;
+                            break;
+                        }
                     }
                 }
             }
+
             if (!matched && lang === 'en') {
                 for (let key in enSuffixes) {
                     if (val.endsWith(key)) {
                         let numPart = val.replace(key, '').trim();
                         let num = parseFloat(numPart.replace(',', '.'));
-                        if (!isNaN(num)) { number = num * enSuffixes[key]; suffix = key; matched = true; break; }
+                        if (!isNaN(num)) {
+                            number = num * enSuffixes[key];
+                            suffix = key;
+                            matched = true;
+                            break;
+                        }
                     }
                 }
             }
+
             if (!matched) {
                 let num = parseFloat(val.replace(',', '.'));
-                if (!isNaN(num)) number = num; else return '';
+                if (!isNaN(num)) {
+                    number = num;
+                } else {
+                    return '';
+                }
             }
-            let displayNum = number, displaySuffix = '';
+
+            // Format the number with appropriate suffix for display
+            let displayNum = number;
+            let displaySuffix = '';
+
             if (lang === 'id') {
-                if (number >= 1000000000000) { displayNum = number / 1000000000000; displaySuffix = 't'; }
-                else if (number >= 1000000000) { displayNum = number / 1000000000; displaySuffix = 'b'; }
-                else if (number >= 1000000) { displayNum = number / 1000000; displaySuffix = 'jt'; }
-                else if (number >= 1000) { displayNum = number / 1000; displaySuffix = 'rb'; }
+                if (number >= 1000000000000) {
+                    displayNum = number / 1000000000000;
+                    displaySuffix = 't';
+                } else if (number >= 1000000000) {
+                    displayNum = number / 1000000000;
+                    displaySuffix = 'b';
+                } else if (number >= 1000000) {
+                    displayNum = number / 1000000;
+                    displaySuffix = 'jt';
+                } else if (number >= 1000) {
+                    displayNum = number / 1000;
+                    displaySuffix = 'rb';
+                } else {
+                    displayNum = number;
+                    displaySuffix = '';
+                }
             } else {
-                if (number >= 1000000000000) { displayNum = number / 1000000000000; displaySuffix = 'T'; }
-                else if (number >= 1000000000) { displayNum = number / 1000000000; displaySuffix = 'B'; }
-                else if (number >= 1000000) { displayNum = number / 1000000; displaySuffix = 'M'; }
-                else if (number >= 1000) { displayNum = number / 1000; displaySuffix = 'K'; }
+                if (number >= 1000000000000) {
+                    displayNum = number / 1000000000000;
+                    displaySuffix = 'T';
+                } else if (number >= 1000000000) {
+                    displayNum = number / 1000000000;
+                    displaySuffix = 'B';
+                } else if (number >= 1000000) {
+                    displayNum = number / 1000000;
+                    displaySuffix = 'M';
+                } else if (number >= 1000) {
+                    displayNum = number / 1000;
+                    displaySuffix = 'K';
+                } else {
+                    displayNum = number;
+                    displaySuffix = '';
+                }
             }
+
             let formattedNum;
-            if (displayNum % 1 === 0) formattedNum = Math.floor(displayNum).toString();
-            else {
+            if (displayNum % 1 === 0) {
+                formattedNum = Math.floor(displayNum).toString();
+            } else {
                 formattedNum = displayNum.toFixed(1);
-                if (formattedNum.endsWith('.0')) formattedNum = formattedNum.slice(0, -2);
+                // Remove trailing .0
+                if (formattedNum.endsWith('.0')) {
+                    formattedNum = formattedNum.slice(0, -2);
+                }
             }
+
             return formattedNum + displaySuffix;
         }
 
@@ -856,8 +1449,11 @@
         function handleLocMusicInput(type) {
             const locVal = locationInput.value.trim();
             const musicVal = musicInput.value.trim();
-            if (type === 'loc' && locVal !== '') musicInput.disabled = true;
-            else if (type === 'music' && musicVal !== '') locationInput.disabled = true;
+            if (type === 'loc' && locVal !== '') {
+                musicInput.disabled = true;
+            } else if (type === 'music' && musicVal !== '') {
+                locationInput.disabled = true;
+            }
             if (type === 'loc' && locVal === '') musicInput.disabled = false;
             if (type === 'music' && musicVal === '') locationInput.disabled = false;
             updatePreviewContent();
@@ -888,6 +1484,7 @@
 
             const locVal = locationInput.value.trim();
             const musicVal = musicInput.value.trim();
+
             if (currentVersion === 1) {
                 if (locVal) {
                     subInfoDisplay.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${locVal}`;
@@ -895,27 +1492,42 @@
                 } else if (musicVal) {
                     subInfoDisplay.innerHTML = `<i class="fas fa-music"></i> ${musicVal}`;
                     subInfoDisplay.style.display = 'flex';
-                } else subInfoDisplay.style.display = 'none';
-            } else subInfoDisplay.style.display = 'none';
+                } else {
+                    subInfoDisplay.style.display = 'none';
+                }
+            } else {
+                subInfoDisplay.style.display = 'none';
+            }
 
             const likeVal = likeCountInput.value.trim();
             const commentVal = commentCountInput.value.trim();
             const repostVal = repostCountInput.value.trim();
             const shareVal = shareCountInput.value.trim();
+
             const lang = currentLang;
 
-            displayLikeCount.textContent = formatNumberWithSuffix(likeVal, lang) || '';
-            displayCommentCount.textContent = formatNumberWithSuffix(commentVal, lang) || '';
-            displayRepostCount.textContent = formatNumberWithSuffix(repostVal, lang) || '';
-            displayShareCount.textContent = formatNumberWithSuffix(shareVal, lang) || '';
+            const likeFormatted = formatNumberWithSuffix(likeVal, lang);
+            displayLikeCount.textContent = likeFormatted || '';
+
+            const commentFormatted = formatNumberWithSuffix(commentVal, lang);
+            displayCommentCount.textContent = commentFormatted || '';
+
+            const repostFormatted = formatNumberWithSuffix(repostVal, lang);
+            displayRepostCount.textContent = repostFormatted || '';
+
+            const shareFormatted = formatNumberWithSuffix(shareVal, lang);
+            displayShareCount.textContent = shareFormatted || '';
 
             updateLoveDisplay();
 
             const user1 = likedByUser1Input.value.trim();
             const user2 = likedByUser2Input.value.trim();
-            if (likeVal !== '' && likeVal !== '0') likedByText.style.display = 'none';
-            else if (user1 === '' && user2 === '') likedByText.style.display = 'none';
-            else {
+
+            if (likeVal !== '' && likeVal !== '0') {
+                likedByText.style.display = 'none';
+            } else if (user1 === '' && user2 === '') {
+                likedByText.style.display = 'none';
+            } else {
                 likedByDisplay1.textContent = user1 || 'User1';
                 likedByDisplay2.textContent = user2 || 'User2';
                 likedByText.style.display = 'block';
@@ -924,10 +1536,12 @@
             if (currentVersion === 1) {
                 captionWrapper.style.display = 'block';
                 const currentCaption = captionInput.value || '';
-                captionUsernameSpan.innerText = uname + ' ';
+                const currentUsername = uname;
+                captionUsernameSpan.innerText = currentUsername + ' ';
                 captionUsernameSpan.style.fontWeight = '700';
                 captionUsernameSpan.style.fontFamily = 'Arial, sans-serif';
                 displayCaption.innerText = currentCaption;
+
                 const ts = timestampInput.value.trim() || 'Just now';
                 displayTimestamp.innerText = ts;
                 displayTimestamp.style.display = 'block';
@@ -941,34 +1555,71 @@
 
         function applyThemeToIcons() {
             const isDark = isDarkMode;
+            // heart
             const heartImg = document.querySelector('#likeIcon .heart-png');
-            if (heartImg) heartImg.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png';
+            if (heartImg) {
+                heartImg.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png';
+            }
             const commentImg = document.querySelector('.action-icon .comment-png');
-            if (commentImg) commentImg.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Comment2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Comment1.png';
+            if (commentImg) {
+                commentImg.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Comment2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Comment1.png';
+            }
             const repostImg = document.querySelector('.action-icon .repost-png');
-            if (repostImg) repostImg.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Repost2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Repost1.png';
-            const shareImg = document.querySelector('.action-icon .share-png');
-            if (shareImg) shareImg.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Share2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Share1.png';
+            if (repostImg) {
+                repostImg.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Repost2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Repost1.png';
+            }
+        const shareImg = document.querySelector('.action-icon .share-png');
+            if (shareImg) {
+                shareImg.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Share2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Share1.png';
+            }
             const bookmarkImg = document.querySelector('.save-icon .action-icon img');
-            if (bookmarkImg) bookmarkImg.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Bookmark2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Bookmark1.png';
+            if (bookmarkImg) {
+                bookmarkImg.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Bookmark2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Bookmark1.png';
+            }
+
             const heartImgById = document.getElementById('heartImage');
-            if (heartImgById) heartImgById.src = isDark ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png' : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png';
+            if (heartImgById) {
+                heartImgById.src = isDark
+                    ? 'https://thekachoo.github.io/CHODATE/INSTA/Heart2.png'
+                    : 'https://thekachoo.github.io/CHODATE/INSTA/Heart1.png';
+            }
         }
 
+        // ---- toggle theme ----
         document.getElementById('themeToggleBtn').addEventListener('click', function() {
             isDarkMode = !isDarkMode;
             const icon = document.getElementById('themeIcon');
             if (isDarkMode) {
+                // dark mode active -> show sun icon (to switch back to light)
                 icon.className = 'fas fa-sun';
                 this.classList.add('sun-mode');
+                // also set preview outer background to dark
                 document.getElementById('previewOuter').style.background = '#1a1a1a';
+                // set card background to dark
                 document.getElementById('instagramCard').style.background = '#1e1e1e';
+                // update text colors in card for dark mode (optional)
                 document.querySelector('.post-header').style.background = '#1e1e1e';
-                document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => el.style.color = '#f5f5f5');
+                document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => {
+                    el.style.color = '#f5f5f5';
+                });
                 document.querySelectorAll('.sub-info').forEach(el => el.style.color = '#aaa');
+                // caption username
                 document.querySelectorAll('.caption-username').forEach(el => el.style.color = '#f5f5f5');
+                // liked by
                 document.querySelectorAll('.liked-by-text .liked-by-username, .liked-by-text .liked-by-others').forEach(el => el.style.color = '#f5f5f5');
+                // also action icons text color
                 document.querySelectorAll('.action-count').forEach(el => el.style.color = '#f5f5f5');
+                // menu dot
                 document.querySelector('.menu-dot').style.color = '#f5f5f5';
             } else {
                 icon.className = 'fas fa-moon';
@@ -976,7 +1627,9 @@
                 document.getElementById('previewOuter').style.background = 'transparent';
                 document.getElementById('instagramCard').style.background = 'white';
                 document.querySelector('.post-header').style.background = 'white';
-                document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => el.style.color = '');
+                document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => {
+                    el.style.color = '';
+                });
                 document.querySelectorAll('.sub-info').forEach(el => el.style.color = '');
                 document.querySelectorAll('.caption-username').forEach(el => el.style.color = '');
                 document.querySelectorAll('.liked-by-text .liked-by-username, .liked-by-text .liked-by-others').forEach(el => el.style.color = '');
@@ -987,15 +1640,23 @@
         });
 
         function applyVersion() {
+            const likeCountDiv = document.querySelector('.like-count');
+            if (currentVersion === 1) {
+                if (likeCountDiv) likeCountDiv.style.display = 'block';
+            } else {
+                if (likeCountDiv) likeCountDiv.style.display = 'none';
+            }
             updatePreviewContent();
         }
 
-        function updateLoveColor() { updateLoveDisplay(); }
+        function updateLoveColor() {
+            updateLoveDisplay();
+        }
 
         function updateBackground() {
             const po = document.getElementById('previewOuter');
-            if (isDarkMode) return;
-            if (currentBg === 'transparent') po.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
+            if (currentBg === 'transparent') po.style.background =
+                'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
             else if (currentBg === 'white') po.style.background = 'white';
             else if (currentBg === 'black') po.style.background = 'black';
             else po.style.background = currentBg;
@@ -1018,27 +1679,46 @@
                 labelMedia: "Upload Foto",
                 uploadMediaLabel: "Klik untuk pilih file",
                 labelCaption: "Caption",
+                labelLikes: "Jumlah Like",
                 labelLikedBy: "Disukai oleh",
                 labelTimestamp: "Waktu posting",
+                defaultTimestamp: "Baru saja",
                 labelLoveColor: "Warna Hati",
                 loveSelectText: "Pilih:",
                 labelBgPreview: "Background Preview",
-                bgTransparent: "Transparan", bgWhite: "Putih", bgBlack: "Hitam",
+                bgTransparent: "Transparan",
+                bgWhite: "Putih",
+                bgBlack: "Hitam",
                 labelActionNumbers: "Angka Interaksi",
-                labelLike: "Like", labelComment: "Comment", labelRepost: "Repost", labelShare: "Share",
-                likePlaceholder: "1.2rb", commentPlaceholder: "500rb", repostPlaceholder: "200rb", sharePlaceholder: "100rb",
-                locationPlaceholder: "Jakarta Selatan, Indonesia", musicPlaceholder: "Judul lagu — Artis",
+                labelLike: "Like",
+                labelComment: "Comment",
+                labelRepost: "Repost",
+                labelShare: "Share",
+                likePlaceholder: "1.2rb",
+                commentPlaceholder: "500rb",
+                repostPlaceholder: "200rb",
+                sharePlaceholder: "100rb",
+                locationPlaceholder: "Jakarta Selatan, Indonesia",
+                musicPlaceholder: "Judul lagu — Artis",
                 timestampPlaceholder: "Baru saja",
                 verifStatus: "Akun Terverifikasi",
                 downloadBtn: "Unduh",
+                uploadPlaceholder: "Upload foto profil",
+                mediaPlaceholder: "Klik untuk pilih file",
                 captionPlaceholder: "Tulis sesuatu...",
                 verificationBtn: "Verification (Official Account)",
                 footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
-                footerExplore: "Explore", footerMore: "More", footerMeet: "Meet Us",
+                footerExplore: "Explore",
+                footerMore: "More",
+                footerMeet: "Meet Us",
                 footerCopyright: "© 2026 CHODATE by The Kachoo. All rights reserved.",
-                toastVerified: "Akun terverifikasi ✓", toastUnverified: "Verifikasi dihapus",
-                toastDownloadSuccess: "Gambar berhasil diunduh!", toastDownloadFailed: "Gagal mengunduh",
-                cropCancel: "Batal", cropSave: "Simpan", usernamePlaceholder: "thekachoo"
+                toastVerified: "Akun terverifikasi ✓",
+                toastUnverified: "Verifikasi dihapus",
+                toastDownloadSuccess: "Gambar berhasil diunduh!",
+                toastDownloadFailed: "Gagal mengunduh",
+                cropCancel: "Batal",
+                cropSave: "Simpan",
+                usernamePlaceholder: "thekachoo"
             },
             en: {
                 pageTitle: "Create your post!",
@@ -1049,27 +1729,46 @@
                 labelMedia: "Upload Photo",
                 uploadMediaLabel: "Click to select file",
                 labelCaption: "Caption",
+                labelLikes: "Number of Likes",
                 labelLikedBy: "Liked by",
                 labelTimestamp: "Post time",
+                defaultTimestamp: "Just now",
                 labelLoveColor: "Heart Color",
                 loveSelectText: "Choose:",
                 labelBgPreview: "Background Preview",
-                bgTransparent: "Transparent", bgWhite: "White", bgBlack: "Black",
+                bgTransparent: "Transparent",
+                bgWhite: "White",
+                bgBlack: "Black",
                 labelActionNumbers: "Interaction Numbers",
-                labelLike: "Like", labelComment: "Comment", labelRepost: "Repost", labelShare: "Share",
-                likePlaceholder: "1.2K", commentPlaceholder: "500K", repostPlaceholder: "200K", sharePlaceholder: "100K",
-                locationPlaceholder: "South Jakarta, Indonesia", musicPlaceholder: "Song title — Artist",
+                labelLike: "Like",
+                labelComment: "Comment",
+                labelRepost: "Repost",
+                labelShare: "Share",
+                likePlaceholder: "1.2K",
+                commentPlaceholder: "500K",
+                repostPlaceholder: "200K",
+                sharePlaceholder: "100K",
+                locationPlaceholder: "South Jakarta, Indonesia",
+                musicPlaceholder: "Song title — Artist",
                 timestampPlaceholder: "Just now",
                 verifStatus: "Verified Account",
                 downloadBtn: "Download",
+                uploadPlaceholder: "Upload profile photo",
+                mediaPlaceholder: "Click to select file",
                 captionPlaceholder: "Write something...",
                 verificationBtn: "Verification (Official Account)",
                 footerDesc: "CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.",
-                footerExplore: "Explore", footerMore: "More", footerMeet: "Meet Us",
+                footerExplore: "Explore",
+                footerMore: "More",
+                footerMeet: "Meet Us",
                 footerCopyright: "© 2026 CHODATE by The Kachoo. All rights reserved.",
-                toastVerified: "Account verified ✓", toastUnverified: "Verification removed",
-                toastDownloadSuccess: "Image downloaded successfully!", toastDownloadFailed: "Download failed",
-                cropCancel: "Cancel", cropSave: "Save", usernamePlaceholder: "thekachoo"
+                toastVerified: "Account verified ✓",
+                toastUnverified: "Verification removed",
+                toastDownloadSuccess: "Image downloaded successfully!",
+                toastDownloadFailed: "Download failed",
+                cropCancel: "Cancel",
+                cropSave: "Save",
+                usernamePlaceholder: "thekachoo"
             }
         };
 
@@ -1118,10 +1817,14 @@
             captionInput.placeholder = t.captionPlaceholder;
             usernameInput.placeholder = t.usernamePlaceholder;
 
+            const verifStatusEl = document.getElementById('verifStatus');
+            const verifStatusText = document.getElementById('verifStatusText');
             if (isVerified) {
-                document.getElementById('verifStatusText').innerText = t.verifStatus;
-                verifStatusDiv.style.display = 'block';
-            } else verifStatusDiv.style.display = 'none';
+                verifStatusText.innerText = t.verifStatus;
+                verifStatusEl.style.display = 'block';
+            } else {
+                verifStatusEl.style.display = 'none';
+            }
 
             updatePreviewContent();
         }
@@ -1130,29 +1833,39 @@
             currentLang = (currentLang === 'id') ? 'en' : 'id';
             this.classList.toggle('active');
             updateLanguage();
-            showToast(currentLang === 'id' ? 'Bahasa diubah ke Indonesia' : 'Language changed to English');
+            const msg = currentLang === 'id' ? 'Bahasa diubah ke Indonesia' : 'Language changed to English';
+            showToast(msg);
         });
 
         document.getElementById('toggleVersionBtn').addEventListener('click', function() {
             currentVersion = (currentVersion === 1) ? 2 : 1;
             this.classList.toggle('active');
             applyVersion();
-            showToast(currentLang === 'id' ? 'Versi diubah ke Insta ' + currentVersion : 'Version changed to Insta ' + currentVersion);
+            const msg = currentLang === 'id' ? 'Versi diubah ke Insta ' + currentVersion : 'Version changed to Insta ' +
+                currentVersion;
+            showToast(msg);
         });
 
         document.getElementById('verificationBtn').addEventListener('click', () => {
             isVerified = !isVerified;
             const t = translations[currentLang];
             verifStatusDiv.style.display = isVerified ? 'block' : 'none';
-            if (isVerified) document.getElementById('verifStatusText').innerText = t.verifStatus;
+            if (isVerified) {
+                document.getElementById('verifStatusText').innerText = t.verifStatus;
+            }
             showToast(isVerified ? t.toastVerified : t.toastUnverified);
             updatePreviewContent();
         });
 
         document.getElementById('likeIcon').addEventListener('click', () => {
             let num = parseInt((likeCountInput.value || '0').replace(/[^0-9]/g, '')) || 0;
-            if (!liked) { num++; liked = true; }
-            else { num = Math.max(0, num - 1); liked = false; }
+            if (!liked) {
+                num++;
+                liked = true;
+            } else {
+                num = Math.max(0, num - 1);
+                liked = false;
+            }
             likeCountInput.value = num.toLocaleString();
             updateLoveColor();
             updatePreviewContent();
@@ -1204,7 +1917,8 @@
             modal.style.display = 'flex';
             setTimeout(() => {
                 if (profileCropper) profileCropper.destroy();
-                profileCropper = new Cropper(document.getElementById('profileCropImage'), { aspectRatio: 1, viewMode: 1, autoCropArea: 1 });
+                profileCropper = new Cropper(document.getElementById('profileCropImage'), { aspectRatio: 1,
+                    viewMode: 1, autoCropArea: 1 });
             }, 100);
         }
 
@@ -1214,56 +1928,34 @@
             modal.style.display = 'flex';
             setTimeout(() => {
                 if (postCropper) postCropper.destroy();
-                postCropper = new Cropper(document.getElementById('postCropImage'), { aspectRatio: currentCropRatio === '1:1' ? 1 : 4 / 5, viewMode: 1, autoCropArea: 1 });
+                postCropper = new Cropper(document.getElementById('postCropImage'), { aspectRatio: currentCropRatio ===
+                        '1:1' ? 1 : 4 / 5, viewMode: 1, autoCropArea: 1 });
             }, 100);
         }
-
         document.getElementById('cancelProfileCrop').addEventListener('click', () => {
             document.getElementById('profileCropModal').style.display = 'none';
-            if (profileCropper) { profileCropper.destroy(); profileCropper = null; }
+            if (profileCropper) { profileCropper.destroy();
+                profileCropper = null; }
         });
-
-        // ========== SAVE AVATAR → SUPABASE ==========
         document.getElementById('saveProfileCrop').addEventListener('click', () => {
             if (profileCropper) {
-                profileCropper.getCroppedCanvas({ width: 300, height: 300 }).toBlob(async blob => {
-                    const localUrl = URL.createObjectURL(blob);
-                    document.getElementById('avatarImg').src = localUrl;
+                profileCropper.getCroppedCanvas({ width: 300, height: 300 }).toBlob(blob => {
+                    document.getElementById('avatarImg').src = URL.createObjectURL(blob);
                     document.getElementById('profileCropModal').style.display = 'none';
                     profileCropper.destroy();
                     profileCropper = null;
-                    updatePreviewContent();
-
-                    // Upload ke Supabase
-                    if (supabaseEnabled) {
-                        try {
-                            setSyncStatus('Upload avatar...', 'saving');
-                            const path = `${DEVICE_ID}/avatar_${Date.now()}.png`;
-                            const { error } = await supaClient.storage
-                                .from('avatars')
-                                .upload(path, blob, { upsert: true, contentType: 'image/png' });
-                            if (error) throw error;
-                            const { data } = supaClient.storage.from('avatars').getPublicUrl(path);
-                            document.getElementById('avatarImg').src = data.publicUrl;
-                            setSyncStatus('Avatar tersimpan', 'saved');
-                            saveToSupabase();
-                        } catch (err) {
-                            console.error('Upload avatar error:', err);
-                            setSyncStatus('Gagal upload avatar', 'error');
-                        }
-                    }
                 }, 'image/png');
             }
         });
-
         document.getElementById('cancelPostCrop').addEventListener('click', () => {
             document.getElementById('postCropModal').style.display = 'none';
-            if (postCropper) { postCropper.destroy(); postCropper = null; }
+            if (postCropper) { postCropper.destroy();
+                postCropper = null; }
         });
-
         document.getElementById('savePostCrop').addEventListener('click', () => {
             if (postCropper) {
-                const w = 1080, h = currentCropRatio === '4:5' ? 1350 : 1080;
+                const w = 1080,
+                    h = currentCropRatio === '4:5' ? 1350 : 1080;
                 postCropper.getCroppedCanvas({ width: w, height: h }).toBlob(blob => {
                     const img = document.createElement('img');
                     img.src = URL.createObjectURL(blob);
@@ -1277,16 +1969,18 @@
                 }, 'image/png');
             }
         });
-
-        document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload').click());
+        document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload')
+            .click());
         document.getElementById('avatarUpload').addEventListener('change', e => {
             if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]);
         });
-        document.getElementById('uploadMediaLabel').addEventListener('click', () => document.getElementById('mediaUpload').click());
+        document.getElementById('uploadMediaLabel').addEventListener('click', () => document.getElementById('mediaUpload')
+            .click());
         document.getElementById('mediaUpload').addEventListener('change', e => {
             if (e.target.files[0]?.type.startsWith('image/')) showPostCrop(e.target.files[0]);
         });
 
+        // Download
         document.getElementById('downloadBtn').addEventListener('click', () => {
             html2canvas(document.getElementById('previewOuter'), { scale: 3, backgroundColor: null, useCORS: true })
                 .then(canvas => {
@@ -1297,9 +1991,12 @@
                     showToast(translations[currentLang].toastDownloadSuccess);
                     editBgBtn.classList.add('visible');
                 })
-                .catch(() => showToast(translations[currentLang].toastDownloadFailed));
+                .catch(() => {
+                    showToast(translations[currentLang].toastDownloadFailed);
+                });
         });
 
+        // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileOverlay = document.getElementById('mobileMenuOverlay');
@@ -1314,6 +2011,7 @@
             document.body.style.overflow = '';
         });
 
+        // Desktop nav dropdown
         const trigger = document.getElementById('desktopNavTrigger');
         const dropdown = document.getElementById('desktopNavDropdown');
         trigger.addEventListener('click', e => {
@@ -1323,60 +2021,6 @@
         document.addEventListener('click', e => {
             if (!trigger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
         });
-
-        // ========== SUPABASE: SAVE USERNAME & AVATAR ==========
-        let saveTimeout = null;
-        function scheduleSave() {
-            if (!supabaseEnabled) return;
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveToSupabase, 800);
-        }
-
-        async function saveToSupabase() {
-            if (!supabaseEnabled) return;
-            try {
-                setSyncStatus('Menyimpan...', 'saving');
-                const avatarSrc = document.getElementById('avatarImg').src;
-                const data = {
-                    device_id: DEVICE_ID,
-                    username: document.getElementById('username').value.trim(),
-                    avatar_url: avatarSrc.startsWith('data:') ? null : avatarSrc
-                };
-                const { error } = await supaClient
-                    .from('posts')
-                    .upsert(data, { onConflict: 'device_id' });
-                if (error) throw error;
-                setSyncStatus('Tersimpan ✓', 'saved');
-            } catch (err) {
-                console.error('❌ Save error:', err);
-                setSyncStatus('Gagal menyimpan', 'error');
-            }
-        }
-
-        async function loadFromSupabase() {
-            if (!supabaseEnabled) return;
-            try {
-                const { data, error } = await supaClient
-                    .from('posts')
-                    .select('*')
-                    .eq('device_id', DEVICE_ID)
-                    .maybeSingle();
-                if (error) throw error;
-                if (!data) { console.log('ℹ️ Belum ada data'); return; }
-
-                if (data.username) document.getElementById('username').value = data.username;
-                if (data.avatar_url) document.getElementById('avatarImg').src = data.avatar_url;
-
-                updatePreviewContent();
-                setSyncStatus('Data dimuat ✓', 'saved');
-                console.log('✅ Loaded from Supabase');
-            } catch (err) {
-                console.error('❌ Load error:', err);
-            }
-        }
-
-        // Auto-save saat username berubah
-        document.getElementById('username').addEventListener('input', scheduleSave);
 
         // Init
         currentLang = 'en';
@@ -1394,16 +2038,15 @@
         document.getElementById('previewOuter').style.background = 'transparent';
         document.getElementById('instagramCard').style.background = 'white';
         document.querySelector('.post-header').style.background = 'white';
-        document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => el.style.color = '');
+        document.querySelectorAll('.username, .menu-dot, .action-count, .liked-by-text, .caption-text, .timestamp, .sub-info i, .sub-info').forEach(el => {
+            el.style.color = '';
+        });
         document.querySelectorAll('.sub-info').forEach(el => el.style.color = '');
         document.querySelectorAll('.caption-username').forEach(el => el.style.color = '');
         document.querySelectorAll('.liked-by-text .liked-by-username, .liked-by-text .liked-by-others').forEach(el => el.style.color = '');
         document.querySelectorAll('.action-count').forEach(el => el.style.color = '');
         document.querySelector('.menu-dot').style.color = '';
-        applyThemeToIcons();
-
-        // Load data dari Supabase saat halaman siap
-        window.addEventListener('load', loadFromSupabase);
+        applyThemeToIcons(); // set to v1 icons (light)
     </script>
 </body>
-</html>
+    </html>
