@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Memorandum of Understanding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    /* ===== PRINT: HIDE BROWSER HEADER/FOOTER ===== */
+    @page {
+      margin: 0;
+      size: auto;
+    }
+
+    body {
+      background:#ffffff;
+      font-family:'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color:#000000;
+      line-height:1.5;
+      font-weight:400;
+    }
+    h1,h2,h3,h4,p,li,a,div,span { font-family:'Outfit', sans-serif; }
+
+    .container { max-width:1280px; margin:0 auto; padding:0 28px; width:100%; }
+
+    /* ===== HEADER ===== */
+    header{background:rgba(0,0,0,.95);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.1);}
+    .header-content{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;max-width:1400px;margin:0 auto;position:relative;}
+    .logo-container{display:flex;align-items:center;cursor:pointer;}
+    .logo-container img { height: 28px; width: auto; }
+    .center-title{position:absolute;left:50%;transform:translateX(-50%);text-align:center;}
+    .center-title span{color:#fff;font-weight:900;font-size:26px;letter-spacing:1px;}
+    @media(max-width:640px){.center-title span{font-size:19px;}.logo-container img{height:22px;}}
+    .desktop-nav-container{position:relative;display:block;}
+    @media(max-width:768px){.desktop-nav-container{display:none;}}
+    .desktop-nav-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);padding:8px 18px;border-radius:100px;font-weight:600;font-size:14px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,.2);}
+    .desktop-nav-dropdown{position:absolute;top:calc(100% + 12px);right:0;width:200px;background:rgba(10,10,10,.97);border-radius:18px;padding:8px 0;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.25s;border:1px solid rgba(255,255,255,.12);}
+    .desktop-nav-dropdown.active{opacity:1;visibility:visible;transform:translateY(0);}
+    .desktop-nav-dropdown a{display:block;width:100%;padding:11px 20px;font-weight:500;font-size:13px;color:rgba(255,255,255,.85);text-decoration:none;}
+    .desktop-nav-dropdown a:hover{background:rgba(255,255,255,.1);}
+    .mobile-menu-btn{display:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:18px;color:#fff;width:40px;height:40px;border-radius:60px;cursor:pointer;align-items:center;justify-content:center;}
+    @media(max-width:768px){.mobile-menu-btn{display:flex;}}
+    .mobile-menu{position:fixed;top:0;right:-100%;width:75%;max-width:260px;height:100vh;background:rgba(0,0,0,.97);padding:90px 20px 40px;transition:right .3s ease;z-index:999;border-left:1px solid rgba(255,255,255,.1);}
+    .mobile-menu.active{right:0;}
+    .mobile-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);opacity:0;visibility:hidden;transition:.3s;z-index:998;}
+    .mobile-menu-overlay.active{opacity:1;visibility:visible;}
+    .mobile-menu-link{display:block;padding:13px 18px;background:rgba(255,255,255,.06);border-radius:40px;text-decoration:none;color:#fff;font-weight:500;margin-bottom:10px;text-align:center;font-size:14px;}
+
+    /* ===== PAGE BODY ===== */
+    .page-body { width:100%; padding:120px 0 20px; }
+
+    /* DESKTOP CONTAINER (narrower, centered) */
+    .desktop-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .desktop-container { max-width: 100%; padding: 0 20px; }
+    }
+    @media (max-width: 480px) {
+      .desktop-container { padding: 0 16px; }
+    }
+
+    .mou-title {
+      font-size:2rem; font-weight:800; letter-spacing:-0.5px; text-align:center;
+      padding-bottom:14px; margin-bottom:6px; border-bottom:2px solid #000;
+    }
+    .mou-parties { text-align:center; margin:18px 0 26px; font-size:1.05rem; }
+    .mou-parties .party-name { font-weight:700; }
+
+    .mou-section { margin:22px 0 8px; }
+    .mou-section h3 {
+      font-size:1.25rem; font-weight:700; text-align:center; margin:26px 0 10px; letter-spacing:-0.2px;
+    }
+    .mou-section p {
+      font-size:1.02rem; line-height:1.75; text-align:justify; text-justify:inter-word; margin-bottom:10px;
+    }
+
+    /* ===== BULLET LIST with "—" prefix (each item on its own line) ===== */
+    .mou-section ul { 
+      list-style: none; 
+      padding-left: 0; 
+      margin: 6px 0 12px; 
+    }
+    .mou-section ul li {
+      display: block;
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      text-align: left;
+      width: 100%;
+    }
+    .mou-section ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #000;
+      font-weight: 400;
+    }
+    .mou-section strong { font-weight:700; }
+    .mou-italic { font-style:italic; }
+
+    /* Editable inline — now with sample text (placeholder feel) */
+    [contenteditable]{
+      outline:none;
+      border-bottom:1px dashed #bbb;
+      padding:0 4px;
+      min-width:40px;
+      display:inline-block;
+      transition:background .15s;
+      cursor:text;
+      color:#555; /* slightly muted so it feels like placeholder */
+    }
+    [contenteditable]:hover{ background:#f5f5f5; color:#000; }
+    [contenteditable]:focus{ background:#eef4ff; border-bottom-color:#1a73e8; color:#000; }
+    
+    /* When the user starts typing, the text becomes normal black */
+    [contenteditable]:not(:empty) { color:#000; }
+
+    /* ===== SIGNATURES ===== */
+    .signature-wrap {
+      display:grid; 
+      grid-template-columns:1fr 1fr; 
+      gap:40px;
+      margin:34px 0 10px; 
+      align-items:start;
+    }
+
+    .sig-col { display:flex; flex-direction:column; height:100%; }
+    .sig-col .sig-top { flex:0 0 auto; }
+    .sig-col .sig-bottom { margin-top:auto; width:100%; }
+
+    .sig-col p { font-size:0.85rem; margin-bottom:3px; text-align:left; line-height:1.4; }
+    .sig-col .sig-label { font-weight:700; font-size:0.9rem; margin-top:6px; }
+    
+    .sig-line {
+      margin-top:30px; margin-bottom:10px; border-bottom:1px solid #000; width:100%;
+    }
+
+    .sig-info-row {
+      display:flex; align-items:center; gap:8px; margin-bottom:4px;
+    }
+    .sig-info-row .label {
+      font-weight:600; font-size:0.85rem; white-space:nowrap; min-width:75px;
+    }
+    .sig-info-row .value-input {
+      border:none;
+      border-bottom:1px solid #000;
+      background:transparent;
+      font-family:'Outfit', sans-serif;
+      font-size:0.85rem;
+      font-weight:500;
+      padding:2px 4px;
+      min-width:120px;
+      flex:1;
+      outline:none;
+      transition:border-color 0.2s;
+    }
+    .sig-info-row .value-input:focus { border-bottom-color:#666; }
+    .sig-info-row .value-input::placeholder { font-weight:400; font-size:0.7rem; color:#aaa; }
+
+    /* TTD - UPLOAD */
+    .ttd-upload-wrap {
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+      margin-top:8px; cursor:pointer;
+    }
+    .ttd-upload-wrap label {
+      font-size:0.75rem; background:#f0f0f0; padding:4px 12px; border-radius:20px;
+      cursor:pointer; transition:background 0.2s;
+    }
+    .ttd-upload-wrap label:hover { background:#ddd; }
+    .ttd-upload-wrap input[type="file"] { display:none; }
+    
+    .ttd-preview {
+      max-height:80px; max-width:200px; object-fit:contain; cursor:pointer;
+      display:none; background:transparent; border:none; padding:0;
+    }
+    .ttd-preview-placeholder {
+      font-size:0.7rem; color:#999; padding:4px 8px; border:1px dashed #ddd;
+      border-radius:4px; min-width:80px; text-align:center; display:inline-block;
+    }
+
+    /* ===== TOMBOL PRINT ===== */
+    .save-section { margin:30px 0 10px; text-align:center; }
+    .btn-print {
+      background:#000; color:#fff; border:none;
+      font-family:'Outfit', sans-serif; font-weight:600; font-size:1rem;
+      padding:14px 48px; border-radius:40px;
+      cursor:pointer; transition:all 0.25s ease; letter-spacing:0.5px;
+    }
+    .btn-print:hover { background:#222; transform:scale(1.02); box-shadow:0 4px 20px rgba(0,0,0,0.15); }
+    .btn-print i { margin-right:10px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #000;
+      color: #ddd;
+      padding: 50px 0 28px;
+      margin-top: 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 36px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    }
+    .footer-section h3 {
+      font-size: 0.7rem; font-weight: 700; margin-bottom: 14px;
+      color: white; text-transform: uppercase; letter-spacing: 1.2px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0px; }
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.5); text-decoration: none;
+      font-size: 0.83rem; transition: 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-brand p {
+      color: rgba(255, 255, 255, 0.5); font-size: 0.8rem;
+      max-width: 200px; margin-bottom: 14px; line-height: 1.6;
+    }
+    .social-links { display: flex; gap: 10px; }
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: rgba(255, 255, 255, 0.08);
+      border-radius: 60px; color: white; text-decoration: none;
+      font-size: 12px; transition: 0.2s;
+    }
+    .social-link:hover { background: white; color: black; }
+    .footer-bottom {
+      display: flex; align-items: center; padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      max-width: 1400px; margin: 0 auto;
+      padding-left: 24px; padding-right: 24px;
+    }
+    .copyright {
+      font-size: 0.7rem; color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:900px) {
+      .signature-wrap { grid-template-columns:1fr 1fr !important; gap:20px !important; }
+      .sig-col { width:100% !important; min-width:0 !important; }
+      .sig-line { width:100% !important; }
+      .sig-info-row .label { min-width:65px; font-size:0.75rem; }
+      .sig-info-row .value-input { min-width:80px; font-size:0.75rem; }
+      .ttd-preview { max-height:60px; max-width:140px; }
+    }
+    @media (max-width:600px) {
+      .mou-title { font-size:1.4rem; }
+      .mou-section h3 { font-size:1.05rem; }
+      .mou-section p, .mou-section ul li { font-size:0.92rem; }
+      .signature-wrap { grid-template-columns:1fr 1fr !important; gap:12px !important; }
+      .sig-col { width:100% !important; min-width:0 !important; padding:0 4px !important; }
+      .sig-col p { font-size:0.65rem; }
+      .sig-info-row .label { min-width:55px; font-size:0.65rem; }
+      .sig-info-row .value-input { min-width:60px; font-size:0.65rem; }
+      .sig-info-row { gap:4px; }
+      .ttd-preview { max-height:45px; max-width:100px; }
+      .sig-line { width:100% !important; }
+      .ttd-upload-wrap label { font-size:0.6rem; padding:2px 6px; }
+      .ttd-preview-placeholder { font-size:0.55rem; min-width:50px; padding:2px 4px; }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      @page {
+        margin: 0;
+        size: auto;
+      }
+
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      header, footer, .mobile-menu, .mobile-menu-overlay { display: none !important; }
+      .btn-print, .ttd-upload-wrap label, .ttd-upload-wrap input, .ttd-preview-placeholder, .save-section {
+        display:none !important;
+      }
+      .ttd-preview { display:block !important; max-height:80px !important; border:none !important; background:transparent !important; }
+      
+      /* Remove underline from editable fields and signature inputs in print */
+      [contenteditable]{ 
+        border-bottom: none !important; 
+        background: transparent !important;
+        color: #000 !important;
+      }
+      .sig-info-row .value-input {
+        border-bottom: none !important;
+        background: transparent !important;
+      }
+      .sig-line { border-bottom:1px solid #000 !important; }
+      .mou-title { border-bottom:2px solid #000 !important; }
+      .desktop-container { padding:0 20px !important; max-width:100% !important; }
+      .page-body { padding:20px 0 !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-content">
+    <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <!-- LOGO.png — replace with your actual logo file -->
+      <img src="Logo.png" alt="Logo" />
+    </div>
+    <div class="center-title"><span>MoU TEMPLATE</span></div>
+    <div class="desktop-nav-container">
+      <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
+      <div class="desktop-nav-dropdown" id="desktopNavDropdown">
+        <a href="Home.html">Home</a>
+        <a href="Chomail.html">Chomail</a>
+        <a href="Convert.html">Convert File</a>
+        <a href="Ratio.html">Ratio Editor</a>
+      </div>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+  </div>
+</header>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="Home.html" class="mobile-menu-link">Home</a>
+  <a href="Chomail.html" class="mobile-menu-link">Chomail</a>
+  <a href="Convert.html" class="mobile-menu-link">Convert File</a>
+  <a href="Ratio.html" class="mobile-menu-link">Ratio Editor</a>
+</div>
+
+<!-- ===== PAGE BODY ===== -->
+<div class="page-body">
+  <div class="desktop-container" id="mou-content">
+
+    <h1 class="mou-title">MEMORANDUM OF UNDERSTANDING (MoU)</h1>
+    <div class="mou-parties">
+      <div class="party-name">
+        <span contenteditable data-ph="Party One Name" data-sync="partyOneName" class="sync-party-one">PARTY ONE NAME</span>
+      </div>
+      <div>and</div>
+      <div class="party-name">
+        <span contenteditable data-ph="Party Two Name" data-sync="partyTwoName" class="sync-party-two">PARTY TWO NAME</span>
+      </div>
+    </div>
+
+    <div class="mou-section">
+      <p>This Memorandum of Understanding (MoU) is made and entered into by and between:</p>
+      <p><strong><span contenteditable data-ph="Party One Name" data-sync="partyOneName" class="sync-party-one">PARTY ONE NAME</span></strong>, with an address at <span contenteditable data-ph="Party One Address">[Address Party One]</span>, hereinafter referred to as <strong>"Party One"</strong>.</p>
+      <p><strong><span contenteditable data-ph="Party Two Full Name" data-sync="partyTwoName" class="sync-party-two">PARTY TWO NAME</span></strong>, a <strong><span contenteditable data-ph="Role">[Sponsor / Media Partner / Technical Support / Guest Star / Master Ceremony / Etc]</span></strong>, with an address at <span contenteditable data-ph="Party Two Address">[Address]</span>, hereinafter referred to as <strong>"Party Two"</strong>.</p>
+      <p>Party One and Party Two are hereinafter individually referred to as a "Party" and collectively referred to as the "Parties."</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>1. Purpose</h3>
+      <p>This MoU serves as a general framework of cooperation between Party One and Party Two for participation and contribution in <strong><span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span></strong>. <span contenteditable data-ph="Project Description">(Project Description)</span> This MoU outlines the basic understanding, roles, and expectations of the Parties during the production, publication, and promotional period of <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span>, without creating a legally binding partnership unless otherwise specified in a separate written agreement.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>2. Scope of Collaboration</h3>
+      <p>Party Two agrees to participate in <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span> in the capacity of <strong><span contenteditable data-ph="Role">[Sponsor / Media Partner / Technical Support / Guest Star / Master Ceremony / Etc]</span></strong>, including but not limited to:</p>
+      <ul>
+        <li contenteditable data-ph="Point 1">Point 1</li>
+        <li contenteditable data-ph="Point 2">Point 2</li>
+        <li contenteditable data-ph="Point 3">Point 3</li>
+      </ul>
+      <p><span contenteditable data-ph="Additional terms...">Specific deliverables, schedules, and technical details may be further agreed upon separately in writing.</span></p>
+    </div>
+
+    <div class="mou-section">
+      <h3>3. Duration</h3>
+      <p>This MoU shall be valid for the duration of <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span>, commencing from:</p>
+      <p><strong>Start Date:</strong> <span contenteditable data-ph="Start Date">[Start Date]</span><br><strong>End Date:</strong> <span contenteditable data-ph="End Date">[End Date]</span></p>
+      <p>or for the full active period of <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span>, including production, release, and related promotional activities, whichever period is longer.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>4. Partner Contribution and Benefits</h3>
+      <p><strong>1) Contribution.</strong> Depending on the partnership category, Party Two agrees to provide the following:</p>
+      <ul>
+        <li contenteditable data-ph="Contribution 1">Contribution 1</li>
+        <li contenteditable data-ph="Contribution 2">Contribution 2</li>
+        <li contenteditable data-ph="Contribution 3">Contribution 3</li>
+      </ul>
+      <p><strong>2) Benefits.</strong> In return, Party One agrees to provide Party Two with the following benefits:</p>
+      <ul>
+        <li contenteditable data-ph="Benefit 1">Benefit 1</li>
+        <li contenteditable data-ph="Benefit 2">Benefit 2</li>
+        <li contenteditable data-ph="Benefit 3">Benefit 3</li>
+      </ul>
+      <p><span contenteditable data-ph="Additional compensation terms...">Any additional compensation, fee, or payment terms beyond the benefits above shall be mutually agreed upon and confirmed separately in writing.</span></p>
+    </div>
+
+    <div class="mou-section">
+      <h3>5. Rights and Usage</h3>
+      <p>Party Two grants Party One the right to use submitted works, images, likeness, name, brand, and related materials solely for:</p>
+      <ul>
+        <li contenteditable data-ph="Usage 1">Usage 1</li>
+        <li contenteditable data-ph="Usage 2">Usage 2</li>
+      </ul>
+      <p>Any usage beyond <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span> shall require additional written consent from Party Two.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>6. Responsibilities of the Parties</h3>
+      <ul>
+        <li>Each Party shall perform their respective roles in a professional and timely manner.</li>
+        <li>Each Party is responsible for their own expenses unless otherwise agreed in writing.</li>
+        <li>Party Two confirms that any submitted work, product, or material does not infringe upon third-party rights.</li>
+        <li><strong>Follow Official Account:</strong> Both Parties agree to follow the official X (Twitter) account <strong>@<span contenteditable data-ph="Party One Username">PartyOne</span></strong> &amp; <strong>@<span contenteditable data-ph="Party Two Username">PartyTwo</span></strong>.</li>
+        <li><strong>Retweet Publication:</strong> Party Two agrees to retweet/share the post when <span contenteditable data-ph="Project Name" data-sync="projectName" class="sync-project">(Project Name)</span> is officially released.</li>
+      </ul>
+    </div>
+
+    <div class="mou-section">
+      <h3>7. Confidentiality</h3>
+      <p>Both Parties agree to keep confidential any non-public information related to the project, including but not limited to creative concepts, unpublished materials, and internal communications, unless disclosure is required by law or approved in writing by the other Party.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>8. Non-Exclusivity</h3>
+      <p>Unless otherwise stated in a separate agreement, this MoU does not create an exclusive relationship between the Parties.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>9. Termination</h3>
+      <p>Either Party may terminate this MoU by providing written notice to the other Party. Termination shall not affect any obligations already fulfilled or contributions/benefits due for completed collaboration.</p>
+    </div>
+
+    <div class="mou-section">
+      <h3>10. General Provisions</h3>
+      <ul>
+        <li>This MoU does not constitute an employment relationship, partnership, or joint venture.</li>
+        <li>Amendments to this MoU must be made in writing and agreed upon by both Parties.</li>
+        <li>This MoU shall be governed by the laws agreed upon by the Parties or, in the absence thereof, by mutual understanding.</li>
+      </ul>
+    </div>
+
+    <div class="mou-section">
+      <h3>11. Signatures</h3>
+      <p>This MoU shall enter into effect upon signing by both Parties.</p>
+
+      <div class="signature-wrap">
+        <!-- KOLOM KIRI: PARTY ONE -->
+        <div class="sig-col">
+          <div class="sig-top">
+            <p class="sig-label"><strong>Party One</strong></p>
+            <p style="font-weight:600;"><span contenteditable data-ph="Party One Name" data-sync="partyOneName" class="sync-party-one">PARTY ONE NAME</span></p>
+            <p style="font-size:0.8rem;"><span contenteditable data-ph="Profession / Company">[Profession / Company]</span></p>
+            
+            <div class="ttd-upload-wrap" id="ttdWrapper1">
+              <input type="file" id="ttd-party1" accept="image/png" />
+              <img id="preview-party1" class="ttd-preview" alt="Signature Party One" />
+              <span id="placeholder-party1" class="ttd-preview-placeholder">⬆ Upload PNG</span>
+            </div>
+          </div>
+          
+          <div class="sig-bottom">
+            <div class="sig-line"></div>
+            <div class="sig-info-row">
+              <span class="label">Name:</span>
+              <input type="text" class="value-input" id="p1-name" placeholder="Full Name" />
+            </div>
+            <div class="sig-info-row">
+              <span class="label">Position:</span>
+              <input type="text" class="value-input" id="p1-title" placeholder="Position" />
+            </div>
+            <div class="sig-info-row">
+              <span class="label">Date:</span>
+              <input type="text" class="value-input" id="p1-date" placeholder="Date" />
+            </div>
+          </div>
+        </div>
+
+        <!-- KOLOM KANAN: PARTY TWO -->
+        <div class="sig-col">
+          <div class="sig-top">
+            <p class="sig-label"><strong>Party Two</strong></p>
+            <p style="font-weight:600; font-size:0.9rem;"><span contenteditable data-ph="Party Two Name" data-sync="partyTwoName" class="sync-party-two">PARTY TWO NAME</span></p>
+            <p style="font-size:0.8rem;"><span contenteditable data-ph="Profession / Company">[Profession / Company]</span></p>
+            
+            <div class="ttd-upload-wrap" id="ttdWrapper2">
+              <input type="file" id="ttd-party2" accept="image/png" />
+              <img id="preview-party2" class="ttd-preview" alt="Signature Party Two" />
+              <span id="placeholder-party2" class="ttd-preview-placeholder">⬆ Upload PNG</span>
+            </div>
+          </div>
+          
+          <div class="sig-bottom">
+            <div class="sig-line"></div>
+            <div class="sig-info-row">
+              <span class="label">Name:</span>
+              <input type="text" class="value-input" id="p2-name" placeholder="Full Name" />
+            </div>
+            <div class="sig-info-row">
+              <span class="label">Position:</span>
+              <input type="text" class="value-input" id="p2-title" placeholder="Position" />
+            </div>
+            <div class="sig-info-row">
+              <span class="label">Date:</span>
+              <input type="text" class="value-input" id="p2-date" placeholder="Date" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== TOMBOL PRINT ===== -->
+<div class="save-section">
+  <button class="btn-print" id="printButton"><i class="fas fa-print"></i> Print MoU</button>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section footer-brand">
+            <h3>CHODATE</h3>
+            <p id="footerDesc">CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+            <div class="social-links">
+                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3 id="footerExplore">Explore</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                <li><a href="#">Kadio</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3 id="footerMore">More</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                <li><a href="https://thekachoo.github.io/CHOSONG/">Chosong</a></li>
+                <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3 id="footerMeet">Meet Us</h3>
+            <ul class="footer-links">
+                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="copyright" id="footerCopyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+  /* ===== MOBILE MENU ===== */
+  const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+  const mobileMenu=document.getElementById('mobileMenu');
+  const mobileOverlay=document.getElementById('mobileMenuOverlay');
+  mobileMenuBtn.addEventListener('click',()=>{
+    mobileMenu.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow=mobileMenu.classList.contains('active')?'hidden':'';
+  });
+  mobileOverlay.addEventListener('click',()=>{
+    mobileMenu.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow='';
+  });
+
+  /* ===== DESKTOP DROPDOWN ===== */
+  const trigger=document.getElementById('desktopNavTrigger');
+  const dropdown=document.getElementById('desktopNavDropdown');
+  trigger.addEventListener('click', e=>{e.stopPropagation(); dropdown.classList.toggle('active');});
+  document.addEventListener('click', e=>{
+    if(!trigger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
+  });
+
+  /* ===== UPLOAD TTD (PARTY ONE & PARTY TWO) ===== */
+  function setupTtd(inputId, previewId, placeholderId){
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const placeholder = document.getElementById(placeholderId);
+
+    input.addEventListener('change', function(e){
+      const file = e.target.files[0];
+      if (file){
+        const reader = new FileReader();
+        reader.onload = function(ev){
+          preview.src = ev.target.result;
+          preview.style.display = 'block';
+          placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    preview.addEventListener('click', ()=> input.click());
+    placeholder.addEventListener('click', ()=> input.click());
+  }
+  setupTtd('ttd-party1','preview-party1','placeholder-party1');
+  setupTtd('ttd-party2','preview-party2','placeholder-party2');
+
+  /* ===== PRINT ===== */
+  document.getElementById('printButton').addEventListener('click', function() {
+    window.print();
+  });
+
+  /* ===== AUTO-SYNC: Party One, Party Two, Project Name ===== */
+  (function() {
+    const partyOneEls = document.querySelectorAll('.sync-party-one');
+    partyOneEls.forEach(el => {
+      el.addEventListener('input', function() {
+        const val = this.innerText.trim() || 'PARTY ONE NAME';
+        partyOneEls.forEach(other => {
+          if (other !== this) other.innerText = val;
+        });
+      });
+    });
+
+    const partyTwoEls = document.querySelectorAll('.sync-party-two');
+    partyTwoEls.forEach(el => {
+      el.addEventListener('input', function() {
+        const val = this.innerText.trim() || 'PARTY TWO NAME';
+        partyTwoEls.forEach(other => {
+          if (other !== this) other.innerText = val;
+        });
+      });
+    });
+
+    const projectEls = document.querySelectorAll('.sync-project');
+    projectEls.forEach(el => {
+      el.addEventListener('input', function() {
+        const val = this.innerText.trim() || '(Project Name)';
+        projectEls.forEach(other => {
+          if (other !== this) other.innerText = val;
+        });
+      });
+    });
+
+    // Initialize with sample text (already in HTML)
+    // Set initial values if empty
+    document.querySelectorAll('.sync-party-one').forEach(el => {
+      if (el.innerText.trim() === '') el.innerText = 'PARTY ONE NAME';
+    });
+    document.querySelectorAll('.sync-party-two').forEach(el => {
+      if (el.innerText.trim() === '') el.innerText = 'PARTY TWO NAME';
+    });
+    document.querySelectorAll('.sync-project').forEach(el => {
+      if (el.innerText.trim() === '') el.innerText = '(Project Name)';
+    });
+  })();
+
+</script>
+
+</body>
+</html>
