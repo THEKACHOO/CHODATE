@@ -10,7 +10,7 @@ document.body.insertAdjacentHTML('afterbegin', `
     <div class="desktop-nav-container">
       <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
       <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-        <a href="Home.html">Home</a>
+        <a href="https://thekachoo.github.io/CHODATE/">Home</a>
         <a href="MoU.html">MoU Templates</a>
         <a href="Convert.html">Convert File</a>
         <a href="Ratio.html">Ratio Editor</a>
