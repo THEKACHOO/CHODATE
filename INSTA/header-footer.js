@@ -14,6 +14,7 @@ document.body.insertAdjacentHTML('afterbegin', `
         <a href="Profile.html">Instacho Profile</a>
         <a href="Post.html">Instacho Post</a>
         <a href="Story.html">Instacho Story</a>
+        <a href="Live.html">Instacho Live</a>
       </div>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
