@@ -15,10 +15,11 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 header{background:rgba(0,0,0,.95);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.1);}
 .header-content{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;max-width:1400px;margin:0 auto;position:relative;}
 .logo-container{display:flex;align-items:center;cursor:pointer;}
+.logo-container img{height:36px;width:auto;display:block;}
 .logo-text{color:#fff;font-weight:800;font-size:18px;letter-spacing:.5px;}
 .center-title{position:absolute;left:50%;transform:translateX(-50%);text-align:center;}
-.center-title span{color:#fff;font-weight:900;font-size:26px;letter-spacing:1px;}
-@media(max-width:640px){.center-title span{font-size:19px;}.logo-text{font-size:14px;}}
+.center-title span{color:#fff;font-weight:700;font-size:15px;letter-spacing:.5px;}
+@media(max-width:640px){.center-title span{font-size:12px;}.logo-container img{height:26px;}.logo-text{font-size:14px;}}
 .desktop-nav-container{position:relative;display:block;}
 @media(max-width:768px){.desktop-nav-container{display:none;}}
 .desktop-nav-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);padding:8px 18px;border-radius:100px;font-weight:600;font-size:14px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,.2);}
@@ -114,27 +115,32 @@ header{background:rgba(0,0,0,.95);backdrop-filter:blur(16px);position:fixed;top:
 .download-btn:disabled{opacity:.6;cursor:wait;}
 .toast-msg{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:11px 22px;border-radius:60px;font-weight:500;font-size:13px;z-index:30000;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;}
 
-footer{background:#000;color:#ddd;padding:50px 0 28px;margin-top:50px;}
+/* ===== FOOTER (TEMPLATE STANDAR) ===== */
+footer{background:#000;color:#ddd;padding:50px 0 28px;margin-top:40px;}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px;max-width:1400px;margin-left:auto;margin-right:auto;padding:0 24px;}
 @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:24px;}}
 .footer-section h3{font-size:.7rem;font-weight:700;margin-bottom:14px;color:#fff;text-transform:uppercase;letter-spacing:1.2px;}
 .footer-links{list-style:none;}
+.footer-links li{margin-bottom:0px;}
 .footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.83rem;transition:.2s;}
-.footer-links a:hover{color:#fff;}
-.footer-brand p{color:rgba(255,255,255,.5);font-size:.8rem;max-width:220px;margin-bottom:14px;line-height:1.6;}
+.footer-links a:hover{color:#fff;transform:translateX(4px);display:inline-block;}
+.footer-brand p{color:rgba(255,255,255,.5);font-size:.8rem;max-width:280px;margin-bottom:14px;line-height:1.6;}
 .social-links{display:flex;gap:10px;}
-.social-link{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:rgba(255,255,255,.08);border-radius:60px;color:#fff;text-decoration:none;font-size:12px;}
-.social-link:hover{background:#fff;color:#000;}
-.footer-bottom{display:flex;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);max-width:1400px;margin:0 auto;padding-left:24px;padding-right:24px;}
-.copyright{text-align:center; width:100%;font-size:.7rem;color:rgba(255,255,255,.4);}
+.social-link{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:rgba(255,255,255,.08);border-radius:60px;color:#fff;text-decoration:none;font-size:12px;transition:all .25s;}
+.social-link:hover{background:#fff;color:#000;transform:translateY(-3px);}
+.footer-bottom{display:flex;justify-content:center;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);max-width:1400px;margin:0 auto;padding-left:24px;padding-right:24px;}
+.copyright{font-size:.75rem;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.3px;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-content">
-    <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="logo-text">CHOMAIL</span></div>
-    <div class="center-title"><span>CHOMAIL</span></div>
+    <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <img src="Logo.png" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none;">CHOWORKER</span>
+    </div>
+    <div class="center-title"><span>YOUR CHOWORKER</span></div>
     <div class="desktop-nav-container">
       <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
       <div class="desktop-nav-dropdown" id="desktopNavDropdown">
@@ -251,44 +257,47 @@ footer{background:#000;color:#ddd;padding:50px 0 28px;margin-top:50px;}
   </div>
 </div>
 
+<!-- ========== FOOTER (SAMA PERSIS TEMPLATE) ========== -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-section footer-brand">
-      <h3>CHOMAIL</h3>
-      <p>CHOMAIL is a feature developed by Kachoo for email content mockups, intended for roleplay purposes.</p>
-      <div class="social-links">
-        <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-        <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-      </div>
+    <div class="footer-grid">
+        <div class="footer-section footer-brand">
+            <h3>CHODATE</h3>
+            <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+            <div class="social-links">
+                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Explore</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                <li><a href="#">Kadio</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>More</h3>
+            <ul class="footer-links">
+                <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Meet Us</h3>
+            <ul class="footer-links">
+                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="footer-section">
-      <h3>Explore</h3>
-      <ul class="footer-links">
-        <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
-        <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
-        <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
-        <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
-        <li><a href="#">Kadio</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
     </div>
-    <div class="footer-section">
-      <h3>More</h3>
-      <ul class="footer-links">
-        <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
-        <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-        <li><a href="https://thekachoo.github.io/CHOSONG/">Chosong</a></li>
-        <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Meet Us</h3>
-      <ul class="footer-links">
-        <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
-        <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom"><div class="copyright">© 2026 CHOMAIL by The Kachoo. All rights reserved.</div></div>
 </footer>
 
 <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
@@ -298,11 +307,7 @@ footer{background:#000;color:#ddd;padding:50px 0 28px;margin-top:50px;}
 const OWNER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%231a73e8'/%3E%3Ctext x='15' y='20' font-size='12' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EYou%3C/text%3E%3C/svg%3E";
 const SENDER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' fill='%23ea4335'/%3E%3Ctext x='18' y='23' font-size='13' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%3F%3C/text%3E%3C/svg%3E";
 
-/* ===== TO CONTROL STATE ===== */
-let toState = {
-  mode: 'me',
-  email: ''
-};
+let toState = { mode: 'me', email: '' };
 
 function renderToControl(){
   document.querySelectorAll('.js-to-control').forEach(container=>{
@@ -316,50 +321,29 @@ function renderToControl(){
       container.innerHTML = `
         <input class="to-input" type="text" value="${toState.email}" placeholder="email@contoh.com">`;
     }
-
     const sel = container.querySelector('.to-select');
     if(sel){
       sel.addEventListener('change', function(){
         if(this.value === 'custom'){
-          toState.mode = 'custom';
-          toState.email = '';
-          renderToControl();
-          setTimeout(()=>{
-            document.querySelectorAll('.js-to-control .to-input').forEach(inp=>{
-              if(inp.offsetParent !== null){ inp.focus(); }
-            });
-          }, 0);
-        } else {
-          toState.mode = 'me';
-          renderToControl();
-        }
+          toState.mode = 'custom'; toState.email = ''; renderToControl();
+          setTimeout(()=>{ document.querySelectorAll('.js-to-control .to-input').forEach(inp=>{ if(inp.offsetParent !== null){ inp.focus(); } }); }, 0);
+        } else { toState.mode = 'me'; renderToControl(); }
       });
     }
-
     const inp = container.querySelector('.to-input');
     if(inp){
       inp.addEventListener('input', function(){
         toState.email = this.value;
-        document.querySelectorAll('.js-to-control .to-input').forEach(other=>{
-          if(other !== this) other.value = this.value;
-        });
+        document.querySelectorAll('.js-to-control .to-input').forEach(other=>{ if(other !== this) other.value = this.value; });
       });
-      const backToMeIfEmpty = ()=>{
-        if(toState.email.trim() === ''){
-          toState.mode = 'me';
-          renderToControl();
-        }
-      };
+      const backToMeIfEmpty = ()=>{ if(toState.email.trim() === ''){ toState.mode = 'me'; renderToControl(); } };
       inp.addEventListener('blur', backToMeIfEmpty);
-      inp.addEventListener('keydown', function(e){
-        if(e.key === 'Enter'){ e.preventDefault(); this.blur(); }
-      });
+      inp.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); this.blur(); } });
     }
   });
 }
 renderToControl();
 
-/* ===== STAR TOGGLE ===== */
 document.querySelectorAll('.js-time-star').forEach(star=>{
   star.addEventListener('click', function(){
     const isActive = this.classList.contains('fa-solid');
@@ -371,23 +355,17 @@ document.querySelectorAll('.js-time-star').forEach(star=>{
   });
 });
 
-/* ===== SYNC PLAIN TEXT FIELDS ===== */
 function syncClass(cls){
   document.querySelectorAll('.'+cls).forEach(el=>{
     el.addEventListener('input',()=>{
       const val = el.innerText;
-      document.querySelectorAll('.'+cls).forEach(other=>{
-        if(other!==el) other.innerText = val;
-      });
-      if(cls==='js-subject'){
-        document.querySelectorAll('.js-subject-top').forEach(t=>t.innerText=val);
-      }
+      document.querySelectorAll('.'+cls).forEach(other=>{ if(other!==el) other.innerText = val; });
+      if(cls==='js-subject'){ document.querySelectorAll('.js-subject-top').forEach(t=>t.innerText=val); }
     });
   });
 }
 ['js-subject','js-sname','js-semail','js-time','js-body'].forEach(syncClass);
 
-/* ===== AVATAR UPLOADS ===== */
 const avatarUpload = document.getElementById('avatarUpload');
 let currentTarget = null;
 function bindAvatarClick(id, target){
@@ -401,63 +379,41 @@ avatarUpload.addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file || !file.type.startsWith('image/')) return;
   const url = URL.createObjectURL(file);
-  if(currentTarget==='owner'){
-    document.getElementById('avatarImgOwner').src = url;
-  } else {
-    document.getElementById('avatarImgSenderD').src = url;
-    document.getElementById('avatarImgSenderM').src = url;
-  }
+  if(currentTarget==='owner'){ document.getElementById('avatarImgOwner').src = url; }
+  else { document.getElementById('avatarImgSenderD').src = url; document.getElementById('avatarImgSenderM').src = url; }
   avatarUpload.value='';
 });
 document.getElementById('avatarImgOwner').src = OWNER_DEFAULT;
 document.getElementById('avatarImgSenderD').src = SENDER_DEFAULT;
 document.getElementById('avatarImgSenderM').src = SENDER_DEFAULT;
 
-/* ===== TOAST ===== */
 function showToast(msg){
   const t=document.getElementById('toastMsg');
   t.innerText=msg; t.style.opacity='1';
   setTimeout(()=>t.style.opacity='0',2000);
 }
 
-/* ===== DOWNLOAD PNG ===== */
 document.getElementById('downloadBtn').addEventListener('click', function(){
   const btn = this;
   const originalText = btn.innerText;
-  btn.innerText = 'Memproses...';
-  btn.disabled = true;
-
+  btn.innerText = 'Memproses...'; btn.disabled = true;
   const captureArea = document.getElementById('captureArea');
   const scrollY = window.scrollY;
-
   html2canvas(captureArea, {
-    scale: 3,
-    backgroundColor: '#ffffff',
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    scrollX: 0,
-    scrollY: -scrollY,
+    scale: 3, backgroundColor: '#ffffff', useCORS: true, allowTaint: true, logging: false,
+    scrollX: 0, scrollY: -scrollY,
     windowWidth: document.documentElement.scrollWidth,
     windowHeight: document.documentElement.scrollHeight
   }).then(canvas=>{
     const a = document.createElement('a');
     a.download = `chomail_${Date.now()}.png`;
     a.href = canvas.toDataURL('image/png');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     showToast('PNG berhasil diunduh!');
-  }).catch(err=>{
-    console.error(err);
-    showToast('Gagal mengunduh, coba lagi');
-  }).finally(()=>{
-    btn.innerText = originalText;
-    btn.disabled = false;
-  });
+  }).catch(err=>{ console.error(err); showToast('Gagal mengunduh, coba lagi'); })
+  .finally(()=>{ btn.innerText = originalText; btn.disabled = false; });
 });
 
-/* ===== MOBILE MENU ===== */
 const mobileMenuBtn=document.getElementById('mobileMenuBtn');
 const mobileMenu=document.getElementById('mobileMenu');
 const mobileOverlay=document.getElementById('mobileMenuOverlay');
