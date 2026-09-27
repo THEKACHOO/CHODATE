@@ -48,6 +48,21 @@
         .main-content {
             padding: 28px 0 60px;
         }
+
+        .page-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: #1a1a1a;
+    font-family: 'Outfit', sans-serif;
+}
+@media (max-width: 640px) {
+    .page-title {
+        font-size: 32px;
+        margin-bottom: 24px;
+    }
+}
         .story-studio {
             display: flex;
             flex-wrap: wrap;
@@ -65,51 +80,72 @@
         .settings-title {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 18px;
             color: #000;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-align: center;
             letter-spacing: 0.5px;
-        }
-        .settings-title span {
-            color: #000;
         }
 
         .form-panel {
             background: white;
             border-radius: 24px;
-            padding: 22px 20px;
+            padding: 18px 18px 20px;
             width: 340px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             border: 1px solid #eaeaea;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        @media (min-width: 861px) {
+            .form-panel {
+                position: sticky;
+                top: 96px;
+            }
         }
         @media (max-width: 860px) {
             .form-panel {
                 width: 100%;
                 max-width: 420px;
+                max-height: none;
+                overflow-y: visible;
+                position: static;
             }
         }
+        .form-panel::-webkit-scrollbar { width: 6px; }
+        .form-panel::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+
         .section-divider {
-            margin: 16px 0 10px;
+            margin: 14px 0 8px;
             border-top: 1px solid #f0f0f0;
-            padding-top: 12px;
+            padding-top: 10px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             color: #444;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 7px;
             text-transform: uppercase;
             letter-spacing: 0.4px;
         }
+        .section-divider:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+        .section-divider-label { display: flex; align-items: center; gap: 7px; }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
         label {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 10.5px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.4px;
@@ -118,7 +154,7 @@
         input[type="number"],
         select {
             width: 100%;
-            padding: 10px 13px;
+            padding: 9px 12px;
             border: 1px solid #e0e0e0;
             border-radius: 12px;
             font-size: 13px;
@@ -134,24 +170,24 @@
         .file-input-label {
             background: #f7f7f7;
             text-align: center;
-            padding: 9px 12px;
+            padding: 8px 12px;
             border-radius: 12px;
-            margin-top: 5px;
+            margin-top: 4px;
             cursor: pointer;
             font-size: 12px;
             border: 1px solid #e8e8e8;
         }
         .bg-options-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-top: 6px;
             flex-wrap: wrap;
             align-items: center;
         }
         .bg-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.15s;
@@ -173,9 +209,9 @@
             border-color: #0095f6 !important;
         }
         .color-picker-small {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
             border: 1px solid #ccc;
             cursor: pointer;
         }
@@ -184,19 +220,21 @@
             align-items: center;
             justify-content: space-between;
             background: #f5f5f5;
-            padding: 9px 14px;
+            padding: 8px 14px;
             border-radius: 60px;
             cursor: pointer;
-            margin-bottom: 9px;
+            margin-bottom: 8px;
         }
-        .toggle-switch span {
+        .toggle-switch span,
+        .toggle-follow-control span {
             font-size: 12px;
             font-weight: 500;
             color: #333;
+            font-family: 'Outfit', sans-serif;
         }
         .toggle-slider {
-            width: 42px;
-            height: 22px;
+            width: 40px;
+            height: 21px;
             background: #ccc;
             border-radius: 30px;
             position: relative;
@@ -209,8 +247,8 @@
         .toggle-slider::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             background: white;
             border-radius: 50%;
             top: 2px;
@@ -218,21 +256,21 @@
             transition: 0.2s;
         }
         .toggle-slider.active::after {
-            left: 22px;
+            left: 21px;
         }
         .toggle-follow-control {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #f5f5f5;
-            padding: 9px 14px;
+            padding: 8px 14px;
             border-radius: 60px;
             cursor: pointer;
-            margin-bottom: 9px;
+            margin-bottom: 8px;
         }
         .follow-toggle-slider {
-            width: 42px;
-            height: 22px;
+            width: 40px;
+            height: 21px;
             background: #ccc;
             border-radius: 30px;
             position: relative;
@@ -244,8 +282,8 @@
         .follow-toggle-slider::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             background: white;
             border-radius: 50%;
             top: 2px;
@@ -253,7 +291,79 @@
             transition: 0.2s;
         }
         .follow-toggle-slider.active::after {
-            left: 22px;
+            left: 21px;
+        }
+
+        .comment-empty-hint {
+            font-size: 11.5px;
+            color: #999;
+            padding: 8px 2px;
+        }
+        .comment-editor-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8f8f8;
+            border: 1px solid #eee;
+            border-radius: 14px;
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+        .comment-editor-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background: #eee;
+        }
+        .comment-editor-fields {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+        }
+        .comment-editor-fields input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            font-size: 12px;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
+        }
+        .comment-remove-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: #efefef;
+            color: #888;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+        .comment-remove-btn:hover {
+            background: #ffe1e1;
+            color: #e33;
+        }
+        .add-comment-btn {
+            width: 100%;
+            padding: 9px;
+            border-radius: 12px;
+            border: 1px dashed #c9c9c9;
+            background: #fafafa;
+            color: #555;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+        .add-comment-btn:hover {
+            background: #f0f0f0;
         }
 
         .story-card-wrapper {
@@ -338,6 +448,12 @@
             padding: 3px 10px;
             border-radius: 4px;
             letter-spacing: 0.5px;
+        }
+        .live-badge-img {
+            height: 18px;
+            width: auto;
+            display: block;
+            border-radius: 4px;
         }
         .live-viewers-box {
             background: rgba(0, 0, 0, 0.5);
@@ -448,7 +564,7 @@
             z-index: 12;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
         .live-action-icon {
             display: flex;
@@ -458,8 +574,8 @@
             position: relative;
         }
         .live-action-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 19px;
+            height: 19px;
             fill: none;
             stroke: white;
             stroke-width: 2;
@@ -600,57 +716,61 @@
 </head>
 <body>
 
-    <!-- Header & footer di-inject otomatis dari header-footer-instacho.js -->
+    <!-- Header & Footer di-inject otomatis oleh header-footer-instacho.js -->
 
     <div class="main-content">
         <div class="container">
+            <h1 class="page-title">Let's live now!</h1>
             <div class="story-studio">
                 <div class="form-panel">
                     <div class="settings-title">Now Live on <span>Instacho!</span></div>
-                    <div class="section-divider"><i class="fas fa-user"></i> Live Streamer Profile</div>
-                    <div class="form-group"><label>Profile Photo</label><input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubAvatarLabel">Upload Avatar</div></div>
-                    <div class="form-group"><label>Username</label><input type="text" id="pubUsername" placeholder="" value=""></div>
-                    <div class="form-group"><label>Viewer Count</label><input type="text" id="pubViewerCount" placeholder="" value=""></div>
+
+                    <div class="section-divider"><div class="section-divider-label"><i class="fas fa-user"></i> Streamer</div></div>
+                    <div class="form-row-2">
+                        <div class="form-group"><label>Username</label><input type="text" id="pubUsername" placeholder="username" value=""></div>
+                        <div class="form-group"><label>Viewers</label><input type="text" id="pubViewerCount" placeholder="0" value=""></div>
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group"><label>Avatar</label><input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubAvatarLabel">Upload</div></div>
+                        <div class="form-group"><label>Background</label><input type="file" id="pubBgUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubBgLabel">Upload</div></div>
+                    </div>
                     <div class="toggle-switch" id="pubVerifiedToggle"><span>Verified Account</span><div class="toggle-slider" id="pubVerifiedSlider"></div></div>
-                    <div class="form-group"><label>Live Background (9:17)</label><input type="file" id="pubBgUpload" accept="image/*" style="display:none;"><div class="file-input-label" id="pubBgLabel">Upload Background</div></div>
-
-                    <div class="section-divider"><i class="fas fa-comments"></i> 5 Comments</div>
-                    <div class="form-group"><label>User 1</label><input type="text" id="comment1User" placeholder="" value=""></div>
-                    <div class="form-group"><label>Comment 1</label><input type="text" id="comment1Text" placeholder="" value=""></div>
-                    <div class="form-group"><label>User 2</label><input type="text" id="comment2User" placeholder="" value=""></div>
-                    <div class="form-group"><label>Comment 2</label><input type="text" id="comment2Text" placeholder="" value=""></div>
-                    <div class="form-group"><label>User 3</label><input type="text" id="comment3User" placeholder="" value=""></div>
-                    <div class="form-group"><label>Comment 3</label><input type="text" id="comment3Text" placeholder="" value=""></div>
-                    <div class="form-group"><label>User 4</label><input type="text" id="comment4User" placeholder="" value=""></div>
-                    <div class="form-group"><label>Comment 4</label><input type="text" id="comment4Text" placeholder="" value=""></div>
-                    <div class="form-group"><label>User 5</label><input type="text" id="comment5User" placeholder="" value=""></div>
-                    <div class="form-group"><label>Comment 5</label><input type="text" id="comment5Text" placeholder="" value=""></div>
-
-                    <div class="section-divider"><i class="fas fa-fill-drip"></i> Outer Frame Color</div>
-                    <div class="form-group"><label>Frame Background</label><div class="bg-options-row"><div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div><div class="bg-option bg-white" data-outer-pub="white"></div><div class="bg-option bg-transparent" data-outer-pub="transparent"></div><input type="color" id="pubOuterColor" value="#000000"></div></div>
                     <div class="toggle-follow-control" id="toggleFollowControl"><span>Follow / Following</span><div class="follow-toggle-slider" id="followToggleSlider"></div></div>
+
+                    <div class="section-divider"><div class="section-divider-label"><i class="fas fa-comments"></i> Comments (optional)</div></div>
+                    <div id="commentEditorList"></div>
+                    <div id="commentEmptyHint" class="comment-empty-hint">Belum ada komentar. Klik tombol di bawah untuk menambah.</div>
+                    <button type="button" class="add-comment-btn" id="addCommentBtn"><i class="fas fa-plus"></i> Add Comment</button>
+
+                    <div class="section-divider"><div class="section-divider-label"><i class="fas fa-fill-drip"></i> Frame Color</div></div>
+                    <div class="bg-options-row"><div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div><div class="bg-option bg-white" data-outer-pub="white"></div><div class="bg-option bg-transparent" data-outer-pub="transparent"></div><input type="color" id="pubOuterColor" class="color-picker-small" value="#000000"></div>
                 </div>
 
                 <div class="story-card-wrapper">
                     <div id="pubOuterFrame" class="story-outer">
                         <div class="other-story-card" id="publicStoryCard">
+                            <!-- Top Bar -->
                             <div class="live-top-bar">
                                 <div class="live-user-row">
                                     <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
                                     <span class="live-username"><span id="pubUsernameLabel">Username</span></span>
                                 </div>
                                 <div class="live-right-top">
-                                    <span class="live-badge">LIVE</span>
+                                    <span class="live-badge" id="liveBadgeText">LIVE</span>
+                                    <img class="live-badge-img" id="liveBadgeImg" src="icon-live.png" alt="LIVE" style="display:none;">
                                     <div class="live-viewers-box">
                                         <span class="live-viewers"><i class="fas fa-eye"></i> <span id="pubViewerLabel">0</span></span>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- KOLOM KOMENTAR -->
                             <div class="live-comments-area" id="commentsArea"></div>
 
+                            <!-- LOVE WARNA-WARNI - HANYA BERUBAH SAAT DIKLIK -->
                             <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
 
+                            <!-- TOMBOL SHARE & LOVE -->
                             <div class="live-bottom-actions">
                                 <div class="live-action-icon">
                                     <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -660,6 +780,7 @@
                                 </div>
                             </div>
 
+                            <!-- Send Message Bar -->
                             <div class="send-message-bg"></div>
                             <div class="send-message-bar">
                                 <div class="send-message-pill">
@@ -684,6 +805,9 @@
             pubFollowActive = false,
             pubLiked = false;
         let pubOuterBg = '#000000';
+
+        let comments = [];
+        let commentIdCounter = 0;
 
         function showToast(msg) { let t = document.getElementById('toastMsg');
             t.innerText = msg;
@@ -753,6 +877,87 @@
             }
         }
 
+        function defaultAvatarSvg(letter, bg) {
+            return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='%23${bg}'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14' font-family='Arial'%3E${letter}%3C/text%3E%3C/svg%3E`;
+        }
+
+        function addCommentRow(prefillUser = '', prefillText = '') {
+            const id = 'c' + (++commentIdCounter);
+            comments.push({ id, user: prefillUser, text: prefillText, avatarUrl: null });
+            renderCommentEditors();
+            updatePublicView();
+        }
+
+        function removeCommentRow(id) {
+            comments = comments.filter(c => c.id !== id);
+            renderCommentEditors();
+            updatePublicView();
+        }
+
+        function renderCommentEditors() {
+            const list = document.getElementById('commentEditorList');
+            const emptyHint = document.getElementById('commentEmptyHint');
+            list.innerHTML = '';
+
+            if (comments.length === 0) {
+                emptyHint.style.display = 'block';
+                return;
+            }
+            emptyHint.style.display = 'none';
+
+            comments.forEach(c => {
+                const row = document.createElement('div');
+                row.className = 'comment-editor-row';
+
+                const avatarBtn = document.createElement('img');
+                avatarBtn.className = 'comment-editor-avatar';
+                const randColor = Math.floor(Math.random() * 16777215).toString(16);
+                avatarBtn.src = c.avatarUrl || defaultAvatarSvg((c.user.charAt(0) || 'U').toUpperCase(), randColor);
+                avatarBtn.title = 'Upload avatar';
+                avatarBtn.addEventListener('click', () => {
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*';
+                    fileInput.onchange = async e => {
+                        if (e.target.files[0]) {
+                            const url = await cropImageRatio(e.target.files[0], 1);
+                            if (url) { c.avatarUrl = url; renderCommentEditors(); updatePublicView(); }
+                        }
+                    };
+                    fileInput.click();
+                });
+                row.appendChild(avatarBtn);
+
+                const fields = document.createElement('div');
+                fields.className = 'comment-editor-fields';
+
+                const userInput = document.createElement('input');
+                userInput.type = 'text';
+                userInput.placeholder = 'Username';
+                userInput.value = c.user;
+                userInput.addEventListener('input', e => { c.user = e.target.value; updatePublicView(); });
+                fields.appendChild(userInput);
+
+                const textInput = document.createElement('input');
+                textInput.type = 'text';
+                textInput.placeholder = 'Comment text';
+                textInput.value = c.text;
+                textInput.addEventListener('input', e => { c.text = e.target.value; updatePublicView(); });
+                fields.appendChild(textInput);
+
+                row.appendChild(fields);
+
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'comment-remove-btn';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.addEventListener('click', () => removeCommentRow(c.id));
+                row.appendChild(removeBtn);
+
+                list.appendChild(row);
+            });
+        }
+
         function updatePublicView() {
             const uname = document.getElementById('pubUsername').value.trim() || 'Username';
             document.getElementById('pubUsernameLabel').innerHTML = uname + (pubVerified ? ' <i class="fas fa-check-circle verified-icon"></i>' : '');
@@ -765,27 +970,14 @@
 
             const commentArea = document.getElementById('commentsArea');
             commentArea.innerHTML = '';
-
-            const users = [];
-            const texts = [];
-            for (let i = 1; i <= 5; i++) {
-                const userVal = document.getElementById(`comment${i}User`).value.trim();
-                const textVal = document.getElementById(`comment${i}Text`).value.trim();
-                if (userVal || textVal) {
-                    users.push(userVal || 'User');
-                    texts.push(textVal || '');
-                }
-            }
-
-            users.forEach((user, idx) => {
+            comments.filter(c => c.user.trim() || c.text.trim()).forEach(c => {
                 const div = document.createElement('div');
                 div.className = 'live-comment';
 
                 const avatar = document.createElement('img');
                 avatar.className = 'comment-avatar-small';
-                const initial = (user.charAt(0) || 'U').toUpperCase();
-                avatar.src =
-                    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='11' fill='%23${Math.floor(Math.random()*16777215).toString(16)}'/%3E%3Ctext x='11' y='15' text-anchor='middle' fill='white' font-size='10'%3E${initial}%3C/text%3E%3C/svg%3E`;
+                const initial = (c.user.trim().charAt(0) || 'U').toUpperCase();
+                avatar.src = c.avatarUrl || defaultAvatarSvg(initial, Math.floor(Math.random() * 16777215).toString(16)).replace('width=\'34\'', 'width=\'22\'').replace('height=\'34\'', 'height=\'22\'').replace('r=\'17\'', 'r=\'11\'').replace("cx='17' cy='17'", "cx='11' cy='11'").replace("viewBox='0 0 34 34'", "viewBox='0 0 22 22'");
                 div.appendChild(avatar);
 
                 const wrapper = document.createElement('div');
@@ -793,13 +985,13 @@
 
                 const usernameSpan = document.createElement('span');
                 usernameSpan.className = 'comment-username';
-                usernameSpan.innerText = user;
+                usernameSpan.innerText = c.user.trim() || 'User';
                 wrapper.appendChild(usernameSpan);
 
-                if (texts[idx]) {
+                if (c.text.trim()) {
                     const textSpan = document.createElement('span');
                     textSpan.className = 'comment-text';
-                    textSpan.innerText = texts[idx];
+                    textSpan.innerText = c.text.trim();
                     wrapper.appendChild(textSpan);
                 }
 
@@ -813,12 +1005,11 @@
             if (pubBgUrl) { card.style.backgroundSize = 'cover';
                 card.style.backgroundPosition = 'center'; }
             document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
-
-            generateRandomHearts();
         }
 
         document.getElementById('pubLikeBtn').addEventListener('click', () => {
             pubLiked = !pubLiked;
+            generateRandomHearts();
             updatePublicView();
         });
 
@@ -850,10 +1041,17 @@
             pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
             updatePublicView(); }));
 
-        const inputIds = ['pubUsername', 'pubViewerCount', 'comment1User', 'comment1Text', 'comment2User', 'comment2Text',
-            'comment3User', 'comment3Text', 'comment4User', 'comment4Text', 'comment5User', 'comment5Text'
-        ];
+        document.getElementById('addCommentBtn').addEventListener('click', () => addCommentRow());
+
+        const inputIds = ['pubUsername', 'pubViewerCount'];
         inputIds.forEach(id => document.getElementById(id).addEventListener('input', () => updatePublicView()));
+
+        (function initLiveBadge() {
+            const img = document.getElementById('liveBadgeImg');
+            const text = document.getElementById('liveBadgeText');
+            img.onload = () => { text.style.display = 'none'; img.style.display = 'block'; };
+            img.onerror = () => { img.style.display = 'none'; text.style.display = 'inline-block'; };
+        })();
 
         async function downloadEl(el, name) { try { const c = await html2canvas(el, { scale: 2.5, backgroundColor: null,
                     useCORS: true, allowTaint: true }); const a = document.createElement('a');
@@ -864,6 +1062,8 @@
         document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'),
             `live_viewer_${Date.now()}.png`);
 
+        renderCommentEditors();
+        generateRandomHearts();
         updatePublicView();
     </script>
 
