@@ -40,10 +40,7 @@
         /* ========== SPLASH SCREEN ========== */
         #splash {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: #ffffff;
             z-index: 9999;
             display: flex;
@@ -110,7 +107,6 @@
             .logo-img { height: 28px; }
         }
 
-        /* DESKTOP: Menu icon (three dots) */
         .desktop-menu-icon {
             display: none;
             background: #ffffff;
@@ -223,21 +219,13 @@
         }
 
         @media (min-width: 781px) {
-            .desktop-nav {
-                display: none !important;
-            }
-            .desktop-menu-icon {
-                display: flex !important;
-            }
+            .desktop-nav { display: none !important; }
+            .desktop-menu-icon { display: flex !important; }
         }
 
         @media (max-width: 780px) {
-            .desktop-menu-icon {
-                display: none !important;
-            }
-            .desktop-nav {
-                display: none;
-            }
+            .desktop-menu-icon { display: none !important; }
+            .desktop-nav { display: none; }
         }
 
         /* Mobile Menu */
@@ -330,7 +318,6 @@
             background: white;
         }
 
-        /* ========== CHOOSE YOUR NEEDS TITLE ========== */
         .choose-title {
             text-align: center;
             margin-bottom: 32px;
@@ -348,133 +335,7 @@
             .choose-title h1 { font-size: 1.8rem; }
         }
 
-        /* ========== INSTACHO CONTAINER ========== */
-        .instacho-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 0 16px;
-            border-top: 3px solid #000000;
-            padding-top: 24px;
-        }
-
-        .instacho-title {
-            text-align: center;
-            margin-bottom: 0px;
-        }
-
-        .instacho-title img {
-            max-width: 220px;
-            height: auto;
-            display: inline-block;
-            width: 100%;
-            margin-top: -60px;
-        }
-
-        .instacho-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-top: -50px;
-        }
-
-        /* Mobile: 3 grid, 2 atas 1 bawah, yang bawah di kiri */
-        @media (max-width: 640px) {
-            .instacho-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .app-card:nth-child(3) {
-                grid-column: 1 / 2;
-                justify-self: start;
-                width: 100%;
-            }
-        }
-
-        .app-card {
-            aspect-ratio: 1 / 1;
-            background: #fafafa;
-            border: 1px solid #eaeaea;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            text-decoration: none;
-            color: #000;
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-        }
-        
-        .app-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: #000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 20px;
-        }
-        
-        .app-card:hover::before { opacity: 1; }
-        .app-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 22px 32px -12px rgba(0,0,0,0.2);
-            border-color: #000;
-        }
-        .app-card:hover .app-card-icon,
-        .app-card:hover .app-card-name { 
-            color: white; 
-            animation: subtlePulse 0.5s ease;
-        }
-        
-        @keyframes subtlePulse {
-            0% { transform: scale(0.96); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .app-card-icon {
-            font-size: 2.2rem;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.2s ease, color 0.2s;
-        }
-        .app-card:hover .app-card-icon {
-            transform: scale(1.08);
-        }
-        
-        .app-card-name {
-            font-size: 0.95rem;
-            font-weight: 700;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -0.1px;
-            transition: all 0.2s;
-        }
-        
-        .app-card {
-            opacity: 0;
-            transform: translateY(18px);
-            animation: cardFloatUp 0.5s ease forwards;
-        }
-        .app-card:nth-child(1) { animation-delay: 0.05s; }
-        .app-card:nth-child(2) { animation-delay: 0.1s; }
-        .app-card:nth-child(3) { animation-delay: 0.15s; }
-        .app-card:nth-child(4) { animation-delay: 0.2s; }
-        
-        @keyframes cardFloatUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ========== DISCLAIMER CONTAINER ========== */
+        /* ========== DISCLAIMER ========== */
         .disclaimer-container {
             max-width: 900px;
             margin: 40px auto 0;
@@ -511,6 +372,203 @@
             }
         }
 
+        /* ========== DESKTOP LAYOUT (no slider) ========== */
+        .desktop-duo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .desktop-duo .slide-item {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ========== SLIDER (MOBILE ONLY) ========== */
+        .slider-outer {
+            position: relative;
+            margin-bottom: 28px;
+            display: none;
+        }
+        .slide-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            cursor: grab;
+            white-space: nowrap;
+            border-radius: 28px;
+            background: white;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+        .slide-container:active { cursor: grabbing; }
+        .slide-wrapper {
+            display: inline-flex;
+            gap: 25px;
+            padding: 20px;
+            white-space: normal;
+        }
+        .slide-item {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 380px;
+            background: white;
+            border: 1px solid #eaeaea;
+            border-radius: 28px;
+            padding: 30px;
+            transition: all 0.2s ease;
+        }
+        @media (max-width: 860px) {
+            .slide-item { width: 360px; padding: 20px; }
+            .slide-wrapper { gap: 16px; padding: 16px; }
+        }
+        @media (max-width: 550px) {
+            .slide-item { width: 280px; padding: 16px; }
+            .slide-wrapper { gap: 12px; padding: 12px; }
+        }
+        .slide-container::-webkit-scrollbar { height: 4px; }
+        .slide-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .slide-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        .slide-container::-webkit-scrollbar-thumb:hover { background: #999; }
+
+        /* Show slider on mobile/tablet, hide desktop duo */
+        @media (max-width: 900px) {
+            .desktop-duo { display: none; }
+            .slider-outer { display: block; }
+        }
+        @media (min-width: 901px) {
+            .slider-outer { display: none; }
+            .desktop-duo { display: grid; }
+        }
+
+        .slide-item-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin-bottom: 20px;
+            color: #000;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            transition: all 0.3s;
+            background-size: 120% auto;
+            animation: gentleGlow 4s infinite alternate;
+        }
+
+        @keyframes gentleGlow {
+            0% { opacity: 0.95; background-position: 0% 50%; }
+            100% { opacity: 1; background-position: 100% 50%; }
+        }
+
+        /* ========== APP GRID ========== */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .app-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .instacho-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .app-card {
+            aspect-ratio: 1 / 1;
+            background: #fafafa;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .app-card:hover::before { opacity: 1; }
+        .app-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 22px 32px -12px rgba(0,0,0,0.2);
+            border-color: #000;
+        }
+        .app-card:hover .app-card-icon,
+        .app-card:hover .app-card-name {
+            color: white;
+            animation: subtlePulse 0.5s ease;
+        }
+
+        @keyframes subtlePulse {
+            0% { transform: scale(0.96); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .app-card-icon {
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.2s ease, color 0.2s;
+        }
+        .app-card:hover .app-card-icon { transform: scale(1.08); }
+
+        .app-card-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.1px;
+            transition: all 0.2s;
+        }
+
+        .app-card {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: cardFloatUp 0.5s ease forwards;
+        }
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.1s; }
+        .app-card:nth-child(3) { animation-delay: 0.15s; }
+        .app-card:nth-child(4) { animation-delay: 0.2s; }
+
+        @keyframes cardFloatUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .app-card, .nav-btn, .social-link, .mobile-menu-link {
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        }
+
+        .social-link i { transition: transform 0.2s; }
+        .social-link:hover i { transform: scale(1.2); }
+
         /* ===== FOOTER ===== */
         footer {
             background: #000;
@@ -529,10 +587,7 @@
             padding: 0 24px;
         }
         @media (max-width: 860px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
         }
         .footer-section h3 {
             font-size: 0.7rem;
@@ -542,12 +597,8 @@
             text-transform: uppercase;
             letter-spacing: 1.2px;
         }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 0px;
-        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0px; }
         .footer-links a {
             color: rgba(255,255,255,0.5);
             text-decoration: none;
@@ -566,10 +617,7 @@
             margin-bottom: 14px;
             line-height: 1.6;
         }
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
+        .social-links { display: flex; gap: 10px; }
         .social-link {
             display: inline-flex;
             align-items: center;
@@ -605,77 +653,34 @@
             text-align: center;
             letter-spacing: 0.3px;
         }
-        
+
         button { background: none; border: none; }
         body { overflow-x: hidden; }
         img, svg { max-width: 100%; }
-        
-        html {
-            scroll-behavior: smooth;
-        }
 
-        /* ========== COMING SOON OVERLAY ========== */
-        .coming-soon-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .coming-soon-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .coming-soon-box {
-            background: white;
-            padding: 48px 56px;
-            border-radius: 32px;
+        html { scroll-behavior: smooth; }
+
+        /* ========== CHOWORKER TITLE IMAGE ========== */
+        .slide-item-title-img {
             text-align: center;
-            max-width: 400px;
-            box-shadow: 0 40px 60px rgba(0,0,0,0.3);
-            transform: scale(0.94) translateY(10px);
-            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
         }
-        .coming-soon-overlay.active .coming-soon-box {
-            transform: scale(1) translateY(0);
+        .slide-item-title-img img {
+            max-height: 60px;
+            width: auto;
+            display: inline-block;
         }
-        .coming-soon-box i {
-            font-size: 3rem;
-            color: #000;
-            margin-bottom: 16px;
-        }
-        .coming-soon-box h2 {
-            font-size: 2rem;
+        .slide-item-title-img .fallback-text {
+            display: none;
+            font-size: 1.3rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #000;
-            margin-bottom: 8px;
-        }
-        .coming-soon-box p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 24px;
-        }
-        .coming-soon-box .close-btn {
-            background: #000;
-            color: white;
-            border: none;
-            padding: 10px 32px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .coming-soon-box .close-btn:hover {
-            background: #222;
-            transform: scale(1.02);
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
@@ -689,10 +694,10 @@
     <header>
         <div class="container header-content">
             <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            <img src="https://thekachoo.github.io/CHODATE/Chodate.png" alt="Chodate Logo" class="logo-img" onerror="this.src='https://placehold.co/100x36?text=CHODATE'">
+                <img src="https://thekachoo.github.io/CHODATE/Chodate.png" alt="Chodate Logo" class="logo-img" onerror="this.src='https://placehold.co/100x36?text=CHODATE'">
             </div>
             <div class="center-logo-text">
-            <img src="https://thekachoo.github.io/CHODATE/Chodate1.png" alt="CHODATE" style="height: 120px; width: auto; display: block; margin: 0 auto;">
+                <img src="https://thekachoo.github.io/CHODATE/Chodate1.png" alt="CHODATE" style="height: 120px; width: auto; display: block; margin: 0 auto;">
             </div>
             <div class="desktop-nav">
                 <a href="https://thekachoo.github.io/Home" class="nav-btn nav-kachoo">The Kachoo</a>
@@ -746,33 +751,67 @@
             <div class="choose-title">
                 <h1>Choose your needs!</h1>
             </div>
-            
-            <div class="instacho-container">
-                <div class="instacho-title">
-                    <img src="https://thekachoo.github.io/CHODATE/INSTA/Instacho2.1.png" alt="Instacho" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                    <span style="display:none;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#000 0%,#333 100%);background-clip:text;-webkit-background-clip:text;color:transparent;">INSTACHO</span>
+
+            <!-- ========== DESKTOP LAYOUT (side by side, no slider) ========== -->
+            <div class="desktop-duo">
+                <!-- INSTACHO -->
+                <div class="slide-item">
+                    <div class="slide-item-title">INSTACHO</div>
+                    <div class="instacho-grid">
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'"><div class="app-card-icon"><i class="fas fa-user-circle"></i></div><div class="app-card-name">Profile</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'"><div class="app-card-icon"><i class="fas fa-camera"></i></div><div class="app-card-name">Post</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'"><div class="app-card-icon"><i class="fas fa-play-circle"></i></div><div class="app-card-name">Story</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Live.html'"><div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div><div class="app-card-name">Live</div></div>
+                    </div>
                 </div>
-                <div class="instacho-grid">
-                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'">
-                        <div class="app-card-icon"><i class="fas fa-user-circle"></i></div>
-                        <div class="app-card-name">Profile</div>
+
+                <!-- CHOWORKER -->
+                <div class="slide-item">
+                    <div class="slide-item-title-img">
+                        <img src="https://thekachoo.github.io/CHODATE/CHOWORKER/Choworker.png" alt="CHOWORKER" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="fallback-text">CHOWORKER</span>
                     </div>
-                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'">
-                        <div class="app-card-icon"><i class="fas fa-camera"></i></div>
-                        <div class="app-card-name">Post</div>
-                    </div>
-                    <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'">
-                        <div class="app-card-icon"><i class="fas fa-play-circle"></i></div>
-                        <div class="app-card-name">Story</div>
-                    </div>
-                    <!-- NEW LIVE CARD -->
-                    <div class="app-card" id="liveCard">
-                        <div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div>
-                        <div class="app-card-name">Live</div>
+                    <div class="app-grid-4">
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Convert.html'"><div class="app-card-icon"><i class="fas fa-file-export"></i></div><div class="app-card-name">Convert File</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Ratio.html'"><div class="app-card-icon"><i class="fas fa-crop-alt"></i></div><div class="app-card-name">Ratio Editor</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Chomail.html'"><div class="app-card-icon"><i class="fas fa-envelope"></i></div><div class="app-card-name">Chomail</div></div>
+                        <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/MoU.html'"><div class="app-card-icon"><i class="fas fa-file-signature"></i></div><div class="app-card-name">MoU Templates</div></div>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- ========== MOBILE SLIDER ========== -->
+            <div class="slider-outer" id="sliderOuter">
+                <div class="slide-container" id="slideContainer">
+                    <div class="slide-wrapper">
+                        <!-- INSTACHO slide -->
+                        <div class="slide-item">
+                            <div class="slide-item-title">INSTACHO</div>
+                            <div class="instacho-grid">
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Profile.html'"><div class="app-card-icon"><i class="fas fa-user-circle"></i></div><div class="app-card-name">Profile</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Post.html'"><div class="app-card-icon"><i class="fas fa-camera"></i></div><div class="app-card-name">Post</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Story.html'"><div class="app-card-icon"><i class="fas fa-play-circle"></i></div><div class="app-card-name">Story</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/INSTA/Live.html'"><div class="app-card-icon"><i class="fas fa-broadcast-tower"></i></div><div class="app-card-name">Live</div></div>
+                            </div>
+                        </div>
+
+                        <!-- CHOWORKER slide -->
+                        <div class="slide-item">
+                            <div class="slide-item-title-img">
+                                <img src="https://thekachoo.github.io/CHODATE/CHOWORKER/Choworker.png" alt="CHOWORKER" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                                <span class="fallback-text">CHOWORKER</span>
+                            </div>
+                            <div class="app-grid-4">
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Convert.html'"><div class="app-card-icon"><i class="fas fa-file-export"></i></div><div class="app-card-name">Convert File</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Ratio.html'"><div class="app-card-icon"><i class="fas fa-crop-alt"></i></div><div class="app-card-name">Ratio Editor</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/Chomail.html'"><div class="app-card-icon"><i class="fas fa-envelope"></i></div><div class="app-card-name">Chomail</div></div>
+                                <div class="app-card" onclick="location.href='https://thekachoo.github.io/CHODATE/CHOWORKER/MoU.html'"><div class="app-card-icon"><i class="fas fa-file-signature"></i></div><div class="app-card-name">MoU Templates</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="disclaimer-container">
                 <h4>Disclaimer</h4>
                 <p>This feature is intended for roleplay purposes only. There are no commercial or payments involved in the use of this feature. The feature may be freely used within the roleplay community. Please use this feature wisely.</p>
@@ -780,24 +819,46 @@
         </div>
     </section>
 
-    <!-- COMING SOON OVERLAY (popup) -->
-    <div class="coming-soon-overlay" id="comingSoonOverlay">
-        <div class="coming-soon-box">
-            <i class="fas fa-clock"></i>
-            <h2>Coming Soon</h2>
-            <p>Live feature is under development. Stay tuned!</p>
-            <button class="close-btn" id="closeComingSoon">Okay</button>
-        </div>
-    </div>
-
     <footer>
         <div class="footer-grid">
-            <div class="footer-section footer-brand"><h3>CHODATE</h3><p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p><div class="social-links"><a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a><a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a></div></div>
-            <div class="footer-section"><h3>Explore</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li><li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li><li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li><li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li><li><a href="#">Kadio</a></li></ul></div>
-            <div class="footer-section"><h3>More</h3><ul class="footer-links"><li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li><li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li><li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li><li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li></ul></div>
-            <div class="footer-section"><h3>Meet Us</h3><ul class="footer-links"><li><a href="https://x.com/thekachoo" target="_blank">X</a></li><li><a href="mailto:ohkachoo@gmail.com">Email</a></li></ul></div>
+            <div class="footer-section footer-brand">
+                <h3>CHODATE</h3>
+                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <div class="social-links">
+                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                    <li><a href="#">Kadio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meet Us</h3>
+                <ul class="footer-links">
+                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-bottom"><div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div></div>
+        <div class="footer-bottom">
+            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+        </div>
     </footer>
 
     <script>
@@ -805,7 +866,7 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('splash').classList.add('hide');
-            }, 2000); // 2 detik
+            }, 2000);
         });
 
         // Mobile menu logic
@@ -830,51 +891,27 @@
         if(desktopIcon) desktopIcon.addEventListener('click', toggleDesktopMenu);
         if(desktopOverlay) desktopOverlay.addEventListener('click', closeDesktopMenu);
         document.addEventListener('click', function(e) { if(!desktopDropdown?.contains(e.target) && e.target !== desktopIcon) closeDesktopMenu(); });
-        
+
         // Logo fallback
         const logoEl = document.querySelector('.logo-img');
         if(logoEl) logoEl.onerror = function() { this.src = 'https://placehold.co/100x36?text=CHODATE'; };
-        
+
+        // Mouse drag (grab) for mobile slider
+        const sliderContainer = document.getElementById('slideContainer');
+        let isDown = false; let startX; let scrollLeft;
+        if(sliderContainer) {
+            sliderContainer.addEventListener('mousedown', (e) => { isDown = true; sliderContainer.style.cursor = 'grabbing'; startX = e.pageX - sliderContainer.offsetLeft; scrollLeft = sliderContainer.scrollLeft; });
+            sliderContainer.addEventListener('mouseleave', () => { isDown = false; sliderContainer.style.cursor = 'grab'; });
+            sliderContainer.addEventListener('mouseup', () => { isDown = false; sliderContainer.style.cursor = 'grab'; });
+            sliderContainer.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - sliderContainer.offsetLeft; const walk = (x - startX) * 1.5; sliderContainer.scrollLeft = scrollLeft - walk; });
+            sliderContainer.style.cursor = 'grab';
+        }
+
         // Card hover micro-interactions
         document.querySelectorAll('.app-card').forEach(card => {
             card.addEventListener('mouseenter', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1.08)'; });
             card.addEventListener('mouseleave', () => { const icon = card.querySelector('.app-card-icon'); if(icon) icon.style.transform = 'scale(1)'; });
         });
-
-        // ========== COMING SOON POPUP ==========
-        const liveCard = document.getElementById('liveCard');
-        const comingSoonOverlay = document.getElementById('comingSoonOverlay');
-        const closeComingSoon = document.getElementById('closeComingSoon');
-
-        function showComingSoon() {
-            comingSoonOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function hideComingSoon() {
-            comingSoonOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        if (liveCard) {
-            liveCard.addEventListener('click', showComingSoon);
-        }
-
-        if (closeComingSoon) {
-            closeComingSoon.addEventListener('click', hideComingSoon);
-        }
-
-        // Click outside box to close
-        comingSoonOverlay.addEventListener('click', function(e) {
-            if (e.target === this) hideComingSoon();
-        });
-
-        // close with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && comingSoonOverlay.classList.contains('active')) {
-                hideComingSoon();
-            }
-        });
     </script>
 </body>
-    </html>
+</html>
