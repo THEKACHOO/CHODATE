@@ -2,10 +2,11 @@ document.body.insertAdjacentHTML('afterbegin', `
 <header>
   <div class="header-content">
     <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <img src="https://thekachoo.github.io/CHODATE/INSTA/Instapost1.png" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="logo-text" style="display:none;">CHOWORKER</span>
+      <img src="https://thekachoo.github.io/CHODATE/INSTA/Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
     </div>
-    <div class="center-title"><span>YOUR CHOWORKER</span></div>
+    <div class="center-title">
+      <img src="https://thekachoo.github.io/CHODATE/INSTA/Instacho1.1.png" alt="Instacho" class="center-logo-img" onerror="this.style.display='none'">
+    </div>
     <div class="desktop-nav-container">
       <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
       <div class="desktop-nav-dropdown" id="desktopNavDropdown">
@@ -27,7 +28,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 </div>
 `);
 
-/* Auto-inject footer */
+/* Auto-inject footer INSTACHO */
 document.body.insertAdjacentHTML('beforeend', `
 <footer>
   <div class="footer-grid">
