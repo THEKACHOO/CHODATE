@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>INSTACHO | Live Viewer</title>
+    <title>INSTACHO | Insta Live</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="header-footer.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
@@ -42,173 +43,6 @@
             .container {
                 padding: 0 16px;
             }
-        }
-
-        header {
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(16px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .logo-img {
-            height: 38px;
-            width: auto;
-        }
-        .center-title {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .center-logo-img {
-            height: 100px;
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
-        @media (max-width: 640px) {
-            .center-logo-img {
-                height: 100px;
-            }
-            .logo-img {
-                height: 30px;
-            }
-        }
-
-        .desktop-nav-container {
-            position: relative;
-            display: block;
-        }
-        @media (max-width: 768px) {
-            .desktop-nav-container {
-                display: none;
-            }
-        }
-        .desktop-nav-trigger {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 18px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .desktop-nav-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            right: 0;
-            width: 200px;
-            background: rgba(10, 10, 10, 0.97);
-            border-radius: 18px;
-            padding: 8px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 0.25s;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .desktop-nav-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .desktop-nav-dropdown .nav-button {
-            display: block;
-            width: 100%;
-            padding: 11px 20px;
-            font-weight: 500;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .desktop-nav-dropdown .nav-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 18px;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 60px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-            }
-        }
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 75%;
-            max-width: 260px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.97);
-            padding: 90px 20px 40px;
-            transition: right 0.3s ease;
-            z-index: 999;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .mobile-menu.active {
-            right: 0;
-        }
-        .mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 998;
-        }
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .mobile-menu-link {
-            display: block;
-            padding: 13px 18px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 40px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            margin-bottom: 10px;
-            text-align: center;
-            font-size: 14px;
         }
 
         .main-content {
@@ -452,7 +286,6 @@
             overflow: hidden;
         }
 
-        /* ===== TOP BAR ===== */
         .live-top-bar {
             position: absolute;
             top: 0;
@@ -492,7 +325,6 @@
             font-size: 11px;
         }
 
-        /* LIVE badge - ungu atas kiri, pink bawah kanan */
         .live-right-top {
             display: flex;
             align-items: center;
@@ -530,7 +362,6 @@
             opacity: 0.7;
         }
 
-        /* ===== KOLOM KOMENTAR DIPENDEKIN ===== */
         .live-comments-area {
             position: absolute;
             bottom: 80px;
@@ -593,7 +424,6 @@
             gap: 6px;
         }
 
-        /* ===== LOVE WARNA-WARNI STATIS - POSISI ACAK KE ATAS ===== */
         .floating-hearts-container {
             position: absolute;
             bottom: 55px;
@@ -611,7 +441,6 @@
             transition: opacity 0.3s;
         }
 
-        /* ===== TOMBOL SHARE & LOVE - TANPA JUMLAH LIKES ===== */
         .live-bottom-actions {
             position: absolute;
             bottom: 12px;
@@ -641,7 +470,6 @@
             stroke: #ff3040;
         }
 
-        /* ===== SEND MESSAGE BAR - "Comment" ===== */
         .send-message-bg {
             position: absolute;
             bottom: 0;
@@ -703,100 +531,6 @@
         }
         .download-single:hover {
             background: #333;
-        }
-
-        footer {
-            background: #000;
-            color: #ddd;
-            padding: 50px 0 28px;
-            margin-top: 40px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 36px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 24px;
-        }
-        @media (max-width: 860px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-        }
-        @media (max-width: 480px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-        }
-        .footer-section h3 {
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-bottom: 14px;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 0px;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 0.83rem;
-            transition: 0.2s;
-        }
-        .footer-links a:hover {
-            color: white;
-        }
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-            max-width: 200px;
-            margin-bottom: 14px;
-            line-height: 1.6;
-        }
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 60px;
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-            transition: 0.2s;
-        }
-        .social-link:hover {
-            background: white;
-            color: black;
-        }
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            padding-top: 22px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-left: 24px;
-            padding-right: 24px;
-        }
-        .copyright {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.4);
         }
 
         .crop-modal {
@@ -866,32 +600,7 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-                <img src="Instapost1.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-            </div>
-            <div class="center-title">
-                <img src="Instacho1.1.png" alt="Logo" class="center-logo-img" onerror="this.style.display='none'">
-            </div>
-            <div class="desktop-nav-container">
-                <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
-                <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-                    <a href="https://thekachoo.github.io/CHODATE/" class="nav-button">Home</a>
-                    <a href="Profile.html" class="nav-button">Instacho Profile</a>
-                    <a href="Story.html" class="nav-button">Instacho Story</a>
-                </div>
-            </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
-        </div>
-    </header>
-
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
-        <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-        <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
-    </div>
+    <!-- Header & footer di-inject otomatis dari header-footer-instacho.js -->
 
     <div class="main-content">
         <div class="container">
@@ -925,7 +634,6 @@
                 <div class="story-card-wrapper">
                     <div id="pubOuterFrame" class="story-outer">
                         <div class="other-story-card" id="publicStoryCard">
-                            <!-- Top Bar -->
                             <div class="live-top-bar">
                                 <div class="live-user-row">
                                     <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
@@ -939,13 +647,10 @@
                                 </div>
                             </div>
 
-                            <!-- KOLOM KOMENTAR DIPENDEKIN -->
                             <div class="live-comments-area" id="commentsArea"></div>
 
-                            <!-- LOVE WARNA-WARNI STATIS - POSISI ACAK KE ATAS -->
                             <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
 
-                            <!-- TOMBOL SHARE & LOVE - TANPA JUMLAH LIKES -->
                             <div class="live-bottom-actions">
                                 <div class="live-action-icon">
                                     <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -955,7 +660,6 @@
                                 </div>
                             </div>
 
-                            <!-- Send Message Bar -->
                             <div class="send-message-bg"></div>
                             <div class="send-message-bar">
                                 <div class="send-message-pill">
@@ -969,48 +673,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-section footer-brand">
-                <h3>CHODATE</h3>
-                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
-                <div class="social-links">
-                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
-                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
-                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
-                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
-                    <li><a href="#">Kadio</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>More</h3>
-                <ul class="footer-links">
-                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
-                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
-                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Meet Us</h3>
-                <ul class="footer-links">
-                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
-                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
-        </div>
-    </footer>
 
     <div class="crop-modal" id="cropModal"><div class="crop-container"><img id="cropImage"></div><div class="crop-modal-buttons"><button class="crop-modal-btn cancel" id="cancelCrop">Cancel</button><button class="crop-modal-btn save" id="saveCrop">Save</button></div></div>
     <div class="toast-msg" id="toastMsg"></div>
@@ -1203,22 +865,8 @@
             `live_viewer_${Date.now()}.png`);
 
         updatePublicView();
-
-        const deskTrigger = document.getElementById('desktopNavTrigger');
-        const deskDrop = document.getElementById('desktopNavDropdown');
-        if (deskTrigger) { deskTrigger.addEventListener('click', e => { e.stopPropagation();
-                deskDrop.classList.toggle('active'); });
-            document.addEventListener('click', () => deskDrop.classList.remove('active')); }
-
-        const mobBtn = document.getElementById('mobileMenuBtn'),
-            mobMenu = document.getElementById('mobileMenu'),
-            mobOverlay = document.getElementById('mobileMenuOverlay');
-        if (mobBtn) { mobBtn.addEventListener('click', () => { mobMenu.classList.toggle('active');
-                mobOverlay.classList.toggle('active');
-                document.body.style.overflow = mobMenu.classList.contains('active') ? 'hidden' : ''; }); }
-        if (mobOverlay) { mobOverlay.addEventListener('click', () => { mobMenu.classList.remove('active');
-                mobOverlay.classList.remove('active');
-                document.body.style.overflow = ''; }); }
     </script>
+
+    <script src="header-footer.js"></script>
 </body>
-    </html>
+</html>
