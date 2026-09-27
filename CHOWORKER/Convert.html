@@ -10,8 +10,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- ===== HEADER FOOTER CSS ===== -->
 <link rel="stylesheet" href="header-footer.css">
 
 <style>
@@ -21,8 +19,23 @@
 :root[data-theme="dark"]{--bg:#0f1115;--card:#181b21;--ink:#f2f3f5;--sub:#9aa0ab;--line:#2a2e37;}
 *{box-sizing:border-box;}
 html,body{height:100%;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0);}
-.wrap{max-width:720px;margin:0 auto;padding:48px 20px 60px;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.wrap{
+  flex:1;              /* isi sisa ruang antara header & footer */
+  max-width:720px;
+  margin:0 auto;
+  padding:48px 20px 60px;
+  width:100%;
+}
 h1{font-size:30px;font-weight:800;text-align:center;letter-spacing:-.5px;margin:0 0 6px;}
 .sub{text-align:center;color:var(--sub);font-size:14px;margin-bottom:32px;}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px;}
