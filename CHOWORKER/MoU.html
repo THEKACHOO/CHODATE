@@ -6,14 +6,11 @@
   <title>Memorandum of Understanding</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="header-footer.css">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
 
-    /* ===== PRINT: HIDE BROWSER HEADER/FOOTER ===== */
-    @page {
-      margin: 0;
-      size: auto;
-    }
+    @page { margin: 0; size: auto; }
 
     body {
       background:#ffffff;
@@ -26,33 +23,8 @@
 
     .container { max-width:1280px; margin:0 auto; padding:0 28px; width:100%; }
 
-    /* ===== HEADER ===== */
-    header{background:rgba(0,0,0,.95);backdrop-filter:blur(16px);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.1);}
-    .header-content{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;max-width:1400px;margin:0 auto;position:relative;}
-    .logo-container{display:flex;align-items:center;cursor:pointer;}
-    .logo-container img { height: 28px; width: auto; }
-    .center-title{position:absolute;left:50%;transform:translateX(-50%);text-align:center;}
-    .center-title span{color:#fff;font-weight:900;font-size:26px;letter-spacing:1px;}
-    @media(max-width:640px){.center-title span{font-size:19px;}.logo-container img{height:22px;}}
-    .desktop-nav-container{position:relative;display:block;}
-    @media(max-width:768px){.desktop-nav-container{display:none;}}
-    .desktop-nav-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);padding:8px 18px;border-radius:100px;font-weight:600;font-size:14px;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,.2);}
-    .desktop-nav-dropdown{position:absolute;top:calc(100% + 12px);right:0;width:200px;background:rgba(10,10,10,.97);border-radius:18px;padding:8px 0;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.25s;border:1px solid rgba(255,255,255,.12);}
-    .desktop-nav-dropdown.active{opacity:1;visibility:visible;transform:translateY(0);}
-    .desktop-nav-dropdown a{display:block;width:100%;padding:11px 20px;font-weight:500;font-size:13px;color:rgba(255,255,255,.85);text-decoration:none;}
-    .desktop-nav-dropdown a:hover{background:rgba(255,255,255,.1);}
-    .mobile-menu-btn{display:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:18px;color:#fff;width:40px;height:40px;border-radius:60px;cursor:pointer;align-items:center;justify-content:center;}
-    @media(max-width:768px){.mobile-menu-btn{display:flex;}}
-    .mobile-menu{position:fixed;top:0;right:-100%;width:75%;max-width:260px;height:100vh;background:rgba(0,0,0,.97);padding:90px 20px 40px;transition:right .3s ease;z-index:999;border-left:1px solid rgba(255,255,255,.1);}
-    .mobile-menu.active{right:0;}
-    .mobile-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);opacity:0;visibility:hidden;transition:.3s;z-index:998;}
-    .mobile-menu-overlay.active{opacity:1;visibility:visible;}
-    .mobile-menu-link{display:block;padding:13px 18px;background:rgba(255,255,255,.06);border-radius:40px;text-decoration:none;color:#fff;font-weight:500;margin-bottom:10px;text-align:center;font-size:14px;}
-
-    /* ===== PAGE BODY ===== */
     .page-body { width:100%; padding:120px 0 20px; }
 
-    /* DESKTOP CONTAINER (narrower, centered) */
     .desktop-container {
       max-width: 1000px;
       margin: 0 auto;
@@ -81,12 +53,7 @@
       font-size:1.02rem; line-height:1.75; text-align:justify; text-justify:inter-word; margin-bottom:10px;
     }
 
-    /* ===== BULLET LIST with "—" prefix (each item on its own line) ===== */
-    .mou-section ul { 
-      list-style: none; 
-      padding-left: 0; 
-      margin: 6px 0 12px; 
-    }
+    .mou-section ul { list-style: none; padding-left: 0; margin: 6px 0 12px; }
     .mou-section ul li {
       display: block;
       position: relative;
@@ -107,7 +74,6 @@
     .mou-section strong { font-weight:700; }
     .mou-italic { font-style:italic; }
 
-    /* Editable inline — now with sample text (placeholder feel) */
     [contenteditable]{
       outline:none;
       border-bottom:1px dashed #bbb;
@@ -116,15 +82,12 @@
       display:inline-block;
       transition:background .15s;
       cursor:text;
-      color:#555; /* slightly muted so it feels like placeholder */
+      color:#555;
     }
     [contenteditable]:hover{ background:#f5f5f5; color:#000; }
     [contenteditable]:focus{ background:#eef4ff; border-bottom-color:#1a73e8; color:#000; }
-    
-    /* When the user starts typing, the text becomes normal black */
     [contenteditable]:not(:empty) { color:#000; }
 
-    /* ===== SIGNATURES ===== */
     .signature-wrap {
       display:grid; 
       grid-template-columns:1fr 1fr; 
@@ -166,7 +129,6 @@
     .sig-info-row .value-input:focus { border-bottom-color:#666; }
     .sig-info-row .value-input::placeholder { font-weight:400; font-size:0.7rem; color:#aaa; }
 
-    /* TTD - UPLOAD */
     .ttd-upload-wrap {
       display:flex; align-items:center; gap:12px; flex-wrap:wrap;
       margin-top:8px; cursor:pointer;
@@ -187,7 +149,6 @@
       border-radius:4px; min-width:80px; text-align:center; display:inline-block;
     }
 
-    /* ===== TOMBOL PRINT ===== */
     .save-section { margin:30px 0 10px; text-align:center; }
     .btn-print {
       background:#000; color:#fff; border:none;
@@ -198,63 +159,6 @@
     .btn-print:hover { background:#222; transform:scale(1.02); box-shadow:0 4px 20px rgba(0,0,0,0.15); }
     .btn-print i { margin-right:10px; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: #000;
-      color: #ddd;
-      padding: 50px 0 28px;
-      margin-top: 40px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 36px;
-      max-width: 1400px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0 24px;
-    }
-    @media (max-width: 860px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-    }
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-    }
-    .footer-section h3 {
-      font-size: 0.7rem; font-weight: 700; margin-bottom: 14px;
-      color: white; text-transform: uppercase; letter-spacing: 1.2px;
-    }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 0px; }
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.5); text-decoration: none;
-      font-size: 0.83rem; transition: 0.2s;
-    }
-    .footer-links a:hover { color: white; }
-    .footer-brand p {
-      color: rgba(255, 255, 255, 0.5); font-size: 0.8rem;
-      max-width: 200px; margin-bottom: 14px; line-height: 1.6;
-    }
-    .social-links { display: flex; gap: 10px; }
-    .social-link {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 32px; height: 32px; background: rgba(255, 255, 255, 0.08);
-      border-radius: 60px; color: white; text-decoration: none;
-      font-size: 12px; transition: 0.2s;
-    }
-    .social-link:hover { background: white; color: black; }
-    .footer-bottom {
-      display: flex; align-items: center; padding-top: 22px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      max-width: 1400px; margin: 0 auto;
-      padding-left: 24px; padding-right: 24px;
-    }
-    .copyright {
-      font-size: 0.7rem; color: rgba(255, 255, 255, 0.4);
-    }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width:900px) {
       .signature-wrap { grid-template-columns:1fr 1fr !important; gap:20px !important; }
       .sig-col { width:100% !important; min-width:0 !important; }
@@ -279,25 +183,14 @@
       .ttd-preview-placeholder { font-size:0.55rem; min-width:50px; padding:2px 4px; }
     }
 
-    /* ===== PRINT STYLES ===== */
     @media print {
-      @page {
-        margin: 0;
-        size: auto;
-      }
-
-      html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
+      @page { margin: 0; size: auto; }
+      html, body { margin: 0 !important; padding: 0 !important; }
       header, footer, .mobile-menu, .mobile-menu-overlay { display: none !important; }
       .btn-print, .ttd-upload-wrap label, .ttd-upload-wrap input, .ttd-preview-placeholder, .save-section {
         display:none !important;
       }
       .ttd-preview { display:block !important; max-height:80px !important; border:none !important; background:transparent !important; }
-      
-      /* Remove underline from editable fields and signature inputs in print */
       [contenteditable]{ 
         border-bottom: none !important; 
         background: transparent !important;
@@ -316,35 +209,8 @@
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
-<header>
-  <div class="header-content">
-    <div class="logo-container" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <!-- LOGO.png — replace with your actual logo file -->
-      <img src="Logo.png" alt="Logo" />
-    </div>
-    <div class="center-title"><span>MoU TEMPLATE</span></div>
-    <div class="desktop-nav-container">
-      <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
-      <div class="desktop-nav-dropdown" id="desktopNavDropdown">
-        <a href="Home.html">Home</a>
-        <a href="Chomail.html">Chomail</a>
-        <a href="Convert.html">Convert File</a>
-        <a href="Ratio.html">Ratio Editor</a>
-      </div>
-    </div>
-    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
-  </div>
-</header>
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="Home.html" class="mobile-menu-link">Home</a>
-  <a href="Chomail.html" class="mobile-menu-link">Chomail</a>
-  <a href="Convert.html" class="mobile-menu-link">Convert File</a>
-  <a href="Ratio.html" class="mobile-menu-link">Ratio Editor</a>
-</div>
+<!-- Header & footer di-inject otomatis sama header-footer.js -->
 
-<!-- ===== PAGE BODY ===== -->
 <div class="page-body">
   <div class="desktop-container" id="mou-content">
 
@@ -528,74 +394,8 @@
   <button class="btn-print" id="printButton"><i class="fas fa-print"></i> Print MoU</button>
 </div>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-section footer-brand">
-            <h3>CHODATE</h3>
-            <p id="footerDesc">CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
-            <div class="social-links">
-                <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-        <div class="footer-section">
-            <h3 id="footerExplore">Explore</h3>
-            <ul class="footer-links">
-                <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
-                <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
-                <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
-                <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
-                <li><a href="#">Kadio</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3 id="footerMore">More</h3>
-            <ul class="footer-links">
-                <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
-                <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-                <li><a href="https://thekachoo.github.io/CHOSONG/">Chosong</a></li>
-                <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3 id="footerMeet">Meet Us</h3>
-            <ul class="footer-links">
-                <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
-                <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="copyright" id="footerCopyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
-    </div>
-</footer>
-
 <script>
-  /* ===== MOBILE MENU ===== */
-  const mobileMenuBtn=document.getElementById('mobileMenuBtn');
-  const mobileMenu=document.getElementById('mobileMenu');
-  const mobileOverlay=document.getElementById('mobileMenuOverlay');
-  mobileMenuBtn.addEventListener('click',()=>{
-    mobileMenu.classList.toggle('active');
-    mobileOverlay.classList.toggle('active');
-    document.body.style.overflow=mobileMenu.classList.contains('active')?'hidden':'';
-  });
-  mobileOverlay.addEventListener('click',()=>{
-    mobileMenu.classList.remove('active');
-    mobileOverlay.classList.remove('active');
-    document.body.style.overflow='';
-  });
-
-  /* ===== DESKTOP DROPDOWN ===== */
-  const trigger=document.getElementById('desktopNavTrigger');
-  const dropdown=document.getElementById('desktopNavDropdown');
-  trigger.addEventListener('click', e=>{e.stopPropagation(); dropdown.classList.toggle('active');});
-  document.addEventListener('click', e=>{
-    if(!trigger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
-  });
-
-  /* ===== UPLOAD TTD (PARTY ONE & PARTY TWO) ===== */
+  /* ===== UPLOAD TTD ===== */
   function setupTtd(inputId, previewId, placeholderId){
     const input = document.getElementById(inputId);
     const preview = document.getElementById(previewId);
@@ -625,15 +425,13 @@
     window.print();
   });
 
-  /* ===== AUTO-SYNC: Party One, Party Two, Project Name ===== */
+  /* ===== AUTO-SYNC ===== */
   (function() {
     const partyOneEls = document.querySelectorAll('.sync-party-one');
     partyOneEls.forEach(el => {
       el.addEventListener('input', function() {
         const val = this.innerText.trim() || 'PARTY ONE NAME';
-        partyOneEls.forEach(other => {
-          if (other !== this) other.innerText = val;
-        });
+        partyOneEls.forEach(other => { if (other !== this) other.innerText = val; });
       });
     });
 
@@ -641,9 +439,7 @@
     partyTwoEls.forEach(el => {
       el.addEventListener('input', function() {
         const val = this.innerText.trim() || 'PARTY TWO NAME';
-        partyTwoEls.forEach(other => {
-          if (other !== this) other.innerText = val;
-        });
+        partyTwoEls.forEach(other => { if (other !== this) other.innerText = val; });
       });
     });
 
@@ -651,26 +447,16 @@
     projectEls.forEach(el => {
       el.addEventListener('input', function() {
         const val = this.innerText.trim() || '(Project Name)';
-        projectEls.forEach(other => {
-          if (other !== this) other.innerText = val;
-        });
+        projectEls.forEach(other => { if (other !== this) other.innerText = val; });
       });
     });
 
-    // Initialize with sample text (already in HTML)
-    // Set initial values if empty
-    document.querySelectorAll('.sync-party-one').forEach(el => {
-      if (el.innerText.trim() === '') el.innerText = 'PARTY ONE NAME';
-    });
-    document.querySelectorAll('.sync-party-two').forEach(el => {
-      if (el.innerText.trim() === '') el.innerText = 'PARTY TWO NAME';
-    });
-    document.querySelectorAll('.sync-project').forEach(el => {
-      if (el.innerText.trim() === '') el.innerText = '(Project Name)';
-    });
+    document.querySelectorAll('.sync-party-one').forEach(el => { if (el.innerText.trim() === '') el.innerText = 'PARTY ONE NAME'; });
+    document.querySelectorAll('.sync-party-two').forEach(el => { if (el.innerText.trim() === '') el.innerText = 'PARTY TWO NAME'; });
+    document.querySelectorAll('.sync-project').forEach(el => { if (el.innerText.trim() === '') el.innerText = '(Project Name)'; });
   })();
-
 </script>
 
+<script src="header-footer.js"></script>
 </body>
 </html>
