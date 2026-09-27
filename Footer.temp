@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, li {
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        body {
+            background: #ffffff;
+            color: #000;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #000;
+            color: #ddd;
+            padding: 50px 0 28px;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
+        }
+        @media (max-width: 860px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+        .footer-section h3 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.83rem;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(4px);
+            display: inline-block;
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            max-width: 280px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.25s;
+        }
+        .social-link:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        .copyright {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-brand">
+                <h3>CHODATE</h3>
+                <p>CHODATE is a feature developed by Kachoo for social media content updates, intended for roleplay purposes.</p>
+                <div class="social-links">
+                    <a href="mailto:ohkachoo@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/thekachoo" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/Home/">The Kachoo</a></li>
+                    <li><a href="https://thekachoo.github.io/Home/kafkapages.html">Kafkapages</a></li>
+                    <li><a href="https://thekachoo.github.io/KAZINE/COLLECTION.html">Kazine</a></li>
+                    <li><a href="https://thekachoo.github.io/KABOOM/">Kaboom</a></li>
+                    <li><a href="#">Kadio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul class="footer-links">
+                    <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
+                    <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
+                    <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+                    <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Meet Us</h3>
+                <ul class="footer-links">
+                    <li><a href="https://x.com/thekachoo" target="_blank">X</a></li>
+                    <li><a href="mailto:ohkachoo@gmail.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">© 2026 CHODATE by The Kachoo. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>
