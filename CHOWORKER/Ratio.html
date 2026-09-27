@@ -148,7 +148,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         <div class="choice-btn" id="choosePreset">
           <i class="fas fa-layer-group"></i>
           <div class="choice-title">Preset Ratios</div>
-          <div class="choice-desc">X Layout · Post 4 Grid · Post 2 Grid</div>
+          <div class="choice-desc">For X app</div>
         </div>
       </div>
     </div>
@@ -283,7 +283,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
             <button class="format-btn active" data-format="png">PNG</button>
             <button class="format-btn" data-format="jpg">JPG</button>
           </div>
-          <button class="btn" id="dlPresetCurrent" disabled><i class="fas fa-download"></i> Download</button>
           <button class="btn" id="dlPresetAll" disabled><i class="fas fa-download"></i> Download All</button>
         </div>
       </div>
@@ -297,7 +296,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 
 <script>
 (function(){
-  // ---------- Helpers ----------
   const toastMsg = document.getElementById('toastMsg');
   function showToast(text){
     toastMsg.innerText = text;
@@ -351,9 +349,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     return active ? active.dataset.format : 'png';
   }
 
-  // ============================================================
-  // INTERACTIVE CROP ENGINE
-  // ============================================================
   const cropStates = {
     custom: { img: null, w: 800, h: 600, x: 0, y: 0, canvas: null },
     grid:   { img: null, w: 0,   h: 0,   x: 0, y: 0, canvas: null, parts: 0, partW: 0, partH: 0 },
@@ -438,7 +433,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   }
 
   // ============================================================
-  // SESSION 1
+  // TOMBOL DI AWAL AJA SIH INI
   // ============================================================
   const session1       = document.getElementById('session1');
   const sessionCustom  = document.getElementById('sessionCustom');
@@ -545,7 +540,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   dlCustom.addEventListener('click', ()=>{
     if(!cropStates.custom.img) return;
     const fmt = getSelectedFormat('customFormatSelector');
-    downloadCanvasAs(fmt, cropCanvasCustom, `custom_${cropStates.custom.w}x${cropStates.custom.h}.${fmt}`);
+    downloadCanvasAs(fmt, cropCanvasCustom, `custom.${fmt}`);
   });
 
   // ============================================================
@@ -555,7 +550,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   const xLayoutSection = document.getElementById('xLayoutSection');
   const gridSection = document.getElementById('gridSection');
 
-  // --- X Layout ---
   const uploadBoxXSquare = document.getElementById('uploadBoxXSquare');
   const fileInputXSquare = document.getElementById('fileInputXSquare');
   const uploadBoxXWide = document.getElementById('uploadBoxXWide');
@@ -575,7 +569,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   attachDrag(xWideCanvas, 'xWide');
   attachDrag(xSquareCanvas, 'xSquare');
 
-  // --- Grid ---
   const uploadBoxPreset = document.getElementById('uploadBoxPreset');
   const fileInputPreset = document.getElementById('fileInputPreset');
   const cropCanvasPreset = document.getElementById('cropCanvasPreset');
@@ -584,7 +577,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   const previewPlaceholderPreset = document.getElementById('previewPlaceholderPreset');
   const gridPreview = document.getElementById('gridPreview');
   const presetActionBar = document.getElementById('presetActionBar');
-  const dlPresetCurrent = document.getElementById('dlPresetCurrent');
   const dlPresetAll = document.getElementById('dlPresetAll');
   const gridReco = document.getElementById('gridReco');
 
@@ -595,17 +587,11 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   let gridSegments = [];
   let mainSegmentIndex = 0;
 
-  // Konfigurasi preset: rekomendasi total (recoW × recoH) & jumlah parts.
-  // Output per part dihitung PROPORSIONAL dari ukuran foto sumber.
-  // Post 4: reco 4848×1896, 4 parts → target per part 1212×1896
-  // Post 2: reco 2424×1896, 2 parts → target per part 1212×1896
   const GRID_CONFIG = {
     'post4grid': { parts: 4, recoW: 4848, recoH: 1896, label: 'Post 4 Grid', reco: 'Recommended: 4848 × 1896' },
     'post2grid': { parts: 2, recoW: 2424, recoH: 1896, label: 'Post 2 Grid', reco: 'Recommended: 2424 × 1896' }
   };
 
-  // Hitung ukuran output proporsional berdasarkan ukuran foto sumber.
-  // scale = min(srcW/recoW, srcH/recoH) → ga ada upscale di salah satu axis
   function computeGridOutput(cfg, img){
     const srcW = img.naturalWidth;
     const srcH = img.naturalHeight;
@@ -669,16 +655,12 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
           gridDragHint.style.display = 'block';
           rebuildGridSegments();
           presetActionBar.style.display = 'flex';
-          dlPresetCurrent.disabled = false;
           dlPresetAll.disabled = false;
         }
       }
     });
   });
 
-  // ============================
-  // X LAYOUT uploads
-  // ============================
   uploadBoxXSquare.addEventListener('click', ()=>fileInputXSquare.click());
   fileInputXSquare.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
@@ -746,7 +728,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     ctx.imageSmoothingQuality = 'high';
     const { drawW, drawH } = computeCover(st.img, st.w, st.h);
     ctx.drawImage(st.img, st.x, st.y, drawW, drawH);
-    downloadCanvasAs(fmt, out, `xlayout_400x400.${fmt}`);
+    downloadCanvasAs(fmt, out, `ava.${fmt}`);
   });
 
   dlXWide.addEventListener('click', ()=>{
@@ -760,12 +742,9 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     ctx.imageSmoothingQuality = 'high';
     const { drawW, drawH } = computeCover(st.img, st.w, st.h);
     ctx.drawImage(st.img, st.x, st.y, drawW, drawH);
-    downloadCanvasAs(fmt, out, `xlayout_1500x500.${fmt}`);
+    downloadCanvasAs(fmt, out, `header.${fmt}`);
   });
 
-  // ============================
-  // GRID upload
-  // ============================
   uploadBoxPreset.addEventListener('click', ()=>fileInputPreset.click());
   fileInputPreset.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
@@ -788,7 +767,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
       gridDragHint.style.display = 'block';
       rebuildGridSegments();
       presetActionBar.style.display = 'flex';
-      dlPresetCurrent.disabled = false;
       dlPresetAll.disabled = false;
     });
     fileInputPreset.value = '';
@@ -803,8 +781,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 
   attachDrag(cropCanvasPreset, 'grid', ()=>{ rebuildGridSegments(); });
 
-  // Slice preview canvas (full strip) jadi parts kolom vertikal.
-  // Setiap part di-draw ke canvas sendiri dengan ukuran partW × partH (dinamis).
   function rebuildGridSegments(){
     const st = cropStates.grid;
     if(!st.img) return;
@@ -839,7 +815,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
       tctx.drawImage(seg.canvas, 0, 0, thumb.width, thumb.height);
       wrap.appendChild(thumb);
       const lbl = document.createElement('span');
-      lbl.innerText = `${seg.label} · ${seg.width}×${seg.height}`;
+      lbl.innerText = seg.label;
       wrap.appendChild(lbl);
       wrap.addEventListener('click', ()=>{
         mainSegmentIndex = idx;
@@ -854,19 +830,12 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     });
   }
 
-  dlPresetCurrent.addEventListener('click', ()=>{
-    if(!gridSegments.length) return;
-    const fmt = getSelectedFormat('presetFormatSelector');
-    const seg = gridSegments[mainSegmentIndex];
-    downloadCanvasAs(fmt, seg.canvas, `crop_${seg.label.replace(/[^\w]/g,'_')}_${seg.width}x${seg.height}.${fmt}`);
-  });
-
   dlPresetAll.addEventListener('click', ()=>{
     if(!gridSegments.length) return;
     const fmt = getSelectedFormat('presetFormatSelector');
     gridSegments.forEach((seg, idx)=>{
       setTimeout(()=>{
-        downloadCanvasAs(fmt, seg.canvas, `crop_${idx+1}_${seg.width}x${seg.height}.${fmt}`);
+        downloadCanvasAs(fmt, seg.canvas, `part_${idx+1}.${fmt}`);
       }, idx * 300);
     });
     showToast(`Downloading ${gridSegments.length} ${fmt.toUpperCase()} files...`);
