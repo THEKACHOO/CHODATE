@@ -8,10 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="header-footer.css">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css">
     <style>
         * {
@@ -50,19 +48,19 @@
         }
 
         .page-title {
-    text-align: center;
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 40px;
-    color: #1a1a1a;
-    font-family: 'Outfit', sans-serif;
-}
-@media (max-width: 640px) {
-    .page-title {
-        font-size: 32px;
-        margin-bottom: 24px;
-    }
-}
+            text-align: center;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+            font-family: 'Outfit', sans-serif;
+        }
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 32px;
+                margin-bottom: 24px;
+            }
+        }
         .story-studio {
             display: flex;
             flex-wrap: wrap;
@@ -413,14 +411,31 @@
             align-items: center;
             gap: 8px;
         }
-        .live-avatar {
-            width: 36px;
-            height: 36px;
+        
+        /* =========================================
+           BORDER LIVE PADA AVATAR STREAMER
+           ========================================= */
+        .live-avatar-border {
+            width: 40px; /* Sedikit lebih besar untuk menampung border */
+            height: 40px;
             border-radius: 50%;
-            border: 2px solid white;
+            padding: 2px; /* Ketebalan border */
+            background: linear-gradient(135deg, #ff7e29, #ff2d55, #8a2be2); /* Gradasi Oranye ke Ungu */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .live-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             object-fit: cover;
             background: #0095f6;
+            border: 2px solid #111; /* Memberi jarak antara border dan gambar */
         }
+        /* ========================================= */
+
         .live-username {
             font-weight: 700;
             font-size: 13px;
@@ -449,12 +464,18 @@
             border-radius: 4px;
             letter-spacing: 0.5px;
         }
+        
+        /* =========================================
+           UKURAN ICON LIVE DIPERBESAR
+           ========================================= */
         .live-badge-img {
-            height: 18px;
+            height: 28px; /* Diubah dari 18px menjadi 28px */
             width: auto;
             display: block;
             border-radius: 4px;
         }
+        /* ========================================= */
+
         .live-viewers-box {
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
@@ -508,6 +529,7 @@
                 transform: translateY(0);
             }
         }
+        /* Avatar komentar tetap biasa (tanpa border live) */
         .comment-avatar-small {
             width: 22px;
             height: 22px;
@@ -752,7 +774,11 @@
                             <!-- Top Bar -->
                             <div class="live-top-bar">
                                 <div class="live-user-row">
-                                    <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
+                                    <!-- PERUBAHAN: Menambahkan wrapper border live pada avatar streamer -->
+                                    <div class="live-avatar-border">
+                                        <img class="live-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%23e4405f'/%3E%3Ctext x='18' y='24' text-anchor='middle' fill='white' font-size='14'%3EZ%3C/text%3E%3C/svg%3E">
+                                    </div>
+                                    <!-- ======================================================= -->
                                     <span class="live-username"><span id="pubUsernameLabel">Username</span></span>
                                 </div>
                                 <div class="live-right-top">
@@ -1069,4 +1095,4 @@
 
     <script src="header-footer.js"></script>
 </body>
-</html>
+    </html>
