@@ -90,6 +90,26 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
   color: #9aa0a6;
 }
 
+/* tampilan pengganti input saat capture */
+.to-static{
+  font-size: 12.5px;
+  color: #202124;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 4px 10px;
+  background: #fff;
+  font-family: inherit;
+  width: 100%;
+  max-width: 320px;
+  line-height: 1.2;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+}
+.to-static.placeholder{
+  color: #9aa0a6;
+}
+
 .email-body{font-size:14px;line-height:1.7;color:#202124;min-height:120px;padding:4px 2px 20px;word-wrap:break-word;overflow-wrap:anywhere;}
 .reply-bar{display:flex;align-items:center;gap:12px;margin-top:14px;}
 .reply-btn{border:1px solid #dadce0;border-radius:20px;padding:9px 20px;font-size:13px;color:#3c4043;font-weight:500;display:flex;align-items:center;gap:8px;}
@@ -100,7 +120,7 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .add-reply-btn:hover{background:#f5f5f5;}
 
 .reply-item{margin-top:22px;padding-top:18px;border-top:1px solid #f0f0f0;position:relative;}
-.reply-delete-btn{position:absolute;top:35px;right:-6px;background:none;border:none;color:#5f6368;font-size:14px;cursor:pointer;padding:4px;}
+.reply-delete-btn{position:absolute;top:24px;right:0;background:none;border:none;color:#5f6368;font-size:14px;cursor:pointer;padding:4px;}
 .reply-delete-btn:hover{color:#111;}
 
 /* LAYOUT */
@@ -171,14 +191,12 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 
           <div class="email-body js-body" contenteditable data-ph="Write the email here...">Write the email here...</div>
 
-          <!-- AREA ADD REPLY -->
           <div id="repliesContainer"></div>
 
           <div class="add-reply-wrap" id="addReplyWrap">
             <button class="add-reply-btn" id="addReplyBtn"><i class="fas fa-plus"></i> Add Reply</button>
           </div>
 
-          <!-- REPLY BAR (pindah ke bawah kalau ada reply) -->
           <div class="reply-bar" id="replyBar">
             <div class="reply-btn"><i class="fas fa-reply"></i> Reply</div>
             <div class="reply-btn"><i class="fas fa-share"></i> Forward</div>
@@ -361,11 +379,21 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
     scrollX: 0, scrollY: -scrollY,
     windowWidth: 1000,
     onclone: doc=>{
-  const a=doc.getElementById('captureArea'); a.style.transform='none';
-  const b=doc.getElementById('scaleBox'); b.style.width='820px'; b.style.height='auto';
-  const ar=doc.getElementById('addReplyWrap'); if(ar) ar.style.display='none';
-  doc.querySelectorAll('.reply-delete-btn').forEach(el=>el.style.display='none');
-  doc.querySelectorAll('.to-input').forEach(el=>{ el.style.transform = 'translateY(-4px)'; });
+      const a=doc.getElementById('captureArea'); a.style.transform='none';
+      const b=doc.getElementById('scaleBox'); b.style.width='820px'; b.style.height='auto';
+      const ar=doc.getElementById('addReplyWrap'); if(ar) ar.style.display='none';
+      doc.querySelectorAll('.reply-delete-btn').forEach(el=>el.style.display='none');
+
+      // Ganti input jadi span statis biar posisinya stabil
+      doc.querySelectorAll('.to-control').forEach(ctrl=>{
+        const inp = ctrl.querySelector('input.to-input');
+        if(!inp) return;
+        const val = inp.value.trim();
+        const span = doc.createElement('span');
+        span.className = 'to-static' + (val ? '' : ' placeholder');
+        span.textContent = val || inp.placeholder || '';
+        ctrl.replaceChild(span, inp);
+      });
     }
   }).then(canvas=>{
     const a = document.createElement('a');
