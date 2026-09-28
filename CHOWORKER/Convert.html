@@ -19,25 +19,11 @@
 :root[data-theme="dark"]{--bg:#0f1115;--card:#181b21;--ink:#f2f3f5;--sub:#9aa0ab;--line:#2a2e37;}
 
 *{box-sizing:border-box;}
-html,body{
-  overflow-x:hidden;
-  max-width:100%;
-}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:'Inter',system-ui,sans-serif;
-  padding-top:60px;
-}
+html,body{overflow-x:hidden;max-width:100%;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;padding-top:60px;}
 .wrap{max-width:720px;margin:0 auto;padding:48px 20px 60px;}
 
-footer .footer-links,
-footer ul{
-  padding-left:0;
-  margin:0;
-  list-style:none;
-}
+footer .footer-links,footer ul{padding-left:0;margin:0;list-style:none;}
 
 h1{font-size:30px;font-weight:800;text-align:center;letter-spacing:-.5px;margin:0 0 6px;}
 .sub{text-align:center;color:var(--sub);font-size:14px;margin-bottom:32px;}
@@ -49,24 +35,40 @@ h1{font-size:30px;font-weight:800;text-align:center;letter-spacing:-.5px;margin:
 .opt.sel{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 8%, var(--card));}
 .card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px;display:none;}
 .card.show{display:block;}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
-.fmt{display:flex;gap:8px;margin-bottom:14px;}
-.fmt button{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:inherit;}
-.fmt button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
 .drop{border:2px dashed var(--line);border-radius:12px;padding:24px;text-align:center;color:var(--sub);font-size:13px;cursor:pointer;}
 .drop.has{border-color:var(--accent);color:var(--ink);}
 input[type=file]{display:none;}
 .go{width:100%;margin-top:16px;background:var(--accent);color:var(--accent-ink);border:none;padding:13px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;}
 .go:disabled{opacity:.5;cursor:default;}
 .note{font-size:11.5px;color:var(--sub);margin-top:10px;}
-.result{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
-.dl{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;}
-.dl a{color:var(--accent);font-weight:600;text-decoration:none;}
 .status{font-size:13px;margin-top:12px;}
 .status.err{color:var(--err);}
 .status.ok{color:var(--ok);}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;margin-right:6px;vertical-align:-2px;}
 @keyframes sp{to{transform:rotate(360deg);}}
+
+/* Action buttons row */
+.actions{display:none;gap:10px;margin-top:16px;}
+.actions.show{display:flex;}
+.actions button{flex:1;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:11px;font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;}
+.actions button:hover{border-color:var(--accent);}
+.actions button:disabled{opacity:.5;cursor:default;}
+
+/* Dropdown */
+.dd{position:relative;flex:1;}
+.dd-menu{position:absolute;bottom:calc(100% + 6px);left:0;right:0;background:var(--card);border:1.5px solid var(--line);border-radius:10px;overflow:hidden;display:none;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.12);}
+.dd-menu.show{display:block;}
+.dd-menu button{display:block;width:100%;background:none;border:none;padding:11px 14px;text-align:left;font-size:13.5px;font-family:inherit;color:var(--ink);cursor:pointer;font-weight:500;}
+.dd-menu button:hover{background:color-mix(in srgb, var(--accent) 10%, var(--card));}
+.dd-menu button + button{border-top:1px solid var(--line);}
+
+/* Preview */
+.preview-wrap{margin-top:18px;border-top:1px dashed var(--line);padding-top:14px;display:none;}
+.preview-title{font-size:12.5px;color:var(--sub);margin-bottom:10px;font-weight:600;letter-spacing:.3px;}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+.preview-item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);}
+.preview-item img{display:block;width:100%;height:auto;}
+.preview-item .cap{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.72));color:#fff;font-size:11px;padding:14px 8px 6px;font-weight:500;}
 </style>
 </head>
 <body>
@@ -77,35 +79,73 @@ input[type=file]{display:none;}
 <div class="grid" id="grid"></div>
 
 <div class="card" id="card">
-  <div id="fmtBox" class="fmt" style="display:none">
-    <button data-f="jpeg" class="on">JPG</button>
-    <button data-f="png">PNG</button>
-  </div>
   <div class="drop" id="drop">Click to choose a file, or drag & drop here</div>
   <input type="file" id="fileInput">
   <button class="go" id="goBtn" disabled>Convert</button>
   <div class="note" id="note"></div>
   <div class="status" id="status"></div>
-  <div class="result" id="result"></div>
+
+  <!-- Action buttons -->
+  <div class="actions" id="actions">
+    <!-- Format dropdown (PDF to JPG/PNG only) -->
+    <div class="dd" id="fmtDD" style="display:none">
+      <button id="fmtBtn" type="button">
+        <i class="fa-solid fa-image"></i> Format: <span id="fmtLabel">JPG</span>
+      </button>
+      <div class="dd-menu" id="fmtMenu">
+        <button data-f="jpeg" type="button">JPG</button>
+        <button data-f="png" type="button">PNG</button>
+      </div>
+    </div>
+    <!-- Download dropdown (PDF<->Image only) -->
+    <div class="dd" id="dlDD" style="display:none">
+      <button id="dlBtn" type="button">
+        <i class="fa-solid fa-download"></i> Download
+      </button>
+      <div class="dd-menu" id="dlMenu">
+        <button id="dlSingle" type="button">Download Single</button>
+        <button id="dlAll" type="button">Download All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results (single-file modes) -->
+  <div id="result" style="margin-top:16px;display:flex;flex-direction:column;gap:8px;"></div>
+
+  <!-- Preview -->
+  <div class="preview-wrap" id="previewWrap">
+    <div class="preview-title">PREVIEW</div>
+    <div class="preview-grid" id="previewGrid"></div>
+  </div>
 </div>
 </div>
 
 <script>
 const MAXMB = 20;
 const OPTS = [
-  {id:'pdf2img', t:'PDF to JPG/PNG', d:'Turn PDF pages into images', accept:'.pdf', multi:false, fmt:true},
-  {id:'img2pdf', t:'JPG/PNG to PDF', d:'Combine images into one PDF', accept:'image/*', multi:true},
+  {id:'pdf2img', t:'PDF to JPG/PNG', d:'Turn PDF pages into images', accept:'.pdf', multi:false, special:'pdf2img'},
+  {id:'img2pdf', t:'JPG/PNG to PDF', d:'Combine images into one PDF', accept:'image/*', multi:true, special:'img2pdf'},
   {id:'jpg2png', t:'JPG to PNG', d:'Convert image format', accept:'.jpg,.jpeg', multi:false},
   {id:'png2jpg', t:'PNG to JPG', d:'Convert image format', accept:'.png', multi:false},
   {id:'pdf2word', t:'PDF to Word', d:'Extract PDF text to docx', accept:'.pdf', multi:false},
   {id:'word2pdf', t:'Word to PDF', d:'Turn docx into a PDF', accept:'.doc,.docx', multi:false},
 ];
+
 let mode=null, files=[], imgFmt='jpeg';
+// results = array of {name, blob, url}
+let results=[];
+
 const grid=document.getElementById('grid'), card=document.getElementById('card'), drop=document.getElementById('drop'),
       fileInput=document.getElementById('fileInput'), goBtn=document.getElementById('goBtn'),
       statusEl=document.getElementById('status'), resultEl=document.getElementById('result'),
-      fmtBox=document.getElementById('fmtBox'), note=document.getElementById('note');
+      note=document.getElementById('note'), actions=document.getElementById('actions'),
+      fmtDD=document.getElementById('fmtDD'), fmtBtn=document.getElementById('fmtBtn'),
+      fmtMenu=document.getElementById('fmtMenu'), fmtLabel=document.getElementById('fmtLabel'),
+      dlDD=document.getElementById('dlDD'), dlBtn=document.getElementById('dlBtn'),
+      dlMenu=document.getElementById('dlMenu'),
+      previewWrap=document.getElementById('previewWrap'), previewGrid=document.getElementById('previewGrid');
 
+// Build option cards
 OPTS.forEach(o=>{
   const b=document.createElement('button');
   b.className='opt'; b.innerHTML=`<b>${o.t}</b><span>${o.d}</span>`;
@@ -114,25 +154,78 @@ OPTS.forEach(o=>{
   grid.appendChild(b);
 });
 
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e)=>{
+  if(!fmtDD.contains(e.target)) fmtMenu.classList.remove('show');
+  if(!dlDD.contains(e.target)) dlMenu.classList.remove('show');
+});
+
+fmtBtn.onclick=(e)=>{ e.stopPropagation(); dlMenu.classList.remove('show'); fmtMenu.classList.toggle('show'); };
+dlBtn.onclick=(e)=>{ e.stopPropagation(); fmtMenu.classList.remove('show'); dlMenu.classList.toggle('show'); };
+
+fmtMenu.querySelectorAll('button').forEach(b=>{
+  b.onclick=()=>{
+    imgFmt = b.dataset.f;
+    fmtLabel.textContent = imgFmt==='jpeg' ? 'JPG' : 'PNG';
+    fmtMenu.classList.remove('show');
+    // Re-render result download links (labels unchanged, just refresh URL preview note)
+  };
+});
+
+document.getElementById('dlSingle').onclick=()=>{
+  dlMenu.classList.remove('show');
+  // Trigger download for each result individually (browser may prompt multiple times)
+  results.forEach((r, i)=>{
+    setTimeout(()=>{
+      const a=document.createElement('a');
+      a.href=r.url; a.download=r.name;
+      document.body.appendChild(a); a.click(); a.remove();
+    }, i*300);
+  });
+};
+
+document.getElementById('dlAll').onclick=async ()=>{
+  dlMenu.classList.remove('show');
+  // Build a ZIP on the fly (only when user explicitly chooses "Download All")
+  const zip=new JSZip();
+  results.forEach(r=>zip.file(r.name, r.blob));
+  statusEl.className='status'; statusEl.innerHTML='<span class="spin"></span>Zipping...';
+  const zblob=await zip.generateAsync({type:'blob'});
+  const url=URL.createObjectURL(zblob);
+  const a=document.createElement('a');
+  a.href=url; a.download='converted-files.zip';
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.className='status ok'; statusEl.textContent='Downloaded as ZIP.';
+};
+
+function clearPreview(){
+  previewGrid.innerHTML='';
+  previewWrap.style.display='none';
+}
+
+function clearResults(){
+  results=[]; resultEl.innerHTML='';
+  actions.classList.remove('show');
+  fmtDD.style.display='none';
+  dlDD.style.display='none';
+  fmtMenu.classList.remove('show');
+  dlMenu.classList.remove('show');
+}
+
 function selectMode(id){
-  mode=id; files=[]; resultEl.innerHTML=''; statusEl.textContent=''; drop.classList.remove('has');
+  mode=id; files=[]; statusEl.textContent=''; drop.classList.remove('has');
   drop.textContent='Click to choose a file, or drag & drop here';
+  clearPreview(); clearResults();
   document.querySelectorAll('.opt').forEach(e=>e.classList.remove('sel'));
   document.getElementById('opt-'+id).classList.add('sel');
   const o=OPTS.find(x=>x.id===id);
   fileInput.accept=o.accept; fileInput.multiple=o.multi;
-  fmtBox.style.display=o.fmt?'flex':'none';
   note.textContent = o.multi ? `You can select multiple images. Max ${MAXMB}MB per file.` :
     (id==='pdf2word' ? `Output is a .doc file (text only, original formatting may change). Max ${MAXMB}MB.` :
      id==='word2pdf' ? `Complex layouts may shift slightly. Max ${MAXMB}MB.` : `Max ${MAXMB}MB per file.`);
   card.classList.add('show'); goBtn.disabled=true;
   card.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-fmtBox.querySelectorAll('button').forEach(b=>b.onclick=()=>{
-  fmtBox.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); imgFmt=b.dataset.f;
-});
 
 drop.onclick=()=>fileInput.click();
 drop.ondragover=e=>{e.preventDefault();drop.classList.add('has');};
@@ -142,14 +235,15 @@ fileInput.onchange=()=>handleFiles(fileInput.files);
 function handleFiles(list){
   const arr=Array.from(list);
   for(const f of arr){ if(f.size > MAXMB*1024*1024){ statusEl.className='status err'; statusEl.textContent=`"${f.name}" exceeds ${MAXMB}MB.`; return; } }
-  files=arr; resultEl.innerHTML=''; statusEl.textContent='';
+  files=arr; statusEl.textContent='';
+  clearPreview(); clearResults();
   drop.classList.add('has');
   drop.textContent = files.length===1 ? files[0].name : `${files.length} files selected`;
   goBtn.disabled = files.length===0;
 }
 
 goBtn.onclick=async ()=>{
-  goBtn.disabled=true; resultEl.innerHTML='';
+  goBtn.disabled=true; clearResults(); clearPreview();
   statusEl.className='status'; statusEl.innerHTML='<span class="spin"></span>Processing...';
   try{
     if(mode==='pdf2img') await pdfToImages(files[0], imgFmt);
@@ -165,33 +259,41 @@ goBtn.onclick=async ()=>{
   goBtn.disabled=false;
 };
 
-function addResult(name,url){
-  const row=document.createElement('div'); row.className='dl';
-  row.innerHTML=`<span>${name}</span>`;
-  const a=document.createElement('a'); a.href=url; a.download=name; a.textContent='Download';
-  row.appendChild(a); resultEl.appendChild(row);
+function addResult(name, blob, url){
+  results.push({name, blob, url});
+}
+
+function addPreview(url, label){
+  const item=document.createElement('div'); item.className='preview-item';
+  const img=document.createElement('img'); img.src=url; img.alt=label;
+  const cap=document.createElement('div'); cap.className='cap'; cap.textContent=label;
+  item.appendChild(img); item.appendChild(cap);
+  previewGrid.appendChild(item);
+  previewWrap.style.display='block';
 }
 
 async function pdfToImages(file, fmt){
   pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   const buf=await file.arrayBuffer();
   const pdf=await pdfjsLib.getDocument({data:buf}).promise;
-  const blobs=[];
+  const ext = fmt==='jpeg' ? 'jpg' : 'png';
+
   for(let i=1;i<=pdf.numPages;i++){
     const page=await pdf.getPage(i);
     const vp=page.getViewport({scale:2});
     const canvas=document.createElement('canvas'); canvas.width=vp.width; canvas.height=vp.height;
     await page.render({canvasContext:canvas.getContext('2d'), viewport:vp}).promise;
     const blob=await new Promise(r=>canvas.toBlob(r, 'image/'+fmt, 0.92));
-    blobs.push({name:`page-${i}.${fmt==='jpeg'?'jpg':'png'}`, blob});
+    const url=URL.createObjectURL(blob);
+    const fname=`page-${i}.${ext}`;
+    addResult(fname, blob, url);
+    addPreview(url, `Page ${i}`);
   }
-  if(blobs.length===1){ addResult(blobs[0].name, URL.createObjectURL(blobs[0].blob)); }
-  else{
-    const zip=new JSZip();
-    blobs.forEach(b=>zip.file(b.name,b.blob));
-    const zblob=await zip.generateAsync({type:'blob'});
-    addResult('pdf-pages.zip', URL.createObjectURL(zblob));
-  }
+  // Show action buttons (Format + Download)
+  actions.classList.add('show');
+  fmtDD.style.display='block';
+  dlDD.style.display='block';
+  fmtLabel.textContent = imgFmt==='jpeg' ? 'JPG' : 'PNG';
 }
 
 function loadImg(file){ return new Promise((res,rej)=>{ const img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=URL.createObjectURL(file); }); }
@@ -205,8 +307,15 @@ async function imagesToPdf(fl){
     const w=img.width*r, h=img.height*r;
     if(i>0) doc.addPage();
     doc.addImage(img, 'JPEG', (pw-w)/2, (ph-h)/2, w, h);
+    addPreview(URL.createObjectURL(fl[i]), fl[i].name);
   }
-  const blob=doc.output('blob'); addResult('result.pdf', URL.createObjectURL(blob));
+  const blob=doc.output('blob'); const url=URL.createObjectURL(blob);
+  addResult('result.pdf', blob, url);
+
+  // If more than 1 image source, expose Download (Single/All) — but there's only 1 PDF output.
+  // Still show it, so user gets the "Download All" convenience (single file anyway).
+  actions.classList.add('show');
+  dlDD.style.display='block';
 }
 
 async function imgConvert(file, targetFmt){
@@ -216,7 +325,29 @@ async function imgConvert(file, targetFmt){
   if(targetFmt==='jpeg'){ ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height); }
   ctx.drawImage(img,0,0);
   const blob=await new Promise(r=>canvas.toBlob(r,'image/'+targetFmt,0.92));
-  addResult('result.'+(targetFmt==='jpeg'?'jpg':'png'), URL.createObjectURL(blob));
+  const url=URL.createObjectURL(blob);
+  const name='result.'+(targetFmt==='jpeg'?'jpg':'png');
+  addResult(name, blob, url);
+  addPreview(url, name);
+  // Simple modes: show direct download link instead of dropdown
+  showDirectDownload();
+}
+
+function showDirectDownload(){
+  actions.classList.add('show');
+  dlDD.style.display='block';
+  // Replace dropdown menu with simple direct download (no choice needed)
+  dlMenu.innerHTML='';
+  const b=document.createElement('button');
+  b.type='button'; b.textContent='Download';
+  b.onclick=()=>{
+    const r=results[0];
+    const a=document.createElement('a');
+    a.href=r.url; a.download=r.name;
+    document.body.appendChild(a); a.click(); a.remove();
+    dlMenu.classList.remove('show');
+  };
+  dlMenu.appendChild(b);
 }
 
 async function pdfToWord(file){
@@ -233,7 +364,8 @@ async function pdfToWord(file){
   }
   html+='</body></html>';
   const blob=new Blob(['\ufeff', html], {type:'application/msword'});
-  addResult('result.doc', URL.createObjectURL(blob));
+  addResult('result.doc', blob, URL.createObjectURL(blob));
+  showDirectDownload();
 }
 
 async function wordToPdf(file){
@@ -244,15 +376,17 @@ async function wordToPdf(file){
   holder.innerHTML=html;
   document.body.appendChild(holder);
   const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:'pt',format:'a4'});
-  await new Promise((resolve,reject)=>{
+  await new Promise((resolve)=>{
     doc.html(holder, {
       x:20, y:20, width:555, windowWidth:650,
-      callback:(d)=>{ document.body.removeChild(holder); resolve(); },
+      callback:()=>{ document.body.removeChild(holder); resolve(); },
     });
   });
-  const blob=doc.output('blob'); addResult('result.pdf', URL.createObjectURL(blob));
+  const blob=doc.output('blob'); const url=URL.createObjectURL(blob);
+  addResult('result.pdf', blob, url);
+  showDirectDownload();
 }
 </script>
 <script src="header-footer.js"></script>
 </body>
-</html>
+                                 </html>
