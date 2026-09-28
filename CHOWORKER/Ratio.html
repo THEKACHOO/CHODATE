@@ -162,7 +162,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .xlayout-circle{position:absolute;bottom:-12%;left:6%;width:26.66%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.15);background:#fff;}
 .xlayout-circle canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;}
 .xlayout-circle canvas:active{cursor:grabbing;}
-.xlayout-hint{text-align:center;font-size:10.5px;color:#000;margin-top:14px;font-weight:600;letter-spacing:.3px;}
 
 /* === GRID THUMBNAILS === */
 .grid-preview{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%;margin-top:12px;}
@@ -210,7 +209,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         <div class="choice-btn" id="chooseCustom">
           <i class="fas fa-crop-alt"></i>
           <div class="choice-title">Custom Ratio</div>
-          <div class="choice-desc">Crop and Download</div>
+          <div class="choice-desc">Enter your own crop width &amp; height</div>
         </div>
         <div class="choice-btn" id="choosePreset">
           <i class="fas fa-layer-group"></i>
@@ -299,7 +298,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         <div class="preview-container" style="min-height:280px;">
           <div class="preview-placeholder" id="previewPlaceholderX" style="display:flex;">
             <i class="fas fa-image"></i>
-            <span>Upload both images to see the layout</span>
+            <span>Upload an image to see the layout</span>
           </div>
           <div class="xlayout-preview" id="xLayoutPreview">
             <div class="xlayout-canvas-wrap">
@@ -308,7 +307,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
             <div class="xlayout-circle">
               <canvas id="xSquareCanvas"></canvas>
             </div>
-            <div class="xlayout-hint"><i class="fas fa-hand-paper"></i> Drag header or ava to reposition</div>
           </div>
         </div>
 
@@ -671,6 +669,44 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     return { partW, partH, fullW: partW * cfg.parts, fullH: partH, scale };
   }
 
+  // X Preview — muncul walau baru 1 gambar
+  function refreshXPreview(){
+    const hasSquare = !!cropStates.xSquare.img;
+    const hasWide   = !!cropStates.xWide.img;
+    if(!hasSquare && !hasWide){
+      previewPlaceholderX.style.display = 'flex';
+      xLayoutPreview.classList.remove('active');
+      xActionBar.style.display = 'none';
+      return;
+    }
+    if(hasSquare){
+      xSquareCanvas.width = cropStates.xSquare.w;
+      xSquareCanvas.height = cropStates.xSquare.h;
+      centerState(cropStates.xSquare);
+      drawState(cropStates.xSquare);
+    } else {
+      xSquareCanvas.width = cropStates.xSquare.w;
+      xSquareCanvas.height = cropStates.xSquare.h;
+      const ctx = xSquareCanvas.getContext('2d');
+      ctx.clearRect(0,0,xSquareCanvas.width,xSquareCanvas.height);
+    }
+    if(hasWide){
+      xWideCanvas.width = cropStates.xWide.w;
+      xWideCanvas.height = cropStates.xWide.h;
+      centerState(cropStates.xWide);
+      drawState(cropStates.xWide);
+    } else {
+      xWideCanvas.width = cropStates.xWide.w;
+      xWideCanvas.height = cropStates.xWide.h;
+      const ctx = xWideCanvas.getContext('2d');
+      ctx.clearRect(0,0,xWideCanvas.width,xWideCanvas.height);
+    }
+    previewPlaceholderX.style.display = 'none';
+    xLayoutPreview.classList.add('active');
+    xActionBar.style.display = 'flex';
+    dlXAll.disabled = !(hasSquare && hasWide);
+  }
+
   presetButtons.forEach(btn=>{
     btn.addEventListener('click', ()=>{
       presetButtons.forEach(b=>b.classList.remove('active'));
@@ -684,20 +720,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
       if(activePreset === 'x-layout'){
         xLayoutSection.style.display = 'block';
         xLayoutSection.classList.add('fade-in');
-        if(cropStates.xSquare.img && cropStates.xWide.img){
-          centerState(cropStates.xSquare);
-          centerState(cropStates.xWide);
-          drawState(cropStates.xSquare);
-          drawState(cropStates.xWide);
-          previewPlaceholderX.style.display = 'none';
-          xLayoutPreview.classList.add('active');
-          xActionBar.style.display = 'flex';
-          dlXAll.disabled = false;
-        } else {
-          xLayoutPreview.classList.remove('active');
-          previewPlaceholderX.style.display = 'flex';
-          xActionBar.style.display = 'none';
-        }
+        refreshXPreview();
       } else {
         gridSection.style.display = 'block';
         gridSection.classList.add('fade-in');
@@ -731,24 +754,11 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   });
 
   // X Upload Handlers
-  function tryShowXPreview(){
-    if(cropStates.xSquare.img && cropStates.xWide.img){
-      centerState(cropStates.xSquare);
-      centerState(cropStates.xWide);
-      drawState(cropStates.xSquare);
-      drawState(cropStates.xWide);
-      previewPlaceholderX.style.display = 'none';
-      xLayoutPreview.classList.add('active');
-      xActionBar.style.display = 'flex';
-      dlXAll.disabled = false;
-    }
-  }
-
   uploadBoxXSquare.addEventListener('click', ()=>fileInputXSquare.click());
   fileInputXSquare.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
       cropStates.xSquare.img = img;
-      tryShowXPreview();
+      refreshXPreview();
     });
     fileInputXSquare.value = '';
   });
@@ -764,7 +774,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   fileInputXWide.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
       cropStates.xWide.img = img;
-      tryShowXPreview();
+      refreshXPreview();
     });
     fileInputXWide.value = '';
   });
@@ -906,4 +916,4 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 </script>
 <script src="header-footer.js"></script>
 </body>
-  </html>
+        </html>
