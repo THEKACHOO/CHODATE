@@ -56,19 +56,37 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .time-col .time-star.active{color:#111;}
 .time-col .time-reply{font-size:14px;color:#5f6368;cursor:default;}
 
-.recipients-block{margin-top:4px;}
-.recipient-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:12.5px;color:#5f6368;margin-bottom:3px;}
-.r-label{width:24px;flex-shrink:0;color:#5f6368;}
+.recipients-block{margin-top:6px;} /* Sedikit naikkan blok to */
+.recipient-row{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;font-size:12.5px;color:#5f6368;margin-bottom:3px;} /* Gap diperkecil jadi 4px */
+.r-label{width:18px;flex-shrink:0;color:#5f6368;text-align:right;padding-right:2px;} /* Lebar label diperkecil biar rapat */
 
-.to-control{display:inline-flex;align-items:center;gap:6px;}
-.to-control select,
-.to-control input.to-input{
-  font-size:12.5px;color:#202124;border:1px solid #dadce0;border-radius:8px;
-  padding:3px 8px;background:#fff;font-family:inherit;cursor:pointer;outline:none;
+/* ==== PERBAIKAN TO CONTROL ==== */
+.to-control{
+  display: flex;
+  align-items: center;
+  flex: 1; /* Agar mengisi sisa ruang */
+  min-width: 0;
 }
-.to-control input.to-input{cursor:text;min-width:160px;}
-.to-control select:focus,
-.to-control input.to-input:focus{border-color:#111;}
+
+.to-control input.to-input{
+  font-size: 12.5px;
+  color: #202124;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 4px 10px;
+  background: #fff;
+  font-family: inherit;
+  cursor: text;
+  outline: none;
+  width: 100%; /* Mengisi penuh container */
+  max-width: 320px; /* Batasi lebar maksimal agar tidak terlalu panjang */
+  transition: border-color 0.2s;
+}
+
+.to-control input.to-input:focus{
+  border-color: #111;
+}
+/* ============================== */
 
 .email-body{font-size:14px;line-height:1.7;color:#202124;min-height:120px;padding:4px 2px 20px;word-wrap:break-word;overflow-wrap:anywhere;}
 .reply-bar{display:flex;align-items:center;gap:12px;margin-top:14px;}
@@ -165,39 +183,41 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 const OWNER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%23333333'/%3E%3Ctext x='15' y='20' font-size='12' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EYou%3C/text%3E%3C/svg%3E";
 const SENDER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' fill='%23777777'/%3E%3Ctext x='18' y='23' font-size='13' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%3F%3C/text%3E%3C/svg%3E";
 
-let toState = { mode: 'me', email: '' };
+// State default langsung ke email tujuan
+let toState = { email: 'official@vault.x' };
 
+// ==== FUNGSI RENDER TO YANG BARU (LANGSUNG INPUT) ====
 function renderToControl(){
   document.querySelectorAll('.js-to-control').forEach(container=>{
-    if(toState.mode === 'me'){
-      container.innerHTML = `
-        <select class="to-select">
-          <option value="me" selected>To me</option>
-          <option value="custom">+ Isi sendiri</option>
-        </select>`;
-    } else {
-      container.innerHTML = `
-        <input class="to-input" type="text" value="${toState.email}" placeholder="email@contoh.com">`;
-    }
-    const sel = container.querySelector('.to-select');
-    if(sel){
-      sel.addEventListener('change', function(){
-        if(this.value === 'custom'){
-          toState.mode = 'custom'; toState.email = ''; renderToControl();
-          setTimeout(()=>{ document.querySelectorAll('.js-to-control .to-input').forEach(inp=>{ if(inp.offsetParent !== null){ inp.focus(); } }); }, 0);
-        } else { toState.mode = 'me'; renderToControl(); }
-      });
-    }
+    container.innerHTML = `
+      <input class="to-input" type="text" value="${toState.email}" placeholder="email@contoh.com">
+    `;
+    
     const inp = container.querySelector('.to-input');
     if(inp){
-      inp.addEventListener('input', function(){ toState.email = this.value; });
-      const backToMeIfEmpty = ()=>{ if(toState.email.trim() === ''){ toState.mode = 'me'; renderToControl(); } };
-      inp.addEventListener('blur', backToMeIfEmpty);
-      inp.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); this.blur(); } });
+      inp.addEventListener('input', function(){ 
+        toState.email = this.value; 
+      });
+      
+      // Jika kosong saat blur, kembalikan ke default
+      inp.addEventListener('blur', function(){
+        if(this.value.trim() === ''){ 
+          toState.email = 'official@vault.x'; 
+          this.value = 'official@vault.x'; 
+        }
+      });
+      
+      inp.addEventListener('keydown', function(e){ 
+        if(e.key === 'Enter'){ 
+          e.preventDefault(); 
+          this.blur(); 
+        } 
+      });
     }
   });
 }
 renderToControl();
+// ====================================================
 
 document.querySelectorAll('.js-time-star').forEach(star=>{
   star.addEventListener('click', function(){
