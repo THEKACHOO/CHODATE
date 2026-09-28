@@ -33,15 +33,32 @@ document.body.insertAdjacentHTML('afterbegin', `
 /* CSS tambahan: perbesar logo tengah di header */
 document.head.insertAdjacentHTML('beforeend', `
 <style>
+  /* Header dinaikkan tingginya agar logo besar tidak terpotong */
+  .header-content {
+    min-height: 90px !important;
+    padding: 8px 24px !important;
+  }
+
+  /* Logo tengah DIPERBESAR */
   .center-logo-img {
-    height: 64px !important;
+    height: 160px !important;      /* <-- UBAH DI SINI kalau mau beda ukuran */
     width: auto !important;
     max-height: none !important;
-    object-fit: contain;
+    max-width: 400px !important;
+    object-fit: contain !important;
+    margin-top: -30px !important;  /* Tarik ke atas agar tidak mendorong header */
+    margin-bottom: -30px !important;
   }
+
   @media (max-width: 768px) {
+    .header-content {
+      min-height: 70px !important;
+    }
     .center-logo-img {
-      height: 48px !important;
+      height: 110px !important;    /* Ukuran mobile */
+      max-width: 220px !important;
+      margin-top: -20px !important;
+      margin-bottom: -20px !important;
     }
   }
 </style>
