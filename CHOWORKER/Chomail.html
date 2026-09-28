@@ -361,10 +361,11 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
     scrollX: 0, scrollY: -scrollY,
     windowWidth: 1000,
     onclone: doc=>{
-      const a=doc.getElementById('captureArea'); a.style.transform='none';
-      const b=doc.getElementById('scaleBox'); b.style.width='820px'; b.style.height='auto';
-      const ar=doc.getElementById('addReplyWrap'); if(ar) ar.style.display='none';
-      doc.querySelectorAll('.reply-delete-btn').forEach(el=>el.style.display='none');
+  const a=doc.getElementById('captureArea'); a.style.transform='none';
+  const b=doc.getElementById('scaleBox'); b.style.width='820px'; b.style.height='auto';
+  const ar=doc.getElementById('addReplyWrap'); if(ar) ar.style.display='none';
+  doc.querySelectorAll('.reply-delete-btn').forEach(el=>el.style.display='none');
+  doc.querySelectorAll('.to-input').forEach(el=>{ el.style.transform = 'translateY(-4px)'; });
     }
   }).then(canvas=>{
     const a = document.createElement('a');
