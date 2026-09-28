@@ -28,6 +28,7 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .gmail-logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:19px;color:#111;}
 .gmail-logo img{height:28px;width:auto;display:none;}
 #logoFallback{display:flex;align-items:center;gap:8px;}
+.logo-text{color:#111;}
 .gmail-search{flex:1;background:var(--gmail-bg);border-radius:24px;padding:9px 16px;display:flex;align-items:center;gap:10px;color:var(--gmail-grey);font-size:14px;}
 .gmail-topbar-right{display:flex;align-items:center;gap:14px;color:var(--gmail-grey);font-size:16px;}
 .avatar-round{width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;}
@@ -60,7 +61,6 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .recipient-row{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;font-size:12.5px;color:#5f6368;margin-bottom:3px;}
 .r-label{width:18px;flex-shrink:0;color:#5f6368;text-align:right;padding-right:2px;}
 
-/* ==== TO CONTROL ==== */
 .to-control{
   display: flex;
   align-items: center;
@@ -89,12 +89,21 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .to-control input.to-input::placeholder{
   color: #9aa0a6;
 }
-/* ============================== */
 
 .email-body{font-size:14px;line-height:1.7;color:#202124;min-height:120px;padding:4px 2px 20px;word-wrap:break-word;overflow-wrap:anywhere;}
 .reply-bar{display:flex;align-items:center;gap:12px;margin-top:14px;}
 .reply-btn{border:1px solid #dadce0;border-radius:20px;padding:9px 20px;font-size:13px;color:#3c4043;font-weight:500;display:flex;align-items:center;gap:8px;}
 
+/* ADD REPLY */
+.add-reply-wrap{display:flex;justify-content:flex-start;margin-top:6px;}
+.add-reply-btn{border:1px dashed #dadce0;border-radius:20px;padding:9px 20px;font-size:13px;color:#3c4043;font-weight:500;display:flex;align-items:center;gap:8px;cursor:pointer;background:#fff;font-family:inherit;}
+.add-reply-btn:hover{background:#f5f5f5;}
+
+.reply-item{margin-top:22px;padding-top:18px;border-top:1px solid #f0f0f0;position:relative;}
+.reply-delete-btn{position:absolute;top:35px;right:-6px;background:none;border:none;color:#5f6368;font-size:14px;cursor:pointer;padding:4px;}
+.reply-delete-btn:hover{color:#111;}
+
+/* LAYOUT */
 .gmail-wrap{display:block;width:100%;}
 .scale-box{margin:0 auto;}
 .gmail-app{width:820px;max-width:none;transform-origin:top left;}
@@ -123,7 +132,6 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
         </div>
         <div class="gmail-search"><i class="fas fa-search"></i> Search mail</div>
         <div class="gmail-topbar-right">
-          <i class="fas fa-th"></i>
           <div class="avatar-round" id="avatarClickOwner" title="Your Picture"><img id="avatarImgOwner" src=""></div>
         </div>
       </div>
@@ -163,7 +171,15 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 
           <div class="email-body js-body" contenteditable data-ph="Write the email here...">Write the email here...</div>
 
-          <div class="reply-bar">
+          <!-- AREA ADD REPLY -->
+          <div id="repliesContainer"></div>
+
+          <div class="add-reply-wrap" id="addReplyWrap">
+            <button class="add-reply-btn" id="addReplyBtn"><i class="fas fa-plus"></i> Add Reply</button>
+          </div>
+
+          <!-- REPLY BAR (pindah ke bawah kalau ada reply) -->
+          <div class="reply-bar" id="replyBar">
             <div class="reply-btn"><i class="fas fa-reply"></i> Reply</div>
             <div class="reply-btn"><i class="fas fa-share"></i> Forward</div>
           </div>
@@ -186,13 +202,13 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 const OWNER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%23333333'/%3E%3Ctext x='15' y='20' font-size='12' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EYou%3C/text%3E%3C/svg%3E";
 const SENDER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' fill='%23777777'/%3E%3Ctext x='18' y='23' font-size='13' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%3F%3C/text%3E%3C/svg%3E";
 
-// ==== INPUT EMAIL KOSONG, PLACEHOLDER CONTOH@EMAIL.XXX ====
 function renderToControl(){
   document.querySelectorAll('.js-to-control').forEach(container=>{
+    if(container.dataset.done) return;
+    container.dataset.done = "1";
     container.innerHTML = `
       <input class="to-input" type="text" value="" placeholder="contoh@email.xxx">
     `;
-    
     const inp = container.querySelector('.to-input');
     if(inp){
       inp.addEventListener('keydown', function(e){ 
@@ -205,7 +221,6 @@ function renderToControl(){
   });
 }
 renderToControl();
-// ==========================================================
 
 document.querySelectorAll('.js-time-star').forEach(star=>{
   star.addEventListener('click', function(){
@@ -215,6 +230,88 @@ document.querySelectorAll('.js-time-star').forEach(star=>{
     this.classList.toggle('active', !isActive);
   });
 });
+
+// ==== ADD REPLY ====
+let replyCount = 0;
+const MAX_REPLY = 2;
+const repliesContainer = document.getElementById('repliesContainer');
+const addReplyBtn = document.getElementById('addReplyBtn');
+const addReplyWrap = document.getElementById('addReplyWrap');
+const replyBar = document.getElementById('replyBar');
+
+function updateReplyUI(){
+  if(replyCount >= MAX_REPLY){
+    addReplyWrap.style.display = 'none';
+  } else {
+    addReplyWrap.style.display = 'flex';
+  }
+  if(replyCount > 0){
+    repliesContainer.appendChild(replyBar);
+  } else {
+    const gmailMain = document.querySelector('.gmail-main');
+    gmailMain.appendChild(replyBar);
+  }
+}
+
+addReplyBtn.addEventListener('click', function(){
+  if(replyCount >= MAX_REPLY) return;
+  replyCount++;
+
+  const reply = document.createElement('div');
+  reply.className = 'reply-item';
+  reply.innerHTML = `
+    <button class="reply-delete-btn" title="Hapus reply"><i class="fas fa-trash"></i></button>
+    <div class="email-header-row">
+      <div class="avatar-round" style="width:36px;height:36px;"><img src="${SENDER_DEFAULT}"></div>
+      <div class="email-meta">
+        <div class="sender-line"><b contenteditable data-ph="(User Name)">(User Name)</b>
+          <span class="email-addr">&lt;<span contenteditable data-ph="(Email)">(Email)</span>&gt;</span></div>
+        <div class="recipients-block">
+          <div class="recipient-row">
+            <span class="r-label">to</span>
+            <div class="to-control">
+              <input class="to-input" type="text" value="" placeholder="contoh@email.xxx">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="time-col">
+        <span class="js-time" contenteditable data-ph="Day, Date, Time AM/PM">Day, Date, Time AM/PM</span>
+        <i class="far fa-star time-star js-time-star" title="Klik untuk star"></i>
+        <i class="fas fa-reply time-reply"></i>
+      </div>
+    </div>
+    <div class="email-body" contenteditable data-ph="Write the email here...">Write the email here...</div>
+  `;
+
+  reply.querySelectorAll('.js-time-star').forEach(star=>{
+    star.addEventListener('click', function(){
+      const isActive = this.classList.contains('fa-solid');
+      this.classList.toggle('fa-solid', !isActive);
+      this.classList.toggle('fa-regular', isActive);
+      this.classList.toggle('active', !isActive);
+    });
+  });
+
+  reply.querySelector('.reply-delete-btn').addEventListener('click', function(){
+    reply.remove();
+    replyCount--;
+    updateReplyUI();
+    fitApp();
+  });
+
+  const inp = reply.querySelector('.to-input');
+  inp.addEventListener('keydown', function(e){ 
+    if(e.key === 'Enter'){ e.preventDefault(); this.blur(); } 
+  });
+
+  repliesContainer.appendChild(reply);
+  updateReplyUI();
+  fitApp();
+});
+
+updateReplyUI();
+// ==================
 
 const avatarUpload = document.getElementById('avatarUpload');
 let currentTarget = null;
@@ -266,6 +363,8 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
     onclone: doc=>{
       const a=doc.getElementById('captureArea'); a.style.transform='none';
       const b=doc.getElementById('scaleBox'); b.style.width='820px'; b.style.height='auto';
+      const ar=doc.getElementById('addReplyWrap'); if(ar) ar.style.display='none';
+      doc.querySelectorAll('.reply-delete-btn').forEach(el=>el.style.display='none');
     }
   }).then(canvas=>{
     const a = document.createElement('a');
@@ -279,4 +378,4 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
 </script>
 <script src="header-footer.js"></script>
 </body>
-</html>
+  </html>
