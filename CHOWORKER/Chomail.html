@@ -56,15 +56,15 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 .time-col .time-star.active{color:#111;}
 .time-col .time-reply{font-size:14px;color:#5f6368;cursor:default;}
 
-.recipients-block{margin-top:6px;} /* Sedikit naikkan blok to */
-.recipient-row{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;font-size:12.5px;color:#5f6368;margin-bottom:3px;} /* Gap diperkecil jadi 4px */
-.r-label{width:18px;flex-shrink:0;color:#5f6368;text-align:right;padding-right:2px;} /* Lebar label diperkecil biar rapat */
+.recipients-block{margin-top:6px;}
+.recipient-row{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;font-size:12.5px;color:#5f6368;margin-bottom:3px;}
+.r-label{width:18px;flex-shrink:0;color:#5f6368;text-align:right;padding-right:2px;}
 
-/* ==== PERBAIKAN TO CONTROL ==== */
+/* ==== TO CONTROL ==== */
 .to-control{
   display: flex;
   align-items: center;
-  flex: 1; /* Agar mengisi sisa ruang */
+  flex: 1;
   min-width: 0;
 }
 
@@ -78,13 +78,16 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
   font-family: inherit;
   cursor: text;
   outline: none;
-  width: 100%; /* Mengisi penuh container */
-  max-width: 320px; /* Batasi lebar maksimal agar tidak terlalu panjang */
+  width: 100%;
+  max-width: 320px;
   transition: border-color 0.2s;
 }
 
 .to-control input.to-input:focus{
   border-color: #111;
+}
+.to-control input.to-input::placeholder{
+  color: #9aa0a6;
 }
 /* ============================== */
 
@@ -116,7 +119,7 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
       <div class="gmail-topbar">
         <div class="gmail-logo">
           <img src="Chomail.png" alt="Chomail" onload="this.style.display='block';document.getElementById('logoFallback').style.display='none';">
-          <span id="logoFallback"><i class="fas fa-envelope" style="color:#111;font-size:20px;"></i> Email</span>
+          <span id="logoFallback"><i class="fas fa-envelope" style="color:#111;font-size:20px;"></i> Chomail</span>
         </div>
         <div class="gmail-search"><i class="fas fa-search"></i> Search mail</div>
         <div class="gmail-topbar-right">
@@ -183,30 +186,15 @@ body,html{width:100%;overflow-x:hidden;background:#f5f5f5;font-family:'Roboto',A
 const OWNER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%23333333'/%3E%3Ctext x='15' y='20' font-size='12' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3EYou%3C/text%3E%3C/svg%3E";
 const SENDER_DEFAULT="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' fill='%23777777'/%3E%3Ctext x='18' y='23' font-size='13' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%3F%3C/text%3E%3C/svg%3E";
 
-// State default langsung ke email tujuan
-let toState = { email: 'official@vault.x' };
-
-// ==== FUNGSI RENDER TO YANG BARU (LANGSUNG INPUT) ====
+// ==== INPUT EMAIL KOSONG, CUMA ADA PLACEHOLDER ====
 function renderToControl(){
   document.querySelectorAll('.js-to-control').forEach(container=>{
     container.innerHTML = `
-      <input class="to-input" type="text" value="${toState.email}" placeholder="email@contoh.com">
+      <input class="to-input" type="text" value="" placeholder="official@vault.x">
     `;
     
     const inp = container.querySelector('.to-input');
     if(inp){
-      inp.addEventListener('input', function(){ 
-        toState.email = this.value; 
-      });
-      
-      // Jika kosong saat blur, kembalikan ke default
-      inp.addEventListener('blur', function(){
-        if(this.value.trim() === ''){ 
-          toState.email = 'official@vault.x'; 
-          this.value = 'official@vault.x'; 
-        }
-      });
-      
       inp.addEventListener('keydown', function(e){ 
         if(e.key === 'Enter'){ 
           e.preventDefault(); 
@@ -217,7 +205,7 @@ function renderToControl(){
   });
 }
 renderToControl();
-// ====================================================
+// ==================================================
 
 document.querySelectorAll('.js-time-star').forEach(star=>{
   star.addEventListener('click', function(){
