@@ -19,48 +19,113 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .page-sub{text-align:center;font-size:14px;color:#000;margin-bottom:26px;}
 @media(max-width:640px){.page-title{font-size:22px;margin-bottom:6px;}.page-sub{font-size:12.5px;margin-bottom:18px;}}
 
-.editor-card{width:100%;max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.12);border:1px solid #000;padding:28px 24px;min-height:340px;}
+.editor-card{width:100%;max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:28px 24px;min-height:340px;}
 @media(max-width:680px){.editor-card{border-radius:0;padding:20px 12px;}}
 
 /* === SESSION 1 === */
-.session-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:36px 10px;}
-.choice-question{font-size:20px;font-weight:700;color:#000;text-align:center;}
+.session-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;padding:36px 10px;}
+.choice-question{font-size:20px;font-weight:700;color:#000;text-align:center;margin-bottom:4px;}
 @media(max-width:640px){.choice-question{font-size:17px;}}
-.choice-buttons{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;width:100%;}
+.choice-buttons{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-content:center;width:100%;max-width:560px;}
+@media(max-width:480px){.choice-buttons{gap:12px;}}
 .choice-btn{
-  flex:0 1 240px;min-width:200px;background:#fff;border:2px solid #000;border-radius:18px;
-  padding:32px 22px;text-align:center;cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;gap:12px;
+  background:#fff;border:2px solid #000;border-radius:18px;
+  padding:28px 14px;text-align:center;cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;gap:10px;
 }
 .choice-btn:hover{background:#000;color:#fff;transform:translateY(-2px);}
 .choice-btn:hover i,.choice-btn:hover .choice-title,.choice-btn:hover .choice-desc{color:#fff;}
-.choice-btn i{font-size:38px;color:#000;}
-.choice-btn .choice-title{font-size:17px;font-weight:700;color:#000;}
-.choice-btn .choice-desc{font-size:12.5px;color:#000;line-height:1.5;}
+.choice-btn i{font-size:34px;color:#000;}
+.choice-btn .choice-title{font-size:15px;font-weight:700;color:#000;}
+.choice-btn .choice-desc{font-size:12px;color:#000;line-height:1.5;}
+@media(max-width:480px){.choice-btn{padding:22px 10px;}.choice-btn i{font-size:28px;}.choice-btn .choice-title{font-size:13.5px;}.choice-btn .choice-desc{font-size:11px;}}
 
 /* === SESSION 2 HEADER === */
-.session-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid #000;flex-wrap:wrap;}
-.back-btn{background:#fff;border:1px solid #000;color:#000;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;}
+.session-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:16px;flex-wrap:wrap;}
+.back-btn{background:#fff;border:1px solid #000;color:#000;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;flex-shrink:0;}
 .back-btn:hover{background:#000;color:#fff;}
 .session-title{font-size:18px;font-weight:700;color:#000;flex:1;min-width:0;}
 @media(max-width:640px){.session-title{font-size:15px;}}
 
-/* === CUSTOM === */
-.custom-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;background:#fff;border:1px solid #000;border-radius:14px;padding:16px;margin-bottom:22px;}
-.custom-controls label{font-size:13px;font-weight:600;color:#000;}
-.custom-controls input{width:100px;padding:10px 12px;border:1px solid #000;border-radius:24px;font-size:14px;text-align:center;outline:none;font-family:inherit;background:#fff;color:#000;}
+/* === CUSTOM CONTROLS (RAPIH 1 BARIS) === */
+.custom-controls{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  padding:18px 8px;
+  margin-bottom:22px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.custom-controls::-webkit-scrollbar{display:none;}
+.custom-controls label{font-size:13px;font-weight:600;color:#000;white-space:nowrap;flex-shrink:0;}
+.custom-controls input{
+  width:90px;
+  min-width:70px;
+  padding:10px 8px;
+  border:1px solid #000;
+  border-radius:24px;
+  font-size:14px;
+  text-align:center;
+  outline:none;
+  font-family:inherit;
+  background:#fff;
+  color:#000;
+  transition:.2s;
+  flex-shrink:0;
+}
 .custom-controls input:focus{border-color:#000;box-shadow:0 0 0 2px rgba(0,0,0,.15);}
-.custom-controls .x-sign{font-weight:700;color:#000;font-size:16px;}
-.apply-custom{background:#000;color:#fff;border:none;padding:10px 26px;border-radius:30px;font-weight:600;font-size:13.5px;cursor:pointer;transition:.15s;}
+.custom-controls .x-sign{font-weight:700;color:#000;font-size:16px;flex-shrink:0;}
+.apply-custom{background:#000;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-weight:600;font-size:13.5px;cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0;}
 .apply-custom:hover{background:#333;color:#fff;}
 
-/* === PRESET === */
-.preset-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;}
-.preset-btn{background:#fff;border:1px solid #000;color:#000;padding:11px 20px;border-radius:30px;font-size:13.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;white-space:nowrap;}
+@media(max-width:520px){
+  .custom-controls{gap:6px;padding:14px 4px;}
+  .custom-controls label{font-size:12px;}
+  .custom-controls input{width:64px;min-width:56px;padding:9px 4px;font-size:13px;}
+  .apply-custom{padding:9px 16px;font-size:12.5px;}
+}
+
+/* === PRESET TABS (3 KOLOM SEJAJAR) === */
+.preset-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:24px;
+  max-width:620px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.preset-btn{
+  background:#fff;
+  border:1px solid #000;
+  color:#000;
+  padding:14px 10px;
+  border-radius:30px;
+  font-size:13.5px;
+  font-weight:500;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.15s;
+  white-space:nowrap;
+  text-align:center;
+}
 .preset-btn i{font-size:13px;color:#000;}
 .preset-btn:hover{background:#000;color:#fff;}
 .preset-btn:hover i{color:#fff;}
 .preset-btn.active{background:#000;color:#fff;border-color:#000;font-weight:700;}
 .preset-btn.active i{color:#fff;}
+@media(max-width:520px){
+  .preset-tabs{gap:8px;max-width:100%;}
+  .preset-btn{padding:12px 6px;font-size:12px;gap:5px;}
+  .preset-btn i{font-size:11px;}
+}
 
 /* === UPLOAD & PREVIEW === */
 .upload-area{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;}
@@ -73,7 +138,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .upload-box .reco{display:block;margin-top:6px;font-size:10.5px;font-weight:700;color:#000;letter-spacing:.2px;text-transform:uppercase;}
 .file-input{display:none;}
 
-.preview-container{flex:2 1 460px;min-width:280px;background:#fff;border-radius:12px;border:1px solid #000;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;position:relative;}
+.preview-container{flex:2 1 460px;min-width:280px;background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;position:relative;}
 .preview-placeholder{color:#000;font-size:13.5px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;}
 .preview-placeholder i{font-size:40px;color:#000;}
 
@@ -81,30 +146,28 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .drag-stage.active{display:block;}
 .drag-stage canvas{
   display:block;max-width:100%;max-height:380px;
-  border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);
-  background:#fff;border:1px solid #000;
+  border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08);
+  background:#fff;
   cursor:grab;touch-action:none;user-select:none;
 }
 .drag-stage canvas:active{cursor:grabbing;}
 .drag-hint{font-size:10.5px;color:#000;margin-top:6px;text-align:center;letter-spacing:.3px;font-weight:600;}
 
 /* === X LAYOUT === */
-.xlayout-preview{display:none;width:100%;max-width:720px;margin:0 auto;position:relative;padding:20px 0 10px;}
+.xlayout-preview{display:none;width:100%;max-width:720px;margin:0 auto;position:relative;padding:20px 0 30px;}
 .xlayout-preview.active{display:block;}
-.xlayout-canvas-wrap{position:relative;width:100%;padding-bottom:33.33%;background:#fff;border:2px solid #000;border-radius:8px;overflow:hidden;}
+.xlayout-canvas-wrap{position:relative;width:100%;padding-bottom:33.33%;background:#fff;border-radius:8px;overflow:hidden;}
 .xlayout-canvas-wrap canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;}
 .xlayout-canvas-wrap canvas:active{cursor:grabbing;}
-.xlayout-circle{position:absolute;bottom:-12%;left:6%;width:26.66%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.25);background:#fff;}
+.xlayout-circle{position:absolute;bottom:-12%;left:6%;width:26.66%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.15);background:#fff;}
 .xlayout-circle canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;}
 .xlayout-circle canvas:active{cursor:grabbing;}
-.xlayout-hint{text-align:center;font-size:10.5px;color:#000;margin-top:10px;font-weight:600;letter-spacing:.3px;}
+.xlayout-hint{text-align:center;font-size:10.5px;color:#000;margin-top:14px;font-weight:600;letter-spacing:.3px;}
 
 /* === GRID THUMBNAILS === */
 .grid-preview{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%;margin-top:12px;}
-.grid-item{background:#fff;border:1px solid #000;border-radius:8px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:.15s;}
-.grid-item:hover{background:#000;}
-.grid-item:hover span{color:#fff;}
-.grid-item canvas{max-width:100px;max-height:160px;border-radius:4px;background:#fff;border:1px solid #000;}
+.grid-item{background:#fff;border-radius:8px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:.15s;}
+.grid-item canvas{max-width:100px;max-height:160px;border-radius:4px;background:#fff;}
 .grid-item span{font-size:10.5px;color:#000;font-weight:600;}
 
 /* === DUAL UPLOAD === */
@@ -113,9 +176,9 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .dual-upload .upload-box .upload-label{font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
 
 /* === ACTION BAR === */
-.action-bar{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid #000;justify-content:center;}
-.btn{background:#000;color:#fff;border:1px solid #000;padding:12px 30px;border-radius:100px;font-weight:600;font-size:13.5px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;justify-content:center;}
-.btn:hover{background:#fff;color:#000;}
+.action-bar{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;padding-top:18px;justify-content:center;align-items:center;}
+.btn{background:#000;color:#fff;border:none;padding:12px 30px;border-radius:100px;font-weight:600;font-size:13.5px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;justify-content:center;}
+.btn:hover{background:#333;color:#fff;}
 .btn:disabled{opacity:.4;cursor:not-allowed;background:#000;color:#fff;}
 .btn:disabled:hover{background:#000;color:#fff;}
 
@@ -126,6 +189,10 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .format-btn.active{background:#000;color:#fff;}
 
 .toast-msg{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:11px 22px;border-radius:60px;font-weight:500;font-size:13px;z-index:30000;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;border:1px solid #000;}
+
+/* === FADE-IN MOTION === */
+.fade-in{animation:fadeIn .35s ease forwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
@@ -137,13 +204,13 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   <div class="editor-card" id="editorCard">
 
     <!-- SESSION 1 -->
-    <div id="session1" class="session-choice">
+    <div id="session1" class="session-choice fade-in">
       <div class="choice-question">Which mode do you want to use?</div>
       <div class="choice-buttons">
         <div class="choice-btn" id="chooseCustom">
           <i class="fas fa-crop-alt"></i>
           <div class="choice-title">Custom Ratio</div>
-          <div class="choice-desc">Enter your own crop width &amp; height</div>
+          <div class="choice-desc">Crop and Download</div>
         </div>
         <div class="choice-btn" id="choosePreset">
           <i class="fas fa-layer-group"></i>
@@ -206,8 +273,8 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 
       <div class="preset-tabs">
         <button class="preset-btn" data-preset="x-layout"><i class="fas fa-columns"></i> X Layout</button>
-        <button class="preset-btn" data-preset="post4grid"><i class="fas fa-th"></i> Post 4 Grid</button>
-        <button class="preset-btn" data-preset="post2grid"><i class="fas fa-th-large"></i> Post 2 Grid</button>
+        <button class="preset-btn" data-preset="post4grid">4 Carousel</button>
+        <button class="preset-btn" data-preset="post2grid">2 Carousel</button>
       </div>
 
       <!-- X LAYOUT -->
@@ -250,8 +317,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
             <button class="format-btn active" data-format="png">PNG</button>
             <button class="format-btn" data-format="jpg">JPG</button>
           </div>
-          <button class="btn" id="dlXSquare" disabled><i class="fas fa-download"></i> Download Ava</button>
-          <button class="btn" id="dlXWide" disabled><i class="fas fa-download"></i> Download Header</button>
+          <button class="btn" id="dlXAll" disabled><i class="fas fa-download"></i> Download All</button>
         </div>
       </div>
 
@@ -433,7 +499,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   }
 
   // ============================================================
-  // TOMBOL DI AWAL AJA SIH INI
+  // TOMBOL DI AWAL
   // ============================================================
   const session1       = document.getElementById('session1');
   const sessionCustom  = document.getElementById('sessionCustom');
@@ -443,16 +509,19 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     session1.style.display = 'none';
     sessionPreset.style.display = 'none';
     sessionCustom.style.display = 'block';
+    sessionCustom.classList.add('fade-in');
   }
   function goToPreset(){
     session1.style.display = 'none';
     sessionCustom.style.display = 'none';
     sessionPreset.style.display = 'block';
+    sessionPreset.classList.add('fade-in');
   }
   function goBackToSession1(){
     session1.style.display = 'block';
     sessionCustom.style.display = 'none';
     sessionPreset.style.display = 'none';
+    session1.classList.add('fade-in');
     presetButtons.forEach(b=>b.classList.remove('active'));
     activePreset = null;
     gridSegments = [];
@@ -559,8 +628,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   const xLayoutPreview = document.getElementById('xLayoutPreview');
   const previewPlaceholderX = document.getElementById('previewPlaceholderX');
   const xActionBar = document.getElementById('xActionBar');
-  const dlXSquare = document.getElementById('dlXSquare');
-  const dlXWide = document.getElementById('dlXWide');
+  const dlXAll = document.getElementById('dlXAll');
 
   setupFormatSelector('xFormatSelector');
   cropStates.xSquare.canvas = xSquareCanvas;
@@ -588,8 +656,8 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   let mainSegmentIndex = 0;
 
   const GRID_CONFIG = {
-    'post4grid': { parts: 4, recoW: 4848, recoH: 1896, label: 'Post 4 Grid', reco: 'Recommended: 4848 × 1896' },
-    'post2grid': { parts: 2, recoW: 2424, recoH: 1896, label: 'Post 2 Grid', reco: 'Recommended: 2424 × 1896' }
+    'post4grid': { parts: 4, recoW: 4848, recoH: 1896, label: '4 Carousel', reco: 'Recommended: 4848 × 1896' },
+    'post2grid': { parts: 2, recoW: 2424, recoH: 1896, label: '2 Carousel', reco: 'Recommended: 2424 × 1896' }
   };
 
   function computeGridOutput(cfg, img){
@@ -615,6 +683,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 
       if(activePreset === 'x-layout'){
         xLayoutSection.style.display = 'block';
+        xLayoutSection.classList.add('fade-in');
         if(cropStates.xSquare.img && cropStates.xWide.img){
           centerState(cropStates.xSquare);
           centerState(cropStates.xWide);
@@ -623,8 +692,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
           previewPlaceholderX.style.display = 'none';
           xLayoutPreview.classList.add('active');
           xActionBar.style.display = 'flex';
-          dlXSquare.disabled = false;
-          dlXWide.disabled = false;
+          dlXAll.disabled = false;
         } else {
           xLayoutPreview.classList.remove('active');
           previewPlaceholderX.style.display = 'flex';
@@ -632,6 +700,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         }
       } else {
         gridSection.style.display = 'block';
+        gridSection.classList.add('fade-in');
         const cfg = GRID_CONFIG[activePreset];
         gridReco.innerText = cfg.reco;
         gridPreview.innerHTML = '';
@@ -661,23 +730,25 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     });
   });
 
+  // X Upload Handlers
+  function tryShowXPreview(){
+    if(cropStates.xSquare.img && cropStates.xWide.img){
+      centerState(cropStates.xSquare);
+      centerState(cropStates.xWide);
+      drawState(cropStates.xSquare);
+      drawState(cropStates.xWide);
+      previewPlaceholderX.style.display = 'none';
+      xLayoutPreview.classList.add('active');
+      xActionBar.style.display = 'flex';
+      dlXAll.disabled = false;
+    }
+  }
+
   uploadBoxXSquare.addEventListener('click', ()=>fileInputXSquare.click());
   fileInputXSquare.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
       cropStates.xSquare.img = img;
-      if(cropStates.xWide.img){
-        centerState(cropStates.xSquare);
-        centerState(cropStates.xWide);
-        drawState(cropStates.xSquare);
-        drawState(cropStates.xWide);
-        previewPlaceholderX.style.display = 'none';
-        xLayoutPreview.classList.add('active');
-        xActionBar.style.display = 'flex';
-        dlXSquare.disabled = false;
-        dlXWide.disabled = false;
-      } else {
-        showToast('Now upload the 1500×500 banner image.');
-      }
+      tryShowXPreview();
     });
     fileInputXSquare.value = '';
   });
@@ -693,19 +764,7 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   fileInputXWide.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
       cropStates.xWide.img = img;
-      if(cropStates.xSquare.img){
-        centerState(cropStates.xSquare);
-        centerState(cropStates.xWide);
-        drawState(cropStates.xSquare);
-        drawState(cropStates.xWide);
-        previewPlaceholderX.style.display = 'none';
-        xLayoutPreview.classList.add('active');
-        xActionBar.style.display = 'flex';
-        dlXSquare.disabled = false;
-        dlXWide.disabled = false;
-      } else {
-        showToast('Now upload the 400×400 square image.');
-      }
+      tryShowXPreview();
     });
     fileInputXWide.value = '';
   });
@@ -717,32 +776,34 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     if(file){ fileInputXWide.files = e.dataTransfer.files; fileInputXWide.dispatchEvent(new Event('change')); }
   });
 
-  dlXSquare.addEventListener('click', ()=>{
-    const st = cropStates.xSquare;
-    if(!st.img) return;
+  // Download All for X Layout
+  dlXAll.addEventListener('click', ()=>{
     const fmt = getSelectedFormat('xFormatSelector');
-    const out = document.createElement('canvas');
-    out.width = st.w; out.height = st.h;
-    const ctx = out.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    const { drawW, drawH } = computeCover(st.img, st.w, st.h);
-    ctx.drawImage(st.img, st.x, st.y, drawW, drawH);
-    downloadCanvasAs(fmt, out, `ava.${fmt}`);
-  });
+    const stSq = cropStates.xSquare;
+    const stWd = cropStates.xWide;
+    if(!stSq.img || !stWd.img) return;
 
-  dlXWide.addEventListener('click', ()=>{
-    const st = cropStates.xWide;
-    if(!st.img) return;
-    const fmt = getSelectedFormat('xFormatSelector');
-    const out = document.createElement('canvas');
-    out.width = st.w; out.height = st.h;
-    const ctx = out.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    const { drawW, drawH } = computeCover(st.img, st.w, st.h);
-    ctx.drawImage(st.img, st.x, st.y, drawW, drawH);
-    downloadCanvasAs(fmt, out, `header.${fmt}`);
+    const sqCanvas = document.createElement('canvas');
+    sqCanvas.width = stSq.w; sqCanvas.height = stSq.h;
+    const sqCtx = sqCanvas.getContext('2d');
+    sqCtx.imageSmoothingEnabled = true;
+    sqCtx.imageSmoothingQuality = 'high';
+    const sqCover = computeCover(stSq.img, stSq.w, stSq.h);
+    sqCtx.drawImage(stSq.img, stSq.x, stSq.y, sqCover.drawW, sqCover.drawH);
+    downloadCanvasAs(fmt, sqCanvas, `ava.${fmt}`);
+
+    setTimeout(()=>{
+      const wdCanvas = document.createElement('canvas');
+      wdCanvas.width = stWd.w; wdCanvas.height = stWd.h;
+      const wdCtx = wdCanvas.getContext('2d');
+      wdCtx.imageSmoothingEnabled = true;
+      wdCtx.imageSmoothingQuality = 'high';
+      const wdCover = computeCover(stWd.img, stWd.w, stWd.h);
+      wdCtx.drawImage(stWd.img, stWd.x, stWd.y, wdCover.drawW, wdCover.drawH);
+      downloadCanvasAs(fmt, wdCanvas, `header.${fmt}`);
+    }, 400);
+
+    showToast(`Downloading ava & header (${fmt.toUpperCase()})...`);
   });
 
   uploadBoxPreset.addEventListener('click', ()=>fileInputPreset.click());
@@ -845,4 +906,4 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 </script>
 <script src="header-footer.js"></script>
 </body>
-</html>
+  </html>
