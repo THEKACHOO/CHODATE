@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>CHODATE | KACHOO UPDATE</title>
+    <title>CHODATE by KACHOO</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -401,9 +401,9 @@
             cursor: grab;
             white-space: nowrap;
             border-radius: 28px;
-            background: white;
-            border: 1px solid #eaeaea;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
         .slide-container:active { cursor: grabbing; }
         .slide-wrapper {
@@ -416,18 +416,19 @@
             scroll-snap-align: start;
             flex-shrink: 0;
             width: 380px;
-            background: white;
-            border: 1px solid #eaeaea;
+            background: #ffffff;
+            border: none;
             border-radius: 28px;
-            padding: 30px;
+            padding: 28px;
             transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
         }
         @media (max-width: 860px) {
-            .slide-item { width: 360px; padding: 20px; }
+            .slide-item { width: 340px; padding: 22px; }
             .slide-wrapper { gap: 16px; padding: 16px; }
         }
         @media (max-width: 550px) {
-            .slide-item { width: 280px; padding: 16px; }
+            .slide-item { width: 280px; padding: 20px; }
             .slide-wrapper { gap: 12px; padding: 12px; }
         }
         .slide-container::-webkit-scrollbar { height: 4px; }
@@ -914,4 +915,4 @@
         });
     </script>
 </body>
-</html>
+            </html>
