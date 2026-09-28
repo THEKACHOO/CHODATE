@@ -11,10 +11,10 @@ document.body.insertAdjacentHTML('afterbegin', `
       <button class="desktop-nav-trigger" id="desktopNavTrigger">Menu <i class="fas fa-chevron-down"></i></button>
       <div class="desktop-nav-dropdown" id="desktopNavDropdown">
         <a href="https://thekachoo.github.io/CHODATE/">Home</a>
-        <a href="Profile.html">Instacho Profile</a>
-        <a href="Post.html">Instacho Post</a>
-        <a href="Story.html">Instacho Story</a>
-        <a href="Live.html">Instacho Live</a>
+        <a href="Profile.html">Instaprofile</a>
+        <a href="Post.html">Instapost</a>
+        <a href="Story.html">Instastory</a>
+        <a href="Live.html">Instalive</a>
       </div>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -23,10 +23,28 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
-  <a href="Profile.html" class="mobile-menu-link">Instacho Profile</a>
-  <a href="Post.html" class="mobile-menu-link">Instacho Post</a>
-  <a href="Story.html" class="mobile-menu-link">Instacho Story</a>
+  <a href="Profile.html" class="mobile-menu-link">Instaprofile</a>
+  <a href="Post.html" class="mobile-menu-link">Instapost</a>
+  <a href="Story.html" class="mobile-menu-link">Instastory</a>
+  <a href="Live.html" class="mobile-menu-link">Instalive</a>
 </div>
+`);
+
+/* CSS tambahan: perbesar logo tengah di header */
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+  .center-logo-img {
+    height: 64px !important;
+    width: auto !important;
+    max-height: none !important;
+    object-fit: contain;
+  }
+  @media (max-width: 768px) {
+    .center-logo-img {
+      height: 48px !important;
+    }
+  }
+</style>
 `);
 
 /* Auto-inject footer INSTACHO */
