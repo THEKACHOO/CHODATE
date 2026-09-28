@@ -21,7 +21,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 </header>
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="Home.html" class="mobile-menu-link">Home</a>
+  <a href="thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
   <a href="MoU.html" class="mobile-menu-link">MoU Templates</a>
   <a href="Convert.html" class="mobile-menu-link">Convert File</a>
   <a href="Ratio.html" class="mobile-menu-link">Ratio Editor</a>
