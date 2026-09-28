@@ -14,6 +14,7 @@ document.body.insertAdjacentHTML('afterbegin', `
         <a href="MoU.html">MoU Templates</a>
         <a href="Convert.html">Convert File</a>
         <a href="Ratio.html">Ratio Editor</a>
+        <a href="Chomail.html">Chomail</a>
       </div>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -25,6 +26,7 @@ document.body.insertAdjacentHTML('afterbegin', `
   <a href="MoU.html" class="mobile-menu-link">MoU Templates</a>
   <a href="Convert.html" class="mobile-menu-link">Convert File</a>
   <a href="Ratio.html" class="mobile-menu-link">Ratio Editor</a>
+  <a href="Chomail.html" class="mobile-menu-link">Chomail</a>
 </div>
 `);
 
