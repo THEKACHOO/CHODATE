@@ -21,7 +21,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 </header>
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
+  <a href="https://thekachoo.github.io/CHODATE/" class="mobile-menu-link">Home</a>
   <a href="MoU.html" class="mobile-menu-link">MoU Templates</a>
   <a href="Convert.html" class="mobile-menu-link">Convert File</a>
   <a href="Ratio.html" class="mobile-menu-link">Ratio Editor</a>
@@ -54,7 +54,7 @@ document.body.insertAdjacentHTML('beforeend', `
       <ul class="footer-links">
         <li><a href="https://thekachoo.github.io/CHOBANK/">Chobank</a></li>
         <li><a href="https://thekachoo.github.io/CHONNECT/">Chonnect</a></li>
-        <li><a href="https://thekachoo.github.io/Games/CHOSONG/">Chosong</a></li>
+        <li><a href="https://thekachoo.github.io/CHOSONG/">Chosong</a></li>
         <li><a href="https://thekachoo.github.io/CHODATE/">Chodate</a></li>
       </ul>
     </div>
