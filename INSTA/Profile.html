@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" id="mainHtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>INSTACHO | Insta Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Anton&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>INSTACHO | Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="header-footer.css">
+    <link rel="stylesheet" href="header-footer-instacho.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js">
@@ -20,12 +20,34 @@
         }
         body,
         html {
-            font-family: Arial, 'Outfit', sans-serif;
-            background-color: #f5f5f5;
-            line-height: 1.6;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        body,
+        html,
+        div,
+        span,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a,
+        button,
+        input,
+        textarea,
+        li,
+        span,
+        label {
+            font-family: Arial, 'Outfit', sans-serif !important;
         }
         body {
-            padding-top: 80px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
         }
         .container {
             max-width: 1400px;
@@ -33,9 +55,9 @@
             padding: 0 32px;
             width: 100%;
         }
-        @media (max-width: 1024px) {
+        @media (max-width: 992px) {
             .container {
-                padding: 0 24px;
+                padding: 0 20px;
             }
         }
         @media (max-width: 768px) {
@@ -44,664 +66,736 @@
             }
         }
 
-        .page-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #1a1a1a;
+        html[lang="id"] .stat-col-preview {
+            gap: 0px;
         }
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 1.6rem;
-            }
+        html[lang="id"] .stat-number {
+            margin-left: 12px;
+        }
+        html[lang="id"] .stat-label-preview {
+            margin-left: 12px;
         }
 
         .main-content {
-            padding: 28px 0 60px;
+            padding: 100px 0 60px;
         }
-        .mode-selector {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin: 32px 0 52px;
-            flex-wrap: wrap;
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 90px 0 40px;
+            }
         }
-        .mode-card {
-            background: white;
-            border-radius: 28px;
-            padding: 36px 44px;
+        .page-title {
             text-align: center;
-            cursor: pointer;
-            transition: all 0.22s;
-            border: 1px solid #e0e0e0;
-            width: 240px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-        .mode-card:hover {
-            transform: translateY(-5px);
-            border-color: #0095f6;
-            box-shadow: 0 16px 28px -10px rgba(0, 0, 0, 0.1);
-        }
-        .mode-card i {
-            font-size: 44px;
-            margin-bottom: 18px;
-            color: #000;
-        }
-        .mode-card h2 {
-            font-size: 22px;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 40px;
             color: #1a1a1a;
         }
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 32px;
+                margin-bottom: 24px;
+            }
+        }
 
-        .studio-wrapper {
-            display: none;
-        }
-        .studio-wrapper.active-view {
-            display: block;
-        }
-        .story-studio {
+        .insta-wrapper {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
-            gap: 40px;
             align-items: flex-start;
+            gap: 40px;
         }
-        @media (max-width: 860px) {
-            .story-studio {
-                flex-direction: column;
+        .form-panel {
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            width: 420px;
+            flex-shrink: 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 900px) {
+            .insta-wrapper {
+                flex-wrap: wrap;
+                gap: 24px;
+                justify-content: center;
+            }
+            .form-panel {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                max-height: none;
+                overflow-y: visible;
+            }
+            .preview-container {
+                width: 100%;
                 align-items: center;
             }
         }
 
-        .form-panel {
-            background: white;
-            border-radius: 24px;
-            padding: 22px 20px;
-            width: 340px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 1px solid #eaeaea;
-        }
-        @media (max-width: 860px) {
-            .form-panel {
-                width: 100%;
-                max-width: 420px;
-            }
-        }
-        .lang-buttons {
+        .setting-row {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             margin-bottom: 18px;
+            justify-content: center;
         }
-        .lang-btn {
-            flex: 1;
-            padding: 8px;
-            background: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 100px;
+        .toggle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #d0d0d0;
+            background: #f5f5f5;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: 0.2s;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            flex-shrink: 0;
+            position: relative;
         }
-        .lang-btn.active {
-            background: #111;
+        .toggle-btn i {
+            font-size: 18px;
+        }
+        .toggle-btn.active {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
             color: white;
-            border-color: #111;
         }
+        .toggle-btn.active i {
+            color: white;
+        }
+        .toggle-btn.active .btn-text {
+            color: white;
+        }
+        .toggle-btn .btn-label {
+            display: none;
+        }
+        .toggle-btn .btn-text {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .toggle-btn:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 15px;
         }
         label {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             display: block;
-            margin-bottom: 5px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
+            margin-bottom: 6px;
+            color: #555;
         }
-        input[type="text"],
-        textarea,
-        select {
+        input,
+        textarea {
             width: 100%;
-            padding: 10px 13px;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 16px;
             font-size: 13px;
             outline: none;
             background: white;
-            font-family: 'Outfit', sans-serif;
+            transition: 0.2s;
         }
-        input[type="text"]:focus,
-        select:focus {
+        input:focus,
+        textarea:focus {
             border-color: #0095f6;
         }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #bbb;
+            font-weight: 400;
+            opacity: 1;
+            font-style: normal;
+            transition: all 0.2s;
+        }
+        input,
+        textarea {
+            background-color: #fefefe;
+        }
+        input::placeholder,
+        textarea::placeholder {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            letter-spacing: 0.2px;
+            opacity: 0.75;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
         .file-input-label {
-            background: #f7f7f7;
+            background: #f5f5f5;
             text-align: center;
-            padding: 9px 12px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 16px;
             margin-top: 5px;
             cursor: pointer;
             font-size: 12px;
-            border: 1px solid #e8e8e8;
+            border: 1px solid #e0e0e0;
+            transition: 0.2s;
         }
-        .section-divider {
-            margin: 16px 0 10px;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 12px;
-            font-weight: 700;
-            font-size: 12px;
-            color: #444;
+        .file-input-label:hover {
+            background: #e9e9e9;
+        }
+
+        .profile-stats-row {
             display: flex;
-            align-items: center;
-            gap: 7px;
+            gap: 20px;
+            margin: 0px 0px 0px;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .stat-item {
+            flex: 1;
+            background: #fafafa;
+            padding: 8px 0;
+            border-radius: 20px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #8e8e8e;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
-        }
-        .bg-options-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .bg-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: 0.15s;
-        }
-        .bg-black {
-            background: #000;
-            border: 1px solid #555;
-        }
-        .bg-white {
-            background: #fff;
-            border: 1px solid #aaa;
-        }
-        .bg-transparent {
-            background: conic-gradient(#ccc 0deg 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg 360deg);
-            background-size: 12px 12px;
-            border: 1px solid #aaa;
-        }
-        .active-bg-choice {
-            border-color: #0095f6 !important;
-        }
-        .color-picker-small {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
-        .toggle-switch {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f5f5f5;
-            padding: 9px 14px;
-            border-radius: 60px;
-            cursor: pointer;
-            margin-bottom: 9px;
-        }
-        .toggle-switch span {
-            font-size: 12px;
             font-weight: 500;
-            color: #333;
         }
-        .toggle-slider {
-            width: 42px;
-            height: 22px;
-            background: #ccc;
-            border-radius: 30px;
-            position: relative;
-            transition: 0.2s;
-            flex-shrink: 0;
-        }
-        .toggle-slider.active {
-            background: #0095f6;
-        }
-        .toggle-slider::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: 0.2s;
-        }
-        .toggle-slider.active::after {
-            left: 22px;
-        }
-
-        .story-card-wrapper {
-            width: 360px;
-        }
-        @media (max-width: 860px) {
-            .story-card-wrapper {
-                width: 100%;
-                max-width: 380px;
-            }
-        }
-
-        .story-outer {
-            background-color: #000;
-            border-radius: 28px;
-            padding: 14px;
-            display: inline-block;
+        .stat-input {
+            font-weight: 700;
+            font-size: 13px;
+            background: transparent;
+            border: none;
+            text-align: center;
+            padding: 4px 0;
             width: 100%;
+            outline: none;
+        }
+
+        .bio-area {
+            margin-top: 10px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        .post-grid-item {
+            aspect-ratio: 1 / 1;
+            background: #f0f0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+            transition: 0.2s;
+        }
+        .post-grid-item:hover {
+            border-color: #0095f6;
+            background: #e6e6e6;
+        }
+        .post-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .post-grid-placeholder {
+            color: #aaa;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .post-grid-item.ratio-45 {
+            aspect-ratio: 4 / 5;
+        }
+
+        .verif-section {
+            margin: 15px 0;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .verif-btn-custom {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .verif-btn-custom.active {
+            background: #0095f6;
+            color: white;
+            border-color: #0095f6;
+        }
+        .verif-btn-custom.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .private-btn-custom {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .private-btn-custom.active {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .preview-outer {
+            padding: 24px 20px;
+            border-radius: 40px;
+            display: inline-block;
             transition: background 0.3s ease;
         }
-
-        .my-story-card,
-        .other-story-card {
-            background: #111;
-            border-radius: 18px;
-            overflow: hidden;
-            aspect-ratio: 9 / 17;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-        }
-
-        .story-progress {
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            right: 10px;
-            display: flex;
-            gap: 3px;
-            z-index: 4;
-        }
-        .progress-bar {
-            flex: 1;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.35);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
+        .instagram-profile-preview {
+            width: 380px;
             background: white;
-            width: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        .progress-bar:first-child .progress-fill {
-            width: 60%;
+        .instagram-profile-preview.dark-theme {
+            background: #000000;
         }
 
-        .story-header-row {
-            position: absolute;
-            top: 24px;
-            left: 0;
-            right: 0;
+        .preview-top-bar {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 12px;
-            z-index: 3;
+            padding: 12px 16px;
+            background: inherit;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .dark-theme .preview-top-bar {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
-        .story-avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #0095f6;
-            flex-shrink: 0;
-        }
-        .self-avatar-container {
-            position: relative;
-            display: inline-block;
-        }
-        .story-username {
-            font-weight: 700;
-            font-size: 12px;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        .story-time {
-            font-size: 10.5px;
-            color: rgba(255, 255, 255, 0.75);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            position: relative;
-        }
-        .cf-badge-header {
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        .cf-badge-header img,
-        .header-right-icons .cf-badge-header img {
-            width: 36px !important;
-            height: 36px !important;
-            object-fit: contain;
-        }
-        .cf-badge-header.show {
-            display: inline-flex;
-        }
-        .verified-icon {
-            color: #0095f6;
-            font-size: 10px;
-            margin-left: 0px;
-            vertical-align: middle;
-            position: relative;
-            top: -0.8px;
-        }
-
-        .header-right {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-            transform: translateY(7px);
-        }
-
-        .header-right-icons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            position: relative;
-        }
-        .header-right-icons i {
+        .top-left-icon {
             font-size: 22px;
-            color: white;
-            cursor: default;
-            display: flex;
-            align-items: center;
-        }
-        .header-right-icons .three-dots {
-            font-size: 22px;
+            color: #262626;
             cursor: pointer;
+            z-index: 8;
+            transform: translateY(1px);
         }
-        .header-right-icons .cf-badge-header {
-            display: none;
-            align-items: center;
-            justify-content: center;
+        .dark-theme .top-left-icon {
+            color: #f5f5f5;
         }
-        .header-right-icons .cf-badge-header.show {
-            display: inline-flex;
-        }
-        .header-right-icons .cf-badge-header img {
-            width: 38px;
-            height: 38px;
-            object-fit: contain;
-        }
-
-        .name-time-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .name-time-wrapper .story-username {
-            margin: 0;
-            line-height: 1.2;
-        }
-        .name-time-wrapper .story-time {
-            margin: 0;
-            line-height: 1;
-        }
-
-        .header-left-self {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .header-left-self .self-avatar-container {
-            display: flex;
-            align-items: center;
-        }
-        .header-left-self .header-text-group {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 1.2;
-        }
-        .header-left-self .header-text-group .name-time-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .header-left-self .header-text-group .story-username {
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.2;
-        }
-        .header-left-self .header-text-group .story-time {
-            font-size: 10.5px;
-            color: rgba(255, 255, 255, 0.75);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.2;
-            top: 0.5px;
-        }
-
-        .plus-badge {
+        .top-center-username {
             position: absolute;
-            bottom: -4px;
-            right: -1px;
-            background: #0095f6;
-            border: 1.5px solid white;
-            border-radius: 50%;
-            width: 14px;
-            height: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 16.5px;
+            color: #262626;
+            white-space: nowrap;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            color: white;
-        }
-
-        .my-bottom-bar {
-            position: absolute;
-            bottom: 12px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 0 12px;
-            z-index: 3;
-        }
-
-        .activity-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            transform: translateY(-6px);
-        }
-        .activity-circle {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-        }
-        .activity-circle img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-
-        .activity-label {
-            font-size: 10px;
-            font-weight: 500;
-            color: white;
-            margin-top: 1.5px;
-            line-height: 1;
-        }
-        .actions-right {
-            display: flex;
-            gap: 7px;
-            align-items: flex-end;
-            transform: translateY(-6px);
-        }
-        .action-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 4px;
         }
-        .action-circle {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            width: 40px;
-            height: 40px;
+        .dark-theme .top-center-username {
+            color: white;
+        }
+        .top-right-icons {
+            display: flex;
+            gap: 12px;
+            z-index: 4;
+            align-items: center;
+            transform: translateY (-6px);
+        }
+        .top-right-icons img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .top-right-icons i {
+            font-size: 20px;
+            color: #262626;
+            cursor: pointer;
+        }
+        .dark-theme .top-right-icons i {
+            color: #f5f5f5;
+        }
+        .top-verif-badge {
+            color: #0095f6;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            transform: translateY(0.5px);
+        }
+        .top-lock-badge {
+            color: #262626;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .dark-theme .top-lock-badge {
+            color: #f5f5f5;
+        }
+        .top-arrow-badge {
+            color: #262626;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .dark-theme .top-arrow-badge {
+            color: #f5f5f5;
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 84px;
+            height: 84px;
+            margin-top: 4.5px;
+        }
+        .profile-avatar-preview {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ddd;
+        }
+        .profile-avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-plus-circle {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            color: white;
-        }
-        .action-circle img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        .action-label {
-            font-size: 10px;
-            font-weight: 500;
-            color: white;
-            margin-top: -1px;
-            line-height: 1;
-        }
-
-        /* PUBLIC VIEW */
-        .send-message-bg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 65px;
-            background: transparent;
-            border-bottom-left-radius: 18px;
-            border-bottom-right-radius: 18px;
-            z-index: 3;
-        }
-        .send-message-bar {
-            position: absolute;
-            bottom: 15px;
-            left: 10px;
-            right: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 4;
-            padding: 0;
-        }
-        .send-message-pill {
-            flex: 1;
-            border: 1.5px solid rgba(255, 255, 255, 0.6);
-            border-radius: 22px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            padding: 0 14px;
-            background: transparent;
-        }
-        .send-message-label {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.65);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            pointer-events: none;
-        }
-        .story-action-icons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .story-icon-btn {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            font-weight: 700;
+            border: 2px solid white;
+            transition: background 0.2s, color 0.2s;
             cursor: pointer;
         }
-        .story-icon-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: white;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .story-icon-btn.liked svg {
-            fill: #ff3040;
-            stroke: #ff3040;
-        }
-        .story-icon-btn img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            filter: brightness(0) invert(1);
+        .avatar-plus-circle i {
+            font-size: 12px;
         }
 
-        .header-right-social {
+        .profile-header-section {
+            padding: 7px 16px 8px;
+            display: flex;
+            gap: 0;
+            align-items: center;
+            background: inherit;
+        }
+        .profile-stats-preview {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+        .profile-stats-numbers {
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+margin-left: 3px;
+        }
+        .stat-col-preview {
+            display: flex;
+            flex-direction: column;
+margin-left: 3px;
+        }
+        .stat-number {
+            font-weight: 750;
+            font-size: 15px;
+            color: #262626;
+        }
+        .dark-theme .stat-number {
+            color: white;
+        }
+        .stat-label-preview {
+            font-size: 11px;
+            color: #8e8e8e;
+            margin-top: -4px;
+            letter-spacing: 0.25px;
+        }
+        .profile-name-in-stats {
+            font-weight: 600;
+            font-size: 12.5px;
+            color: #262626;
+            padding: 4px 4px 4px 16px;
+            text-align: left;
+            display: none;
+            transform: translateX(10px);
+        }
+        .profile-name-in-stats.visible {
+            display: block;
+        }
+        .dark-theme .profile-name-in-stats {
+            color: #f5f5f5;
+        }
+
+        .profile-bio {
+            padding: 5px 16px 4px;
+            background: inherit;
+            transform: translateX(2px);
+        }
+        .bio-text {
+            font-size: 12px;
+            line-height: 1.2;
+            color: #262626;
+        }
+        .dark-theme .bio-text {
+            color: #dddddd;
+        }
+
+        .profile-link-row {
+            padding: 1px 8px 2px 12px;
+            background: inherit;
+            display: none;
+        }
+        .profile-link-row.visible {
+            display: block;
+        }
+        .profile-link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            transform: translateX(4px);
+        }
+        .profile-link-wrapper i {
+            font-size: 16px;
+            color: #0095f6;
+        }
+        .profile-link-wrapper span {
+            color: #0095f6;
+        }
+        .dark-theme .profile-link-wrapper {
+            color: #0095f6;
+        }
+        .dark-theme .profile-link-wrapper i {
+            color: #0095f6;
+        }
+        .dark-theme .profile-link-wrapper span {
+            color: #0095f6;
+        }
+
+        .action-buttons-row {
             display: flex;
             gap: 12px;
+            padding: 8px 16px 16px;
+            background: inherit;
             align-items: center;
         }
-        .header-right-social i {
-            font-size: 16px;
-            color: white;
-            cursor: default;
+        .profile-action-btn {
+            flex: 1;
+            background: #efefef;
+            border: none;
+            padding: 8px 0;
+            border-radius: 10px;
+            font-weight: 550;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            color: #262626;
         }
-        .three-dots {
+        .dark-theme .profile-action-btn {
+            background: #2c2c2c;
             color: white;
-            font-size: 18px;
+        }
+        .right-icons-row {
+            display: flex;
+            align-items: center;
+        }
+        .contact-icon-img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
             cursor: pointer;
         }
 
-        .download-group {
+        .story-tab-row {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 16px;
-            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 8px 16px;
+            border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            background: inherit;
         }
-        .download-single {
+        .dark-theme .story-tab-row {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .tab-icon-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+            filter: brightness(0.4);
+            transition: 0.2s;
+        }
+        .grid-icon-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+            filter: brightness(0.4);
+            transition: 0.2s;
+        }
+        .dark-theme .tab-icon-img {
+            filter: brightness(0.7);
+        }
+        .dark-theme .grid-icon-img {
+            filter: brightness(0.7);
+        }
+        .tab-icon-img.active-tab {
+            filter: brightness(0) invert(1);
+        }
+        .dark-theme .tab-icon-img.active-tab {
+            filter: brightness(1);
+        }
+
+        .posts-grid-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: inherit;
+        }
+        .posts-grid-preview.ratio-45 .preview-post-item {
+            aspect-ratio: 4 / 5;
+        }
+        .preview-post-item {
+            aspect-ratio: 1 / 1;
+            background: #efefef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .preview-post-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-post-placeholder {
+            color: #bbb;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .bottom-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+            background: inherit;
+            margin-top: 4px;
+        }
+        .dark-theme .bottom-nav-bar {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+        .nav-icon-img-custom {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+            filter: brightness(0.3);
+        }
+        .dark-theme .nav-icon-img-custom {
+            filter: brightness(0.8);
+        }
+        .nav-icon-share-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .search-icon-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            cursor: pointer;
+            filter: brightness(0.3);
+        }
+        .dark-theme .search-icon-img {
+            filter: brightness(0.8);
+        }
+        .nav-profile-img {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        .download-area {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .download-btn {
             background: #111;
+            color: white;
             border: none;
-            padding: 11px 26px;
+            padding: 13px 40px;
             border-radius: 100px;
             font-weight: 600;
-            color: white;
             cursor: pointer;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 15px;
             transition: 0.2s;
-            font-family: 'Outfit', sans-serif;
         }
-        .download-single:hover {
+        .download-btn:hover {
             background: #333;
         }
 
@@ -709,109 +803,56 @@
             background: #111;
             color: white;
             border: none;
-            padding: 11px 26px;
+            padding: 13px 40px;
             border-radius: 100px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 15px;
             transition: 0.2s;
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
             display: none;
+            text-decoration: none;
         }
         .edit-bg-btn:hover {
             background: #333;
         }
         .edit-bg-btn.visible {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
         }
 
-        .back-btn {
-            background: #1e1e1e;
-            border: 1px solid #333;
-            padding: 9px 22px;
-            border-radius: 100px;
-            font-weight: 600;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-            margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
+        .bg-options {
+            display: flex;
             gap: 8px;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .draggable-text {
-            position: absolute;
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            cursor: grab;
-            padding: 4px 8px;
-            z-index: 10;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: none;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-            pointer-events: auto;
-            border-radius: 4px;
-            transition: outline 0.15s;
-        }
-        .draggable-text:active {
-            cursor: grabbing;
-            z-index: 20;
-        }
-        .draggable-text.dragging {
-            opacity: 0.85;
-            transform: scale(1.02);
-        }
-        .draggable-text .text-actions {
-            position: absolute;
-            top: -14px;
-            right: -14px;
-            display: flex;
-            gap: 3px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 50%;
-            padding: 2px;
-            z-index: 30;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-        .draggable-text .text-actions button {
-            width: 24px;
-            height: 24px;
-            border: none;
-            border-radius: 50%;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
+            flex-wrap: wrap;
+            margin-top: 12px;
             align-items: center;
             justify-content: center;
-            transition: 0.15s;
+        }
+        .bg-option-btn {
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .bg-option-btn.active {
+            background: #111;
             color: white;
-            line-height: 1;
-            background: #ff3040;
-            pointer-events: auto;
-            touch-action: manipulation;
         }
-        .draggable-text .text-actions button:hover {
-            background: #ff5252;
-            transform: scale(1.1);
+        .color-picker-input {
+            width: 42px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            padding: 2px;
         }
-        .draggable-text .text-actions button:active {
-            transform: scale(0.9);
-        }
-        .draggable-text.selected-text {
-            outline: 2px solid #0095f6;
-            outline-offset: 2px;
-        }
-        .draggable-text.hide-actions .text-actions {
-            display: none !important;
+        .bg-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-right: 4px;
         }
 
         .crop-modal {
@@ -870,968 +911,725 @@
             white-space: nowrap;
         }
 
-        input::placeholder,
-        textarea::placeholder {
-            color: #bbb;
-            opacity: 1;
+        .link-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
         }
-        select {
+        .link-input-group input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            font-size: 12px;
+            outline: none;
+        }
+        .link-input-group input:focus {
+            border-color: #0095f6;
+        }
+        .lock-badge-before,
+        .verif-badge-after,
+        .arrow-badge-after {
+            display: none;
+        }
+        .lock-badge-before.show,
+        .verif-badge-after.show,
+        .arrow-badge-after.show {
+            display: inline-flex;
+        }
+
+        .link-input-group button {
+            padding: 8px 16px;
+            background: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .link-input-group button:hover {
+            background: #0077cc;
+        }
+        .link-placeholder {
+            color: #9ca3af;
+            font-size: 12px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .preview-outer-inner {
+            display: inline-block;
+        }
+
+        .icon-fallback {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
             color: #666;
         }
-        select option:first-child {
-            color: #666;
+        .dark-theme .icon-fallback {
+            background: #333;
+            color: #aaa;
         }
     </style>
+
 </head>
 <body>
-
-    <!-- Header & footer di-inject otomatis dari header-footer-instacho.js -->
+    <!-- Header & Footer di-inject otomatis oleh header-footer-instacho.js -->
 
     <div class="main-content">
         <div class="container">
-            <h1 class="page-title">Create your story!</h1>
-            <div id="modeSelection" class="mode-selector">
-                <div class="mode-card" data-mode="myview">
-                    <i class="fas fa-user-circle"></i><h2>Self View</h2>
-                </div>
-                <div class="mode-card" data-mode="public">
-                    <i class="fas fa-globe"></i><h2>Social View</h2>
-                </div>
-            </div>
-
-            <!-- ===== VERSI SELF VIEW ===== -->
-            <div id="studioMyView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeText">Kembali ke Mode</span></button>
-                <div class="story-studio">
-                    <div class="form-panel">
-                        <div class="lang-buttons">
-                            <button class="lang-btn active" id="btnIndonesiaMy">Bahasa Indonesia</button>
-                            <button class="lang-btn" id="btnInggrisMy">English</button>
-                        </div>
-                        <div class="section-divider"><i class="fas fa-user-circle"></i> <span id="myProfileLabel">Profil Saya</span></div>
-                        <div class="form-group">
-                            <label id="avatarLabel">Foto Profil</label>
-                            <input type="file" id="myAvatarUpload" accept="image/*" style="display:none;">
-                            <div class="file-input-label" id="myAvatarLabel">Upload Avatar (1:1)</div>
-                        </div>
-                        <div class="form-group">
-                            <label id="timeLabel">Waktu Tayang</label>
-                            <select id="myTimeSelect">
-                                <option value="Just now" id="justNowOption">Baru saja</option>
-                                <option value="Custom" id="customOption">Custom</option>
-                            </select>
-                            <input type="text" id="myCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
-                        </div>
-                        <div class="form-group">
-                            <label id="storyLabel">Gambar Story</label>
-                            <input type="file" id="myBgUpload" accept="image/*" style="display:none;">
-                            <div class="file-input-label" id="myBgLabel">Upload latar story (9:16)</div>
-                        </div>
-                        <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerBgLabel">Background Luar</span></div>
-                        <div class="form-group">
-                            <label id="outerColorLabel">Warna Luar Frame</label>
-                            <div class="bg-options-row">
-                                <div class="bg-option bg-black active-bg-choice" data-outer="black"></div>
-                                <div class="bg-option bg-white" data-outer="white"></div>
-                                <div class="bg-option bg-transparent" data-outer="transparent"></div>
-                                <input type="color" id="myOuterColor" class="color-picker-small" value="#000000">
-                            </div>
-                        </div>
-                        <div class="toggle-switch" id="myCloseFriendsToggle">
-                            <span id="closeFriendsText">Teman Dekat</span>
-                            <div class="toggle-slider" id="myCfSlider"></div>
-                        </div>
-
-                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
-                        <div class="form-group">
-                            <label>Isi Teks</label>
-                            <input type="text" id="myTextInput" placeholder="Tulis teks..." value="">
-                        </div>
-                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                            <label style="flex:1; min-width:50px;">Warna</label>
-                            <input type="color" id="myTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
-                            <label style="flex:1; min-width:50px;">Ukuran</label>
-                            <input type="range" id="myTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
-                            <span id="myTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Font</label>
-                            <select id="myTextFont">
-                                <option value="'Manrope', sans-serif">Classic</option>
-                                <option value="'Courier PS', serif">Typewriter</option>
-                                <option value="'Comic Sans MS', cursive">Meme</option>
-                                <option value="'Libre Baskerville', serif">Literature</option>
-                                <option value="'Space Mono', monospace">Space Mono</option>
-                                <option value="'Anton', sans-serif">Anton</option>
-                                <option value="'Barlow Condensed', sans-serif">Modern</option>
-                            </select>
-                        </div>
-                        <button class="download-single" id="myAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
+            <h1 class="page-title" id="pageTitle">Create your profile!</h1>
+            <div class="insta-wrapper">
+                <div class="form-panel">
+                    <div class="setting-row">
+                        <button class="toggle-btn active" id="themeToggle" data-tooltip="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="toggle-btn active" id="versionToggle" data-tooltip="Toggle Version">
+                            <i class="fas fa-square"></i>
+                        </button>
+                        <button class="toggle-btn active" id="langToggle" data-tooltip="Toggle Language">
+                            <span class="btn-text">IND</span>
+                        </button>
                     </div>
 
-                    <!-- Self View Story Card -->
-                    <div class="story-card-wrapper">
-                        <div id="myOuterFrame" class="story-outer">
-                            <div class="my-story-card" id="myViewStoryCard">
-                                <div class="story-progress">
-                                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                </div>
-                                <div class="story-header-row">
-                                    <div class="header-left-self">
-                                        <div class="self-avatar-container">
-                                            <img class="story-avatar" id="myViewAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%230095f6'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EY%3C/text%3E%3C/svg%3E">
-                                            <div class="plus-badge"><i class="fas fa-plus" style="font-size:6px;"></i></div>
-                                        </div>
-                                        <div class="header-text-group">
-                                            <div class="name-time-wrapper">
-                                                <span class="story-username" id="yourStoryText">Story Anda</span>
-                                                <span class="story-time" id="myViewTime">Baru saja</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="header-right-icons">
-                                        <span class="cf-badge-header" id="myViewCfBadge"><img src="https://thekachoo.github.io/CHODATE/INSTA/CF.png" alt="CF"></span>
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </div>
-                                <div class="my-bottom-bar">
-                                    <div class="activity-left">
-                                        <div class="activity-circle">
-                                            <img src="https://thekachoo.github.io/CHODATE/INSTA/Activity-icon.png" alt="Activity" id="activityIconMy">
-                                        </div>
-                                        <span class="activity-label" id="activityText">Aktivitas</span>
-                                    </div>
-                                    <div class="actions-right">
-                                        <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Boost-icon.png" alt="Boost" id="boostIconMy">
-                                            </div>
-                                            <span class="action-label" id="boostText">Bagikan</span>
-                                        </div>
-                                        <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Highlight-icon.png" alt="Highlight" id="highlightIconMy">
-                                            </div>
-                                            <span class="action-label" id="highlightText">Sorotan</span>
-                                        </div>
-                                        <div class="action-item">
-                                            <div class="action-circle">
-                                                <img src="https://thekachoo.github.io/CHODATE/INSTA/Mention-icon.png" alt="Mention" id="mentionIconMy">
-                                            </div>
-                                            <span class="action-label" id="mentionText">Sebut</span>
-                                        </div>
-                                        <div class="action-item">
-                                            <div class="action-circle"><i class="fas fa-ellipsis-h"></i></div>
-                                            <span class="action-label" id="moreText">Lainnya</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="form-group"><label id="labelAvatar">Foto Profil</label><div class="file-input-label" id="uploadAvatarLabel">Upload foto profil</div><input type="file" id="avatarUpload" accept="image/*" style="display: none;"></div>
+                    <div class="form-group"><label id="labelUsername">Username</label><input type="text" id="username" placeholder="thekachoo" value=""></div>
+                    <div class="form-group"><label id="labelName">Nama</label><input type="text" id="nameInput" placeholder="Masukkan nama (opsional)" value=""></div>
+                    <div class="form-group verif-section">
+                        <button class="verif-btn-custom" id="verificationBtn"><i class="fas fa-check-circle"></i> <span id="verifText">Verifikasi</span></button>
+                        <button class="private-btn-custom" id="privateBtn"><i class="fas fa-lock"></i> <span id="privateText">Private</span></button>
+                    </div>
+                    <div class="profile-stats-row">
+                        <div class="stat-item"><div class="stat-label" id="labelPosts">Posts</div><input type="text" id="postsCount" class="stat-input" placeholder="248"></div>
+                        <div class="stat-item"><div class="stat-label" id="labelFollowers">Followers</div><input type="text" id="followersCount" class="stat-input" placeholder="10.5M"></div>
+                        <div class="stat-item"><div class="stat-label" id="labelFollowing">Following</div><input type="text" id="followingCount" class="stat-input" placeholder="689"></div>
+                    </div>
+                    <div class="form-group bio-area"><label id="labelBio">Bio</label><textarea id="bioText" placeholder="Tulis bio kamu disini..."></textarea></div>
+
+                    <div class="form-group">
+                        <label>Link Profil</label>
+                        <div class="link-input-group">
+                            <input type="text" id="profileLinkInput" placeholder="Masukkan link (contoh: https://example.com)" value="">
+                            <button id="updateLinkBtn">Ganti Link</button>
                         </div>
-                        <div class="download-group">
-                            <button class="download-single" id="downloadMyViewBtn"><i class="fas fa-download"></i> <span id="downloadText">Unduh</span></button>
-                            <a href="#" class="edit-bg-btn" id="editBgBtnMy">Background</a>
+                        <div class="link-placeholder">Kosongkan untuk menyembunyikan link</div>
+                    </div>
+
+                    <div class="form-group"><label id="labelPostsGrid">6 Foto Postingan</label><div class="posts-grid" id="postsGridForm"><div class="post-grid-item" data-index="0"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="1"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="2"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="3"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="4"><div class="post-grid-placeholder">+</div></div><div class="post-grid-item" data-index="5"><div class="post-grid-placeholder">+</div></div></div><input type="file" id="postImageUpload" accept="image/*" style="display: none;"><div class="file-input-label" id="uploadPostLabel" style="margin-top: 10px;">Upload / Ganti Foto Postingan</div></div>
+
+                    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee;">
+                        <div class="bg-label">Background Preview</div>
+                        <div class="bg-options">
+                            <button class="bg-option-btn active" data-bg="transparent" id="bgTransparent">Transparent</button>
+                            <button class="bg-option-btn" data-bg="white" id="bgWhite">White</button>
+                            <button class="bg-option-btn" data-bg="black" id="bgBlack">Black</button>
+                            <input type="color" id="customColorPicker" class="color-picker-input" value="#f5f5f5">
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ===== VERSI TAMPILAN PUBLIK ===== -->
-            <div id="studioPublicView" class="studio-wrapper">
-                <button class="back-btn" onclick="resetToModeSelection()"><i class="fas fa-arrow-left"></i> <span id="backToModeTextPub">Kembali ke Mode</span></button>
-                <div class="story-studio">
-                    <div class="form-panel">
-                        <div class="lang-buttons">
-                            <button class="lang-btn active" id="btnIndonesiaPub">Bahasa Indonesia</button>
-                            <button class="lang-btn" id="btnInggrisPub">English</button>
-                        </div>
-                        <div class="section-divider"><i class="fas fa-user"></i> <span id="profileLabelPub">Profil & Interaksi</span></div>
-                        <div class="form-group">
-                            <label id="avatarLabelPub">Foto Profil</label>
-                            <input type="file" id="pubAvatarUpload" accept="image/*" style="display:none;">
-                            <div class="file-input-label" id="pubAvatarLabel">Upload avatar</div>
-                        </div>
-                        <div class="form-group">
-                            <label id="usernameLabel">Username</label>
-                            <input type="text" id="pubUsername" placeholder="thekachoo" value="">
-                        </div>
-                        <div class="toggle-switch" id="pubVerifiedToggle">
-                            <span id="verifiedText">Akun Terverifikasi</span>
-                            <div class="toggle-slider" id="pubVerifiedSlider"></div>
-                        </div>
-                        <div class="form-group">
-                            <label id="timeLabelPub">Waktu Tayang</label>
-                            <select id="pubTimeSelect">
-                                <option value="Just now" id="justNowOptionPub">Baru saja</option>
-                                <option value="Custom" id="customOptionPub">Custom</option>
-                            </select>
-                            <input type="text" id="pubCustomTime" placeholder="Isi waktu..." style="margin-top:8px; display:none;">
-                        </div>
-                        <div class="form-group">
-                            <label id="storyLabelPub">Gambar Story</label>
-                            <input type="file" id="pubBgUpload" accept="image/*" style="display:none;">
-                            <div class="file-input-label" id="pubBgLabel">Upload latar story (9:16)</div>
-                        </div>
-                        <div class="section-divider"><i class="fas fa-fill-drip"></i> <span id="outerLabelPub">Background Luar</span></div>
-                        <div class="form-group">
-                            <label id="outerColorLabelPub">Warna Luar Frame</label>
-                            <div class="bg-options-row">
-                                <div class="bg-option bg-black active-bg-choice" data-outer-pub="black"></div>
-                                <div class="bg-option bg-white" data-outer-pub="white"></div>
-                                <div class="bg-option bg-transparent" data-outer-pub="transparent"></div>
-                                <input type="color" id="pubOuterColor" class="color-picker-small" value="#000000">
+                <div class="preview-container">
+                    <div class="preview-outer" id="previewOuter">
+                        <div class="instagram-profile-preview" id="profilePreviewCard">
+                            <div class="preview-top-bar">
+                                <div class="top-left-icon"><i class="fas fa-plus"></i></div>
+                                <div class="top-center-username" id="previewTopUsername">
+                                    thekachoo
+                                    <span class="lock-badge-before" id="topLockBadge"><i class="fas fa-lock top-lock-badge"></i></span>
+                                    <span class="verif-badge-after" id="topVerifBadge"><i class="fas fa-check-circle top-verif-badge"></i></span>
+                                    <span class="arrow-badge-after" id="topArrowBadge"><i class="fas fa-chevron-down top-arrow-badge"></i></span>
+                                </div>
+                                <div class="top-right-icons">
+                                    <img src="Thread.png" alt="thread" id="threadIcon" onerror="this.style.display='none'">
+                                    <i class="fas fa-bars"></i>
+                                </div>
+                            </div>
+
+                            <div class="profile-header-section">
+                                <div class="profile-avatar-wrapper">
+                                    <div class="profile-avatar-preview" id="previewAvatar">
+                                        <img id="previewAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' fill='%230095f6'/%3E%3Ctext x='42' y='52' font-size='32' text-anchor='middle' fill='white' font-weight='bold'%3ETK%3C/text%3E%3C/svg%3E">
+                                    </div>
+                                    <div class="avatar-plus-circle" id="avatarPlusCircle">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="profile-stats-preview">
+                                    <div class="profile-name-in-stats" id="previewNameInStats"></div>
+                                    <div class="profile-stats-numbers">
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewPosts">248</span><span class="stat-label-preview" id="statPostsLabel">posts</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowers">10.5M</span><span class="stat-label-preview" id="statFollowersLabel">followers</span></div>
+                                        <div class="stat-col-preview"><span class="stat-number" id="previewFollowing">689</span><span class="stat-label-preview" id="statFollowingLabel">following</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-bio">
+                                <div class="bio-text" id="previewBio">Content Creator | Jakarta</div>
+                            </div>
+                            <div class="profile-link-row" id="profileLinkRow">
+                                <a href="#" class="profile-link-wrapper" id="profileLink">
+                                    <i class="fas fa-link"></i>
+                                    <span id="profileLinkText"></span>
+                                </a>
+                            </div>
+                            <div class="action-buttons-row">
+                                <button class="profile-action-btn" id="editProfileBtn"><span id="editProfileText">Edit profil</span></button>
+                                <button class="profile-action-btn" id="shareProfileBtn"><span id="shareProfileText">Bagikan profil</span></button>
+                                <div class="right-icons-row">
+                                    <img src="Icon-contact1.png" class="contact-icon-img" id="contactIconImg" alt="add contact" onerror="this.style.display='none'">
+                                </div>
+                            </div>
+                            <div class="story-tab-row">
+                                <img src="Icon-grid1.png" class="grid-icon-img" id="gridIconImg" alt="grid" onerror="this.style.display='none'">
+                                <img src="Reels1.png" class="tab-icon-img media-icon" id="mediaIconImg" alt="media" onerror="this.style.display='none'">
+                                <img src="Repost1.png" class="tab-icon-img repost-icon" id="repostIconImg" alt="repost" onerror="this.style.display='none'">
+                                <img src="icon-tag1.png" class="tab-icon-img tag-icon" id="tagIconImg" alt="user tag" onerror="this.style.display='none'">
+                            </div>
+                            <div class="posts-grid-preview" id="previewGridPosts"><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div><div class="preview-post-item"><div class="preview-post-placeholder">+</div></div></div>
+                            <div class="bottom-nav-bar">
+                                <img src="Icon-home1.png" class="nav-icon-img-custom" id="homeIconImg" alt="home" onerror="this.style.display='none'">
+                                <img src="Reels1.png" class="nav-icon-img-custom" id="bottomMediaImg" alt="media" onerror="this.style.display='none'">
+                                <img src="Share1.png" class="nav-icon-share-img" id="bottomShareImg" alt="share" onerror="this.style.display='none'">
+                                <img src="Icon-search1.png" class="search-icon-img" id="searchIconImg" alt="search" onerror="this.style.display='none'">
+                                <img class="nav-profile-img" id="bottomNavAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230095f6'/%3E%3Ctext x='12' y='16' font-size='12' text-anchor='middle' fill='white'%3ETK%3C/text%3E%3C/svg%3E">
                             </div>
                         </div>
-                        <div class="toggle-switch" id="pubCloseFriendsToggle">
-                            <span id="cfTextPub">Teman Dekat</span>
-                            <div class="toggle-slider" id="pubCfSlider"></div>
-                        </div>
-
-                        <div class="section-divider"><i class="fas fa-font"></i> <span>Teks Story (Opsional)</span></div>
-                        <div class="form-group">
-                            <label>Isi Teks</label>
-                            <input type="text" id="pubTextInput" placeholder="Tulis teks..." value="">
-                        </div>
-                        <div class="form-group" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                            <label style="flex:1; min-width:50px;">Warna</label>
-                            <input type="color" id="pubTextColor" value="#ffffff" style="width:36px; height:36px; border:none; border-radius:8px; cursor:pointer; padding:0; background:transparent;">
-                            <label style="flex:1; min-width:50px;">Ukuran</label>
-                            <input type="range" id="pubTextSize" min="12" max="60" value="24" style="flex:2; accent-color:#0095f6;">
-                            <span id="pubTextSizeLabel" style="font-size:12px; color:#666; min-width:35px;">24px</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Font</label>
-                            <select id="pubTextFont">
-                                <option value="'Manrope', sans-serif">Classic</option>
-                                <option value="'Courier PS', serif">Typewriter</option>
-                                <option value="'Comic Sans MS', cursive">Meme</option>
-                                <option value="'Libre Baskerville', serif">Literature</option>
-                                <option value="'Space Mono', monospace">Space Mono</option>
-                                <option value="'Anton', sans-serif">Anton</option>
-                                <option value="'Barlow Condensed', sans-serif">Modern</option>
-                            </select>
-                        </div>
-                        <button class="download-single" id="pubAddTextBtn" style="width:100%; justify-content:center; background:#0095f6; margin-top:6px;">+ Tambah Teks</button>
                     </div>
 
-                    <div class="story-card-wrapper">
-                        <div id="pubOuterFrame" class="story-outer">
-                            <div class="other-story-card" id="publicStoryCard">
-                                <div class="story-progress">
-                                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                    <div class="progress-bar" style="background:rgba(255,255,255,0.55);"></div>
-                                </div>
-                                <div class="story-header-row">
-                                    <div class="header-left">
-                                        <img class="story-avatar" id="pubAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' fill='%23e4405f'/%3E%3Ctext x='17' y='22' text-anchor='middle' fill='white' font-size='14'%3EK%3C/text%3E%3C/svg%3E">
-                                        <div>
-                                            <div class="name-time-wrapper">
-                                                <span class="story-username">
-                                                    <span id="pubUsernameLabel">thekachoo</span>
-                                                    <i class="fas fa-check-circle verified-icon" id="pubVerifiedIcon" style="display:none;"></i>
-                                                </span>
-                                                <span class="story-time" id="pubTimeLabel">Baru saja</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="header-right-icons">
-                                        <span class="cf-badge-header" id="pubCfBadge"><img src="https://thekachoo.github.io/CHODATE/INSTA/CF.png" alt="CF"></span>
-                                        <i class="fas fa-ellipsis-h three-dots"></i>
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                </div>
-                                <div class="send-message-bg"></div>
-                                <div class="send-message-bar">
-                                    <div class="send-message-pill">
-                                        <span class="send-message-label" id="pubMessageInput">Kirim pesan...</span>
-                                    </div>
-                                    <div class="story-action-icons">
-                                        <div class="story-icon-btn" id="pubLikeBtn">
-                                            <svg viewBox="0 0 24 24">
-                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                            </svg>
-                                        </div>
-                                        <div class="story-icon-btn">
-                                            <img src="https://thekachoo.github.io/CHODATE/INSTA/Comment2.png" alt="Comment">
-                                        </div>
-                                        <div class="story-icon-btn">
-                                            <svg viewBox="0 0 24 24">
-                                                <line x1="22" y1="2" x2="11" y2="13"/>
-                                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="download-group">
-                            <button class="download-single" id="downloadPublicBtn"><i class="fas fa-download"></i> <span id="downloadTextPub">Unduh</span></button>
-                            <a href="#" class="edit-bg-btn" id="editBgBtnPub">Background</a>
-                        </div>
+                    <div class="download-area">
+                        <button class="download-btn" id="downloadBtn">Unduh Profil</button>
+                        <a href="#" class="edit-bg-btn" id="editBgBtn">Background</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer di-inject otomatis dari header-footer-instacho.js -->
-
-    <div class="crop-modal" id="cropModal">
-        <div class="crop-container"><img id="cropImage"></div>
-        <div class="crop-modal-buttons">
-            <button class="crop-modal-btn cancel" id="cancelCrop">Batal</button>
-            <button class="crop-modal-btn save" id="saveCrop">Simpan</button>
-        </div>
-    </div>
+    <div class="crop-modal" id="profileCropModal"><div class="crop-container"><img id="profileCropImage" src=""></div><div class="crop-modal-buttons"><button class="crop-modal-btn cancel" id="cancelProfileCrop">Batal</button><button class="crop-modal-btn save" id="saveProfileCrop">Simpan</button></div></div>
+    <div class="crop-modal" id="postGridCropModal"><div class="crop-container"><img id="postGridCropImage" src=""></div><div class="crop-modal-buttons"><button class="crop-modal-btn cancel" id="cancelPostCrop">Batal</button><button class="crop-modal-btn save" id="savePostCrop">Simpan</button></div></div>
     <div class="toast-msg" id="toastMsg"></div>
 
     <script>
-        let activeCropper = null;
-        let myBgUrl = null,
-            pubBgUrl = null,
-            myAvatarUrl = null,
-            pubAvatarUrl = null;
-        let myCfActive = false,
-            pubCfActive = false,
-            pubVerified = false,
-            pubLiked = false;
-        let currentMyLang = 'id',
-            currentPubLang = 'id';
-        let myOuterBg = '#000000',
-            pubOuterBg = '#000000';
-        let myTextTheme = 'white',
-            pubTextTheme = 'white';
+        let isVerified = false;
+        let isPrivate = false;
+        let currentTheme = 'light';
+        let currentLang = 'en';
+        let currentVersion = '2';
+        let postImages = new Array(6).fill(null);
+        let currentPostIndex = 0;
+        let postCropper = null,
+            profileCropper = null;
+
+        let currentBg = 'transparent';
 
         const translations = {
-            id: {
-                backToMode: "Kembali ke Mode",
-                myProfile: "Profil Saya",
-                avatarLabel: "Foto Profil",
-                uploadAvatar: "Upload Avatar (1:1)",
-                timeLabel: "Waktu Tayang",
-                justNow: "Baru saja",
-                custom: "Kustom",
-                customTimePlaceholder: "Isi waktu...",
-                storyLabel: "Gambar Story",
-                uploadStoryBg: "Upload latar story (9:16)",
-                outerBgLabel: "Background Luar",
-                outerColorLabel: "Warna Luar Frame",
-                closeFriends: "Teman Dekat",
-                yourStory: "Story Anda",
-                activity: "Aktivitas",
-                boost: "Bagikan",
-                highlight: "Sorotan",
-                mention: "Sebut",
-                more: "Lainnya",
-                download: "Unduh",
-                profileLabelPub: "Profil & Interaksi",
-                avatarLabelPub: "Foto Profil",
-                uploadAvatarPub: "Upload avatar",
-                usernameLabel: "Username",
-                verifiedText: "Akun Terverifikasi",
-                timeLabelPub: "Waktu Tayang",
-                storyLabelPub: "Gambar Story",
-                outerLabelPub: "Background Luar",
-                outerColorLabelPub: "Warna Luar Frame",
-                cfTextPub: "Teman Dekat",
-                sendMessagePlaceholder: "Kirim pesan..."
-            },
-            en: {
-                backToMode: "Back to Mode",
-                myProfile: "My Profile",
-                avatarLabel: "Profile Photo",
-                uploadAvatar: "Upload Avatar (1:1)",
-                timeLabel: "Time Posted",
-                justNow: "Just now",
-                custom: "Custom",
-                customTimePlaceholder: "Enter time...",
-                storyLabel: "Story Image",
-                uploadStoryBg: "Upload story background (9:16)",
-                outerBgLabel: "Outer Background",
-                outerColorLabel: "Outer Frame Color",
-                closeFriends: "Close Friends",
-                yourStory: "Your Story",
-                activity: "Activity",
-                boost: "Share",
-                highlight: "Highlight",
-                mention: "Mention",
-                more: "More",
-                download: "Download",
-                profileLabelPub: "Profile & Interaction",
-                avatarLabelPub: "Profile Photo",
-                uploadAvatarPub: "Upload avatar",
-                usernameLabel: "Username",
-                verifiedText: "Verified Account",
-                timeLabelPub: "Time Posted",
-                storyLabelPub: "Story Image",
-                outerLabelPub: "Outer Background",
-                outerColorLabelPub: "Outer Frame Color",
-                cfTextPub: "Close Friends",
-                sendMessagePlaceholder: "Send message..."
-            }
+            id: { postsLabel: "postingan", followersLabel: "pengikut", followingLabel: "mengikuti", labelAvatar: "Foto Profil", uploadAvatarLabel: "Upload foto profil", labelUsername: "username", labelBio: "Bio", labelPostsGrid: "6 Foto Postingan", verifBtn: "Verifikasi", privateBtn: "Private", downloadToast: "Profil berhasil diunduh", errorToast: "Gagal unduh", editProfile: "Edit profil", shareProfile: "Bagikan profil", pageTitle: "Create your profile!", labelName: "Nama" },
+            en: { postsLabel: "posts", followersLabel: "followers", followingLabel: "following", labelAvatar: "Profile Photo", uploadAvatarLabel: "Upload profile photo", labelUsername: "Username", labelBio: "Bio", labelPostsGrid: "6 Posts", verifBtn: "Verification", privateBtn: "Private", downloadToast: "Profile saved successfully", errorToast: "Download failed", editProfile: "Edit profile", shareProfile: "Share profile", pageTitle: "Create your profile!", labelName: "Name" }
         };
 
-        function showToast(msg) {
-            const t = document.getElementById('toastMsg');
-            t.innerText = msg;
-            t.style.opacity = '1';
-            clearTimeout(t._timeout);
-            t._timeout = setTimeout(() => t.style.opacity = '0', 2000);
-        }
+        function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(() => toast.style.opacity = '0', 2000); }
 
-        function applyLanguage(lang, isMyView) {
-            const t = translations[lang];
-            if (!t) return;
-
-            if (isMyView) {
-                document.getElementById('backToModeText') && (document.getElementById('backToModeText').innerText = t.backToMode);
-                document.getElementById('myProfileLabel') && (document.getElementById('myProfileLabel').innerText = t.myProfile);
-                document.getElementById('avatarLabel') && (document.getElementById('avatarLabel').innerText = t.avatarLabel);
-                document.getElementById('myAvatarLabel') && (document.getElementById('myAvatarLabel').innerText = t.uploadAvatar);
-                document.getElementById('timeLabel') && (document.getElementById('timeLabel').innerText = t.timeLabel);
-                document.getElementById('justNowOption') && (document.getElementById('justNowOption').innerText = t.justNow);
-                document.getElementById('customOption') && (document.getElementById('customOption').innerText = t.custom);
-                document.getElementById('storyLabel') && (document.getElementById('storyLabel').innerText = t.storyLabel);
-                document.getElementById('myBgLabel') && (document.getElementById('myBgLabel').innerText = t.uploadStoryBg);
-                document.getElementById('outerBgLabel') && (document.getElementById('outerBgLabel').innerText = t.outerBgLabel);
-                document.getElementById('outerColorLabel') && (document.getElementById('outerColorLabel').innerText = t.outerColorLabel);
-                document.getElementById('closeFriendsText') && (document.getElementById('closeFriendsText').innerText = t.closeFriends);
-                document.getElementById('yourStoryText') && (document.getElementById('yourStoryText').innerText = t.yourStory);
-                document.getElementById('activityText') && (document.getElementById('activityText').innerText = t.activity);
-                document.getElementById('boostText') && (document.getElementById('boostText').innerText = t.boost);
-                document.getElementById('highlightText') && (document.getElementById('highlightText').innerText = t.highlight);
-                document.getElementById('mentionText') && (document.getElementById('mentionText').innerText = t.mention);
-                document.getElementById('moreText') && (document.getElementById('moreText').innerText = t.more);
-                document.getElementById('downloadText') && (document.getElementById('downloadText').innerText = t.download);
-
-                let timeVal = document.getElementById('myTimeSelect').value;
-                if (timeVal === 'Just now') {
-                    document.getElementById('myViewTime').innerText = t.justNow;
-                }
+        function updateBackground() {
+            const previewOuter = document.getElementById('previewOuter');
+            if (currentBg === 'transparent') {
+                previewOuter.style.background = 'radial-gradient(circle at 30% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.0))';
+            } else if (currentBg === 'white') {
+                previewOuter.style.background = 'white';
+            } else if (currentBg === 'black') {
+                previewOuter.style.background = 'black';
             } else {
-                document.getElementById('backToModeTextPub') && (document.getElementById('backToModeTextPub').innerText = t.backToMode);
-                document.getElementById('profileLabelPub') && (document.getElementById('profileLabelPub').innerText = t.profileLabelPub);
-                document.getElementById('avatarLabelPub') && (document.getElementById('avatarLabelPub').innerText = t.avatarLabelPub);
-                document.getElementById('pubAvatarLabel') && (document.getElementById('pubAvatarLabel').innerText = t.uploadAvatarPub);
-                document.getElementById('usernameLabel') && (document.getElementById('usernameLabel').innerText = t.usernameLabel);
-                document.getElementById('verifiedText') && (document.getElementById('verifiedText').innerText = t.verifiedText);
-                document.getElementById('timeLabelPub') && (document.getElementById('timeLabelPub').innerText = t.timeLabelPub);
-                document.getElementById('justNowOptionPub') && (document.getElementById('justNowOptionPub').innerText = t.justNow);
-                document.getElementById('customOptionPub') && (document.getElementById('customOptionPub').innerText = t.custom);
-                document.getElementById('storyLabelPub') && (document.getElementById('storyLabelPub').innerText = t.storyLabelPub);
-                document.getElementById('pubBgLabel') && (document.getElementById('pubBgLabel').innerText = t.uploadStoryBg);
-                document.getElementById('outerLabelPub') && (document.getElementById('outerLabelPub').innerText = t.outerBgLabel);
-                document.getElementById('outerColorLabelPub') && (document.getElementById('outerColorLabelPub').innerText = t.outerColorLabel);
-                document.getElementById('cfTextPub') && (document.getElementById('cfTextPub').innerText = t.closeFriends);
-                document.getElementById('downloadTextPub') && (document.getElementById('downloadTextPub').innerText = t.download);
-                document.getElementById('pubMessageInput') && (document.getElementById('pubMessageInput').innerText = t.sendMessagePlaceholder);
-
-                let timeVal = document.getElementById('pubTimeSelect').value;
-                if (timeVal === 'Just now') {
-                    document.getElementById('pubTimeLabel').innerText = t.justNow;
-                }
+                previewOuter.style.background = currentBg;
             }
         }
 
-        function cropImageRatio(file, ratio) {
-            return new Promise(resolve => {
-                const modal = document.getElementById('cropModal');
-                const img = document.getElementById('cropImage');
-                img.src = URL.createObjectURL(file);
-                modal.style.display = 'flex';
-                setTimeout(() => {
-                    if (activeCropper) activeCropper.destroy();
-                    activeCropper = new Cropper(img, { aspectRatio: ratio, viewMode: 1, autoCropArea: 1 });
-                }, 100);
-                document.getElementById('cancelCrop').onclick = () => { modal.style.display = 'none';
-                    if (activeCropper) { activeCropper.destroy();
-                        activeCropper = null; }
-                    resolve(null); };
-                document.getElementById('saveCrop').onclick = () => { if (activeCropper) { activeCropper.getCroppedCanvas().toBlob(blob => { const url = URL.createObjectURL(blob);
-                            modal.style.display = 'none';
-                            activeCropper.destroy();
-                            activeCropper = null;
-                            resolve(url); }, 'image/png'); } };
-            });
-        }
-
-        function applyTextTheme(cardEl, theme) {
-            const color = theme === 'white' ? '#fff' : '#000';
-            cardEl.querySelectorAll('.story-username, .story-time, .action-label, .activity-label').forEach(el => el.style.color = color);
-            const msgInput = cardEl.querySelector('.send-message-input');
-            if (msgInput) msgInput.style.color = color;
-            const threeDots = cardEl.querySelector('.three-dots');
-            if (threeDots) threeDots.style.color = color;
-        }
-
-        function updateMyView() {
-            let timeVal = document.getElementById('myTimeSelect').value;
-            if (timeVal === 'Custom') timeVal = document.getElementById('myCustomTime').value;
-            const t = translations[currentMyLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
-
-            const cfBadge = document.getElementById('myViewCfBadge');
-            if (myCfActive) {
-                cfBadge.classList.add('show');
-                document.getElementById('myViewTime').style.display = 'inline';
-                document.getElementById('myViewTime').innerText = displayTime;
+        function updateAvatarPlus() {
+            const plusCircle = document.getElementById('avatarPlusCircle');
+            const icon = plusCircle.querySelector('i');
+            if (currentTheme === 'dark') {
+                plusCircle.style.background = 'white';
+                plusCircle.style.color = 'black';
+                icon.style.color = 'black';
             } else {
-                cfBadge.classList.remove('show');
-                document.getElementById('myViewTime').style.display = 'inline';
-                document.getElementById('myViewTime').innerText = displayTime;
+                plusCircle.style.background = 'black';
+                plusCircle.style.color = 'white';
+                icon.style.color = 'white';
             }
-
-            if (myAvatarUrl) document.getElementById('myViewAvatar').src = myAvatarUrl;
-            const card = document.getElementById('myViewStoryCard');
-            card.style.backgroundImage = myBgUrl ? `url(${myBgUrl})` : 'none';
-            card.style.backgroundColor = myBgUrl ? 'transparent' : '#111';
-            if (myBgUrl) { card.style.backgroundSize = 'cover';
-                card.style.backgroundPosition = 'center'; }
-            document.getElementById('myOuterFrame').style.backgroundColor = myOuterBg;
-            applyTextTheme(card, myTextTheme);
         }
 
-        function updatePublicView() {
-            const uname = document.getElementById('pubUsername').value.trim() || 'thekachoo';
-            document.getElementById('pubUsernameLabel').innerText = uname;
-            document.getElementById('pubVerifiedIcon').style.display = pubVerified ? 'inline' : 'none';
-            let timeVal = document.getElementById('pubTimeSelect').value;
-            if (timeVal === 'Custom') timeVal = document.getElementById('pubCustomTime').value;
-            const t = translations[currentPubLang];
-            const displayTime = (timeVal === 'Just now') ? (t ? t.justNow : 'Baru saja') : (timeVal || (t ? t.justNow : 'Baru saja'));
+        function updatePreview() {
+            let username = document.getElementById('username').value.trim() || 'thekachoo';
+            const topUsernameSpan = document.getElementById('previewTopUsername');
 
-            const cfBadge = document.getElementById('pubCfBadge');
-            if (pubCfActive) {
-                cfBadge.classList.add('show');
-                document.getElementById('pubTimeLabel').style.display = 'inline';
-                document.getElementById('pubTimeLabel').innerText = displayTime;
+            topUsernameSpan.innerHTML = '';
+            
+            const lockSpan = document.createElement('span');
+            lockSpan.className = 'lock-badge-before';
+            lockSpan.id = 'topLockBadge';
+            lockSpan.innerHTML = '<i class="fas fa-lock top-lock-badge"></i>';
+            topUsernameSpan.appendChild(lockSpan);
+
+            const textNode = document.createTextNode(username);
+            topUsernameSpan.appendChild(textNode);
+
+            const verifSpan = document.createElement('span');
+            verifSpan.className = 'verif-badge-after';
+            verifSpan.id = 'topVerifBadge';
+            verifSpan.innerHTML = '<i class="fas fa-check-circle top-verif-badge"></i>';
+            topUsernameSpan.appendChild(verifSpan);
+
+            const arrowSpan = document.createElement('span');
+            arrowSpan.className = 'arrow-badge-after';
+            arrowSpan.id = 'topArrowBadge';
+            arrowSpan.innerHTML = '<i class="fas fa-chevron-down top-arrow-badge"></i>';
+            topUsernameSpan.appendChild(arrowSpan);
+
+            const lockBadge = lockSpan;
+            const verifBadge = verifSpan;
+            const arrowBadge = arrowSpan;
+
+            if (isPrivate && isVerified) {
+                lockBadge.classList.add('show');
+                verifBadge.classList.add('show');
+                arrowBadge.classList.remove('show');
+            } else if (isPrivate && !isVerified) {
+                lockBadge.classList.add('show');
+                verifBadge.classList.remove('show');
+                arrowBadge.classList.add('show');
+            } else if (!isPrivate && isVerified) {
+                lockBadge.classList.remove('show');
+                verifBadge.classList.add('show');
+                arrowBadge.classList.remove('show');
             } else {
-                cfBadge.classList.remove('show');
-                document.getElementById('pubTimeLabel').style.display = 'inline';
-                document.getElementById('pubTimeLabel').innerText = displayTime;
+                lockBadge.classList.remove('show');
+                verifBadge.classList.remove('show');
+                arrowBadge.classList.remove('show');
             }
 
-            const likeBtn = document.getElementById('pubLikeBtn');
-            likeBtn.classList.toggle('liked', pubLiked);
-            if (pubAvatarUrl) document.getElementById('pubAvatarImg').src = pubAvatarUrl;
-            const card = document.getElementById('publicStoryCard');
-            card.style.backgroundImage = pubBgUrl ? `url(${pubBgUrl})` : 'none';
-            card.style.backgroundColor = pubBgUrl ? 'transparent' : '#111';
-            if (pubBgUrl) { card.style.backgroundSize = 'cover';
-                card.style.backgroundPosition = 'center'; }
-            document.getElementById('pubOuterFrame').style.backgroundColor = pubOuterBg;
-            applyTextTheme(card, pubTextTheme);
+            document.getElementById('previewPosts').innerText = document.getElementById('postsCount').value.trim() || '0';
+            document.getElementById('previewFollowers').innerText = document.getElementById('followersCount').value.trim() || '0';
+            document.getElementById('previewFollowing').innerText = document.getElementById('followingCount').value.trim() || '0';
+            document.getElementById('previewBio').innerText = document.getElementById('bioText').value || '';
+
+            const verifBtn = document.getElementById('verificationBtn');
+            if (isVerified) verifBtn.classList.add('active');
+            else verifBtn.classList.remove('active');
+
+            document.getElementById('bottomNavAvatar').src = document.getElementById('previewAvatarImg').src;
+
+            const nameInput = document.getElementById('nameInput');
+            const nameValue = nameInput.value.trim();
+            const nameDisplay = document.getElementById('previewNameInStats');
+            if (nameValue) {
+                nameDisplay.classList.add('visible');
+                nameDisplay.innerText = nameValue;
+            } else {
+                nameDisplay.classList.remove('visible');
+                nameDisplay.innerText = '';
+            }
+
+            updateAvatarPlus();
         }
 
-        myTextTheme = 'white';
-        pubTextTheme = 'white';
-
-        let myTextContainer = document.getElementById('myViewStoryCard');
-
-        function makeDraggable(el, container) {
-            let isDragging = false;
-            let startX, startY, startLeft, startTop;
-
-            function onStart(e) {
-                if (e.target.closest('.text-actions button')) return;
-                e.preventDefault();
-                const touch = e.touches ? e.touches[0] : e;
-                isDragging = true;
-                el.classList.add('dragging');
-                el.classList.add('selected-text');
-                const rect = container.getBoundingClientRect();
-                const elRect = el.getBoundingClientRect();
-                startX = touch.clientX - rect.left;
-                startY = touch.clientY - rect.top;
-                const leftPx = (parseFloat(el.style.left) / 100) * rect.width;
-                const topPx = (parseFloat(el.style.top) / 100) * rect.height;
-                startLeft = leftPx || 0;
-                startTop = topPx || 0;
+        function updateVersion() {
+            const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
+            const previewGrid = document.getElementById('previewGridPosts');
+            
+            if (currentVersion === '2') {
+                formItems.forEach(item => item.classList.add('ratio-45'));
+                previewGrid.classList.add('ratio-45');
+            } else {
+                formItems.forEach(item => item.classList.remove('ratio-45'));
+                previewGrid.classList.remove('ratio-45');
             }
-
-            function onMove(e) {
-                if (!isDragging) return;
-                e.preventDefault();
-                const touch = e.touches ? e.touches[0] : e;
-                const rect = container.getBoundingClientRect();
-                let deltaX = (touch.clientX - rect.left) - startX;
-                let deltaY = (touch.clientY - rect.top) - startY;
-                let newLeftPx = startLeft + deltaX;
-                let newTopPx = startTop + deltaY;
-                const elW = el.offsetWidth;
-                const elH = el.offsetHeight;
-                newLeftPx = Math.max(0, Math.min(rect.width - elW, newLeftPx));
-                newTopPx = Math.max(0, Math.min(rect.height - elH, newTopPx));
-                const leftPercent = (newLeftPx / rect.width) * 100;
-                const topPercent = (newTopPx / rect.height) * 100;
-                el.style.left = leftPercent + '%';
-                el.style.top = topPercent + '%';
-            }
-
-            function onEnd(e) {
-                if (isDragging) {
-                    isDragging = false;
-                    el.classList.remove('dragging');
-                }
-            }
-
-            el.addEventListener('mousedown', onStart);
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', onEnd);
-            el.addEventListener('touchstart', onStart, { passive: false });
-            document.addEventListener('touchmove', onMove, { passive: false });
-            document.addEventListener('touchend', onEnd);
         }
 
-        function addDraggableText(container, text, color, size, font, x, y) {
-            const el = document.createElement('div');
-            el.className = 'draggable-text';
-            el.textContent = text;
-            el.style.color = color || '#ffffff';
-            el.style.fontSize = (size || 24) + 'px';
-            el.style.fontFamily = font || "'Outfit', sans-serif";
-            el.style.left = (x || 20) + '%';
-            el.style.top = (y || 20) + '%';
-            el.style.position = 'absolute';
-            el.style.zIndex = '10';
-            el.style.pointerEvents = 'auto';
-            el.style.cursor = 'grab';
-            el.style.textShadow = '0 1px 4px rgba(0,0,0,0.5)';
-            el.style.userSelect = 'none';
-            el.style.webkitUserSelect = 'none';
+        function updateTheme() {
+            const card = document.getElementById('profilePreviewCard');
+            if (currentTheme === 'dark') card.classList.add('dark-theme');
+            else card.classList.remove('dark-theme');
 
-            const actions = document.createElement('div');
-            actions.className = 'text-actions';
-            actions.style.position = 'absolute';
-            actions.style.top = '-14px';
-            actions.style.right = '-14px';
-            actions.style.display = 'flex';
-            actions.style.gap = '3px';
-            actions.style.background = 'rgba(0,0,0,0.7)';
-            actions.style.backdropFilter = 'blur(4px)';
-            actions.style.borderRadius = '50%';
-            actions.style.padding = '2px';
-            actions.style.zIndex = '30';
-            actions.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+            const mediaIcon = document.getElementById('mediaIconImg');
+            const repostIcon = document.getElementById('repostIconImg');
+            const tagIcon = document.getElementById('tagIconImg');
+            const bottomMedia = document.getElementById('bottomMediaImg');
+            const bottomShare = document.getElementById('bottomShareImg');
+            const gridIcon = document.getElementById('gridIconImg');
+            const homeIcon = document.getElementById('homeIconImg');
+            const searchIcon = document.getElementById('searchIconImg');
+            const contactIcon = document.getElementById('contactIconImg');
+            const threadIcon = document.getElementById('threadIcon');
 
-            const deleteBtn = document.createElement('button');
-            deleteBtn.innerHTML = '✕';
-            deleteBtn.title = 'Hapus teks';
-            deleteBtn.style.width = '24px';
-            deleteBtn.style.height = '24px';
-            deleteBtn.style.border = 'none';
-            deleteBtn.style.borderRadius = '50%';
-            deleteBtn.style.fontSize = '14px';
-            deleteBtn.style.fontWeight = '700';
-            deleteBtn.style.cursor = 'pointer';
-            deleteBtn.style.display = 'flex';
-            deleteBtn.style.alignItems = 'center';
-            deleteBtn.style.justifyContent = 'center';
-            deleteBtn.style.transition = '0.15s';
-            deleteBtn.style.color = 'white';
-            deleteBtn.style.lineHeight = '1';
-            deleteBtn.style.background = '#ff3040';
-            deleteBtn.style.pointerEvents = 'auto';
-            deleteBtn.style.touchAction = 'manipulation';
-
-            function deleteHandler(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                el.remove();
-                showToast('Teks dihapus');
+            if (currentTheme === 'dark') {
+                if (mediaIcon) mediaIcon.src = 'Reels2.png';
+                if (repostIcon) repostIcon.src = 'Repost2.png';
+                if (tagIcon) tagIcon.src = 'icon-tag2.png';
+                if (bottomMedia) bottomMedia.src = 'Reels2.png';
+                if (bottomShare) bottomShare.src = 'Share2.png';
+                if (gridIcon) gridIcon.src = 'Icon-grid2.png';
+                if (homeIcon) homeIcon.src = 'Icon-home2.png';
+                if (searchIcon) searchIcon.src = 'Icon-search2.png';
+                if (contactIcon) contactIcon.src = 'Icon-contact2.png';
+                if (threadIcon) threadIcon.src = 'Mention-icon.png';
+            } else {
+                if (mediaIcon) mediaIcon.src = 'Reels1.png';
+                if (repostIcon) repostIcon.src = 'Repost1.png';
+                if (tagIcon) tagIcon.src = 'icon-tag1.png';
+                if (bottomMedia) bottomMedia.src = 'Reels1.png';
+                if (bottomShare) bottomShare.src = 'Share1.png';
+                if (gridIcon) gridIcon.src = 'Icon-grid1.png';
+                if (homeIcon) homeIcon.src = 'Icon-home1.png';
+                if (searchIcon) searchIcon.src = 'Icon-search1.png';
+                if (contactIcon) contactIcon.src = 'Icon-contact1.png';
+                if (threadIcon) threadIcon.src = 'Thread.png';
             }
 
-            deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
-            deleteBtn.addEventListener('click', deleteHandler);
+            updateAvatarPlus();
+        }
 
-            actions.appendChild(deleteBtn);
-            el.appendChild(actions);
-            container.appendChild(el);
-            makeDraggable(el, container);
-
-            el.addEventListener('click', function(e) {
-                if (e.target.closest('.text-actions button')) return;
-                document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
-                this.classList.add('selected-text');
+        function renderPostGrids() {
+            const formItems = document.querySelectorAll('#postsGridForm .post-grid-item');
+            formItems.forEach((item, idx) => { 
+                item.innerHTML = ''; 
+                if (postImages[idx]) { 
+                    const img = document.createElement('img'); 
+                    img.src = postImages[idx]; 
+                    item.appendChild(img); 
+                } else { 
+                    const div = document.createElement('div'); 
+                    div.className = 'post-grid-placeholder'; 
+                    div.innerText = '+'; 
+                    item.appendChild(div); 
+                } 
+                item.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    currentPostIndex = idx; 
+                    document.getElementById('postImageUpload').click(); 
+                }; 
             });
-
-            return el;
-        }
-
-        let myTexts = [];
-
-        document.getElementById('myAddTextBtn').addEventListener('click', function() {
-            const text = document.getElementById('myTextInput').value || 'Teks';
-            const color = document.getElementById('myTextColor').value;
-            const size = parseInt(document.getElementById('myTextSize').value);
-            const font = document.getElementById('myTextFont').value;
-            const x = 15 + Math.random() * 50;
-            const y = 15 + Math.random() * 50;
-            const el = addDraggableText(myTextContainer, text, color, size, font, x, y);
-            myTexts.push(el);
-            showToast('Teks ditambahkan!');
-        });
-
-        document.getElementById('myTextSize').addEventListener('input', function() {
-            document.getElementById('myTextSizeLabel').textContent = this.value + 'px';
-        });
-
-        let pubTextContainer = document.getElementById('publicStoryCard');
-
-        function addDraggableTextPublic(container, text, color, size, font, x, y) {
-            const el = document.createElement('div');
-            el.className = 'draggable-text';
-            el.textContent = text;
-            el.style.color = color || '#ffffff';
-            el.style.fontSize = (size || 24) + 'px';
-            el.style.fontFamily = font || "'Outfit', sans-serif";
-            el.style.left = (x || 20) + '%';
-            el.style.top = (y || 20) + '%';
-            el.style.position = 'absolute';
-            el.style.zIndex = '10';
-            el.style.pointerEvents = 'auto';
-            el.style.cursor = 'grab';
-            el.style.textShadow = '0 1px 4px rgba(0,0,0,0.5)';
-            el.style.userSelect = 'none';
-            el.style.webkitUserSelect = 'none';
-
-            const actions = document.createElement('div');
-            actions.className = 'text-actions';
-            actions.style.position = 'absolute';
-            actions.style.top = '-14px';
-            actions.style.right = '-14px';
-            actions.style.display = 'flex';
-            actions.style.gap = '3px';
-            actions.style.background = 'rgba(0,0,0,0.7)';
-            actions.style.backdropFilter = 'blur(4px)';
-            actions.style.borderRadius = '50%';
-            actions.style.padding = '2px';
-            actions.style.zIndex = '30';
-            actions.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.innerHTML = '✕';
-            deleteBtn.title = 'Hapus teks';
-            deleteBtn.style.width = '24px';
-            deleteBtn.style.height = '24px';
-            deleteBtn.style.border = 'none';
-            deleteBtn.style.borderRadius = '50%';
-            deleteBtn.style.fontSize = '14px';
-            deleteBtn.style.fontWeight = '700';
-            deleteBtn.style.cursor = 'pointer';
-            deleteBtn.style.display = 'flex';
-            deleteBtn.style.alignItems = 'center';
-            deleteBtn.style.justifyContent = 'center';
-            deleteBtn.style.transition = '0.15s';
-            deleteBtn.style.color = 'white';
-            deleteBtn.style.lineHeight = '1';
-            deleteBtn.style.background = '#ff3040';
-            deleteBtn.style.pointerEvents = 'auto';
-            deleteBtn.style.touchAction = 'manipulation';
-
-            function deleteHandler(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                el.remove();
-                showToast('Teks dihapus');
+            
+            const previewGrid = document.getElementById('previewGridPosts');
+            previewGrid.innerHTML = '';
+            for (let i = 0; i < 6; i++) { 
+                const div = document.createElement('div'); 
+                div.className = 'preview-post-item'; 
+                if (postImages[i]) { 
+                    const img = document.createElement('img'); 
+                    img.src = postImages[i]; 
+                    div.appendChild(img); 
+                } else { 
+                    const ph = document.createElement('div'); 
+                    ph.className = 'preview-post-placeholder'; 
+                    ph.innerText = '+'; 
+                    div.appendChild(ph); 
+                } 
+                previewGrid.appendChild(div); 
             }
-
-            deleteBtn.addEventListener('touchstart', deleteHandler, { passive: false });
-            deleteBtn.addEventListener('click', deleteHandler);
-
-            actions.appendChild(deleteBtn);
-            el.appendChild(actions);
-            container.appendChild(el);
-            makeDraggable(el, container);
-
-            el.addEventListener('click', function(e) {
-                if (e.target.closest('.text-actions button')) return;
-                document.querySelectorAll('.draggable-text').forEach(t => t.classList.remove('selected-text'));
-                this.classList.add('selected-text');
-            });
-
-            return el;
+            updateVersion();
         }
 
-        let pubTexts = [];
+        function getCropRatio() {
+            return currentVersion === '2' ? 4/5 : 1;
+        }
 
-        document.getElementById('pubAddTextBtn').addEventListener('click', function() {
-            const text = document.getElementById('pubTextInput').value || 'Teks';
-            const color = document.getElementById('pubTextColor').value;
-            const size = parseInt(document.getElementById('pubTextSize').value);
-            const font = document.getElementById('pubTextFont').value;
-            const x = 15 + Math.random() * 50;
-            const y = 15 + Math.random() * 50;
-            const el = addDraggableTextPublic(pubTextContainer, text, color, size, font, x, y);
-            pubTexts.push(el);
-            showToast('Teks ditambahkan!');
+        function showPostCropModal(file) { 
+            const modal = document.getElementById('postGridCropModal'); 
+            const img = document.getElementById('postGridCropImage'); 
+            img.src = URL.createObjectURL(file); 
+            modal.style.display = 'flex'; 
+            setTimeout(() => { 
+                if (postCropper) postCropper.destroy(); 
+                const ratio = getCropRatio();
+                postCropper = new Cropper(img, { 
+                    aspectRatio: ratio, 
+                    viewMode: 1, 
+                    autoCropArea: 1 
+                }); 
+            }, 100); 
+        }
+
+        document.getElementById('savePostCrop').addEventListener('click', () => { 
+            if (postCropper) { 
+                const canvas = postCropper.getCroppedCanvas({ 
+                    width: 600, 
+                    height: 600 / getCropRatio() 
+                }); 
+                canvas.toBlob(blob => { 
+                    postImages[currentPostIndex] = URL.createObjectURL(blob); 
+                    renderPostGrids(); 
+                    document.getElementById('postGridCropModal').style.display = 'none'; 
+                    if (postCropper) postCropper.destroy(); 
+                    postCropper = null; 
+                    showToast('Foto postingan berhasil diupdate'); 
+                }); 
+            } 
         });
 
-        document.getElementById('pubTextSize').addEventListener('input', function() {
-            document.getElementById('pubTextSizeLabel').textContent = this.value + 'px';
+        document.getElementById('cancelPostCrop').addEventListener('click', () => { 
+            document.getElementById('postGridCropModal').style.display = 'none'; 
+            if (postCropper) postCropper.destroy(); 
+            postCropper = null; 
         });
 
-        // ========== DOWNLOAD ==========
-        async function downloadEl(el, name, bgBtnId) {
+        const postImageUpload = document.getElementById('postImageUpload');
+        postImageUpload.addEventListener('change', (e) => { 
+            if (e.target.files.length > 0 && e.target.files[0].type.startsWith('image/')) 
+                showPostCropModal(e.target.files[0]); 
+            postImageUpload.value = ''; 
+        });
+        document.getElementById('uploadPostLabel').addEventListener('click', () => { 
+            currentPostIndex = 0; 
+            postImageUpload.click(); 
+        });
+
+        function showProfileCrop(file) { 
+            const modal = document.getElementById('profileCropModal'); 
+            const img = document.getElementById('profileCropImage'); 
+            img.src = URL.createObjectURL(file); 
+            modal.style.display = 'flex'; 
+            setTimeout(() => { 
+                if (profileCropper) profileCropper.destroy(); 
+                profileCropper = new Cropper(img, { 
+                    aspectRatio: 1, 
+                    viewMode: 1, 
+                    autoCropArea: 1 
+                }); 
+            }, 100); 
+        }
+
+        document.getElementById('saveProfileCrop').addEventListener('click', () => { 
+            if (profileCropper) { 
+                const canvas = profileCropper.getCroppedCanvas({ width: 300, height: 300 }); 
+                canvas.toBlob(blob => { 
+                    const url = URL.createObjectURL(blob); 
+                    document.getElementById('previewAvatarImg').src = url; 
+                    document.getElementById('bottomNavAvatar').src = url; 
+                    document.getElementById('profileCropModal').style.display = 'none'; 
+                    if (profileCropper) profileCropper.destroy(); 
+                    profileCropper = null; 
+                    showToast('Foto profil diupdate'); 
+                    updatePreview(); 
+                }); 
+            } 
+        });
+
+        document.getElementById('cancelProfileCrop').addEventListener('click', () => { 
+            document.getElementById('profileCropModal').style.display = 'none'; 
+            if (profileCropper) profileCropper.destroy(); 
+            profileCropper = null; 
+        });
+
+        document.getElementById('uploadAvatarLabel').addEventListener('click', () => document.getElementById('avatarUpload').click());
+        document.getElementById('avatarUpload').addEventListener('change', (e) => { 
+            if (e.target.files[0]?.type.startsWith('image/')) showProfileCrop(e.target.files[0]); 
+        });
+
+        document.getElementById('verificationBtn').addEventListener('click', () => {
+            isVerified = !isVerified;
+            updatePreview();
+            showToast(isVerified ? (currentLang === 'id' ? 'Akun terverifikasi' : 'Account verified') : (currentLang === 'id' ? 'Verifikasi dihapus' : 'Verification removed'));
+        });
+
+        document.getElementById('privateBtn').addEventListener('click', () => {
+            isPrivate = !isPrivate;
+            if (isPrivate) {
+                document.getElementById('privateBtn').classList.add('active');
+            } else {
+                document.getElementById('privateBtn').classList.remove('active');
+            }
+            updatePreview();
+            showToast(isPrivate ? (currentLang === 'id' ? 'Akun diprivat' : 'Account privatized') : (currentLang === 'id' ? 'Akun dipublik' : 'Account public'));
+        });
+
+        document.getElementById('username').addEventListener('input', updatePreview);
+        document.getElementById('nameInput').addEventListener('input', updatePreview);
+        document.getElementById('postsCount').addEventListener('input', updatePreview);
+        document.getElementById('followersCount').addEventListener('input', updatePreview);
+        document.getElementById('followingCount').addEventListener('input', updatePreview);
+        document.getElementById('bioText').addEventListener('input', updatePreview);
+
+        function updateFormLanguage() { 
+            const t = translations[currentLang]; 
+            document.getElementById('labelAvatar').innerText = t.labelAvatar; 
+            document.getElementById('uploadAvatarLabel').innerText = t.uploadAvatarLabel; 
+            document.getElementById('labelUsername').innerText = t.labelUsername; 
+            document.getElementById('labelName').innerText = t.labelName;
+            document.getElementById('labelBio').innerText = t.labelBio; 
+            document.getElementById('labelPostsGrid').innerText = t.labelPostsGrid; 
+            document.getElementById('labelPosts').innerText = t.postsLabel; 
+            document.getElementById('labelFollowers').innerText = t.followersLabel; 
+            document.getElementById('labelFollowing').innerText = t.followingLabel; 
+            document.getElementById('statPostsLabel').innerText = t.postsLabel; 
+            document.getElementById('statFollowersLabel').innerText = t.followersLabel; 
+            document.getElementById('statFollowingLabel').innerText = t.followingLabel; 
+            document.getElementById('editProfileText').innerText = t.editProfile; 
+            document.getElementById('shareProfileText').innerText = t.shareProfile; 
+            document.getElementById('pageTitle').innerText = t.pageTitle; 
+            document.getElementById('verifText').innerText = t.verifBtn;
+            document.getElementById('privateText').innerText = t.privateBtn;
+            updatePreview(); 
+        }
+
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.classList.add('active');
+        themeToggle.addEventListener('click', () => {
+            if (currentTheme === 'light') {
+                currentTheme = 'dark';
+                themeToggle.classList.remove('active');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                updateTheme();
+                showToast('Dark Mode');
+            } else {
+                currentTheme = 'light';
+                themeToggle.classList.add('active');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                updateTheme();
+                showToast('Light Mode');
+            }
+        });
+
+        const versionToggle = document.getElementById('versionToggle');
+        versionToggle.classList.add('active');
+        
+        versionToggle.addEventListener('click', () => {
+            if (currentVersion === '2') {
+                currentVersion = '1';
+                versionToggle.classList.remove('active');
+                updateVersion();
+            } else {
+                currentVersion = '2';
+                versionToggle.classList.add('active');
+                updateVersion();
+            }
+        });
+
+        const langToggle = document.getElementById('langToggle');
+        langToggle.classList.add('active');
+        langToggle.innerHTML = '<span class="btn-text">IND</span>';
+        
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'en') {
+                currentLang = 'id';
+                langToggle.classList.remove('active');
+                langToggle.innerHTML = '<span class="btn-text">ENG</span>';
+                document.getElementById('mainHtml').setAttribute('lang', 'id');
+                updateFormLanguage();
+                showToast('Bahasa Indonesia');
+            } else {
+                currentLang = 'en';
+                langToggle.classList.add('active');
+                langToggle.innerHTML = '<span class="btn-text">IND</span>';
+                document.getElementById('mainHtml').setAttribute('lang', 'en');
+                updateFormLanguage();
+                showToast('English');
+            }
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const element = document.getElementById('previewOuter');
             try {
-                const allTexts = el.querySelectorAll('.draggable-text');
-                allTexts.forEach(t => t.classList.add('hide-actions'));
-
-                const c = await html2canvas(el, {
-                    scale: 3.0, 
+                const rect = element.getBoundingClientRect();
+                const canvas = await html2canvas(element, {
+                    scale: 3,
                     backgroundColor: null,
                     useCORS: true,
                     allowTaint: true,
                     logging: false,
-                    onclone: function(clonedDoc, clonedEl) {
-                        clonedEl.querySelectorAll('.my-story-card, .other-story-card').forEach(function(card) {
-                            card.style.overflow = 'visible';
-                            card.style.borderRadius = '18px';
-                        });
-                    }
+                    width: rect.width,
+                    height: rect.height
                 });
-
-                allTexts.forEach(t => t.classList.remove('hide-actions'));
                 const link = document.createElement('a');
-                link.download = name;
-                link.href = c.toDataURL('image/png');
+                link.download = `instaprofile_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
                 link.click();
-                showToast('Berhasil diunduh');
+                showToast(translations[currentLang].downloadToast);
 
-                const bgBtn = document.getElementById(bgBtnId);
-                if (bgBtn) {
-                    bgBtn.classList.add('visible');
-                    bgBtn.style.transform = 'scale(0.8)';
-                    setTimeout(() => bgBtn.style.transform = 'scale(1)', 200);
-                }
+                const editBgBtn = document.getElementById('editBgBtn');
+                editBgBtn.classList.add('visible');
+                editBgBtn.style.transform = 'scale(0.8)';
+                setTimeout(() => editBgBtn.style.transform = 'scale(1)', 200);
             } catch (e) {
                 console.error(e);
-                const allTexts = el.querySelectorAll('.draggable-text');
-                allTexts.forEach(t => t.classList.remove('hide-actions'));
-                showToast('Gagal');
+                showToast(translations[currentLang].errorToast);
             }
+        });
+
+        document.getElementById('editBgBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'Edit.html';
+        });
+
+        document.querySelectorAll('.bg-option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentBg = this.getAttribute('data-bg');
+                updateBackground();
+            });
+        });
+
+        document.getElementById('customColorPicker').addEventListener('input', function(e) {
+            document.querySelectorAll('.bg-option-btn').forEach(b => b.classList.remove('active'));
+            currentBg = e.target.value;
+            updateBackground();
+        });
+
+        document.getElementById('editProfileBtn').addEventListener('click', () => showToast('Edit profil akan segera hadir'));
+        document.getElementById('shareProfileBtn').addEventListener('click', () => showToast('Bagikan profil akan segera hadir'));
+
+        function updateProfileLink() {
+            const input = document.getElementById('profileLinkInput');
+            let url = input.value.trim();
+            const linkRow = document.getElementById('profileLinkRow');
+            const linkText = document.getElementById('profileLinkText');
+            const linkEl = document.getElementById('profileLink');
+
+            if (!url) {
+                linkRow.classList.remove('visible');
+                linkText.innerText = '';
+                linkEl.href = '#';
+                showToast('Link disembunyikan');
+                return;
+            }
+
+            linkRow.classList.add('visible');
+            let displayText = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+            if (displayText.length > 30) displayText = displayText.substring(0, 30) + '...';
+            linkText.innerText = displayText;
+            linkEl.href = url;
+            showToast('Link profil diperbarui');
         }
 
-        document.getElementById('downloadMyViewBtn').onclick = () => downloadEl(document.getElementById('myOuterFrame'), `selfstory_${Date.now()}.png`, 'editBgBtnMy');
-        document.getElementById('downloadPublicBtn').onclick = () => downloadEl(document.getElementById('pubOuterFrame'), `socialstory_${Date.now()}.png`, 'editBgBtnPub');
-
-        // ===== EDIT BACKGROUND BUTTON =====
-        document.getElementById('editBgBtnMy').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'Edit.html';
+        document.getElementById('updateLinkBtn').addEventListener('click', updateProfileLink);
+        document.getElementById('profileLinkInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') updateProfileLink();
         });
 
-        document.getElementById('editBgBtnPub').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'Edit.html';
-        });
-        // Foto profil & Background uploads
-        document.getElementById('myAvatarLabel').addEventListener('click', () => document.getElementById('myAvatarUpload').click());
-        document.getElementById('myAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
-                if (u) { myAvatarUrl = u;
-                    updateMyView(); } } });
-        document.getElementById('myBgLabel').addEventListener('click', () => document.getElementById('myBgUpload').click());
-        document.getElementById('myBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
-                if (u) { myBgUrl = u;
-                    updateMyView(); } } });
-        document.getElementById('pubAvatarLabel').addEventListener('click', () => document.getElementById('pubAvatarUpload').click());
-        document.getElementById('pubAvatarUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 1);
-                if (u) { pubAvatarUrl = u;
-                    updatePublicView(); } } });
-        document.getElementById('pubBgLabel').addEventListener('click', () => document.getElementById('pubBgUpload').click());
-        document.getElementById('pubBgUpload').addEventListener('change', async e => { if (e.target.files[0]) { const u = await cropImageRatio(e.target.files[0], 9 / 16);
-                if (u) { pubBgUrl = u;
-                    updatePublicView(); } } });
+        currentVersion = '2';
+        currentLang = 'en';
+        document.getElementById('mainHtml').setAttribute('lang', 'en');
+        updateFormLanguage();
+        updateTheme();
+        renderPostGrids();
+        updatePreview();
+        updateVersion();
+        updateBackground();
 
-        document.getElementById('myTimeSelect').addEventListener('change', function() { document.getElementById('myCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updateMyView(); });
-        document.getElementById('myCustomTime').addEventListener('input', updateMyView);
-        document.getElementById('pubTimeSelect').addEventListener('change', function() { document.getElementById('pubCustomTime').style.display = this.value === 'Custom' ? 'block' : 'none';
-            updatePublicView(); });
-        document.getElementById('pubCustomTime').addEventListener('input', updatePublicView);
-
-        document.getElementById('myCfSlider').addEventListener('click', () => { myCfActive = !myCfActive;
-            document.getElementById('myCfSlider').classList.toggle('active');
-            updateMyView(); });
-        document.getElementById('pubVerifiedSlider').addEventListener('click', () => { pubVerified = !pubVerified;
-            document.getElementById('pubVerifiedSlider').classList.toggle('active');
-            updatePublicView(); });
-        document.getElementById('pubCfSlider').addEventListener('click', () => { pubCfActive = !pubCfActive;
-            document.getElementById('pubCfSlider').classList.toggle('active');
-            updatePublicView(); });
-        document.getElementById('pubLikeBtn').addEventListener('click', () => { pubLiked = !pubLiked;
-            updatePublicView(); });
-        document.getElementById('pubUsername').addEventListener('input', updatePublicView);
-
-        document.getElementById('myOuterColor').addEventListener('input', e => { myOuterBg = e.target.value;
-            updateMyView(); });
-        document.querySelectorAll('[data-outer]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer');
-            myOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
-            updateMyView(); }));
-        document.getElementById('pubOuterColor').addEventListener('input', e => { pubOuterBg = e.target.value;
-            updatePublicView(); });
-        document.querySelectorAll('[data-outer-pub]').forEach(el => el.addEventListener('click', () => { const v = el.getAttribute('data-outer-pub');
-            pubOuterBg = v === 'black' ? '#000000' : v === 'white' ? '#ffffff' : 'transparent';
-            updatePublicView(); }));
-
-        window.resetToModeSelection = function() { document.getElementById('modeSelection').style.display = 'flex';
-            document.getElementById('studioMyView').classList.remove('active-view');
-            document.getElementById('studioPublicView').classList.remove('active-view');
-            document.getElementById('studioMyView').style.display = 'none';
-            document.getElementById('studioPublicView').style.display = 'none'; };
-        document.querySelectorAll('.mode-card').forEach(card => card.addEventListener('click', () => {
-            const mode = card.getAttribute('data-mode');
-            document.getElementById('modeSelection').style.display = 'none';
-            if (mode === 'myview') {
-                document.getElementById('studioMyView').style.display = 'block';
-                document.getElementById('studioMyView').classList.add('active-view');
-                updateMyView();
-            } else {
-                document.getElementById('studioPublicView').style.display = 'block';
-                document.getElementById('studioPublicView').classList.add('active-view');
-                updatePublicView();
-            }
-        }));
-
-        document.getElementById('btnIndonesiaMy').addEventListener('click', () => {
-            currentMyLang = 'id';
-            document.getElementById('btnIndonesiaMy').classList.add('active');
-            document.getElementById('btnInggrisMy').classList.remove('active');
-            applyLanguage('id', true);
-            updateMyView();
-        });
-        document.getElementById('btnInggrisMy').addEventListener('click', () => {
-            currentMyLang = 'en';
-            document.getElementById('btnInggrisMy').classList.add('active');
-            document.getElementById('btnIndonesiaMy').classList.remove('active');
-            applyLanguage('en', true);
-            updateMyView();
-        });
-
-        document.getElementById('btnIndonesiaPub').addEventListener('click', () => {
-            currentPubLang = 'id';
-            document.getElementById('btnIndonesiaPub').classList.add('active');
-            document.getElementById('btnInggrisPub').classList.remove('active');
-            applyLanguage('id', false);
-            updatePublicView();
-        });
-        document.getElementById('btnInggrisPub').addEventListener('click', () => {
-            currentPubLang = 'en';
-            document.getElementById('btnInggrisPub').classList.add('active');
-            document.getElementById('btnIndonesiaPub').classList.remove('active');
-            applyLanguage('en', false);
-            updatePublicView();
-        });
-
-        updateMyView();
-        updatePublicView();
-        applyLanguage('id', true);
-        applyLanguage('id', false);
+        document.getElementById('profileLinkRow').classList.remove('visible');
+        document.getElementById('profileLinkInput').value = '';
+        document.getElementById('profileLinkText').innerText = '';
+        document.getElementById('profileLink').href = '#';
     </script>
 
-    <script src="header-footer.js"></script>
+    <script src="header-footer-instacho.js"></script>
 </body>
-</html>
+    </html>
