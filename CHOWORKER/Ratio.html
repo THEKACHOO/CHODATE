@@ -11,19 +11,15 @@
 :root{color-scheme:light;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',Arial,sans-serif;color:#000000;}
-
 .main-content{padding:96px 20px 60px;max-width:1200px;margin:0 auto;}
 @media(max-width:768px){.main-content{padding:82px 12px 40px;}}
-
 .page-title{text-align:center;font-size:32px;font-weight:800;margin-bottom:8px;color:#000;letter-spacing:-.5px;}
 .page-sub{text-align:center;font-size:14px;color:#000;margin-bottom:26px;}
 @media(max-width:640px){.page-title{font-size:22px;margin-bottom:6px;}.page-sub{font-size:12.5px;margin-bottom:18px;}}
-
-.editor-card{width:100%;max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:28px 24px;min-height:340px;}
+.editor-card{width:100%;max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:28px 24px;min-height:340px;display:flex;flex-direction:column;}
 @media(max-width:680px){.editor-card{border-radius:0;padding:20px 12px;}}
-
-/* === SESSION 1 === */
-.session-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;padding:36px 10px;}
+.session-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;padding:36px 10px;flex:1;min-height:calc(100vh - 320px);}
+@media(max-width:680px){.session-choice{min-height:calc(100vh - 260px);}}
 .choice-question{font-size:20px;font-weight:700;color:#000;text-align:center;margin-bottom:4px;}
 @media(max-width:640px){.choice-question{font-size:17px;}}
 .choice-buttons{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-content:center;width:100%;max-width:560px;}
@@ -39,14 +35,12 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .choice-btn .choice-desc{font-size:12px;color:#000;line-height:1.5;}
 @media(max-width:480px){.choice-btn{padding:22px 10px;}.choice-btn i{font-size:28px;}.choice-btn .choice-title{font-size:13.5px;}.choice-btn .choice-desc{font-size:11px;}}
 
-/* === SESSION 2 HEADER === */
 .session-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:16px;flex-wrap:wrap;}
 .back-btn{background:#fff;border:1px solid #000;color:#000;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;flex-shrink:0;}
 .back-btn:hover{background:#000;color:#fff;}
 .session-title{font-size:18px;font-weight:700;color:#000;flex:1;min-width:0;}
 @media(max-width:640px){.session-title{font-size:15px;}}
 
-/* === CUSTOM CONTROLS (RAPIH 1 BARIS) === */
 .custom-controls{
   display:flex;
   flex-wrap:nowrap;
@@ -89,7 +83,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   .apply-custom{padding:9px 16px;font-size:12.5px;}
 }
 
-/* === PRESET TABS (3 KOLOM SEJAJAR) === */
 .preset-tabs{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -127,7 +120,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   .preset-btn i{font-size:11px;}
 }
 
-/* === UPLOAD & PREVIEW === */
 .upload-area{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;}
 .upload-box{flex:1 1 240px;min-width:220px;background:#fff;border:2px dashed #000;border-radius:16px;padding:30px 18px;text-align:center;cursor:pointer;transition:.2s;}
 .upload-box:hover{background:#000;color:#fff;}
@@ -152,8 +144,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 }
 .drag-stage canvas:active{cursor:grabbing;}
 .drag-hint{font-size:10.5px;color:#000;margin-top:6px;text-align:center;letter-spacing:.3px;font-weight:600;}
-
-/* === X LAYOUT === */
 .xlayout-preview{display:none;width:100%;max-width:720px;margin:0 auto;position:relative;padding:20px 0 30px;}
 .xlayout-preview.active{display:block;}
 .xlayout-canvas-wrap{position:relative;width:100%;padding-bottom:33.33%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1);}
@@ -162,36 +152,25 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
 .xlayout-circle{position:absolute;bottom:-12%;left:6%;width:26.66%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.15);background:#fff;}
 .xlayout-circle canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;}
 .xlayout-circle canvas:active{cursor:grabbing;}
-
-/* === GRID THUMBNAILS === */
 .grid-preview{display:flex;flex-wrap:nowrap;gap:10px;justify-content:center;width:100%;margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;}
 .grid-preview::-webkit-scrollbar{height:4px;}
 .grid-preview::-webkit-scrollbar-thumb{background:#000;border-radius:4px;}
 .grid-item{background:#fff;border-radius:8px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:.15s;flex:0 0 auto;}
 .grid-item canvas{max-width:80px;max-height:120px;border-radius:4px;background:#fff;}
 .grid-item span{font-size:10.5px;color:#000;font-weight:600;}
-
-/* === DUAL UPLOAD === */
 .dual-upload{display:flex;flex-wrap:wrap;gap:16px;width:100%;margin-bottom:20px;}
 .dual-upload .upload-box{flex:1 1 200px;min-width:180px;padding:22px 14px;}
 .dual-upload .upload-box .upload-label{font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
-
-/* === ACTION BAR === */
 .action-bar{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;padding-top:18px;justify-content:center;align-items:center;}
 .btn{background:#000;color:#fff;border:none;padding:12px 30px;border-radius:100px;font-weight:600;font-size:13.5px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;justify-content:center;}
 .btn:hover{background:#333;color:#fff;}
 .btn:disabled{opacity:.4;cursor:not-allowed;background:#000;color:#fff;}
 .btn:disabled:hover{background:#000;color:#fff;}
-
-/* === FORMAT SELECTOR === */
 .format-selector{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:8px;}
 .format-btn{background:#fff;border:1px solid #000;color:#000;padding:8px 20px;border-radius:30px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s;}
 .format-btn:hover{background:#000;color:#fff;}
 .format-btn.active{background:#000;color:#fff;}
-
 .toast-msg{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:11px 22px;border-radius:60px;font-weight:500;font-size:13px;z-index:30000;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;border:1px solid #000;}
-
-/* === FADE-IN MOTION === */
 .fade-in{animation:fadeIn .35s ease forwards;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 </style>
@@ -220,7 +199,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
       </div>
     </div>
 
-    <!-- CUSTOM -->
     <div id="sessionCustom" style="display:none;">
       <div class="session-header">
         <button class="back-btn" id="backFromCustom"><i class="fas fa-arrow-left"></i> Change Mode</button>
@@ -264,7 +242,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
       </div>
     </div>
 
-    <!-- PRESET -->
     <div id="sessionPreset" style="display:none;">
       <div class="session-header">
         <button class="back-btn" id="backFromPreset"><i class="fas fa-arrow-left"></i> Change Mode</button>
@@ -277,7 +254,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         <button class="preset-btn" data-preset="post2grid">2 Carousel</button>
       </div>
 
-      <!-- X LAYOUT -->
       <div id="xLayoutSection" style="display:none;">
         <div class="dual-upload">
           <div class="upload-box" id="uploadBoxXSquare">
@@ -320,7 +296,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
         </div>
       </div>
 
-      <!-- POST GRID -->
       <div id="gridSection" style="display:none;">
         <div class="upload-area">
           <div class="upload-box" id="uploadBoxPreset">
@@ -497,9 +472,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     canvas.addEventListener('pointercancel', endDrag);
   }
 
-  // ============================================================
-  // TOMBOL DI AWAL
-  // ============================================================
   const session1       = document.getElementById('session1');
   const sessionCustom  = document.getElementById('sessionCustom');
   const sessionPreset  = document.getElementById('sessionPreset');
@@ -548,9 +520,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
   document.getElementById('backFromCustom').addEventListener('click', goBackToSession1);
   document.getElementById('backFromPreset').addEventListener('click', goBackToSession1);
 
-  // ============================================================
-  // CUSTOM
-  // ============================================================
   const uploadBoxCustom = document.getElementById('uploadBoxCustom');
   const fileInputCustom = document.getElementById('fileInputCustom');
   const cropCanvasCustom = document.getElementById('cropCanvasCustom');
@@ -611,9 +580,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     downloadCanvasAs(fmt, cropCanvasCustom, `custom.${fmt}`);
   });
 
-  // ============================================================
-  // PRESET
-  // ============================================================
   const presetButtons = document.querySelectorAll('.preset-btn');
   const xLayoutSection = document.getElementById('xLayoutSection');
   const gridSection = document.getElementById('gridSection');
@@ -670,7 +636,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     return { partW, partH, fullW: partW * cfg.parts, fullH: partH, scale };
   }
 
-  // X Preview — muncul walau baru 1 gambar
   function refreshXPreview(){
     const hasSquare = !!cropStates.xSquare.img;
     const hasWide   = !!cropStates.xWide.img;
@@ -754,7 +719,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     });
   });
 
-  // X Upload Handlers
   uploadBoxXSquare.addEventListener('click', ()=>fileInputXSquare.click());
   fileInputXSquare.addEventListener('change', e=>{
     loadImageFromFile(e.target.files[0], img=>{
@@ -787,7 +751,6 @@ body,html{width:100%;overflow-x:hidden;background:#ffffff;font-family:'Roboto',A
     if(file){ fileInputXWide.files = e.dataTransfer.files; fileInputXWide.dispatchEvent(new Event('change')); }
   });
 
-  // Download All for X Layout
   dlXAll.addEventListener('click', ()=>{
     const fmt = getSelectedFormat('xFormatSelector');
     const stSq = cropStates.xSquare;
